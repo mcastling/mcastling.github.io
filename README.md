@@ -2,7 +2,7 @@
 # DALi Documentation
 
 ### Introduction
- + [What is zDALi?](@ref dali-introduction)
+ + [What is DALi?](dali-introduction.md)
  + [Features](@ref dali-features)
  + [High Level Design](@ref dali-hld)
   + [Components](@ref dali-components)
