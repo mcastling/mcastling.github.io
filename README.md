@@ -3,7 +3,7 @@
 
 ### Introduction
  + [What is DALi?](dali-introduction.md)
- + [Features](dali-introduction.md)
+   + [Features](dali-introduction.md)
  + [High Level Design](high-level-design.md)
   + [Components](high-level-design.md)
   + [Main, Update & Render Threads](high-level-design.md)
