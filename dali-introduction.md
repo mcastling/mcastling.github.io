@@ -1,7 +1,7 @@
 <!--
 /**-->
 
-# DALi 3D ( Dynamic Animation Library ) {#dali-introduction}
+# DALi 3D ( Dynamic Animation Library )
 
 DALi enables developers to quickly create Rich UI Applications such as:
 
@@ -13,7 +13,7 @@ DALi enables developers to quickly create Rich UI Applications such as:
  + Advanced watch faces for wearable devices
 
 DALi is based on OpenGL ES 2.0 and 3.0. DALi provides a high level wrapper around the complexity of
-the OpenGL API and provides a clean cross-platform C# and JavaScript framework.
+the OpenGL API, and also provides a clean cross-platform C# and JavaScript framework.
 
 ## Features
 
@@ -23,10 +23,10 @@ the OpenGL API and provides a clean cross-platform C# and JavaScript framework.
  + Provides Layers to aid in 2D UI layout
  + Easy to use Animation framework
  + Automatic background loading of resources ( images / text / meshes )
- + Runs all animations in a separate thread. Multithreading enables a 60 FPS rate, even if JavaScript is performing a long operation ( such as Garbage Collection ).
+ + Runs all animations in a separate thread. Multithreading enables a 60 FPS rate, even if JavaScript is performing a long operation such as Garbage Collection.
  + Provides keyboard / touch / mouse handling
+ 
  
 
 ![ ](screen-shot.png)
 
-*/
