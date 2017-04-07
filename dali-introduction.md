@@ -1,5 +1,3 @@
-<!--
-/**-->
 
 # DALi 3D ( Dynamic Animation Library )
 
@@ -23,7 +21,7 @@ the OpenGL API, and also provides a clean cross-platform C# and JavaScript frame
  + Provides Layers to aid in 2D UI layout
  + Easy to use Animation framework
  + Automatic background loading of resources ( images / text / meshes )
- + Runs all animations in a separate thread. Multithreading enables a 60 FPS rate, even if JavaScript is performing a long operation such as Garbage Collection.
+ + Runs all animations in a separate thread to the UI thread. Multithreading enables a 60 FPS rate, even if JavaScript is performing a long operation such as Garbage Collection.
  + Provides keyboard / touch / mouse handling
  
  

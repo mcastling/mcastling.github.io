@@ -9,7 +9,7 @@
   + [Main, Update & Render Threads](high-level-design.md)
  + [DALi Fundamentals](fundamentals.md)
   + [Actors & Stage](fundamentals.md)
-  + [Layers and draw order](fundamentals.md)
+  + [Layers and draw order](layers.md)
   + [Coordinate System](fundamentals.md)
   + [Scene Graph](fundamentals.md)
   + [Handle / Body Idiom](TBD)

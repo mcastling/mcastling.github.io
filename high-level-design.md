@@ -1,28 +1,31 @@
-<!--
-/**-->
+# High Level Design
 
-# High Level Design {#dali-hld}
+## Components
 
-## Components {#dali-components}
-
- + **DALi Core:** Event handling, Scene Graph, Rendering, Resource Management
- + **DALi Adaptor:** Threading Model, Integration with the main loop.
+ + **DALi Core:** Event handling, Scene graph, Rendering, Resource management
+ + **DALi Adaptor:** Threading Model, integration with the main loop.
  + **DALi Platform Abstraction:** Resource loading & decoding in multiple threads (part of dali-adaptor)
- + **DALi Toolkit:** Reusable UI Controls, Effects & Scripting Support
+ + **DALi Toolkit:** Reusable UI controls, Effects & Scripting support
 
-![ ](../assets/img/architecture.png)
 ![ ](architecture.png)
 
-## Main, Update & Render Threads {#dali-threads}
+## Main, Update & Render Threads
 
 DALi uses a multithreaded architecture in order to provide the best performance and scalability.
 
  + **Event Thread:** The main thread in which application code and event handling runs.
  + **Update Thread:** Updates the nodes on the scene as well as running animations & constraints
  + **Render Thread:** OpenGL drawing, texture and geometry uploading etc.
- + **Resource Threads:** Loads images and decodes into bitmaps etc.
+ + **Resource Threads:** Loads and decodes images into bitmaps etc.
 
-![ ](../assets/img/dali-threads.png)
 ![ ](dali-threads.png)
 
-*/
+## Implementation
+
+DALi uses the Pimpl design pattern.
+
+The Pimpl pattern hides implementation details in the header file and provides improved encapsulation
+
+Implementation details are hidden, only the required API is visible for the application developer.
+API/ABI 'breaks' are reduced since the implementation of a class can be changed without modifying the public API.
+
