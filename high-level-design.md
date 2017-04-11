@@ -2,7 +2,7 @@
 
 ## Components
 
- + **DALi Core:** Event handling, Scene graph, Rendering, Resource management
+ + **DALi Core:** Event handling, Scene graph, Rendering, Animation framework, Resource management
  + **DALi Adaptor:** Threading Model, integration with the main loop.
  + **DALi Platform Abstraction:** Resource loading & decoding in multiple threads (part of dali-adaptor)
  + **DALi Toolkit:** Reusable UI controls, Effects & Scripting support
@@ -24,8 +24,7 @@ DALi uses a multithreaded architecture in order to provide the best performance 
 
 DALi uses the Pimpl design pattern.
 
-The Pimpl pattern hides implementation details in the header file and provides improved encapsulation
-
+The Pimpl pattern hides implementation details in the header file and provides improved encapsulation.
 Implementation details are hidden, only the required API is visible for the application developer.
 API/ABI 'breaks' are reduced since the implementation of a class can be changed without modifying the public API.
 

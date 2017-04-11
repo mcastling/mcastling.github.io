@@ -4,10 +4,20 @@
 ## What is a property?
 
 A property is a value used by an object that can be modified or read externally to that object.
-This could be from within DALi or externally by an application.
+This modification could be from within DALi or externally by an application. The key feature
+of properties is that they can be dynamically modified at run time.
+
+Properties can be used to expose useful information or behaviour of a View. However care should be exercised as which variables can be exposed, to limit the public interface.
+
+Classes such as Views have pre-defined Properties. User defined Custom properties can also be defined.
 
 ## What is a constraint?
 
+A constraint makes a property a function of other properties.
+
+## What is a notification ?
+
+An application can get a _notification_ when a property reaches a threshold value.
 
 ## What is a property used for ?
 
@@ -16,8 +26,7 @@ This could include the physical geometry of the view, or how it is drawn or move
 
 Properties can also be read. This feature can be used in conjunction with constraints to allow changes to a property within one view to change the property of another view. For example, a view following the movement of a separate view (that it is not a child of).
 
-Properties can be used to expose useful information or behaviour of a view.
-Other view variables that are used to implement this bevahiour, or do not make useful sense from an application developers point of view should not be exposed.
+
 
 ## How to implement a property within DALi Core:
 
@@ -61,14 +70,11 @@ Registered Animatable and Custom. An index range is used for each of the the dif
 Common uses for properties are constraints and animations.
 
 
-
 <br>
 <hr>
 **Property use in JavaScript**
 
 Note that constraints cannot be used within JavaScript, so below is a simple example that sets one of the default properties; scale:
-
-
 
 <br>
 <hr>
