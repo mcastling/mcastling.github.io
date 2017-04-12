@@ -28,12 +28,14 @@ This could include the physical geometry of the view, or how it is drawn or move
 
 Properties can also be read. This feature can be used in conjunction with constraints to allow changes to a property within one view to change the property of another view. For example, a view following the movement of a separate view (that it is not a child of).
 
+<hr>
 
-## Property implementation
+## Software considerations
+
+### Property implementation
 
 + Define the properties as an enum in the public-api header file.
 + Define the property details using methods to build up a table of property information.
-
 
 An example of a property can be seen in **the public-api header file Layer.h**
 
@@ -45,12 +47,9 @@ Specific methods are used to define properties for the following reasons:
 - To handle type-registering for properties, signals and actions in one place.
 - To facilitate the posibility of running the code with the type-registry disabled.
 
-<hr>
-**Property Indices**
+### Property Indices
 
 Properties are enumerated to give them a unique index. 
 
-<br>
-<hr>
 
 

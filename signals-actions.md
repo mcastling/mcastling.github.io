@@ -1,17 +1,16 @@
 
-# Signals and Actions
+# Event Handling
 
 In DALI applications a _signal and slot_ mechanism is used for communication between objects.
 
 A **signal** is a notfication from a DALi object containing event information.
 A **slot** is an application function that recieves the signal - an event handler.
 
-Examples of signals used in Dali are Touch data, Key events and Input signals.
-
 ## Signals
 
-Objects in DALi can provide 'signals' to inform an application of user actions or events.
-The application can connect to these signals if it requires notification of these events.
+Objects in DALi can provide 'signals' to inform an application of user actions or events,
+such as Touch data, Key events and Input signals. The application can connect to these
+signals if it requires notification of these events.
 
 A class method can be connected to the signals if local data needs to be accessed. If local data does
 not need to be accessed standard C Style functions can be used.

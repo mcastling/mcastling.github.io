@@ -1,6 +1,6 @@
 # High Level Design
 
-## Components
+## Architecture
 
  + **DALi Core:** Event handling, Scene graph, Rendering, Animation framework, Resource management
  + **DALi Adaptor:** Threading Model, integration with the main loop.
@@ -20,7 +20,7 @@ DALi uses a multithreaded architecture in order to provide the best performance 
 
 ![ ](dali-threads.png)
 
-## Implementation
+## Implementation details
 
 DALi uses the Pimpl design pattern.
 
