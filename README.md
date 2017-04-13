@@ -17,7 +17,7 @@
 
    + [Scene graph](fundamentals.md)
    + [Stage and Views](fundamentals.md)
-   + [Coordinate system](coordinate.md)
+   + [Coordinate system](coordinatez.md)
    + [Layers](layer.md)
    + [Properties and Constraints](properties.md)
    + [Animations](animations.md)
