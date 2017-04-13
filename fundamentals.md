@@ -18,7 +18,7 @@ compound object that can then be moved, transformed, selected,
 etc. as easily as a single object.
 
 ### Objects and nodes in DALi
-The DALi scene graph consists of objects (nodes) such as image, text and buttons.
+The DALi scene graph consists of objects (nodes) such as images, text and buttons.
 
 Views are also effectively nodes which receive input (touch events), and act as a
 container for draw-able elements (which are also nodes), and other views.
@@ -35,6 +35,8 @@ UI controls can be built by combining multiple Views.
 The _Stage_ is a top-level object used for displaying a tree of views.
 
 A View must be added to the stage to display its contents.
+
+Note: The term **'View'** has now replaced the term **'Actor'**.
 
 <hr>
 
