@@ -1,15 +1,18 @@
-# Layer
+# Layers
 
- A layer acts like a transparent sheet upon which shapes can be placed, sub-layers (layers within layers to any desired depth
- are supported. Layers provide a mechanism for overlaying groups of views on top of each other.
- Layers can also clip their contents to exclude any content outside a user defined area.
+A layer acts like a transparent sheet upon which shapes can be placed, sub-layers (layers within layers to any desired depth
+are supported. Layers provide a mechanism for overlaying groups of views on top of each other.
+Layers can also clip their contents to exclude any content outside a user defined area.
+
+Layers can be 2D or 3D, defined by their _behaviour_ property.
   
  ![ ](layers.png)
   
- When a layer is added to the stage it is assigned a unique depth value. By default the stage has a root layer with a depth value of 0.
+When a layer is added to the stage it is assigned a unique depth value. By default the stage has a root layer
+with a depth value of 0.
   
- Layers are Views and they inherit position, orientation and scale of their parent View.
- Layers are drawn in an order determined by a layer depth value.
+Layers are Views and they inherit position, orientation and scale of their parent View.
+Layers are drawn in an order determined by a layer depth value.
  
 **Note: Layers work independently of the View hierarchy.**
 Layers can be positioned anywhere in the View tree. The layer draw order is always defined by the _depth_ value.
@@ -25,21 +28,14 @@ stage.add( myView );
 Layer rootLayer = stage.GetRootLayer();
 rootLayer.add( myView );  // adds a view to the root layer
 
-// rootLayer.getDepth() == 0
-
 ~~~  
 
 ### Layer View Specific Properties
 
- clippingEnable
- clippingBox
- behaviour - "LAYER_2D" or "LAYER_3D"
-
-
-
-Further examples of operations involving layers include creating two new layers on top of the root layer.
+ - clippingEnable
+ - clippingBox
+ - behaviour can be "LAYER_UI" which is default or "LAYER_3D"
   
-
 ### Layer clipping
 
 Clips the contents of the layer to a rectangle.
@@ -49,16 +45,6 @@ Clips the contents of the layer to a rectangle.
 A range of functions are provided to change the draw order of the layers.
 
 ### Rendering order of Views inside of a layer
-
-Layers have two behaviour modes:
-
- - LAYER_UI ( Default )
- - LAYER_3D
-
-### Layer_UI
-
-Set the layer behaviour property to "LAYER_UI";
-
 
 #### Background
 
@@ -80,21 +66,14 @@ Set the layer behaviour property to "LAYER_UI";
 
 Set Layer behaviour to "LAYER_3D";
   
-Opaque renderers are drawn first and write to the depth buffer.
+Opaque renderers are drawn first and writen to the depth buffer.
  
  ![ ](layers3d.png)
 
   
-Transparent renderers are drawn in order of distance
-from the camera ( painter's algorithm ).
+Transparent renderers are drawn in order of distance from the camera ( painter's algorithm ).
 
  ![ ](transSort.png)
-  
-
-Note:
-
- - In LAYER_3D mode, View tree hierarchy makes no difference to draw order
- - When 2 transparent renderers are the same distance from the camera, you can use depth index to adjust which renderer is drawn first.
 
   
 ### View drawMode OVERLAY_2D
