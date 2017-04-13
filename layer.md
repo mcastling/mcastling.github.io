@@ -11,7 +11,7 @@ Layers can be 2D or 3D, defined by their _behaviour_ property.
 When a layer is added to the stage it is assigned a unique depth value. By default the stage has a root layer
 with a depth value of 0.
   
-Layers are Views and they inherit position, orientation and scale of their parent View.
+Layers are Views inherit the position, orientation and scale of their parent View.
 Layers are drawn in an order determined by a layer depth value.
  
 **Note: Layers work independently of the View hierarchy.**
@@ -34,7 +34,7 @@ rootLayer.add( myView );  // adds a view to the root layer
 
  - clippingEnable
  - clippingBox
- - behaviour can be "LAYER_UI" which is default or "LAYER_3D"
+ - behaviour can be "LAYER_UI" which is default, or "LAYER_3D"
   
 ### Layer clipping
 

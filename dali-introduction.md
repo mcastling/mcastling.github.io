@@ -3,7 +3,7 @@
 
 DALi is a 3D graphics engine and UI toolkit.
 
-DALi enables developers to quickly create Rich UI Applications with realistic effects and animations such as:
+DALi enables developers to quickly create Rich UI applications with realistic effects and animations such as:
 
  + Image & Video galleries
  + Music players
@@ -17,13 +17,13 @@ the OpenGL API, and also provides a clean cross-platform C++, C# and JavaScript 
 multithreaded to improve performance and scalability.
 
 ## DALi features
- + Maintains a hiearchical 3D scene graph consisting of parent and child nodes
- + Creates Images & Text
+ + Maintains a hierarchical 3D scene graph consisting of parent and child nodes
+ + Creates images & Text
  + Creates shaders using GLSL, each View has its own default shader
  + Provides multiple cameras and render targets
  + Provides Layers to aid in 2D UI layout
  + Automatic background loading of resources ( images / text / meshes )
- + Easy to use Animation framework using 3D Math, animations run in a separate thread to the UI thread.
+ + Easy to use Animation framework using 3D Math.
  + Provides keyboard / touch / mouse handling
  
  
