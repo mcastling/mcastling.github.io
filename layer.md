@@ -11,11 +11,11 @@ Layers can be 2D or 3D, defined by their _behaviour_ property.
 When a layer is added to the stage it is assigned a unique depth value. By default the stage has a root layer
 with a depth value of 0.
   
-Layers are Views inherit the position, orientation and scale of their parent View.
+Layers are views and inherit the position, orientation and scale of their parent view.
 Layers are drawn in an order determined by a layer depth value.
  
 **Note: Layers work independently of the View hierarchy.**
-Layers can be positioned anywhere in the View tree. The layer draw order is always defined by the _depth_ value.
+Layers can be positioned anywhere in the view tree. The layer draw order is always defined by the _depth_ value.
 
 ~~~{.cs}
 // C# example of adding a view to the root layer
@@ -34,7 +34,7 @@ rootLayer.add( myView );  // adds a view to the root layer
 
  - clippingEnable
  - clippingBox
- - behaviour can be "LAYER_UI" which is default, or "LAYER_3D"
+ - behaviour : which can be "LAYER_UI" (default), or "LAYER_3D"
   
 ### Layer clipping
 
@@ -46,11 +46,13 @@ A range of functions are provided to change the draw order of the layers.
 
 ### Rendering order of Views inside of a layer
 
+### Layer_UI
+
 #### Background
 
  - Graphics are drawn in DALi using renderers
  - Views can have zero or many renderers
- - Renderers can be shared by Views
+ - Renderers can be shared by views
  - Renderers have a depth index property
   
   With LAYER_UI, the draw order of the renderers is defined by both:
@@ -76,9 +78,9 @@ Transparent renderers are drawn in order of distance from the camera ( painter's
  ![ ](transSort.png)
 
   
-### View drawMode OVERLAY_2D
+### View drawing mode OVERLAY_2D
 
-Inside a layer it is possible to force a tree views to be drawn on top of everything else in the layer.
+Inside a layer it is possible to force tree views to be drawn on top of everything else in the layer.
 
 
 
