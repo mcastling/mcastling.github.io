@@ -35,13 +35,13 @@ may not support all characters in your input text. For example, latin fonts ofte
 
 Alternatively you can request a font using either or all of FONT_FAMILY, FONT_STYLE, and POINT_SIZE properties:
 ~~~{.cs}
-label.FONT_FAMILY = "FreeSerif";
+label.FontFamily = "FreeSerif";
 
 Property.Map fontStyle = new Property.Map();
 fontStyle.Add( "weight", "bold" )
          .Add( "slant", "italic" ) );
 
-label.POINT_SIZE = 12.0f;
+label.PointSize = 12.0f;
 
 ~~~
 
@@ -67,11 +67,11 @@ Web color and 32 bits hexadecimal 0xAARRGGBB formats are also supported.
 Examples below are equivalent, render the text in red. Second example codes the color in 0xAARRGGBB, third and fourth in web color with 3 and 6 characters.
 
 ~~~{.cs}
-label.TEXT = "<color value='red'>Red Text</color>" ); // Color coded with a text constant.
+label.Text = "<color value='red'>Red Text</color>" ); // Color coded with a text constant.
 ~~~
 
 ~~~{.cs}
-label.TEXT = "<color value='0xFFFF0000'>Red Text</color>" ); // Color packed inside an ARGB hexadecimal value.
+label.Text = "<color value='0xFFFF0000'>Red Text</color>" ); // Color packed inside an ARGB hexadecimal value.
 ~~~
 
 
@@ -89,7 +89,7 @@ Supported attributes are:
 See [Font Selection](#1)
 
 ~~~{.cs}
-label.TEXT = "<font family='SamsungSans' weight='bold'>Hello world</font>";
+label.Text = "<font family='SamsungSans' weight='bold'>Hello world</font>";
 ~~~
 
 
@@ -104,9 +104,9 @@ label.MULTI_LINE = true;
 The text can be aligned horizontally to the beginning, end, or center of the available area:
 
 ~~~{.cs}
-label.HORIZONTAL_ALIGNMENT = "BEGIN";
-label.HORIZONTAL_ALIGNMENT = "CENTER";
-label.HORIZONTAL_ALIGNMENT = "END";
+label.HorizontalAlignment = "BEGIN";
+label.HorizontalAlignment = "CENTER";
+label.HorizontalAlignment = "END";
 ~~~
 
 |  |  |
@@ -131,14 +131,15 @@ The following examples show TextLabels actual size by setting a colored backgrou
 ### Using natural size
 
 With a "natural" size TextLabel will be large enough to display the text without wrapping, and will not have extra space to align the text within.  
+
 Therefore in this example the same result would be displayed, regardless of the alignment or multi-line properties.  
 
 ~~~{.cs}
 TextLabel label = new TextLabel("Hello World");
-label.AnchorPoint( AnchorPoint.TOP_LEFT );
 label.SetResizePolicy( ResizePolicyType.USE_NATURAL_SIZE, DimensionType.ALL_DIMENSIONS );
 label.BackgroundColor( Color.BLUE );
-Window.GetCurrent().Add( label );
+Window window = Window.Instance;
+window.Add( label );
 ~~~
 
  ![ ](../Images/HelloWorld-NaturalSize.png)
@@ -148,17 +149,16 @@ Window.GetCurrent().Add( label );
 
 To layout text labels vertically, a fixed (maximum) width should be provided by the parent control.  
 Each TextLabel will then report a desired height for the given width.  
+
 Here is an example of this behavior using TableView as the parent:
 
 ~~~{.cs}
 TableView parent = new TableView( 3, 1 );
 parent.SetResizePolicy( ResizePolicyType.FILL_TO_PARENT, DimensionType.WIDTH );
 parent.SetResizePolicy( ResizePolicyType.USE_NATURAL_SIZE, DimensionType.HEIGHT );
-parent.SetAnchorPoint( AnchorPoint.TOP_LEFT );
 WIndow.GetCurrent().Add( parent );
 
 TextLabel label = new TextLabel("Hello World");
-label.AnchorPoint( AnchorPoint.TOP_LEFT );
 label.SetResizePolicy( ResizePolicyType.FILL_TO_PARENT, DimensionType.WIDTH );
 label.SetResizePolicy( ResizePolicyType.DIMENSION_DEPENDENCY, DimensionType.HEIGHT );
 label.BackgroundColor( Color.BLUE );
@@ -166,20 +166,18 @@ parent.AddChild( label, new TableView.CellPosition( 0, 0 ) );
 parent.SetFitHeight( 0 );
 
 label = new TextLabel( "A Quick Brown Fox Jumps Over The Lazy Dog" );
-label.AnchorPoint( AnchorPoint.TOP_LEFT );
 label.SetResizePolicy( ResizePolicyType.FILL_TO_PARENT, DimensionType.WIDTH );
 label.SetResizePolicy( ResizePolicyType.DIMENSION_DEPENDENCY, DimensionType.HEIGHT );
 label.BackgroundColor( Color.GREEN );
-label.MULTI_LINE = true;
+label.MultiLine = true;
 parent.AddChild( label, new TableView.CellPosition( 1, 0 ) );
 parent.SetFitHeight( 1 );
 
 label = new TextLabel( "لإعادة ترتيب الشاشات، يجب تغيير نوع العرض إلى شبكة قابلة للتخصيص." );
-label.SetAnchorPoint( AnchorPoint::TOP_LEFT );
 label.SetResizePolicy( ResizePolicyType.FILL_TO_PARENT, DimensionType.WIDTH );
 label.SetResizePolicy( ResizePolicyTYpe.DIMENSION_DEPENDENCY, DimensionType.HEIGHT );
 label.BackgroundColor( Color.BLUE );
-label.MULTI_LINE = true;
+label.MultiLine = true;
 parent.AddChild( label, new TableView.CellPosition( 2, 0 ) );
 parent.SetFitHeight( 2 );
 ~~~
@@ -201,7 +199,7 @@ label.TEXT = "Red Text";
 label.TEXT_COLOR = Color.RED;
 ~~~
 
- ![ ](RedText.png)
+ ![ ](../Images/RedText.png)
 
 #### Drop Shadow
 
@@ -222,13 +220,13 @@ label4.TEXT, "Text with Color Shadow" );
 label4.SHADOW, "{\"offset\":\"1 1\",\"color\":\"red\"}" );
 ~~~
 
-![ ](PlainText.png)
+![ ](../Images/PlainText.png)
 
-![ ](TextWithShadow.png)
+![ ](../Images/TextWithShadow.png)
 
-![ ](TextWithBiggerShadow.png)
+![ ](../Images/TextWithBiggerShadow.png)
 
-![ ](TextWithColorShadow.png)
+![ ](../Images/TextWithColorShadow.png)
 
 
 #### Underline
@@ -237,23 +235,23 @@ The text can be underlined by setting UNDERLINE_ENABLED.
 The color can be selected using the UNDERLINE_COLOR property.  
 
 ~~~{.cs}
-label1.TEXT = "Text with Underline";
-label1.UNDERLINE_ENABLED = true;
+label1.Text = "Text with Underline";
+label1.UnderlineEnabled = true;
 
-label2.TEXT = "Text with Color Underline";
-label2.UNDERLINE_ENABLED = true;
-label2.UNDERLINE_COLOR = Color.GREEN;
+label2.Text = "Text with Color Underline";
+label2.UnderlineHeight = true;
+label2.UnderlineColor = Color.GREEN;
 ~~~
 
-![ ](TextWithUnderline.png)
+![ ](../Images/TextWithUnderline.png)
 
-![ ](TextWithColorUnderline.png)
+![ ](../Images/TextWithColorUnderline.png)
 
 By default the underline height will be taken from the font metrics, however this can be overridden using the
 UNDERLINE_HEIGHT property:
 
 ~~~{.cs}
-label1.UNDERLINE_HEIGHT = 1.0f;
+label1.UnderlineHeight = 1.0f;
 ~~~
 
 ![ ](../Images/TextWith1pxUnderline.png)
