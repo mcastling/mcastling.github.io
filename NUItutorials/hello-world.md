@@ -13,10 +13,88 @@ A brief description of key NUI concepts is also given.
 The following steps are required to display text:
 
 + Initialise the DALi library
-+ Create a View - text label showing text
-+ Add the text label to the __Window__
++ Create a View - a text label showing text
++ Add the text label to the application main window
 
-## Example code
+### Creation
+
+THe application is derived from the Tizen application class - _NUIApplication_
+
+~~~{.cs}
+Example example = new Example();
+~~~
+
+### Initialisation
+
+A initialisation callback is added to the _Initialized_ event.
+
+~~~{.cs}
+example.Initialized += Initialize;
+~~~
+
+### The Initialisation callback - Initialize
+
+Get main window and add callback to window _Touch_ event, hence
+callback invoked on click in application window.
+
+~~~{.cs}
+Window window = Window.Instance;
+window.Touch += OnWindowTouched;
+~~~
+
+Position text in centre of application window:
+
+~~~{.cs}
+text.ParentOrigin = ParentOrigin.Center;
+text.AnchorPoint  = AnchorPoint.Center;
+~~~
+
+The ParentOrigin defines a point within the parent views's area.
+The AnchorPoint	 defines a point within the child views's area (the label)
+
+Align text horizontally to the center of the available area:
+
+~~~{.cs}
+text.HorizontalAlignment = HorizontalAlignment.Center;
+~~~
+
+Set text size.
+
+~~~{.cs}
+text.PointSize = 32.0f;
+~~~
+
+
+Add text to default layer.
+
+_Layers provide a mechanism for overlaying groups of views on top of each other._
+
+~~~{.cs}
+window.GetDefaultLayer().Add(text);
+~~~
+
+### main loop
+
+To run the application, its main loop should be started. This ensues that images are displayed, events and signals
+are displatched and captured.
+
+~~~{.cs}
+example.Run(args);
+~~~
+
+### quit application
+
+~~~{.cs}
+click anywhere in application window to exit.
+
+private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
+{
+   example.Application.Quit();
+}
+~~~
+
+
+## Full example code
 
 ~~~{.cs}
 
@@ -24,55 +102,34 @@ namespace HelloTest
 {
     class Example : NUIApplication
     {
-        private TextLabel _text;
-        private Window _window;
-
-        public Example():base()
-        {
-        }
-
-        public Example(string stylesheet):base(stylesheet)
-        {
-        }
-
-        public Example(string stylesheet, WindowMode windowMode):base(stylesheet, windowMode)
-        {
-        }
-
-        protected override void OnCreate()
-        {
-            base.OnCreate();
-            Initialize();
-        }
-
-        private void Initialize()
+        private void Initialize(object src, EventArgs e)
         {
             // Connect the signal callback for stage touched signal
             Window window = Window.Instance;
             window.Touch += OnWindowTouched;
 
-            // Add a _text label to the stage
-            TextLabel text = new TextLabel("Hello World");
+            // Add a simple text label to the main window
+            TextLabel text = new TextLabel("Hello DALi World");
             text.ParentOrigin = ParentOrigin.Center;
-            text.AnchorPoint = AnchorPoint.Center;
+            text.AnchorPoint  = AnchorPoint.Center;
             text.HorizontalAlignment = HorizontalAlignment.Center;
             text.PointSize = 32.0f;
 
-            window.GetDefaultLayer().Add(_text);
+            window.GetDefaultLayer().Add(text);
         }
 
-        // Callback for stage touched signal handling
+        // Callback for main window touched signal handling
         private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
         {
-	    _application.Quit();
+	    example.Application.Quit();
         }
 
         static void Main(string[] args)
         {
             Tizen.Log.Debug("NUI", "Hello world.");
-  
-            //Example example = new Example("stylesheet", WindowMode.Transparent);
+
             Example example = new Example();
+	    example.Initialized += Initialize;
             example.Run(args);
         }
     }
@@ -80,43 +137,48 @@ namespace HelloTest
 
 ~~~
 
-### Key points
 
-Initialsation ....
+### Notes on the NUIApplication class and its members
 
-To run the application, its main loop should be started. This ensues that images are displayed, events and signals are displatched and captured.
+The **NUIApplication** class represents an application that has a UI screen, in addition this class has a default __Window__
 
-### notes on the NUIApplication class
+The following NUIApplication class member variables are also of particular interest:
 
-The **NUIApplication** class represents an application that has a UI screen, in addition this class has a default 'stage' - __Window__
-
-The following NUIApplication class member variables are of particular interest:
-
-**_appMode** - application mode (Default, StyleSheetOnly or StyleSheetWithWindowMode)
-
-**_stylesheet** - DALi control properties are stylable. The stylesheet contains json markup for the controls.
-
-Style sheets can be written at the device level i.e seperate stylesheets for mobiles and TV's. The stlylesheets
-are passed in at the application ctor level (constructors shown here commented out for informational purposes
-Alternatively individual stylesheets can be used at the control level.
-
-**_windowMode** - window mode (Opaque or Transparent)
-
-
-### C# and native C++ interaction
-
-In essence the C# API invokes the corresponding C++ API, via wrapper functions generated by the the SWIG software tool.
-
-An example:
+#### DALi application class
 
 ~~~{.cs}
-    public void MainLoop()
-        {
-            NDalicPINVOKE.Application_MainLoop__SWIG_0(swigCPtr);
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-        }
+private Application _application;
 ~~~
 
-### 
+This is the DALi Application class. The NUIApplication class is in effect a wrapper class around the DALi application class.
 
+#### Style sheets
+
+~~~{.cs}
+private string _stylesheet;
+~~~
+
+DALi control properties are stylable. The stylesheet contains json markup for the controls.
+
+Style sheets can be written at the device level i.e. seperate stylesheets for mobiles and TV's. The stylesheets
+are passed in at the NUI application constructors level.
+
+#### window mode
+
+The window modecan be Opaque or Transparent.
+
+~~~{.cs}
+private Appication.WindowMode _windowMode;
+~~~
+
+#### application mode
+
+The application mode can be Default, StyleSheetOnly or StyleSheetWithWindowMode.
+
+~~~{.cs}
+private AppMode _appMode;
+~~~
+
+### More information on the Text label 
+The ![Text Label tutorial](text-label.md) describes the key properties of the text label in detail.
 
