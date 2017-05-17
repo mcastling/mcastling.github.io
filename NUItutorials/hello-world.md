@@ -93,7 +93,6 @@ private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
 }
 ~~~
 
-
 ## Full example code
 
 ~~~{.cs}

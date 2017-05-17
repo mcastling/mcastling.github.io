@@ -311,5 +311,12 @@ If the text is multi-lined it will scroll upwards.
 
 ### Text Label Properties
 
-The properties used by TextLabel are listed [here](@ref TextLabelProperties)
+The properties used by TextLabel are:
+
+|  Property enum  | Property  | Type |
+| ------------ | ------------ | ------------ |
+| RENDERING_BACKEND  | RenderingBackend  | int  |
+| TEXT| Text | string |
+
+
 
