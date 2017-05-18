@@ -7,7 +7,7 @@ This overview provides an introduction to NUI and the DALi animation framework.
 
 NUI is a C# interface to the original DALi graphics library.
 
-## Development of NUI
+## Development of NUI from DALi
 
 DALi was originally developed in C++, then subsequently developed in parallel in C#. A seperate Tizen
 NUI branch was created from this C# DALi branch.
@@ -15,9 +15,9 @@ NUI branch was created from this C# DALi branch.
 ## NUI 
 
 NUI is a cross platform library for creating applications with rich GUI. These applications are run on a
-range of Tizen devices. Dali is built on a multi-threaded architecture enabling realistic smooth animations.
-In addition a range of optimisation techniques are utilised to obtain low CPU and GPU usage, further
-increasing graphics performance.
+range of Tizen devices such as TV's. NUI is built on a multi-threaded architecture enabling realistic
+smooth animations. In addition a range of optimisation techniques are utilised to obtain low CPU and GPU
+usage, further increasing graphics performance.
 
 NUI enables developers to quickly create Rich UI applications with realistic effects and animations such as:
 

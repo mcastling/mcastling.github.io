@@ -35,7 +35,7 @@ The initialisation event is triggered once during the application lifetime.
 example.Initialized += Initialize;
 ~~~
 
-### The Initialisation callback - Initialize
+### The Initialisation event handler - Initialize
 
 Create text label:
 
@@ -44,7 +44,7 @@ TextLabel text = new TextLabel("Hello NUI World");
 ~~~
 
 Get main application window and add callback to window _Touch_ event.
-Hence this event handler is invoked on any click in the application window.
+The event handler is invoked on any click in the application window.
 
 ~~~{.cs}
 Window window = Window.Instance;
