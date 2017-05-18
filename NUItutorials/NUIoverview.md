@@ -2,25 +2,28 @@
 
 This overview provides an introduction to NUI and the DALi animation framework.
 
-NUI - Natural User Interface, is a C# interface to DALi.
+NUI - Natural User Interface.
 
-Currently NUI is been used in the development of TV's.
+NUI is a C# interface to DALi.
 
 ## What is DALi?
+
 DALi - Dynamic Animation Library, a cross platform library for creating applications with rich GUI. These applications
 are run on a range of Tizen devices. Dali is built on a multi-threaded architecture enabling realistic smooth animations.
 In addition a range of optimisation techniques are utilised to obtain low CPU and GPU usage, further increasing graphics
 performance.
 
 DALi was originally developed in C++. DALi is now been developed in parallel in C#, currently all C# functionaility
-is simply a wrapper around the existing C++ API. It is conceivable in future that new UI elements may be developed
+is simply a wrapper around the existing native C++ API. It is conceivable in future that new UI elements may be developed
 in C# that have no direct C++ version (_though would still use the native C++ API where required_).
 
 ## key NUI API interface changes
 
-+ THe NUI API was recently changed in order to minimise the number of API's exposed but unrequired in C#. This was partially
-  to do with the Handle/Body idiom which has to be exposed to application developers in c++ but is available by default
-  in C# (almost everything is a handle in C#).
+The NUI DALi API has been modified from its original C# base.
+
++ THe NUI API was changed in order to minimise the number of API's exposed but unrequired in C#. This was partially
+  to do with the Handle/Body idiom which has to be exposed to application developers in C++ but is available by default
+  in C#.
 
 + Actor has been removed, all actor properties have been moved to View. View is the basic building block for a UI. Views can
   can be added to other Views or Layers.
@@ -34,18 +37,14 @@ in C# that have no direct C++ version (_though would still use the native C++ AP
 + Window and Stage have been combined solely into the Window class. To add a View or Layer to the scene, add them to the Window.
   The Window can be used to retrieve the list of Layers.
 
-![ ](NewWindowHierarchy.png)
+![ ](../Images/NewWindowHierarchy.png)
 
-## History
+## Use of NUI applications
 
-2010 - present : DALi development in C++ (the 'native' API)
-2017 - present : DALi development in C#
-2017 - present : DALi toolkit development in C#. The dali-toolkit folder now includes two development folders 'dali-sharp' and 'dali-swig'.
-                 The 'dali-sharp' folder contains the source code 'converted' to using __Views__ instead of __Actors__, and __WIndow__ instead
-                 of __Stage__.
+Currently NUI is been used in the development of TV's.
 
-2016 : DALi C# development frozen, seperate development started in Tizen branch. This is the NUI development
-2016 - present : Further API's developed in NUI in Tizen branch.
-2017 : Todo - SRUK devel/master branch will be merged with Tizen branch. At that point the intention is to cease
-       seperate development of both the SRUK DALi and the NUI Tizen.
+## PLanned branch merge
+
+SRUK devel/master branch will be merged with Tizen branch. At that point the intention is to cease seperate development of both
+the SRUK DALi and the NUI Tizen.
 

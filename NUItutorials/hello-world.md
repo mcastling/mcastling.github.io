@@ -7,7 +7,7 @@ The tutorial shows how to create and display "Hello World" using a text label.
 
 A brief description of the key [NUI application class](#1) is also given.
 
-![The NUI Overview](NUIoverview.md) describes the relationship between NUI and DALi in detail.
+[The NUI Overview](NUIoverview.md) describes the relationship between NUI and DALi in detail.
 
 ## Explanation of tutorial
 
@@ -136,9 +136,9 @@ namespace HelloTest
 }
 ~~~
 
-[Back to top](#0)
+[Back to top](#0)<br>
 
-<a name="#1"></a>
+<a name="#1">
 ### Notes on the NUIApplication class and its members
 
 The **NUIApplication** class represents application that have a UI screen, in addition this class has a default __Window__
@@ -157,8 +157,8 @@ private Application _application;
 
 DALi control properties are stylable. The stylesheet contains json markup for the controls.
 
-Style sheets can be written at the device level i.e. seperate stylesheets for mobiles and TV's. The stylesheets
-are passed in at the NUI application constructors level.
+Style sheets can be written at the device level i.e seperate stylesheets for mobiles and TV's. The stylesheets
+are passed in at the NUI application class constructors level.
 
 ~~~{.cs}
 private string _stylesheet;
@@ -203,5 +203,5 @@ public NUIApplication(string stylesheet, WindowMode windowMode) : base()pMode.St
 
 ### More information on the Text label 
 
-The ![Text Label tutorial](text-label.md) describes the key properties of the text label in detail.
+The [Text Label tutorial](text-label.md) describes the key properties of the text label in detail.
 
