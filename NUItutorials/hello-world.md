@@ -85,7 +85,7 @@ _Layers provide a mechanism for overlaying groups of views on top of each other.
 window.GetDefaultLayer().Add(text);
 ~~~
 
-### running application
+### Running the application
 
 To run the application, its main loop should be started. This ensues that images are displayed,
 events and signals are displatched and captured.
@@ -146,6 +146,12 @@ namespace HelloTest
     }
 }
 ~~~
+
+## Example output
+
+After running the example, the following output should appear:
+
+![ ](./Images/hello-world.png)
 
 ### More information on the Text label 
 
