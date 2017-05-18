@@ -68,7 +68,7 @@ text.HorizontalAlignment = HorizontalAlignment.Center;
 Set text label background color to illustrate label width.
 
 ~~~{.cs}
-text.BackgroundColor = BackgroundColor = Color.Red;
+text.BackgroundColor = Color.Red;
 ~~~
 
 Set text size. The size of the font in points.
