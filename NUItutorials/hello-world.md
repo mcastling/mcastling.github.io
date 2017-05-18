@@ -1,6 +1,6 @@
 # NUI Hello World Tutorial
 
-<a name="0">
+<a name="0"></a>
 This tutorial provides an introduction to the NUI Animation framework.
 
 The tutorial shows how to create and display "Hello World" using a text label.
@@ -37,7 +37,7 @@ example.Initialized += Initialize;
 
 ### The Initialisation callback - Initialize
 
-Create text label.
+Create text label:
 
 ~~~{.cs}
 TextLabel text = new TextLabel("Hello NUI World");
@@ -51,21 +51,21 @@ Window window = Window.Instance;
 window.Touch += OnWindowTouched;
 ~~~
 
-Position text in centre of application window. Note the Text label will be at least the
-width of the screen if the text label size is not specified. The ParentOrigin defines a point within the
-parent views's area.
+Position text in centre of application window. Note: the text label will be at least the
+width of the screen if the text label size is not specified. The ParentOrigin defines a point
+within the parent views's area.
 
 ~~~{.cs}
 text.ParentOrigin = ParentOrigin.CenterLeft;
 ~~~
 
-Align text horizontally to the center of the available area.
+Align text horizontally to the center of the available area:
 
 ~~~{.cs}
 text.HorizontalAlignment = HorizontalAlignment.Center;
 ~~~
 
-Set text label background color to illustrate label width.
+Set text label background color to illustrate label width:
 
 ~~~{.cs}
 text.BackgroundColor = Color.Red;
@@ -88,7 +88,7 @@ window.GetDefaultLayer().Add(text);
 ### Running the application
 
 To run the application, its main loop should be started. This ensues that images are displayed,
-events and signals are displatched and captured.
+and events and signals are dispatched and captured.
 
 ~~~{.cs}
 example.Run(args);
@@ -96,13 +96,27 @@ example.Run(args);
 
 ### Touch event handler
 
-Click anywhere in the application window to exit.
+Click anywhere in the application window to exit:
 
 ~~~{.cs}
 private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
 {
    example.Application.Quit();
 }
+~~~
+
+### logging
+
+Output simple message to buffer.
+
+~~~{.cs}
+Tizen.Log.Debug("NUI", "Hello world.");
+~~~
+
+View message using the dlog utility.
+
+~~~
+dlogutil NUI
 ~~~
 
 ## Full example code
@@ -119,9 +133,8 @@ namespace HelloTest
             window.Touch += OnWindowTouched;
 
             // Add a simple text label to the main window
-            TextLabel text = new TextLabel("Hello DALi World");
+            TextLabel text = new TextLabel("Hello World");
             text.ParentOrigin = ParentOrigin.Center;
-            text.AnchorPoint  = AnchorPoint.Center;
             text.HorizontalAlignment = HorizontalAlignment.Center;
 	    text.BackgroundColor = Color.Red;
             text.PointSize = 32.0f;
@@ -156,4 +169,6 @@ After running the example, the following output should appear:
 ### More information on the Text label 
 
 The [Text Label tutorial](text-label.md) describes the key properties of the text label in detail.
+
+[Back to top](#0)
 

@@ -9,14 +9,15 @@ NUI is a C# interface to the original DALi graphics library.
 
 ## Development of NUI
 
-DALi was originally developed in C++. DALi was then subsequently developed in parallel in C#. A seperate Tizen
-NUI branch was created from this C# DALi branch.
+DALi was originally developed in C++. DALi was then subsequently developed in parallel in C#.
+A seperate Tizen NUI branch was created from this C# DALi branch.
 
 ## NUI 
 
-NUI is a cross platform library for creating applications with rich GUI. These applications are run on a range of Tizen
-devices. Dali is built on a multi-threaded architecture enabling realistic smooth animations. In addition a range of
-optimisation techniques are utilised to obtain low CPU and GPU usage, further increasing graphics performance.
+NUI is a cross platform library for creating applications with rich GUI. These applications are run on a
+range of Tizen devices. Dali is built on a multi-threaded architecture enabling realistic smooth animations.
+In addition a range of optimisation techniques are utilised to obtain low CPU and GPU usage, further
+increasing graphics performance.
 
 NUI enables developers to quickly create Rich UI applications with realistic effects and animations such as:
 
@@ -46,6 +47,6 @@ API where required_).
 
 ## Planned branch merge
 
-SRUK devel/master branch will be merged with Tizen branch. At that point the intention is to cease seperate development of both
+SRUK devel/master branch will be merged with the Tizen branch. At that point the intention is to cease seperate development of both
 the SRUK DALi and the NUI Tizen.
 
