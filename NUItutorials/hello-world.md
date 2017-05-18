@@ -169,7 +169,7 @@ private string _stylesheet;
 The window mode can be Opaque or Transparent.
 
 ~~~{.cs}
-private Appication.WindowMode _windowMode;
+private Application.WindowMode _windowMode;
 ~~~
 
 #### application mode

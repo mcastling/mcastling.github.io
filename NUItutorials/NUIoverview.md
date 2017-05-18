@@ -37,13 +37,13 @@ The NUI DALi API has been modified from its original C# base.
 + Window and Stage have been combined solely into the Window class. To add a View or Layer to the scene, add them to the Window.
   The Window can be used to retrieve the list of Layers.
 
-![ ](../Images/NewWindowHierarchy.png)
+![ ](./Images/NewWindowHierarchy.png)
 
 ## Use of NUI applications
 
 Currently NUI is been used in the development of TV's.
 
-## PLanned branch merge
+## Planned branch merge
 
 SRUK devel/master branch will be merged with Tizen branch. At that point the intention is to cease seperate development of both
 the SRUK DALi and the NUI Tizen.
