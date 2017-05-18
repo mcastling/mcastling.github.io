@@ -105,7 +105,7 @@ private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
 }
 ~~~
 
-### logging
+### Logging
 
 Output simple message to buffer.
 
