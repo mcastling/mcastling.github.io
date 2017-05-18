@@ -107,13 +107,13 @@ private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
 
 ### Logging
 
-Output simple message to buffer.
+Output simple message to buffer:
 
 ~~~{.cs}
 Tizen.Log.Debug("NUI", "Hello world.");
 ~~~
 
-View message using the dlog utility.
+View message using the dlog utility:
 
 ~~~
 dlogutil NUI

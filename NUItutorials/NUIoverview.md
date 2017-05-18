@@ -2,15 +2,15 @@
 
 This overview provides an introduction to NUI and the DALi animation framework.
 
-NUI  - Natural User Interface
-DALi - Dynamic Animation Library
++ NUI  - Natural User Interface
++ DALi - Dynamic Animation Library
 
 NUI is a C# interface to the original DALi graphics library.
 
 ## Development of NUI
 
-DALi was originally developed in C++. DALi was then subsequently developed in parallel in C#.
-A seperate Tizen NUI branch was created from this C# DALi branch.
+DALi was originally developed in C++, then subsequently developed in parallel in C#. A seperate Tizen
+NUI branch was created from this C# DALi branch.
 
 ## NUI 
 
@@ -47,6 +47,6 @@ native C++ API where required_).
 
 ## Planned branch merge
 
-SRUK devel/master branch will be merged with the Tizen branch. At that point the intention is to cease seperate
-development of both the SRUK DALi and the NUI Tizen.
+The SRUK devel/master branch will be merged with the Tizen branch. At that point the intention is to cease seperate
+development of these branches.
 
