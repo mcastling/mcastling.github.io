@@ -51,9 +51,9 @@ Window window = Window.Instance;
 window.Touch += OnWindowTouched;
 ~~~
 
-Position text in centre of application window. Note: the text label will be at least the
-width of the screen if the text label size is not specified. The ParentOrigin defines a point
-within the parent views's area.
+Position text in centre of application window. The ParentOrigin defines a point
+within the parent views's area. Note: The text label will be at least the
+width of the screen if the text label size is not specified.
 
 ~~~{.cs}
 text.ParentOrigin = ParentOrigin.CenterLeft;
@@ -87,7 +87,7 @@ window.GetDefaultLayer().Add(text);
 
 ### Running the application
 
-To run the application, its main loop should be started. This ensues that images are displayed,
+The main loop must be started to run the application. This ensures that images are displayed,
 and events and signals are dispatched and captured.
 
 ~~~{.cs}
