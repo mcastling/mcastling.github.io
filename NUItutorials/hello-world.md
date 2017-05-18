@@ -1,6 +1,6 @@
+<a name="0"></a>
 # NUI Hello World Tutorial
 
-<a name="0"></a>
 This tutorial provides an introduction to the NUI Animation framework.
 
 The tutorial shows how to create and display "Hello World" using a text label.
