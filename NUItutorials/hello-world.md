@@ -1,10 +1,11 @@
-# Hello World Tutorial
+# NUI Hello World Tutorial
 
+<a name="0">
 This tutorial provides an introduction to NUI and the DALi Animation framework.
 
 The tutorial shows how to create and display "Hello World" using a text label.
 
-A brief description of key NUI concepts is also given.
+A brief description of the key [NUI application class](#1) is also given.
 
 ![The NUI Overview](NUIoverview.md) describes the relationship between NUI and DALi in detail.
 
@@ -18,7 +19,7 @@ The following steps are required to display text:
 
 ### Creation
 
-THe application is derived from the Tizen application class - _NUIApplication_
+The application is derived from the Tizen NUI application class - _NUIApplication_
 
 ~~~{.cs}
 Example example = new Example();
@@ -26,7 +27,7 @@ Example example = new Example();
 
 ### Initialisation
 
-A initialisation callback is added to the _Initialized_ event.
+An initialisation callback is added to the application _Initialized_ event.
 
 ~~~{.cs}
 example.Initialized += Initialize;
@@ -34,15 +35,15 @@ example.Initialized += Initialize;
 
 ### The Initialisation callback - Initialize
 
-Get main window and add callback to window _Touch_ event, hence
-callback invoked on click in application window.
+Get main application window and add callback to window _Touch_ event.
+Hence event handler invoked on any click in application window.
 
 ~~~{.cs}
 Window window = Window.Instance;
 window.Touch += OnWindowTouched;
 ~~~
 
-Position text in centre of application window:
+Position text in centre of application window.
 
 ~~~{.cs}
 text.ParentOrigin = ParentOrigin.Center;
@@ -50,20 +51,19 @@ text.AnchorPoint  = AnchorPoint.Center;
 ~~~
 
 The ParentOrigin defines a point within the parent views's area.
-The AnchorPoint	 defines a point within the child views's area (the label)
+The AnchorPoint	 defines a point within the child views's area (_the label_)
 
-Align text horizontally to the center of the available area:
+Align text horizontally to the center of the available area.
 
 ~~~{.cs}
 text.HorizontalAlignment = HorizontalAlignment.Center;
 ~~~
 
-Set text size.
+Set text size. The size of the font in points.
 
 ~~~{.cs}
 text.PointSize = 32.0f;
 ~~~
-
 
 Add text to default layer.
 
@@ -84,8 +84,9 @@ example.Run(args);
 
 ### quit application
 
+Click anywhere in application window to exit.
+
 ~~~{.cs}
-click anywhere in application window to exit.
 
 private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
 {
@@ -133,38 +134,39 @@ namespace HelloTest
         }
     }
 }
-
 ~~~
 
+[Back to top](#0)
 
+<a name="#1"></a>
 ### Notes on the NUIApplication class and its members
 
-The **NUIApplication** class represents an application that has a UI screen, in addition this class has a default __Window__
+The **NUIApplication** class represents application that have a UI screen, in addition this class has a default __Window__
 
-The following NUIApplication class member variables are also of particular interest:
+The following NUIApplication class member variables are of particular interest:
 
 #### DALi application class
+
+The NUIApplication class is in effect a wrapper class around the DALi application class.
 
 ~~~{.cs}
 private Application _application;
 ~~~
 
-This is the DALi Application class. The NUIApplication class is in effect a wrapper class around the DALi application class.
-
 #### Style sheets
-
-~~~{.cs}
-private string _stylesheet;
-~~~
 
 DALi control properties are stylable. The stylesheet contains json markup for the controls.
 
 Style sheets can be written at the device level i.e. seperate stylesheets for mobiles and TV's. The stylesheets
 are passed in at the NUI application constructors level.
 
+~~~{.cs}
+private string _stylesheet;
+~~~
+
 #### window mode
 
-The window modecan be Opaque or Transparent.
+The window mode can be Opaque or Transparent.
 
 ~~~{.cs}
 private Appication.WindowMode _windowMode;
@@ -178,6 +180,28 @@ The application mode can be Default, StyleSheetOnly or StyleSheetWithWindowMode.
 private AppMode _appMode;
 ~~~
 
+#### appiication window
+
+The application window instance.
+
+~~~{.cs}
+private Window _window;
+~~~
+
+#### Cnnstructors
+
+~~~{.cs}
+/// The default constructor.
+public NUIApplication() : base()
+
+/// The constructor with stylesheet
+public NUIApplication(string stylesheet) : base()
+
+/// The constructor with stylesheet and window mode.
+public NUIApplication(string stylesheet, WindowMode windowMode) : base()pMode.StyleSheetOnly;
+~~~
+
 ### More information on the Text label 
+
 The ![Text Label tutorial](text-label.md) describes the key properties of the text label in detail.
 
