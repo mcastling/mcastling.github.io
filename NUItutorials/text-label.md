@@ -32,7 +32,7 @@ This image is ParentOrigin.TOP_LEFT:
 
 ![ ](./Images/TextLabelTopLeft.png)
 
-<a name="#1"></a>
+<a name="1"></a>
 ### Font Selection
 
 By default the TextLabel will automatically select a suitable font from the platform. Note that the selected font
@@ -127,7 +127,7 @@ An example of arabic can be seen the images in the [Text Alignment](#2) section.
 
 See also [Font Selection](#1)
 
-<a name="#2"></a>
+<a name="2"></a>
 ### Text Alignment
 
 Wrapping can be enabled using the MULTI_LINE property:
@@ -143,11 +143,6 @@ label.HorizontalAlignment = "BEGIN";
 label.HorizontalAlignment = "CENTER";
 label.HorizontalAlignment = "END";
 ~~~
-
-
-![ ](./Images/LatinBegin.png)
-
-
 
 |  |  |
 |--|--|
@@ -341,7 +336,7 @@ See [Font Selection](#1)
 label.Text = "<font family='SamsungSans' weight='bold'>Hello world</font>";
 ~~~
 
-<a name="#3"></a>
+<a name="3"></a>
 ### Text Label Properties
 
 The properties available for TextLabel are:

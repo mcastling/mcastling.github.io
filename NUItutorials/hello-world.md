@@ -51,7 +51,7 @@ Window window = Window.Instance;
 window.Touch += OnWindowTouched;
 ~~~
 
-Position text in centre of application window. The ParentOrigin defines a point
+Position text in centre of application window. The _ParentOrigin_ defines a point
 within the parent views's area. Note: The text label will be at least the
 width of the screen if the text label size is not specified.
 
@@ -65,7 +65,7 @@ Align text horizontally to the center of the available area:
 text.HorizontalAlignment = HorizontalAlignment.Center;
 ~~~
 
-Set text label background color to illustrate label width:
+Set label background color to illustrate label width:
 
 ~~~{.cs}
 text.BackgroundColor = Color.Red;
