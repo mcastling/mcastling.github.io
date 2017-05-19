@@ -14,7 +14,7 @@ An instance of an ImageView is created with a file path:
  imageView = new ImageView("./images/gallery-3.jpg");
 ~~~
 
-or the _ResourceURL_ property:
+or by the _ResourceURL_ property:
 
 ~~~{.cs}
  imageView = new ImageView();

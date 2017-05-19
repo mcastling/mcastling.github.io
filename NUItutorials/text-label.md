@@ -43,7 +43,7 @@ Alternatively you can request a font using either or all, of FONT_FAMILY, FONT_S
   Is a string with the font's family name. i.e. *FreeSerif*
 
 - FONT_STYLE
-  Is a json formatted string with the font's style. Possible *key, value* pairs are:
+  Is a JSON formatted string with the font's style. Possible *key, value* pairs are:
   + *width* Modifies the space between glyphs. Commonly used values are:
     - *condensed*
     - *semiCondensed*
@@ -171,7 +171,7 @@ label.TextColor = Color.RED;
 
 #### Drop Shadow
 
-To add a drop-shadow to the text, simply set the SHADOW property. Shadow parameters can be set through a json string,
+To add a drop-shadow to the text, simply set the SHADOW property. Shadow parameters can be set through a JSON string,
 see the examples below.
 
 ~~~{.cs}
