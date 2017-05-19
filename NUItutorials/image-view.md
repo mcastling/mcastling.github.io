@@ -8,13 +8,13 @@ The ImageView is a control which displays an image.
 
 ### Basic creation and usage
 
-An instance of an ImageView is created by a URL: 
+An instance of an ImageView is created with a file path: 
 
 ~~~{.cs}
  imageView = new ImageView("./images/gallery-3.jpg");
 ~~~
 
-or:
+or the _ResourceURL_ property:
 
 ~~~{.cs}
  imageView = new ImageView();
@@ -42,7 +42,7 @@ A brief description of each property:
 
 + ResourceUrl        - path to image file.
 + ImageMap           - multiple properties associated with a given image.
-+ PreMUltipliedAlpha - If true, the RGB components represent the color of the object or pixel adjusted for its opacity by multiplication.
-                     - if false, the RGB components represent the colour of the object or pixel, disregarding its opacity.
++ PreMUltipliedAlpha - If true, the RGB components represent the color of the object or pixel adjusted for its opacity
+                       by multiplication. If false, the opacity is disregarded.
 + PixelArea          - sub area of image.
 

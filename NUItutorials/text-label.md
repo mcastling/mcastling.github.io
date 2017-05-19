@@ -1,7 +1,7 @@
 <a name="0"></a>
 # Text Label Tutorial
 
-This tutorial describes the TextLabel control in detail.
+This tutorial describes the _TextLabel_ control in detail.
 
 ## Overview
 
@@ -14,17 +14,13 @@ See [Text Label Properties](#3) for a list of available properties.
 
 ### Basic creation and usage
 
-To display a TextLabel the TEXT property must be set using a UTF-8 string.
-
-Note: *CR+LF* new line characters are replaced by *LF*.
-
 ~~~{.cs}
 TextLabel label = new TextLabel("Hello World");
 Window window = Window.Instance;
 window.Add(label);
 ~~~
 
-The label must also be added to the Window, or to a View which is on the Window.
+The label must be added to the Window, or to a View which is on the Window.
 
 The position of the label on-screen is dependent on the *parentOrigin* property.
 
@@ -32,13 +28,16 @@ This image is ParentOrigin.TOP_LEFT:
 
 ![ ](./Images/TextLabelTopLeft.png)
 
+To display a TextLabel the TEXT property must be set using a UTF-8 string.
+Note: *CR+LF* new line characters are replaced by *LF*.
+
 <a name="1"></a>
 ### Font Selection
 
 By default the TextLabel will automatically select a suitable font from the platform. Note that the selected font
 may not support all characters in your input text. For example, latin fonts often do not provide Arabic glyphs.
 
-Alternatively you can request a font using either, or all of FONT_FAMILY, FONT_STYLE, and POINT_SIZE properties:
+Alternatively you can request a font using either or all, of FONT_FAMILY, FONT_STYLE, and POINT_SIZE properties:
 
 - FONT_FAMILY
   Is a string with the font's family name. i.e. *FreeSerif*
@@ -273,7 +272,7 @@ locations in the control.
 
 Provide the distance in pixels.
 
-### Scroll Direction
+#### Scroll Direction
 
 The scroll direction is chosen automatically with the following rules:
 
