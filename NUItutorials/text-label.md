@@ -10,7 +10,7 @@ The TextLabel is a NUI control which renders a short text string.
 Text labels are lightweight, non-editable and do not respond to user input. Text labels also offer
 multi-language support.
 
-See [Text Label Properties](#2) for a list of available properties.
+See [Text Label Properties](#3) for a list of available properties.
 
 ### Basic creation and usage
 
@@ -143,7 +143,12 @@ label.HorizontalAlignment = "BEGIN";
 label.HorizontalAlignment = "CENTER";
 label.HorizontalAlignment = "END";
 ~~~
+
+
 ![ ](./Images/LatinBegin.png)
+
+
+
 |  |  |
 |--|--|
 | Here is the "BEGIN" alignment shown for left-to-right (Latin)   |  right-to-left (Arabic) scripts |
