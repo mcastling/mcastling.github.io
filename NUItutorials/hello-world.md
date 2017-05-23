@@ -1,8 +1,6 @@
 <a name="0"></a>
 # NUI Hello World Tutorial
 
-This tutorial provides an introduction to the NUI Animation framework.
-
 The tutorial shows how to create and display "Hello World" using a text label.
 
 [The NUI Overview](NUIoverview.md) describes NUI capabilities in detail.
@@ -15,7 +13,41 @@ The following steps are required to display text:
 + Create a View - a text label showing text
 + Add the text label to the application main window
 
-### Creation
+Two window application events are linked in this tutorial, _Initialized_ and _Touch_
+
+### Main method
+
+The Main method consists of 3 steps:
+
+1. Create application with the default constructor:
+
+~~~{.cs}
+Example example = new Example();
+~~~
+
+_Alternative constructors enable application creation with stylesheets and window modes_.
+
+2. Add initialization event handler to window application _Initialized_ event.
+
+This event handler will set up the scene, and is triggered once only.
+
+~~~{.cs}
+example.Initialized += Initialize;
+~~~
+
+3. Start application main loop
+
+The main loop must be started to run the application. This ensures that images are displayed,
+and events and signals are dispatched and captured.
+
+~~~{.cs}
+example.Run(args);
+~~~
+
+In this simple example, a Main method within the class is used. For more sophisticated development, seperate out the Main
+method to a seperate .cs file.
+
+#### Creation
 
 The application is derived from the Tizen NUI application class - _NUIApplication_
 
@@ -23,32 +55,12 @@ The application is derived from the Tizen NUI application class - _NUIApplicatio
 class Example : NUIApplication
 ~~~
 
-### Initialisation
-
-An initialisation callback is added to the application _Initialized_ event.
-
-During initialisation the initial scene is set up.
-
-The initialisation event is triggered once during the application lifetime.
-
-~~~{.cs}
-example.Initialized += Initialize;
-~~~
-
-### The Initialisation event handler - Initialize
+### The Initialization event handler - Initialize()
 
 Create text label:
 
 ~~~{.cs}
 TextLabel text = new TextLabel("Hello NUI World");
-~~~
-
-Get main application window and add callback to window _Touch_ event.
-The event handler is invoked on any click in the application window.
-
-~~~{.cs}
-Window window = Window.Instance;
-window.Touch += OnWindowTouched;
 ~~~
 
 Position text in centre of application window. The _ParentOrigin_ defines a point
@@ -77,12 +89,18 @@ Set text size. The size of the font in points.
 text.PointSize = 32.0f;
 ~~~
 
-Add text to default layer.
-
-_Layers provide a mechanism for overlaying groups of views on top of each other._
+Get main application window and add event handler to window _Touch_ event.
+The event handler is invoked on any click in the application window.
 
 ~~~{.cs}
-window.GetDefaultLayer().Add(text);
+Window window = Window.Instance;
+window.Touch += WindowTouched;
+~~~
+
+Add text to default layer.
+
+~~~{.cs}
+window.Add(text);
 ~~~
 
 ### Running the application
@@ -99,25 +117,21 @@ example.Run(args);
 Click anywhere in the application window to exit:
 
 ~~~{.cs}
-private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
+private void WindowTouched(object sender, Window.TouchEventArgs e)
 {
    example.Application.Quit();
 }
 ~~~
 
-### Logging
 
-Output simple message to buffer:
+### Compile the application
 
-~~~{.cs}
-Tizen.Log.Debug("NUI", "Hello world.");
-~~~
+csc /DALi_toolkit.lib helloNUI.cs
 
-View message using the dlog utility:
+### Starting the application
 
-~~~
-dlogutil NUI
-~~~
+Start up a terminal, and type ./helloNUI
+
 
 ## Full example code
 
@@ -128,35 +142,48 @@ namespace HelloTest
     {
         private void Initialize(object src, EventArgs e)
         {
-            // Connect the signal callback for stage touched signal
-            Window window = Window.Instance;
-            window.Touch += OnWindowTouched;
-
             // Add a simple text label to the main window
-            TextLabel text = new TextLabel("Hello World");
-            text.ParentOrigin = ParentOrigin.Center;
+            TextLabel text = new TextLabel("Hello NUI World");
+            text.ParentOrigin = ParentOrigin.CenterLeft;
             text.HorizontalAlignment = HorizontalAlignment.Center;
 	    text.BackgroundColor = Color.Red;
             text.PointSize = 32.0f;
 
-            window.GetDefaultLayer().Add(text);
+            // Connect the signal callback for a touched signal
+            Window window = Window.Instance;
+            window.Touch += OnWindowTouched;
+
+            window.Add(text);
         }
 
         // Callback for main window touched signal handling
-        private void OnWindowTouched(object sender, WIndow.TouchEventArgs e)
+        private void WindowTouched(object sender, Window.TouchEventArgs e)
         {
 	    example.Application.Quit();
         }
 
         static void Main(string[] args)
         {
-            Tizen.Log.Debug("NUI", "Hello world.");
-
             Example example = new Example();
 	    example.Initialized += Initialize;
             example.Run(args);
         }
     }
+}
+~~~
+
+### Alternate method of adding the Initialzed event using lambda expression syntax
+
+~~~{.cs}
+static void Main(string[] args)
+{
+    Example example = new Example();
+    example.Initialized += (object src, EventArgs args) =>
+    { // Initialisation code
+
+    };
+
+    example.Run(args);
 }
 ~~~
 
