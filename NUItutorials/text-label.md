@@ -3,6 +3,17 @@
 
 This tutorial describes the _TextLabel_ control in detail.
 
+In this tutorial:
+
+[Text Label creation](#1)
+[Font selection](#2)
+[Multi-language support](#3)
+[Text alignment](#4)
+[Label decorations](#5)
+[Auto scrolling](#6)
+[Mark style](#7)
+[Text Label Properties](#8)
+
 ## Overview
 
 The TextLabel is a NUI control which renders a short text string.  
@@ -10,8 +21,7 @@ The TextLabel is a NUI control which renders a short text string.
 Text labels are lightweight, non-editable and do not respond to user input. Text labels also offer
 multi-language support.
 
-See [Text Label Properties](#3) for a list of available properties.
-
+<a name="1"></a>
 ### Basic creation and usage
 
 ~~~{.cs}
@@ -31,7 +41,7 @@ This image is ParentOrigin.TOP_LEFT:
 To display a TextLabel the TEXT property must be set using a UTF-8 string.
 Note: *CR+LF* new line characters are replaced by *LF*.
 
-<a name="1"></a>
+<a name="2"></a>
 ### Font Selection
 
 By default the TextLabel will automatically select a suitable font from the platform. Note that the selected font
@@ -64,19 +74,20 @@ Alternatively you can request a font using either or all, of FONT_FAMILY, FONT_S
     - *oblique*
 
 - POINT_SIZE
-  Is a float with the font's size in points. To get the point size from pixels, could use the formula: <em>point_size = 72 * pixels / vertical_dpi</em> where <em>vertical_dpi</em> is the device's vertical resolution in dots per inch.
+  Is a float with the font's size in points. To get the point size from pixels, could use the formula: <em>point_size = 72 * pixels / vertical_dpi</em>
+  where <em>vertical_dpi</em> is the device's vertical resolution in dots per inch.
 
 ~~~{.cs}
 label.FontFamily = "FreeSerif";
 
-Property.Map fontStyle = new Property.Map();
-fontStyle.Add( "weight", "bold" )
-         .Add( "slant", "italic" ) );
-
+PropertyMap fontStyle = new PropertyMap();
+fontStyle.Add( "weight", "bold" );
+fontStyle.Add( "slant", "italic" );
+label.FontStyle = fontStyle;
 label.PointSize = 12.0f;
-~~~
 
-However the text control will fall-back to using the default font, if the requested font does not support the required scripts.
+If fonts are not specified, styling defaults are used.
+~~~
 
 #### Font Styles
 
@@ -88,8 +99,12 @@ set.
 A more flexible approach is to prepare various JSON stylesheets, and request a different style for each platform:
 
 ~~~{.cs}
-StyleManager styleManager = StyleManager.Get();
-styleManager.ApplyTheme( "example-path/example.json" );
+class Example : NUIApplication
+
+...
+...
+
+Example example = new Example("example-path/example.json");
 ~~~
 
 To change the font for standard text controls, this JSON syntax can be used:
@@ -119,17 +134,18 @@ then provide a style override in JSON.
 Mapping (_in the stylesheet_) the logical size to a physical size, can provide further flexibility
 for the end user.
 
+<a name="3"></a>
 ### Multi - language support
-Text labels offer multi-language support, including 'right to left' languages such as arabic.
+Text labels offer multi-language support, including 'right to left' languages such as Arabic.
 
-An example of arabic can be seen the images in the [Text Alignment](#2) section.
+An example of Arabic can be seen the images in the [Text Alignment](#4) section.
 
-See also [Font Selection](#1)
+See also [Font Selection](#2)
 
-<a name="2"></a>
+<a name="4"></a>
 ### Text Alignment
 
-Wrapping can be enabled using the MULTI_LINE property:
+Wrapping can be enabled using the _MultiLine_ property:
 
 ~~~{.cs}
 label.MultiLine = true;
@@ -138,9 +154,9 @@ label.MultiLine = true;
 The text can be aligned horizontally to the beginning, end, or center of the available area:
 
 ~~~{.cs}
-label.HorizontalAlignment = "BEGIN";
-label.HorizontalAlignment = "CENTER";
-label.HorizontalAlignment = "END";
+label.HorizontalAlignment = HorizontalAlignment.Begin;
+label.HorizontalAlignment = HorizontalAlignment.Center;
+label.HorizontalAlignment = HorizontalAlignment.End;
 ~~~
 
 |  |  |
@@ -155,6 +171,7 @@ label.HorizontalAlignment = "END";
 
 The examples above assume that the label size is greater than the minimum required.
 
+<a name="5"></a>
 ### TextLabel Decorations
 
 #### Color
@@ -200,31 +217,45 @@ label4.Shadow = "{\"offset\":\"1 1\",\"color\":\"red\"}" );
 
 #### Underline
 
-The text can be underlined by setting UNDERLINE_ENABLED.  
-The color can be selected using the UNDERLINE_COLOR property.  
+Text underline properties can be set using property map.
+
+Here text is underlined:
 
 ~~~{.cs}
 label1.Text = "Text with Underline";
-label1.UnderlineEnabled = true;
 
+PropertyMap textStyle = new PropertyMap();
+textStyle.Add(ENABLE_KEY, TRUE_TOKEN);
+label1.Underline = textStyle;
+~~~
+
+Here the underline color is set:
+
+~~~{.cs}
 label2.Text = "Text with Color Underline";
-label2.UnderlineHeight = true;
-label2.UnderlineColor = Color.GREEN;
+
+PropertyMap textStyle = new PropertyMap();
+textStyle.Add(ENABLE_KEY, TRUE_TOKEN);
+textStyle.Add(COLOR_KEY, Color.GREEN);
+label2.Underline = textStyle;
 ~~~
 
 ![ ](./Images/TextWithUnderline.png)
 
 ![ ](./Images/TextWithColorUnderline.png)
 
-By default the underline height will be taken from the font metrics, however this can be overridden using the
-UNDERLINE_HEIGHT property:
+By default the underline height will be taken from the font metrics, however this can be overridden:
 
 ~~~{.cs}
-label1.UnderlineHeight = 1.0f;
+PropertyMap textStyle = new PropertyMap();
+textStyle.Add(ENABLE_KEY, TRUE_TOKEN);
+textStyle.Add(HEIGHT_KEY, 1.0f);
+label1.Underline = textStyle;
 ~~~
 
 ![ ](./Images/TextWith1pxUnderline.png)
 
+<a name="6"></a>
 ### Auto Scrolling
 
 ![ ](./Images/AutoScroll.gif)
@@ -239,31 +270,31 @@ occur 3 times.
 
 If the loop count is not set, then once triggered to start, scrolling will continue until requested to stop.
 
-Multiline text will not scroll, and text should be BEGIN aligned.
+Multi-line text will not scroll, and text should be BEGIN aligned.
 
-The ENABLE_AUTO_SCROLL property should be set to TRUE to enable scrolling.
+The _EnableAutoScroll_ property should be set to TRUE to enable scrolling.
 
 ~~~{.cs}
 label.EnableAutoScroll = true;
 ~~~
 
-Once enabled, scrolling will continue until the loop count is completed, or the ENABLE_AUTO_SCROLL set to false. 
-Setting ENABLE_AUTO_SCROLL to false will let the text complete it's current scrolling loop then stop.
+Once enabled, scrolling will continue until the loop count is completed, or _EnableAutoScroll_ set to false. 
+Setting _EnableAutoScroll_ to false will let the text complete it's current scrolling loop then stop.
 
 The scroll speed, gap and loop count can be set in the stylesheet or via these relevant properties:
 
-#### AUTO_SCROLL_SPEED
+#### Auto scroll speed
 
 _AutoScrollSpeed_ controls the speed of the scrolling, the speed should be provided as pixels/second.
 
-#### AUTO_SCROLL_LOOP_COUNT
+#### Auto scroll loop count
 
 _AutoScrollLoopCount_ specifies how many times the text will complete a full scroll cycle.
-If this property is not set then scrolling will continue until ENABLE_AUTO_SCROLL is set to false.
+If this property is not set then scrolling will continue until _EnableAutoScroll_ is set to false.
 
-Setting ENABLE_AUTO_SCROLL to false will stop scrolling, whilst maintaining the original loop count value for next start.
+Setting _EnableAutoScroll_ to false will stop scrolling, whilst maintaining the original loop count value for next start.
 
-#### AUTO_SCROLL_GAP
+#### Auto scroll gap
 
 This specifies the amount of whitespace to display before the scrolling text is shown again.
 
@@ -282,6 +313,7 @@ The scroll direction is chosen automatically with the following rules:
 |              | or scroll right if text is Right to Left (RTL). |
 | multi-lined  | scroll upward |
 
+<a name="7"></a>
 ### Mark-up Style
 
 Mark-up tags can be used to change the style of the text. 
@@ -302,13 +334,13 @@ There are priorities when styles are applied while rendering text.
 
 Current supported tags are:
 
-## \<color\>
+#### \<color\>
 
 Sets the color of the characters inside the tag. The *color* tag has a *value* attribute used to set the color.
 Possible values are: 'red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'white', 'black' and 'transparent'.
 Web color and 32 bits hexadecimal 0xAARRGGBB formats are also supported.
 
-Examples below are equivalent, first example render the text in red. Second example codes the color in 0xAARRGGBB.
+The examples below are equivalent, the first example renders the text in red. Second example codes the color in 0xAARRGGBB.
 
 ~~~{.cs}
 label.Text = "<color value='red'>Red Text</color>" ); // Color coded with a text constant.
@@ -318,7 +350,7 @@ label.Text = "<color value='red'>Red Text</color>" ); // Color coded with a text
 label.Text = "<color value='0xFFFF0000'>Red Text</color>" ); // Color packed inside an ARGB hexadecimal value.
 ~~~
 
-## \<font\>
+#### \<font\>
 
 Sets the font values of the characters inside the tag.
 
@@ -329,43 +361,43 @@ Supported attributes are:
 - *width* The width of the font
 - *slant* The slant of the font.
 
-See [Font Selection](#1)
+See [Font Selection](#2)
 
 ~~~{.cs}
 label.Text = "<font family='SamsungSans' weight='bold'>Hello world</font>";
 ~~~
 
-<a name="3"></a>
+<a name="8"></a>
 ### Text Label Properties
+
+All text label properties are writable.
+
+All text label properties are not animatable.
+
+Text labels are lightweight, non-editable and do not respond to user input.
 
 The properties available for TextLabel are:
 
-|  Property enum  | Property  | Type |
+| Property  | Type | Description
 | ------------ | ------------ | ------------ |
-| RENDERING_BACKEND  | RenderingBackend  | int  |
-| TEXT| Text | string |
-| FONT_FAMILY | FontFamily | string |
-| FONT_STYLE| FontStyle | Map |
-| POINT_SIZE | PointSize | float |
-| MULTI_LINE | MultiLine | bool |
-| HORIZONTAL_ALIGNMENT | HorizontalAlignment | string |
-| VERTICAL_ALIGNMENT | VerticalAlignment | string |
-| TEXT_COLOR| TextColor | Vector4 |
-| SHADOW_OFFSET| ShadowOffset | Vector2 |
-| SHADOW_COLOR | ShadowColor | Vector4|
-| UNDERLINE_ENABLED | UnderlineEnabled | bool |
-| UNDERLINE_COLOR | UnderlineColor| Vector4 |
-| UNDERLINE_HEIGHT | UnderlineHeight | float |
-| ENABLE_MARKUP| EnableMarkup | bool |
-| ENABLE_AUTO_SCROLL | EnableAutoScroll | bool |
-| AUTO_SCROLL_SPEED | AutoScrollSpeed | int |
-| AUTO_SCROLL_LOOP_COUNT | AutoScrollLoopCount | int |
-| AUTO_SCROLL_GAP | AutoScrollGap  | float |
-| LINE_SPACING | LineSpacing | float |
-| UNDERLINE | Underline | Map |
-| SHADOW | Shadow | Map |
-| EMBOSS | Emboss | Map |
-| OUTLINE | Outline | Map |
+| Text | string | The text to display in UTF-8 format.
+| FontFamily | string | The requested font family to use.
+| FontStyle | Map | The requested font style to use.
+| PointSize | float | The size of font in points.
+| MultiLine | bool | The single-line or multi-line layout option.
+| HorizontalAlignment | string | The line horizontal alignment.
+| VerticalAlignment | string | The line vertical alignment.
+| TextColor | Color | The color of the text.
+| EnableMarkup | bool | Whether the mark-up processing is enabled.
+| EnableAutoScroll | bool | Starts or stops auto scrolling.
+| AutoScrollSpeed | int | Sets the speed of scrolling in pixels per second.
+| AutoScrollLoopCount | int | Number of complete loops when scrolling enabled.
+| AutoScrollGap  | float | Gap before scrolling wraps.
+| LineSpacing | float | The default extra space between lines in points.
+| Underline | Map | The default underline parameters.
+| Shadow | Map | The default shadow parameters.
+| Emboss | Map | The default emboss parameters.
+| Outline | Map | The default emboss parameters.
 
 ### More information on the Text label 
 
