@@ -154,9 +154,9 @@ label.MultiLine = true;
 The text can be aligned horizontally to the beginning, end, or center of the available area:
 
 ~~~{.cs}
-label.HorizontalAlignment = HorizontalAlignment.Begin;
-label.HorizontalAlignment = HorizontalAlignment.Center;
-label.HorizontalAlignment = HorizontalAlignment.End;
+label.HorizontalAlignment = HorizontalAlignmentType.Left;
+label.HorizontalAlignment = HorizontalAlignmentType.Center;
+label.HorizontalAlignment = HorizontalAlignmentType.Right;
 ~~~
 
 |  |  |
@@ -217,7 +217,7 @@ label4.Shadow = "{\"offset\":\"1 1\",\"color\":\"red\"}" );
 
 #### Underline
 
-Text underline properties can be set using property map.
+Text underline properties can be set using a property map.
 
 Here text is underlined:
 
@@ -229,7 +229,7 @@ textStyle.Add(ENABLE_KEY, TRUE_TOKEN);
 label1.Underline = textStyle;
 ~~~
 
-Here the underline color is set:
+Here the underline color and height is set:
 
 ~~~{.cs}
 label2.Text = "Text with Color Underline";
@@ -249,11 +249,11 @@ By default the underline height will be taken from the font metrics, however thi
 ~~~{.cs}
 PropertyMap textStyle = new PropertyMap();
 textStyle.Add(ENABLE_KEY, TRUE_TOKEN);
-textStyle.Add(HEIGHT_KEY, 1.0f);
+textStyle.Add(HEIGHT_KEY, 2.0f); // 2 pixel height
 label1.Underline = textStyle;
 ~~~
 
-![ ](./Images/TextWith1pxUnderline.png)
+The underline images above have a 1 pixel height.
 
 <a name="6"></a>
 ### Auto Scrolling
@@ -268,7 +268,7 @@ larger.
 The _loop count_ sets the number of scrolling repetitions i.e. if loop count is set to 3, scrolling of the text will
 occur 3 times.
 
-If the loop count is not set, then once triggered to start, scrolling will continue until requested to stop.
+If the loop count is 0, then once triggered to start, scrolling will continue until requested to stop.
 
 Multi-line text will not scroll, and text should be BEGIN aligned.
 
@@ -278,19 +278,19 @@ The _EnableAutoScroll_ property should be set to TRUE to enable scrolling.
 label.EnableAutoScroll = true;
 ~~~
 
-Once enabled, scrolling will continue until the loop count is completed, or _EnableAutoScroll_ set to false. 
+Once enabled, scrolling will continue until the loop count is completed, or _EnableAutoScroll_ is set to false. 
 Setting _EnableAutoScroll_ to false will let the text complete it's current scrolling loop then stop.
 
 The scroll speed, gap and loop count can be set in the stylesheet or via these relevant properties:
 
 #### Auto scroll speed
 
-_AutoScrollSpeed_ controls the speed of the scrolling, the speed should be provided as pixels/second.
+The _AutoScrollSpeed_ property controls the speed of the scrolling, the speed should be provided as pixels/second.
 
 #### Auto scroll loop count
 
 _AutoScrollLoopCount_ specifies how many times the text will complete a full scroll cycle.
-If this property is not set then scrolling will continue until _EnableAutoScroll_ is set to false.
+If this property is 0, then scrolling will continue until _EnableAutoScroll_ is set to false.
 
 Setting _EnableAutoScroll_ to false will stop scrolling, whilst maintaining the original loop count value for next start.
 
@@ -319,7 +319,7 @@ The scroll direction is chosen automatically with the following rules:
 Mark-up tags can be used to change the style of the text. 
 
 By default the text controls don't process the mark-up string. To enable the mark-up string processing the property
-*ENABLE_MARKUP* must be set to *true*.
+_EnableMarkup_ must be set to *true*.
 
 ~~~{.cs}
 TextLabel label = new TextLabel("Hello World");
