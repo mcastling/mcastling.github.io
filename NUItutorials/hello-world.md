@@ -186,7 +186,11 @@ static void Main(string[] args)
 
 After running the example, the following output should appear:
 
-![ ](./Images/hello-world.png)
+<img src="./Images/hello-world.png" style="border:5px solid black">
+
+<!-- 
+![ ](./Images/hello-world.png) 
+-->
 
 ### More information on the Text label 
 
