@@ -26,7 +26,7 @@ There are two approaches to styling a control, 1 is recommended.
       ...
 ~~~
 
-or 2) via code using SetProperty()
+2) via code using SetProperty()
 
 ~~~{.cpp}
 Dali::Toolkit::Control control = Dali::Toolkit::Control::New();
@@ -34,12 +34,16 @@ control.SetProperty( Control::BACKGROUND, "file_name.png" );
 ~~~
 
 
-The json approach means that there are no code changes and recompilation required, if the png file needs to be changed.
+The json approach means that if a change is required (such as changing the png file), no code changes and the
+subsequent recompilation are required.
 
 
 ### Style sheets
 
-Style sheets are written at the device level i.e seperate stylesheets for mobiles and TV's
+Style sheets can be written at the device level i.e. seperate stylesheets for mobiles and TV's.
+The stylesheets are passed into the Application constructors.
+
+Stlyesheets canalso be written at the control level. The default stylesheet read in on control construction.
 
 An example of a style sheet can be seen .....
 
@@ -48,7 +52,7 @@ An example of a style sheet can be seen .....
 
 ### Programming guide
 
-The Styling section
+The Styling section.
 
 ### Dali demos - Styling
 
@@ -59,17 +63,18 @@ styling.example
 animated-images.example
 ~~~
 
+The source code for these examples can be found in:
+~~~{.cpp}
+../dali-demo/examples/styling
+../dali-demo/examples/animated-images
+~~~
+
 Reminder - THe DALi environment variables must be sourced by either adding them to the .bashrc file
 or running the following commands after opening a new terminal:
 ~~~{.cpp}
 In the DALI parent directory (~/Public/DALI on my system)
 dali-env/opt/bin/dali_env -s > setenv
 . setenv
-~~~
-
-The source code for this example can be found in:
-~~~{.cpp}
-../dali-demo/examples/styling
 ~~~
 
 
