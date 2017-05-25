@@ -1,23 +1,23 @@
 # C# DALi Documentation
 
 ### Introduction
- + [DALi Overview](dali-introduction.md)
+ + [DALi Overview](./DALiIntroduction/dali-introduction.md)
 
-   + [DALI Features](dali-introduction.md)
+   + [DALI Features](./DALiIntroduction/dali-introduction.md)
 
- + [DALi high level design](high-level-design.md)
+ + [DALi high level design](./DALiIntroduction/high-level-design.md)
 
-   + [Architecture](high-level-design.md)
-   + [UI Components](UI-components.md)
-   + [Event handling](signals-actions.md)
-   + [Threading](high-level-design.md)
-   + [Implementation](high-level-design.md)
+   + [Architecture](./DALiIntroduction/high-level-design.md)
+   + [UI Components](./DALiIntroduction/UI-components.md)
+   + [Event handling](./DALiIntroduction/signals-actions.md)
+   + [Threading](./DALiIntroduction/high-level-design.md)
+   + [Implementation](./DALiIntroduction/high-level-design.md)
 
- + [DALi fundamentals](fundamentals.md)
+ + [DALi fundamentals](./DALiIntroduction/fundamentals.md)
 
-   + [Scene graph](fundamentals.md)
-   + [Stage and Views](fundamentals.md)
-   + [Coordinate system](coordinate.md)
-   + [Layers](layer.md)
-   + [Properties and Constraints](properties.md)
-   + [Animations](animations.md)
+   + [Scene graph](./DALiIntroduction/fundamentals.md)
+   + [Stage and Views](./DALiIntroduction/fundamentals.md)
+   + [Coordinate system](./DALiIntroduction/coordinate.md)
+   + [Layers](./DALiIntroduction/layer.md)
+   + [Properties and Constraints](./DALiIntroduction/properties.md)
+   + [Animations](./DALiIntroduction/animations.md)
