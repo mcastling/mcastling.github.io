@@ -374,8 +374,6 @@ All text label properties are writable.
 
 All text label properties are not animatable.
 
-Text labels are lightweight, non-editable and do not respond to user input.
-
 The properties available for TextLabel are:
 
 | Property  | Type | Description
