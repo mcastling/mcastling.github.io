@@ -23,3 +23,16 @@ The NUI API has been modified from its original C# base.
   The Window can be used to retrieve the list of Layers.
 
 ![ ](./Images/NewWindowHierarchy.png)
+
+
+## Relationship Between NUI code and original DALi code
+
+Currently all C# functionality is simply a wrapper around the existing native C++ API. It is conceivable in
+future that new UI elements may be developed in C# that have no direct C++ version (_though would still use the
+native C++ API where required_).
+
+
+## Development of NUI from DALi
+
+DALi was originally developed in C++, then subsequently developed in parallel in C#. A seperate Tizen
+NUI branch was created from this C# DALi branch.
