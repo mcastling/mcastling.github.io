@@ -21,39 +21,39 @@ The Main method consist of 3 steps:
 
 1. Creation of application via the default constructor.
 
-~~~{.cs}
-Example example = new Example();
-~~~
+   ~~~{.cs}
+   Example example = new Example();
+   ~~~
 
-The application is derived from the Tizen NUI application class - _NUIApplication_.
+   The application is derived from the Tizen NUI application class - _NUIApplication_.
 
-~~~{.cs}
-class Example : NUIApplication
-~~~
+   ~~~{.cs}
+   class Example : NUIApplication
+   ~~~
 
-_The NUIApplication class also includes constructors enabling application creation with stylesheets and window modes_.
+   _The NUIApplication class also includes constructors enabling application creation with stylesheets and window modes_.
 
 2. Adding initialization event handler to window application _Initialized_ event.
 
-This event handler will set up the scene, and is triggered once only.
+   This event handler will set up the scene, and is triggered once only.
 
-~~~{.cs}
-example.Initialized += Initialize;
-~~~
+   ~~~{.cs}
+   example.Initialized += Initialize;
+   ~~~
 
-_Adding the Initialize event handler with lambda expressions is demonstrated at the end of the tutorial._
+   _Adding the Initialize event handler with lambda expressions, is demonstrated at the end of the tutorial._
 
 3. Start of application main loop
 
-The main loop must be started to run the application. This ensures that images are displayed,
-and events and signals are dispatched and captured.
+   The main loop must be started to run the application. This ensures that images are displayed,
+   and events and signals are dispatched and captured.
 
-~~~{.cs}
-example.Run(args);
-~~~
+   ~~~{.cs}
+   example.Run(args);
+   ~~~
 
-In this simple tutorial, the Main method resides within the class. For significant application development, the Main
-method should be placed in a seperate .cs file.
+   In this simple tutorial, the Main method resides within the class. For significant application development, the Main
+   method should be placed in a seperate .cs file.
 
 ### The Initialization event handler - Initialize()
 
@@ -91,7 +91,7 @@ Setting text size. The size of the font in points.
 text.PointSize = 32.0f;
 ~~~
 
-Add event handler to main application window _Touch_ event. This event handler is invoked
+Add _Touch_ event handler to main application window. This event handler is invoked
 on any click in the application window.
 
 ~~~{.cs}
@@ -116,14 +116,11 @@ private void WindowTouched(object sender, Window.TouchEventArgs e)
 }
 ~~~
 
-### Compile the application
+### Build and Run the application
 
-csc /DALi_toolkit.lib helloNUI.cs
+Use Visual studio on a Windows platform.
 
-### Starting the application
-
-Start up a terminal, and type ./helloNUI
-
+Use Visual Studio Code on Linux.
 
 ## Full example code
 
@@ -166,11 +163,13 @@ namespace HelloTest
 
 ## Example output
 
+<h1 style="color:blue;">HIya</h1>
+
 After running the example, the following output should appear:
 
 <img src="./Images/hello-world.png" style="border: 5px solid black;">
 
-### Alternate method of adding the Initialzed event using lambda expression syntax
+### Alternate method of adding the Initialzed event, using lambda expression syntax
 
 ~~~{.cs}
 static void Main(string[] args)
