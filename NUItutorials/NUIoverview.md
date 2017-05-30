@@ -28,7 +28,7 @@ NUI enables developers to quickly create Rich UI applications with realistic eff
  + Maintains a hierarchical 3D scene graph consisting of parent and child nodes
  + Creates images & text
  + Provides Layers to aid in 2D UI layout
- + Automatic background loading of resources ( images / text / meshes )
+ + Automatic background loading of resources
  + Easy to use Animation framework which hides the complexity of the underlying 3D Math.
  + Provides keyboard / touch / mouse handling
 
@@ -36,16 +36,15 @@ NUI enables developers to quickly create Rich UI applications with realistic eff
 
 Scene graph: Tree data structure, consisting of a collection of nodes.
 
-Nodes: Image, text, buttons etc.
+Nodes:       Image, text, buttons etc.
 
-Window: Top level node of the scene graph, used for displaying a tree of Views.
+Window:      Top level node of the scene graph, used for displaying a tree of Views.
 
-View: Primary object for interaction. Views are effectively nodes that receive input (such as touch events)
-      and act as a container for drawable elements and other views. A NUI application uses a hierarchy of view
-      objects to position visible content.
+View:        Primary object for interaction. Views are effectively nodes that receive input (such as touch events),
+             and act as a container for drawable elements and other views. A NUI application uses a hierarchy of view
+             objects to position visible content.
 
-Layer: Differant levels within an image. Layers provide a mechanism for overlaying groups of views on top of each other.
-
+Layer:       Differant levels within an image. Layers provide a mechanism for overlaying groups of views on top of each other.
 
 ### Last updated - May 2017
 

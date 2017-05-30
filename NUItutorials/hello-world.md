@@ -33,7 +33,7 @@ The Main method consist of 3 steps:
 
    _The NUIApplication class also includes constructors enabling application creation with stylesheets and window modes_.
 
-2. Adding initialization event handler to window application _Initialized_ event.
+2. Adding an initialization event handler to window application _Initialized_ event.
 
    This event handler will set up the scene, and is triggered once only.
 
@@ -59,53 +59,53 @@ The Main method consist of 3 steps:
 
 The initialization code contains the following simple steps:
 
-Creation of the text label.
+1. Creation of the text label.
 
-~~~{.cs}
-TextLabel text = new TextLabel("Hello NUI World");
-~~~
+   ~~~{.cs}
+   TextLabel text = new TextLabel("Hello NUI World");
+   ~~~
 
-Positioning the text in centre of application window. The _ParentOrigin_ defines a point
-within the parent views's area. Note: The text label will be at least the
-width of the screen if the text label size is not specified.
+2. Positioning the text in centre of application window. The _ParentOrigin_ defines a point
+   within the parent views's area. Note: The text label will be at least the
+   width of the screen if the text label size is not specified.
 
-~~~{.cs}
-text.ParentOrigin = ParentOrigin.CenterLeft;
-~~~
+   ~~~{.cs}
+   text.ParentOrigin = ParentOrigin.CenterLeft;
+   ~~~
 
-Alignment of text horizontally to the center of the available area.
+3. Alignment of text horizontally to the center of the available area.
 
-~~~{.cs}
-text.HorizontalAlignment = HorizontalAlignment.Center;
-~~~
+   ~~~{.cs}
+   text.HorizontalAlignment = HorizontalAlignment.Center;
+   ~~~
 
-Setting label background color to illustrate label width.
+4. Setting label background color to illustrate label width.
 
-~~~{.cs}
-text.BackgroundColor = Color.Red;
-~~~
+   ~~~{.cs}
+   text.BackgroundColor = Color.Red;
+   ~~~
 
-Setting text size. The size of the font in points.
+5. Setting text size. The size of the font in points.
 
-~~~{.cs}
-text.PointSize = 32.0f;
-~~~
+   ~~~{.cs}
+   text.PointSize = 32.0f;
+   ~~~
 
-Add _Touch_ event handler to main application window. This event handler is invoked
-on any click in the application window.
+6. Adding _Touch_ event handler to the main application window. This event handler is invoked
+   on any click in the application window.
 
-~~~{.cs}
-Window window = Window.Instance;
-window.Touch += WindowTouched;
-~~~
+   ~~~{.cs}
+   Window window = Window.Instance;
+   window.Touch += WindowTouched;
+   ~~~
 
-Adding text to default layer.
+7. Adding text to default layer.
 
-~~~{.cs}
-window.Add(text);
-~~~
+   ~~~{.cs}
+   window.Add(text);
+   ~~~
 
-### Touch event handler
+### The Touch event handler
 
 The user can click anywhere in the application window to exit:
 
@@ -118,7 +118,7 @@ private void WindowTouched(object sender, Window.TouchEventArgs e)
 
 ### Build and Run the application
 
-Use Visual studio on a Windows platform.
+Use Visual Studio on a Windows platform.
 
 Use Visual Studio Code on Linux.
 
@@ -140,7 +140,7 @@ namespace HelloTest
 
             // Connect the signal callback for a touched signal
             Window window = Window.Instance;
-            window.Touch += OnWindowTouched;
+            window.Touch += WindowTouched;
 
             window.Add(text);
         }
@@ -162,8 +162,6 @@ namespace HelloTest
 ~~~
 
 ## Example output
-
-<h1 style="color:blue;">HIya</h1>
 
 After running the example, the following output should appear:
 

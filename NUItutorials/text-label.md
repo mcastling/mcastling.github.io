@@ -5,14 +5,14 @@ This tutorial describes the _TextLabel_ control in detail.
 
 In this tutorial:
 
-[Text Label creation](#1)
-[Font selection](#2)
-[Multi-language support](#3)
-[Text alignment](#4)
-[Label decorations](#5)
-[Auto scrolling](#6)
-[Mark style](#7)
-[Text Label Properties](#8)
+[Text Label creation](#1)<br>
+[Font selection](#2)<br>
+[Multi-language support](#3)<br>
+[Text alignment](#4)<br>
+[Label decorations](#5)<br>
+[Auto scrolling](#6)<br>
+[Mark style](#7)<br>
+[Text Label Properties](#8)<br>
 
 ## Overview
 
@@ -34,25 +34,25 @@ The label must be added to the Window, or to a View which is on the Window.
 
 The position of the label on-screen is dependent on the *parentOrigin* property.
 
-This image is ParentOrigin.TOP_LEFT:
+This image is ParentOrigin.TopLeft:
 
 ![ ](./Images/TextLabelTopLeft.png)
 
-To display a TextLabel the TEXT property must be set using a UTF-8 string.
+To display a TextLabel the _Text_ property must be set using a UTF-8 string.
 Note: *CR+LF* new line characters are replaced by *LF*.
 
 <a name="2"></a>
 ### Font Selection
 
-By default the TextLabel will automatically select a suitable font from the platform. Note that the selected font
-may not support all characters in your input text. For example, latin fonts often do not provide Arabic glyphs.
+By default the TextLabel will automatically select a suitable font from the platform. Note; that the selected font
+may not support all characters in your input text. For example, Latin fonts often do not provide Arabic glyphs.
 
-Alternatively you can request a font using either or all, of FONT_FAMILY, FONT_STYLE, and POINT_SIZE properties:
+Alternatively you can request a font using either or all, of _FontFamily_, _FontStyle_, and _PointSize_ properties:
 
-- FONT_FAMILY
+- FONT FAMILY
   Is a string with the font's family name. i.e. *FreeSerif*
 
-- FONT_STYLE
+- FONT STYLE
   Is a JSON formatted string with the font's style. Possible *key, value* pairs are:
   + *width* Modifies the space between glyphs. Commonly used values are:
     - *condensed*
@@ -73,7 +73,7 @@ Alternatively you can request a font using either or all, of FONT_FAMILY, FONT_S
     - *italic*
     - *oblique*
 
-- POINT_SIZE
+- POINT SIZE
   Is a float with the font's size in points. To get the point size from pixels, could use the formula: <em>point_size = 72 * pixels / vertical_dpi</em>
   where <em>vertical_dpi</em> is the device's vertical resolution in dots per inch.
 
@@ -88,11 +88,12 @@ label.PointSize = 12.0f;
 
 If fonts are not specified, styling defaults are used.
 ~~~
+[Back to top](#0)
 
 #### Font Styles
 
 Setting a font size programmatically is not ideal for applications which support multiple
-screen resolutions and platforms which support multiple logical font sizes.  Also, any
+screen resolutions, and platforms which support multiple logical font sizes.  Also, any
 changes to the platform font settings will override any sizes that have been programmatically
 set.
 
@@ -138,9 +139,10 @@ for the end user.
 ### Multi - language support
 Text labels offer multi-language support, including 'right to left' languages such as Arabic.
 
-An example of Arabic can be seen the images in the [Text Alignment](#4) section.
+An example of Arabic can be seen in the images in the [Text Alignment](#4) section.
 
 See also [Font Selection](#2)
+[Back to top](#0)
 
 <a name="4"></a>
 ### Text Alignment
@@ -170,6 +172,7 @@ label.HorizontalAlignment = HorizontalAlignmentType.Right;
 
 
 The examples above assume that the label size is greater than the minimum required.
+[Back to top](#0)
 
 <a name="5"></a>
 ### TextLabel Decorations
@@ -188,8 +191,8 @@ label.TextColor = Color.RED;
 
 #### Drop Shadow
 
-To add a drop-shadow to the text, simply set the SHADOW property. Shadow parameters can be set through a JSON string,
-see the examples below.
+To add a drop-shadow to the text, simply set the _Shadow_ property. Shadow parameters can be set through a JSON string,
+as demonstrated below.
 
 ~~~{.cs}
 window.BackgroundColor( Color.BLUE );
@@ -255,6 +258,8 @@ label1.Underline = textStyle;
 
 The underline images above have a 1 pixel height.
 
+[Back to top](#0)
+
 <a name="6"></a>
 ### Auto Scrolling
 
@@ -270,9 +275,9 @@ occur 3 times.
 
 If the loop count is 0, then once triggered to start, scrolling will continue until requested to stop.
 
-Multi-line text will not scroll, and text should be BEGIN aligned.
+Multi-line text will not scroll, and text should be 'Begin' aligned.
 
-The _EnableAutoScroll_ property should be set to TRUE to enable scrolling.
+The _EnableAutoScroll_ property should be set to TRUE to enable scrolling:
 
 ~~~{.cs}
 label.EnableAutoScroll = true;
@@ -296,10 +301,8 @@ Setting _EnableAutoScroll_ to false will stop scrolling, whilst maintaining the 
 
 #### Auto scroll gap
 
-This specifies the amount of whitespace to display before the scrolling text is shown again.
-
-This will be increased if the given value is not large enough to prevent the same bit of text being visible at two
-locations in the control.
+This specifies the amount of whitespace to display before the scrolling text is shown again. This gap will be increased
+if the given value is not large enough to prevent the same bit of text being visible at two locations in the control.
 
 Provide the distance in pixels.
 
@@ -367,6 +370,7 @@ See [Font Selection](#2)
 label.Text = "<font family='SamsungSans' weight='bold'>Hello world</font>";
 ~~~
 
+[Back to top](#0)
 <a name="8"></a>
 ### Text Label Properties
 
