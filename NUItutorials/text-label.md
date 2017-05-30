@@ -49,10 +49,10 @@ may not support all characters in your input text. For example, Latin fonts ofte
 
 Alternatively you can request a font using either or all, of _FontFamily_, _FontStyle_, and _PointSize_ properties:
 
-- FONT FAMILY
+- Font Family
   Is a string with the font's family name. i.e. *FreeSerif*
 
-- FONT STYLE
+- Font Style
   Is a JSON formatted string with the font's style. Possible *key, value* pairs are:
   + *width* Modifies the space between glyphs. Commonly used values are:
     - *condensed*
@@ -73,7 +73,7 @@ Alternatively you can request a font using either or all, of _FontFamily_, _Font
     - *italic*
     - *oblique*
 
-- POINT SIZE
+- Point Size
   Is a float with the font's size in points. To get the point size from pixels, could use the formula: <em>point_size = 72 * pixels / vertical_dpi</em>
   where <em>vertical_dpi</em> is the device's vertical resolution in dots per inch.
 
@@ -88,7 +88,6 @@ label.PointSize = 12.0f;
 
 If fonts are not specified, styling defaults are used.
 ~~~
-[Back to top](#0)
 
 #### Font Styles
 
@@ -97,7 +96,8 @@ screen resolutions, and platforms which support multiple logical font sizes.  Al
 changes to the platform font settings will override any sizes that have been programmatically
 set.
 
-A more flexible approach is to prepare various JSON stylesheets, and request a different style for each platform:
+A more flexible approach is to prepare various JSON stylesheets, and request a different style for each platform.
+The NUIApplication class has constructors which take a stylesheet argument:
 
 ~~~{.cs}
 class Example : NUIApplication
@@ -141,7 +141,7 @@ Text labels offer multi-language support, including 'right to left' languages su
 
 An example of Arabic can be seen in the images in the [Text Alignment](#4) section.
 
-See also [Font Selection](#2)
+See also [Font Selection](#2)<br>
 [Back to top](#0)
 
 <a name="4"></a>
@@ -374,10 +374,6 @@ label.Text = "<font family='SamsungSans' weight='bold'>Hello world</font>";
 <a name="8"></a>
 ### Text Label Properties
 
-All text label properties are writable.
-
-All text label properties are not animatable.
-
 The properties available for TextLabel are:
 
 | Property  | Type | Description
@@ -400,6 +396,10 @@ The properties available for TextLabel are:
 | Shadow | Map | The default shadow parameters.
 | Emboss | Map | The default emboss parameters.
 | Outline | Map | The default emboss parameters.
+
+All text label properties are writable.
+
+Text label properties are not animatable.
 
 ### More information on the Text label 
 
