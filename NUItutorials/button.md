@@ -1,7 +1,7 @@
 <a name="0"></a>
 # Button Tutorial
 
-This tutorial describes the NUI button controls including _Button_, _Checkbox_, _Radio_ and _Toggle_.
+This tutorial describes the NUI button controls including: _PushButton_, _Checkbox_, _Radio_ and _Toggle_.
 
 In this tutorial:
 
@@ -14,22 +14,71 @@ In this tutorial:
 [](#7)
 [properties](#8)
 
-
 ## Overview
 
-This class provides the disabled property and the clicked signal.
-
-A push *button* changes its appearance when pressed and returns to its original appearance when released.
+A pushbutton changes its appearance when pressed and returns to its original appearance when released.
 
 The check box can be checked or unchecked.
 
 The radio button has two states selected and unselected. Usually radio buttons are grouped, in a group only one
 radio button can be selected at a given time.
 
-The toggle button allows the user to switch a feature on or off. Toggle 
-buttons also support tooltips.
+The toggle button allows the user to switch a feature on or off. Toggle buttons also support tooltips.
 
-The Checkbox, Radio and Toggle buttons are derived from the Button class.
+<a name="2"></a>
+## The Button class and events
+
+The _Button_ class is the base class for the _PushButton_, _Checkbox_, _Radio_ and _Toggle_ button classes.
+
+The Button class provides the disabled property.
+
+There are 4 events associated with the Button class:
+
++ Clicked      - The button is touched and the touch point doesn't leave the boundary of the button.
++ Pressed      - The button is touched
++ Released     - The button is touched and the touch point leaves the boundary of the button.
++ StateChanged - The button's state is changed.
+
+When the \e disabled property is set to \e true, events are not emitted.
+
+The Button provides the following properties which modify when events are emitted:
+
+ <ul>
+    <li>\e autorepeating
+        When \e autorepeating is set to \e true, Pressed,Released and Clicked events are emitted at regular
+      intervals while the button is touched.
+
+      The intervals could be modified with the Button::SetInitialAutoRepeatingDelay and Button::SetNextAutoRepeatingDelay methods.
+ 
+     A \e togglable button can't be \e autorepeating. If the \e autorepeating property is set to \e true,
+       then the \e togglable property is set to false but no signal is emitted.
+ 
+    <li>\e togglable
+       When \e togglable is set to \e true, a Button::StateChangedSignal() signal is emitted, with the selected state.
+ </ul>
+
+Adding an event handler to a Clicked event:
+~~~{.cs}
+
+pushButton.Clicked += (obj, e) =>
+{
+   e.Button.LabelText = "Click Me";
+   e.Button.UnselectedColor = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+   return true;
+};
+
+The entire button area has the unselected color
+
+For a checkbox all 4 events are available, usually only the StateChanged event is used to notify
+when the button changes its state to selected or unselected.
+
+For a radio button use the StateChanged event to check when the radio button is selected.
+
+~~~
+
+<a name="1"></a>
+## The Button class and visuals
+
 
 <a name="1"></a>
 ### Button creation
@@ -52,7 +101,7 @@ CheckBoxButton checkBoxbutton = new CheckBoxButton();
 button.LabelText = "Yes";
 button.BackgroundColor = Color.White;
 
-                   _contentContainer.AddChild(checkBoxButton, new TableView.CellPosition(((uint)idx / 5) * 2 + 1, (uint)idx % 5));
+   _contentContainer.AddChild(checkBoxButton, new TableView.CellPosition(((uint)idx / 5) * 2 + 1, (uint)idx % 5));
 
 Window window = Window.Instance;
 window.Add(button;
@@ -86,65 +135,9 @@ Toggle button
 
 ~~~{.cs}
 
-
-
-
-
 ToggleButton toggleButton = new ToggleButton();
 
-
 _contentContainer.AddChild(toggleButton, new TableView.CellPosition(.........);
-~~~
-
-
-<a name="2"></a>
-### Button events
-
-There are 4 events assoociated with the Button class:
-
-+ Clicked
-+ Pressed
-+ Released
-+ StateChanged
-
- A ClickedSignal() is emitted when the button is touched and the touch point doesn't leave the boundary of the button.
-
-When the \e disabled property is set to \e true, no signal is emitted.
-
-Button provides the following properties which modify the signals emitted:
- * <ul>
- *   <li>\e autorepeating
- *       When \e autorepeating is set to \e true, a Button::PressedSignal(), Button::ReleasedSignal() and Button::ClickedSignal() signals are emitted at regular
- *       intervals while the button is touched.
- *       The intervals could be modified with the Button::SetInitialAutoRepeatingDelay and Button::SetNextAutoRepeatingDelay methods.
- *
- *       A \e togglable button can't be \e autorepeating. If the \e autorepeating property is set to \e true, then the \e togglable property is set to
- *       false but no signal is emitted.
- *
- *   <li>\e togglable
- *       When \e togglable is set to \e true, a Button::StateChangedSignal() signal is emitted, with the selected state.
- * </ul>
- *
-
-
-
-For a button 3 events are available
-
-For a checkbox all 4 events are available, usually only the StateChanged event is used to notify
-when the button changes its state to selected or unselected.
-
-For a radio button use the StateChanged event to check when the radio button is selected.
-
-Adding an event handler to a Clicked event:
-~~~{.cs}
-
-pushButton.Clicked += (obj, e) =>
-{
-   e.Button.LabelText = "Click Me";
-   e.Button.UnselectedColor = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-   return true;
-};
-
 ~~~
 
 <a name=""></a>
@@ -152,7 +145,7 @@ pushButton.Clicked += (obj, e) =>
 
 The button's appearance can be modified by setting properties for the various visuals/images.
 
-Visuals provide reusable rendering logic which can be used by all controls.
+_Visuals provide reusable rendering logic which can be used by all controls_.
 
 Images and icons are added to buttons via the use of visuals.
 
@@ -164,7 +157,6 @@ The \e button visual is shown over the \e background visual.
 When pressed the unselected visuals are replaced by the \e selected visual. The text label is always placed on the top of all images.
  
 When the button is disabled, \e background, \e button and \e selected visuals are replaced by their \e disabled visuals.
-
 
 A control has 3 states: NORMAL, FOCUSED and DISABLED. Each state should have the required visuals.
 
@@ -272,34 +264,43 @@ All text label properties are writable.
 
 All text label properties are not animatable.
 
-The properties available for TextLabel are:
+The properties available for the Button class are:
 
 | Property  | Type | Description
 | ------------ | ------------ | ------------ |
-| Text | string | The text to display in UTF-8 format.
-| FontFamily | string | The requested font family to use.
-| FontStyle | Map | The requested font style to use.
-| PointSize | float | The size of font in points.
-| MultiLine | bool | The single-line or multi-line layout option.
-| HorizontalAlignment | string | The line horizontal alignment.
-| VerticalAlignment | string | The line vertical alignment.
-| TextColor | Color | The color of the text.
-| EnableMarkup | bool | Whether the mark-up processing is enabled.
-| EnableAutoScroll | bool | Starts or stops auto scrolling.
-| AutoScrollSpeed | int | Sets the speed of scrolling in pixels per second.
-| AutoScrollLoopCount | int | Number of complete loops when scrolling enabled.
-| AutoScrollGap  | float | Gap before scrolling wraps.
-| LineSpacing | float | The default extra space between lines in points.
-| Underline | Map | The default underline parameters.
-| Shadow | Map | The default shadow parameters.
-| Emboss | Map | The default emboss parameters.
-| Outline | Map | The default emboss parameters.
+| UnselectedVisual | Map | 
+| SelectedVisual | Map | 
+| DisabledSelectedVisual | Map | 
+| DisabledUnselectedVisual | Map | 
+| UnselectedBackgroundVisual | Map | 
+| SelectedBackgroundVisual | Map | 
+| DisabledUnselectedBackgroundVisual | Map | 
+| DisabledSelectedBackgroundVisual | Map | 
+| LabelRelativeAlignment | string | 
+| LabelPadding | Vector4 | 
+| ForegroundVisualPadding | Vector4 | 
+| AutoRepeating | | 
+| InitialAutoRepeatingDelay | float |
+| NextAutoRepeatingDelay | float | 
+| Togglable | bool | 
+| Selected | bool | 
+| UnselectedColor | Map | 
+| SelectedColor | Map | 
+| Label | | 
+| LabelText | |
+| | |
+| | |
+
+
 
 ### More information on Buttons in NUI
 
-The [Hello World tutorial](hello-world.md) describes how to display text in a text label.
+The [xxx tutorial](xxx.md) describes how to ...
 
 [Back to top](#0)
+
+
+
 
 ~~~{.cs}
 PropertyMap textStyle = new PropertyMap();
