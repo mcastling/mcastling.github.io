@@ -142,6 +142,7 @@ Text labels offer multi-language support, including 'right to left' languages su
 An example of Arabic can be seen in the images in the [Text Alignment](#4) section.
 
 See also [Font Selection](#2)<br>
+
 [Back to top](#0)
 
 <a name="4"></a>
