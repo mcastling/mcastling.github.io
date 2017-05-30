@@ -17,13 +17,21 @@ This tutorial demonstrates the triggering (_firing_) of the the _Initialized_ an
 
 ### Main method
 
-The Main method consists of 3 steps:
+The Main method consist of 3 steps:
 
-1. Creating application with the default constructor:
+1. Creation of application via the default constructor.
 
 ~~~{.cs}
 Example example = new Example();
 ~~~
+
+The application is derived from the Tizen NUI application class - _NUIApplication_.
+
+~~~{.cs}
+class Example : NUIApplication
+~~~
+
+_The NUIApplication class also includes constructors enabling application creation with stylesheets and window modes_.
 
 2. Adding initialization event handler to window application _Initialized_ event.
 
@@ -33,9 +41,9 @@ This event handler will set up the scene, and is triggered once only.
 example.Initialized += Initialize;
 ~~~
 
-Adding the event handler with lambda expressions is demonstrated at the end of the tutorial.
+_Adding the Initialize event handler with lambda expressions is demonstrated at the end of the tutorial._
 
-3. Starting application main loop
+3. Start of application main loop
 
 The main loop must be started to run the application. This ensures that images are displayed,
 and events and signals are dispatched and captured.
@@ -44,24 +52,14 @@ and events and signals are dispatched and captured.
 example.Run(args);
 ~~~
 
-In this simple tutorial, the Main method resides within the class. For significant application development place the Main
-method in a seperate .cs file.
-
-#### Creation
-
-The application is derived from the Tizen NUI application class - _NUIApplication_
-
-~~~{.cs}
-class Example : NUIApplication
-~~~
-
-_The NUIApplication class includes constructors enabling application creation with stylesheets and window modes_.
+In this simple tutorial, the Main method resides within the class. For significant application development, the Main
+method should be placed in a seperate .cs file.
 
 ### The Initialization event handler - Initialize()
 
 The initialization code contains the following simple steps:
 
-Creating the text label:
+Creation of the text label.
 
 ~~~{.cs}
 TextLabel text = new TextLabel("Hello NUI World");
@@ -75,13 +73,13 @@ width of the screen if the text label size is not specified.
 text.ParentOrigin = ParentOrigin.CenterLeft;
 ~~~
 
-Alignment of text horizontally to the center of the available area:
+Alignment of text horizontally to the center of the available area.
 
 ~~~{.cs}
 text.HorizontalAlignment = HorizontalAlignment.Center;
 ~~~
 
-Setting label background color to illustrate label width:
+Setting label background color to illustrate label width.
 
 ~~~{.cs}
 text.BackgroundColor = Color.Red;
@@ -93,8 +91,8 @@ Setting text size. The size of the font in points.
 text.PointSize = 32.0f;
 ~~~
 
-Get main application window and add event handler to window _Touch_ event.
-The event handler is invoked on any click in the application window.
+Add event handler to main application window _Touch_ event. This event handler is invoked
+on any click in the application window.
 
 ~~~{.cs}
 Window window = Window.Instance;
@@ -109,7 +107,7 @@ window.Add(text);
 
 ### Touch event handler
 
-Click anywhere in the application window to exit:
+The user can click anywhere in the application window to exit:
 
 ~~~{.cs}
 private void WindowTouched(object sender, Window.TouchEventArgs e)
@@ -117,7 +115,6 @@ private void WindowTouched(object sender, Window.TouchEventArgs e)
    example.Application.Quit();
 }
 ~~~
-
 
 ### Compile the application
 
@@ -167,6 +164,12 @@ namespace HelloTest
 }
 ~~~
 
+## Example output
+
+After running the example, the following output should appear:
+
+<img src="./Images/hello-world.png" style="border: 5px solid black;">
+
 ### Alternate method of adding the Initialzed event using lambda expression syntax
 
 ~~~{.cs}
@@ -181,16 +184,6 @@ static void Main(string[] args)
     example.Run(args);
 }
 ~~~
-
-## Example output
-
-After running the example, the following output should appear:
-
-<img src="./Images/hello-world.png" style="border:5px solid black">
-
-<!-- 
-![ ](./Images/hello-world.png) 
--->
 
 ### More information on the Text label 
 
