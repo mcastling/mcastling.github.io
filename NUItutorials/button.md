@@ -5,27 +5,27 @@ This tutorial describes the NUI button controls including: _PushButton_, _Checkb
 
 In this tutorial:
 
-[Button creation](#1)
-[Button states](#2)
-[Button events](#3)
-[Button visuals](#4)
-[Tool tips](#5)
-[Button properties](#6)
+[Button creation](#1)<br>
+[Button states](#2)<br>
+[Button events](#3)<br>
+[Button visuals](#4)<br>
+[Tool tips](#5)<br>
+[Button properties](#6)<br>
 
 ## Overview
 
-The *Button* class is the base class for the *PushButton*, *Checkbox*, *Radio* and *Toggle* button UI components.
+The *Button* class is the base class for the button UI components.
 
 Buttons can be _selected_, _disabled_, and _togglable_.
 
-A push button changes its appearance when pressed, and returns to its original appearance when released.
+A *push button* changes its appearance when pressed, and returns to its original appearance when released.
 
-The check box can be checked or unchecked.
+The *check box* can be checked or unchecked.
 
-The radio button has two states selected and unselected. Usually radio buttons are grouped, in a group only one
+The *radio button* has two states selected and unselected. Usually radio buttons are grouped, in a group only one
 radio button can be selected at a given time.
 
-The toggle button allows the user to switch a feature on or off. Toggle buttons also support tooltips.
+The *toggle button* allows the user to switch a feature on or off. Toggle buttons also support tooltips.
 
 <a name="1"></a>
 ### Button creation
@@ -39,6 +39,7 @@ _window = Window.Instance;
 _contentContainer = new TableView(6, 5);
 
 ...
+...
 PushButton button = new PushButton();
 button.LabelText = "Process";
 button.ParentOrigin = ParentOrigin.BottomLeft;
@@ -46,8 +47,9 @@ button.ParentOrigin = ParentOrigin.BottomLeft;
 _contentContainer.AddChild(button, new TableView.CellPosition(....    );
 _window.Add(_contentContainer);
 
-In this example the button is added to a Table View UI component.
 ~~~
+
+In this example the button is added to a Table View UI component.
 
 check box button:
 
@@ -82,7 +84,7 @@ ToggleButton toggleButton = new ToggleButton();
 [Back to top](#0)
 
 <a name="2"></a>
-## Button states
+### Button states
 
 Buttons are selectable, can be disabled, and are togglable.
 
@@ -93,7 +95,7 @@ The _View_ class provides the _Disabled_ property.
 [Back to top](#0)
 
 <a name="3"></a>
-## Button events
+### Button events
 
 There are 4 events associated with the Button class:
 
@@ -112,21 +114,21 @@ pushButton.Clicked += (obj, e) =>
 };
 ~~~
 
-Events are not fired when the \e disabled property is set to \e true.
+Events are not fired when the disabled property is set to true.
 
 The Button class provides the following properties which modify the fired events:
 
-+ autorepeating
-When \e autorepeating is set to \e true, the Pressed, Released and Clicked events are fired at regular
+1. autorepeating
+When autorepeating is set to true, the Pressed, Released and Clicked events are fired at regular
 intervals while the button is touched.
 
 The interval times can be modified with the _InitialAutoRepeatingDelay_ and _NextAutoRepeatingDelay_ properties.
  
-A \e togglable button can't be \e autorepeating. If the \e autorepeating property is set to \e true,
-then the \e togglable property is set to false but no event is fired.
+A togglable button can't be autorepeating. If the autorepeating property is set to true,
+then the togglable property is set to false but no event is fired.
  
-+ togglable
-When \e togglable is set to \e true, a _StateChanged_ event is fired, with the selected state.
+2. togglable
+When togglable is set to true, a _StateChanged_ event is fired, with the selected state.
 
 For a checkbox all 4 events are available, usually only the _StateChanged_ event is used to notify
 when the button changes its state to selected or unselected.
@@ -136,7 +138,7 @@ For a radio button use the _StateChanged_ event to check when the radio button i
 [Back to top](#0)
 
 <a name="4"></a>
-## Button visuals
+### Button visuals
 
 _Visuals provide reusable rendering logic which can be used by all controls. Images and icons are added
 to buttons via the use of visuals_.
@@ -144,16 +146,13 @@ to buttons via the use of visuals_.
 The button's appearance can be modified by setting properties for the various 'state' visuals/images.
 
 A control has 3 states: NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
+Each state and sub-state should have the required visuals. A visual can be common between states.
 
-Each state and sub-state should have the required visuals.
-
-When pressed the unselected visuals are replaced by the \e selected visual. The text label is always
+When pressed the unselected visuals are replaced by the selected visual. The text label is always
 placed on the top of all images.
  
-When the button is disabled, \e background, \e button and \e selected visuals are replaced by
-their \e disabled visuals.
-
-Each state can have its own set of visuals, or a visual can be common between states.
+When the button is disabled, background, button and selected visuals are replaced by
+their disabled visuals.
 
 This example illustrates the toggle button _StateVisuals_ property, which has visuals for each state:
  
@@ -194,9 +193,9 @@ PushButton button = new PushButton();
 button.TooltipText = "Simple Tooltip";
 ~~~
 
-2. Use a property array as shown in the [Visuals section](#0)
+2. Use a property array as shown in the [Visuals section](#4)
 
-3. property maps
+3. Property maps
 
 In this example an array of property map's is created for a tooltip with one icon and one text visual:
 
@@ -245,22 +244,21 @@ The properties available in the *Button* base class are:
 | LabelRelativeAlignment | string | Position of text label in relation to foreground/icon when both are present |
 | LabelPadding | Vector4 | The padding area around the label (if present) |
 | ForegroundVisualPadding | Vector4 | The padding area around the foreground/icon visual (if present) |
-| AutoRepeating | bool | autorepeating described [button events](#3) section |
+| AutoRepeating | bool | autorepeating is described in the [button events](#3) section |
 | InitialAutoRepeatingDelay | float | Stores the initial autorepeating delay in seconds (current default setting 0.15s) |
 | NextAutoRepeatingDelay | float | Stores the next autorepeating delay in seconds (current default setting 0.05s) |
-| Togglable | bool | If the \e togglable property is set to \e true, then the \e autorepeating property is set to false. |
+| Togglable | bool | If the togglable property is set to true, then the autorepeating property is set to false. |
 | Selected | bool | Sets the toggable button as either selected or unselected |
 | Label | string | Stores the button text label |
-| | |
 
-Note: If the \e autorepeating property is set to \e true then the \e togglable property is set to false.
+Note: If the autorepeating property is set to true then the togglable property is set to false.
 
 The properties available for the *PushButton* class are:
 
 | Property  | Type | Description |
 | ------------ | ------------ | ------------ |
-| LabelPadding | string | | 
-| IconPadding | string | |
+| LabelPadding | string | The padding area around the label | 
+| IconPadding | string | The padding area around the Icon |
 
 The properties available for the *ToggleButton* class are:
 
