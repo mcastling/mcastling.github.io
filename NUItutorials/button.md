@@ -3,7 +3,7 @@
 
 This tutorial describes the NUI button controls including, _PushButton_, _Checkbox_, _Radio_ and _Toggle_.
 
-In this tutorial:
+In this tutorial the following subjects are covered:
 
 [Button creation](#1)<br>
 [Button states](#2)<br>
