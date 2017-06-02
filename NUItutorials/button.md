@@ -1,7 +1,7 @@
 <a name="0"></a>
 # Button Tutorial
 
-This tutorial describes the NUI button controls including: _PushButton_, _Checkbox_, _Radio_ and _Toggle_.
+This tutorial describes the NUI button controls including, _PushButton_, _Checkbox_, _Radio_ and _Toggle_.
 
 In this tutorial:
 
@@ -86,7 +86,7 @@ ToggleButton toggleButton = new ToggleButton();
 <a name="2"></a>
 ### Button states
 
-Buttons are selectable, can be disabled, and are togglable.
+Buttons are _selectable_, can be _disabled_, and are _togglable_.
 
 The Button class provides the _Toggable_ and _Selected_ properties.
 
@@ -99,10 +99,10 @@ The _View_ class provides the _Disabled_ property.
 
 There are 4 events associated with the Button class:
 
-+ Clicked      - The button is touched and the touch point doesn't leave the boundary of the button.
-+ Pressed      - The button is touched
-+ Released     - The button is touched and the touch point leaves the boundary of the button.
-+ StateChanged - The button's state is changed.
++ Clicked	- The button is touched, and the touch point doesn't leave the boundary of the button.
++ Pressed	- The button is touched
++ Released	- The button is touched, and the touch point leaves the boundary of the button.
++ StateChanged	- The button's state is changed.
 
 Here is an example of adding an event handler to a push button _Clicked_ event:
 
@@ -118,17 +118,15 @@ Events are not fired when the disabled property is set to true.
 
 The Button class provides the following properties which modify the fired events:
 
-1. autorepeating
-When autorepeating is set to true, the Pressed, Released and Clicked events are fired at regular
-intervals while the button is touched.
+1. When *autorepeating* is set to true, the Pressed, Released and Clicked events are fired at regular
+   intervals while the button is touched.
 
 The interval times can be modified with the _InitialAutoRepeatingDelay_ and _NextAutoRepeatingDelay_ properties.
  
 A togglable button can't be autorepeating. If the autorepeating property is set to true,
 then the togglable property is set to false but no event is fired.
  
-2. togglable
-When togglable is set to true, a _StateChanged_ event is fired, with the selected state.
+2. When *togglable* is set to true, a _StateChanged_ event is fired, with the selected state.
 
 For a checkbox all 4 events are available, usually only the _StateChanged_ event is used to notify
 when the button changes its state to selected or unselected.
@@ -143,9 +141,9 @@ For a radio button use the _StateChanged_ event to check when the radio button i
 _Visuals provide reusable rendering logic which can be used by all controls. Images and icons are added
 to buttons via the use of visuals_.
 
-The button's appearance can be modified by setting properties for the various 'state' visuals/images.
+The button's appearance can be modified by setting properties for the various 'state' Visuals.
 
-A control has 3 states: NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
+A control has 3 states - NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
 Each state and sub-state should have the required visuals. A visual can be common between states.
 
 When pressed the unselected visuals are replaced by the selected visual. The text label is always
@@ -193,7 +191,7 @@ PushButton button = new PushButton();
 button.TooltipText = "Simple Tooltip";
 ~~~
 
-2. Use a property array as shown in the [Visuals section](#4)
+2. Use a property array as shown in the example in the [Visuals section](#4)
 
 3. Property maps
 
@@ -239,8 +237,8 @@ The properties available in the *Button* base class are:
 
 | Property  | Type | Description
 | ------------ | ------------ | ------------ |
-| ForeGroundVisual | Map | map describing visual, changes dependent on state | 
-| BackgroundVisual | Map | map describing visual, changes dependent on state |
+| ForeGroundVisual | Map | A map describing visual, changes dependent on state | 
+| BackgroundVisual | Map | a map describing visual, changes dependent on state |
 | LabelRelativeAlignment | string | Position of text label in relation to foreground/icon when both are present |
 | LabelPadding | Vector4 | The padding area around the label (if present) |
 | ForegroundVisualPadding | Vector4 | The padding area around the foreground/icon visual (if present) |
@@ -264,8 +262,8 @@ The properties available for the *ToggleButton* class are:
 
 | Property  | Type | Description
 | ------------ | ------------ | ------------ |
-| StateVisuals | Array | array of property-maps, or a property array of strings. The property map expects a description of visual, and string represents an image url. | 
-| Tooltips | Array | array of toggle state tooltip strings. Each tooltip string should match a toggle state |
+| StateVisuals | Array | Array of property-maps, or a property array of strings. The property map expects a description of visual, and string represents an image url. | 
+| Tooltips | Array | Array of toggle state tooltip strings. Each tooltip string should match a toggle state |
 | CurrentStateIndex | int | current state |
 
 [Back to top](#0)
