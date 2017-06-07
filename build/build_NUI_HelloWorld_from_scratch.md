@@ -1,33 +1,40 @@
 <a name="0"></a>
-# Setting up the environment for building applications using NUI on Ubuntu
+# Setup NUI development environment on Ubuntu
 
 This guide explains how to setup, build and run NUI (Dali C#) applications using Visual Studio Core.
 
+This document covers:
+
+[Installation](#1)<br>
+[Getting NUI source code](#2)<br>
+[](#3)<br>
+[](#4)<br>
+[](#5)<br>
+[](#6)<br>
+[](#7)<br>
+[](#8)<br>
+
+## Overview
 It assumes the starting point is a completely 'clean' system.
 
-A "Hello World" tutorial ![](../NUItutorials/hello-world.md) provides an introduction into NUI application development.
-
-![](../NUItutorials/hello-world.md)
-
-The [Hello World tutorial](hello-world.md) describes how to display text in a text label.
+The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to display text in a text label.
 
 ## Step-by-step guide
 
+<a name="1"></a>
 ### Installation
 + Install dot net core for Ubuntu
-	Follow instructions on installing dotnet core for Ubuntu [](www.microsoft.com/net/core#linuxubuntu)
+    Follow instructions on [installing dotnet core for Ubuntu](www.microsoft.com/net/core#linuxubuntu)
 
 + Install latest Visual Studio Core (VSC) for Ubuntu
-
-	a. 	Download deb package from [](https://code.visualstudio.com)
-![](https://code.visualstudio.com)
-	b.   	Install deb package with:
+    a. [Download deb package from](https://code.visualstudio.com)
+    b. Install deb package with:
 ~~~{.bash}
-	$ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
+    $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
 + Open VSC
-	a.	In the desktop launcher, Select *Search your Computer* > *Applications* for Visual Studio Code icon
+	a.	In the desktop launcher, select *Search your Computer* > *Applications* for the Visual Studio Code icon
 
 	b.	Copy VSC icon to Launcher
 
@@ -73,14 +80,14 @@ The [Hello World tutorial](hello-world.md) describes how to display text in a te
 		Select File > Preferences > Settings > Edit "http.proxy" (_in settings.json_).
         	e.g "http.proxy": "http://106.1.18.35:8080
 
-### Recommended - Familiarise with VSC
+#### Recommended - Familiarise with VSC
 + Build VSC with a console hello world
 
 ![This tutorial](https://docs.microsoft.com/en-us-dotnet/csharp/getting-started/with-visual-studio-code)
 
 will give you a basic understanding of building, debugging and running projects in VSC.
 
-
+<a name="2"></a>
 ### Get NUI source code from Git
 + Get code from git (_review.tizen.org_ server)
 
@@ -116,6 +123,9 @@ c.	$ git pull
 
 Repeat above steps for the dali-adaptor and dali-toolkit folders.
 
+[Back to top](#0)
+
+<a name="4"></a>
 ### Build NUI environment
 + Build environment setup, saving to a file
 
