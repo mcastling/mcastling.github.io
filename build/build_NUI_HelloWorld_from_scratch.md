@@ -188,18 +188,22 @@ If ok, DALi demo window will appear.
 
     3. Build bindings by following the README file. (_"Building the Repositry"_)
 
-* Overwrite existing NUI files
-
-Create a sub folder (_I have used nuirun_), copy nui source code into sub folder:
+* Overwrite existing NUI files in ~/DALiNUI/nuirun/src/public
+    1. Create a sub folder (_I have used nuirun_), copy nui source code into sub folder:
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-Overwrite *NUIApplication.cs* and *CoreApplication.cs* files in ~/DALiNUI/nuirun/src/public with
-the same named files in this gerrithub repositry (TBD). If access to *Confluence* is available, these files can
-alternatively be obtained from the 'How to article'- "Building NUI (DALi C#) using Visual Studio Confluence".
+    2. Overwrite files:
+~~~{.sh}
+    $ cp [NUIApplication.cs](../NUIfilesForOverWriting/NUIApplication.cs) ~/DALiNUI/nuirun/src/public
+    $ cp [CoreUIApplication.cs](../NUIfilesForOverWriting/CoreUIApplication.cs) ~/DALiNUI/nuirun/src/public
+~~~
+
+If access to *Confluence* is available, these files can alternatively be obtained from the
+'How to article'- "Building NUI (DALi C#) using Visual Studio Confluence".
 
 _This step is necessary as NUI In Ubuntu is not fully supported just yet._
 
@@ -253,7 +257,7 @@ Running dotnet restore pulls down the required packages.
 + Configure VSC by creating task.json
     1. Press Ctrl+Shift+P to open the command Pallete, type "ctr", and select Configure Task runner > NET core
 
-A _Task.json_ file is essential, or else will get "No task runner configured" or "Error Could not find the Pre Launch Task 'build'"
+A _Task.json_ file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
 message pane on building.
 
     2. build
