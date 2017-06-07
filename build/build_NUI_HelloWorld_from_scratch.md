@@ -1,41 +1,38 @@
 <a name="0"></a>
-# Setup NUI development environment on Ubuntu
+# Setting up the NUI development environment on Ubuntu
 
 This guide explains how to setup, build and run NUI (Dali C#) applications using Visual Studio Core.
 
+It assumes the starting point is a completely 'clean' system.
+
+The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to display text in a text label.
+
+## Overview
 This document covers:
 
 [Installation](#1)<br>
 [Getting NUI source code](#2)<br>
-[](#3)<br>
-[](#4)<br>
-[](#5)<br>
-[](#6)<br>
-[](#7)<br>
+[NUI build environment](#3)<br>
+[Building NUI source code](#4)<br>
+[Build and run the Hello World tutorial](#5)<br>
 [](#8)<br>
-
-## Overview
-It assumes the starting point is a completely 'clean' system.
-
-The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to display text in a text label.
 
 ## Step-by-step guide
 
 <a name="1"></a>
 ### Installation
-+ Install dot net core for Ubuntu
-Follow instructions on [installing dotnet core for Ubuntu](www.microsoft.com/net/core#linuxubuntu)
-Follow instructions on [FROM MICROSOFT](https://www.microsoft.com)
+* Install dot net core for Ubuntu
+Follow instructions on [installing dotnet core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
 
-+ Install latest Visual Studio Core (VSC) for Ubuntu
-a. [Download deb package from](https://code.visualstudio.com)
-b. Install deb package with:
+* Install latest Visual Studio Core (VSC) for Ubuntu
+    1. [Download deb package from](https://code.visualstudio.com)
+    2. Install deb package with:
 ~~~{.bash}
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
-+ Open VSC
-a. In the desktop launcher, select *Search your Computer* > *Applications* for the Visual Studio Code icon
+* Open VSC
+    a. In the desktop launcher, select *Search your Computer* > *Applications* for the Visual Studio Code icon
 b. Copy VSC icon to Launcher
 c. Select *Launch* to open VSC, or double click on VSC icon in Launcher
 
@@ -86,6 +83,8 @@ c. Select *Launch* to open VSC, or double click on VSC icon in Launcher
 
 will give you a basic understanding of building, debugging and running projects in VSC.
 
+[Back to top](#0)
+
 <a name="2"></a>
 ### Get NUI source code from Git
 + Get code from git (_review.tizen.org_ server)
@@ -124,8 +123,8 @@ Repeat above steps for the dali-adaptor and dali-toolkit folders.
 
 [Back to top](#0)
 
-<a name="4"></a>
-### Build NUI environment
+<a name="3"></a>
+### NUI build  environment
 + Build environment setup, saving to a file
 
 ~~~{.sh}
@@ -147,7 +146,10 @@ You can do this by sourcing the ''setenv'' script you created above:
 	$ . setenv
 ~~~
 
-### Build NUI source code
+[Back to top](#0)
+
+<a name="4"></a>
+### Building NUI source code
 + Build DALi *native* repo's
 
 To build, follow instructions in the README file in each repo folder.
@@ -228,6 +230,9 @@ cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcore
 
 + Modify project file
 
+[Back to top](#0)
+
+<a name="5"></a>
 ### Build and Run the Hello World NUI Tutorial
 
 + Create Hello World project in VSC
@@ -253,7 +258,7 @@ and also creates Program.cs, which should be deleted in VSC Explorer.
 
 a. Edit nuirun.csproj, adding the following line inside the PropertyGroup element:
 
-	<DefineCOnstants>DOT_NET_CORE<DefineCOnstants>
+	<DefineConstants>DOT_NET_CORE<DefineConstants>
 
 + Create tutorial file (in VSC)
 
