@@ -25,20 +25,19 @@ The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduct
 ### Installation
 + Install dot net core for Ubuntu
     Follow instructions on [installing dotnet core for Ubuntu](www.microsoft.com/net/core#linuxubuntu)
+    Follow instructions on [FROM MICROSOFT](www.microsoft.com)
 
 + Install latest Visual Studio Core (VSC) for Ubuntu
-    a. [Download deb package from](https://code.visualstudio.com)
-    b. Install deb package with:
+a. [Download deb package from](https://code.visualstudio.com)
+b. Install deb package with:
 ~~~{.bash}
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
 + Open VSC
-	a.	In the desktop launcher, select *Search your Computer* > *Applications* for the Visual Studio Code icon
-
-	b.	Copy VSC icon to Launcher
-
-	c.	Select *Launch* to open VSC, or double click on VSC icon in Launcher
+a. In the desktop launcher, select *Search your Computer* > *Applications* for the Visual Studio Code icon
+b. Copy VSC icon to Launcher
+c. Select *Launch* to open VSC, or double click on VSC icon in Launcher
 
 + Setup Proxy settings for VSC _to enable install and download of extensions and libraries_
 
