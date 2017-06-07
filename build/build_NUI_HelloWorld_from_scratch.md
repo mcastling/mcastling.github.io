@@ -24,8 +24,8 @@ The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduct
 <a name="1"></a>
 ### Installation
 + Install dot net core for Ubuntu
-    Follow instructions on [installing dotnet core for Ubuntu](www.microsoft.com/net/core#linuxubuntu)
-    Follow instructions on [FROM MICROSOFT](www.microsoft.com)
+Follow instructions on [installing dotnet core for Ubuntu](www.microsoft.com/net/core#linuxubuntu)
+Follow instructions on [FROM MICROSOFT](https://www.microsoft.com)
 
 + Install latest Visual Studio Core (VSC) for Ubuntu
 a. [Download deb package from](https://code.visualstudio.com)
