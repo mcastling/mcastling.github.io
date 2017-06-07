@@ -52,14 +52,14 @@ The next steps requires download via http so might require setting firewall prox
     }
 ~~~
 
-    Add the proxy setting:
+    4. Add the proxy setting:
 ~~~{.sh}
     {
        "http.proxy": "http://xxx.xxx.xxx.xxx:xxxx
     }
-
-    The proxy settings are saved to the _settings.json_ file.
 ~~~
+
+The proxy settings are saved to the _settings.json_ file.
 
 * OR Set the OS environment variables http_proxy and https_proxy as above (_http://xxx.xxx.xxx.xxx_).
 
@@ -83,14 +83,13 @@ will give you a basic understanding of building, debugging and running projects 
 <a name="2"></a>
 ### Get NUI source code from Git
 
-* Get code from git (via _review.tizen.org_ server)
-    1. Create a 'NUI root folder' for the source code, _example folder shown used for rest of the tutorial_
+* Create a 'NUI root folder' for the source code, _example folder shown used for rest of the tutorial_
 ~~~{.sh}	
     $ mkdir ~/DALiNUI
     $ cd ~/DALiNUI
 ~~~
 
-    2. Get code:
+* Get code from git (via _review.tizen.org_ server)
 ~~~{.sh}
     $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-core
     $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
@@ -116,9 +115,9 @@ Repeat above steps for the dali-adaptor and dali-toolkit folders.
 [Back to top](#0)
 
 <a name="3"></a>
-### NUI build  environment
+### NUI build environment
 
-* Build environment setup, saving to a file
+* Build environment setup, saving to a file:
 
 ~~~{.sh}
     $ cd ~/DALiNUI
@@ -148,13 +147,13 @@ You can do this by sourcing the ''setenv'' script you created above:
 
 _The shared library files (.so) will be built and installed into the ~/DALiNUI/dali-env/opt/lib_ folder.
 
-    4. To subsequently clean the build, use:
+* To subsequently clean the build, use:
 ~~~{.sh}
     $ make maintainer-clean	
 ~~~
 
 * Optional - Run and test DALI Native (C++)
-    1. Get code - This step requires the _dali_demo_ :
+    1. Get code - This step requires the _dali_demo_ repo:
 
 ~~~{.sh}
     $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
@@ -162,7 +161,6 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     $ cd ~/DALiNUI/dali-demo
     $ git checkout devel/master
     $ git pull
-
 ~~~
 
     2. Build from README
@@ -178,14 +176,11 @@ If ok, DALi demo window will appear.
 
 * Build NUI csharp bindings
     1. In this step we build the C# bindings.
-
 ~~~{.sh}
    $ cd dali-csharp-binder
 ~~~
-
     2. Edit _file.list_ and remove the line "src/key-grab.cpp \".
        (_This is a tizen only dependency_). Do not leave a gap in the file.
-
     3. Build bindings by following the README file. (_"Building the Repositry"_)
 
 * Overwrite existing NUI files in ~/DALiNUI/nuirun/src/public
@@ -216,7 +211,7 @@ _This step is necessary as NUI In Ubuntu is not fully supported just yet._
 [Back to top](#0)
 
 <a name="5"></a>
-### Build and Run the Hello World NUI Tutorial
+### Build NUI and Run the Hello World (NUI) Tutorial
 
 * Create a 'Hello World' project in VSC
     1. Open the command prompt (Ctrl+`)
@@ -230,7 +225,7 @@ _This step is necessary as NUI In Ubuntu is not fully supported just yet._
 
 The setenv may not be necessary, depending on how the environment has been setup.
 
-The _dotnet new console_ creates a Project file *nuirun.csproj* which is essential and Program.cs.
+The _dotnet new console_ creates a Project file *nuirun.csproj* which is essential, and also Program.cs.
 
 + Delete Program.cs in VSC Explorer
 
@@ -245,29 +240,30 @@ The _dotnet new console_ creates a Project file *nuirun.csproj* which is essenti
     2. Copy code in (_"full example" section_) of [Hello World tutorial](../NUItutorials/hello-world.md) to new file
     3. Rename file, File > Save As "hello-world.cs", or select right click and Rename from menu
 
-+ Build tutorial
++ Build assets
     1. Resolve the build assets
-	
 ~~~{.sh}
     $ dotnet restore
 ~~~
 
 Running dotnet restore pulls down the required packages.
 
-+ Configure VSC by creating task.json
++ Configure VSC by creating tasks.json
     1. Press Ctrl+Shift+P to open the command Pallete, type "ctr", and select Configure Task runner > NET core
 
-A _Task.json_ file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
+A _tasks.json_ file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
 message pane on building.
 
-    2. build
++ Build
 ~~~{.sh}
     $ dotnet build
 ~~~
 
 #### Modify Hello World Application size
 
-In VSC, Open launch.json via the Explorer. In the "configurations" section, add the required width and height:
+This section provides an insight into the capability of launch.json.
+
+In VSC, Open _launch.json_ via the Explorer. In the "configurations" section, add the required width and height:
 
 ~~~{.sh}
     "name": ".NET Core Launch (console)",
