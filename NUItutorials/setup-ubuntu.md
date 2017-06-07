@@ -1,74 +1,63 @@
 <a name="0"></a>
 # Setting up the NUI development environment on Ubuntu
 
-This guide explains how to setup, build and run NUI (Dali C#) applications using Visual Studio Core (VSC).
+This guide explains how to setup, build and run NUI (DALi C#) applications using Visual Studio Core (VSC).
 
 It assumes the starting point is a completely 'clean' system, though that is not essential.
 
-The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to display text in a text label.
+The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development,
+describing how to display text in a text label.
 
 ## Overview
 This document covers:
 
-[Installation of dotnetcore and VSC](#1)<br>
+[Installation of .NET Core and VSC](#1)<br>
 [Getting NUI source code](#2)<br>
 [NUI build environment](#3)<br>
 [Building NUI source code](#4)<br>
 [Build and run the Hello World tutorial](#5)<br>
+[Appendix A - Configuring firewall proxy settings](#6)<br>
 
 ## Step-by-step guide
 
 <a name="1"></a>
-### Installation of dotnetcore and VSC
+### Installation of .NET Core and Visual Studio Core (VSC)
 
 * Install dot net core for Ubuntu
     1. Follow instructions for [installing dotnet core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
 
-* Install latest Visual Studio Core (VSC) for Ubuntu
+* Install latest VSC for Ubuntu
     1. [Download deb package](https://code.visualstudio.com).
     2. Install deb package with:
 ~~~{.sh}
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
-The next steps requires download via http so might require setting firewall proxy settings:
+* Open VSC via Launch button
+    1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
+    2. Select the _Launch_ button to open VSC
 
-* Open VSC
+* Open VSC via desktop launcher
     1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
     2. Copy VSC icon to Launcher.
-    3. Select _Launch_ to open VSC, or double click on the VSC icon in Launcher.
+    3. Double click on the VSC icon in Launcher.
 
-* Setup System firewall Proxy settings for VSC _enable install of the VSC C# extension package_
-    1. On desktop, select System Settings > Network > Network Proxy >  HTTP Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
-    2. On desktop, select System Settings > Network > Network Proxy > HTTPS Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
-
-* Configure VSC firewall proxy settings (_for install of library packages such as mono runtime and .NET Core Debugger_) 
-    1. Select File > Preferences > Settings > Edit
-    2. Select HTTP in middle pane
-    3. Select Edit icon > Copy to settings. "http.proxy" should be copied to right hand pane :-
-~~~{.sh}
-    {
-       "http.proxy":
-    }
+* Open VSC via terminal
+~~~{.sh}	
+    $ code
+    $ code myfile
 ~~~
 
-    4. Add the proxy setting:
-~~~{.sh}
-    {
-       "http.proxy": "http://xxx.xxx.xxx.xxx:xxxx
-    }
-~~~
+* Firewall proxy settings
+VSC requires installation of required packages and libraries. It may be necessary to configure the firewall
+proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#6).
 
-The proxy settings are saved to the _settings.json_ file.
-
-* OR Set the OS environment variables http_proxy and https_proxy as above (_http://xxx.xxx.xxx.xxx_).
-
-* Install C# Extension from within VSC via Extensions View
+* Install C# extension from within VSC, via the Extensions View
     1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or Ctrl+Shift+X (View extensions command).
     2. This will bring up all the extensions in the VS code marketplace.
     3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
-Or alternatively-
+* Alternatively, install C# extension from website
     1. Install [Install _C# extension_ from visual studio marketplace](https://marketplace.visualstudio.com)
 
 #### Recommended - Familiarisation with VSC
@@ -83,7 +72,7 @@ will give you a basic understanding of building, debugging and running projects 
 <a name="2"></a>
 ### Get NUI source code from Git
 
-* Create a 'NUI root folder' for the source code, _example folder shown used for rest of the tutorial_
+* Create a 'NUI root folder' for the source code, _I am using ~/DALiNUI as an example_
 ~~~{.sh}	
     $ mkdir ~/DALiNUI
     $ cd ~/DALiNUI
@@ -91,16 +80,14 @@ will give you a basic understanding of building, debugging and running projects 
 
 * Get code from git (via _review.tizen.org_ server)
 ~~~{.sh}
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-core
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-csharp-binder
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/csapi/nui
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-core
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-csharp-binder
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/csapi/nui
 ~~~
 
-where 'your account' is 'm.castling' for me, ...://m.castling@review.tizen.org:29418.....
-
-Observation: _only the .git file is pulled into the _dali-csharp-binder_ and _nui_ folders.
+**Observation:** _only the .git file is pulled into the dali-csharp-binder and nui folders._
 
 * Switch to the 'devel master' branch for each required repo
 
@@ -147,17 +134,19 @@ You can do this by sourcing the ''setenv'' script you created above:
 
 _The shared library files (.so) will be built and installed into the ~/DALiNUI/dali-env/opt/lib_ folder.
 
-* To subsequently clean the build, use:
+* To subsequently clean the build
 ~~~{.sh}
     $ make maintainer-clean	
 ~~~
 
-* Optional - Run and test DALI Native (C++)
+* Optional - Run and test DALi Native (C++)
     1. Get code - This step requires the _dali_demo_ repo:
 
 ~~~{.sh}
-    $ git clone ssh://[your account]@review.tizen.org:29418/platform/core/uifw/dali-demo
+    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-demo
+~~~
 
+~~~{.sh}
     $ cd ~/DALiNUI/dali-demo
     $ git checkout devel/master
     $ git pull
@@ -168,17 +157,17 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     3. run:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-env/opt/bin
-    $ . setenv
     $ dali-demo
 ~~~
 
 If ok, DALi demo window will appear.
 
 * Build NUI csharp bindings
-    1. In this step we build the C# bindings.
+    1. In this step we build the C# bindings:
 ~~~{.sh}
    $ cd dali-csharp-binder
 ~~~
+
     2. Edit _file.list_ and remove the line "src/key-grab.cpp \".
        (_This is a tizen only dependency_). Do not leave a gap in the file.
     3. Build bindings by following the README file. (_"Building the Repositry"_)
@@ -191,19 +180,12 @@ If ok, DALi demo window will appear.
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-    2. Overwrite files:
-~~~{.sh}
-    $ cp [NUIApplication.cs](../NUIfilesForOverWriting/NUIApplication.cs) ~/DALiNUI/nuirun/src/public
-    $ cp [CoreUIApplication.cs](../NUIfilesForOverWriting/CoreUIApplication.cs) ~/DALiNUI/nuirun/src/public
-~~~
+    2. Overwrite file by downloading [NUIApplication.cs](../NUIfilesForOverWriting/NUIApplication.cs) ~/DALiNUI/nuirun/src/public
+    3. Overwrite file by downloading [CoreUIApplication.cs](../NUIfilesForOverWriting/CoreUIApplication.cs) ~/DALiNUI/nuirun/src/public
 
-If access to *Confluence* is available, these files can alternatively be obtained from the
-'How to article'- "Building NUI (DALi C#) using Visual Studio Confluence".
-
-_This step is necessary as NUI In Ubuntu is not fully supported just yet._
+_This step of overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
 * Copy shared library:
-
 ~~~{.sh}
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
@@ -214,7 +196,7 @@ _This step is necessary as NUI In Ubuntu is not fully supported just yet._
 ### Build NUI and Run the Hello World (NUI) Tutorial
 
 * Create a 'Hello World' project in VSC
-    1. Open the command prompt (Ctrl+`)
+    1. Open VSC, open the command prompt (Ctrl+`)
     2. In the Terminal, type the following:
 
 ~~~{.sh}
@@ -227,7 +209,7 @@ The setenv may not be necessary, depending on how the environment has been setup
 
 The _dotnet new console_ creates a Project file *nuirun.csproj* which is essential, and also Program.cs.
 
-+ Delete Program.cs in VSC Explorer
++ Delete Program.cs in VSC Explorer, as its not needed
 
 + Modify project file
     1. Edit nuirun.csproj, adding the following line inside the PropertyGroup element:
@@ -259,7 +241,7 @@ message pane on building.
     $ dotnet build
 ~~~
 
-#### Modify Hello World Application size
+#### Modify Hello World Application window size
 
 This section provides an insight into the capability of launch.json.
 
@@ -275,6 +257,40 @@ In VSC, Open _launch.json_ via the Explorer. In the "configurations" section, ad
         "DALI_WINDOW_HEIGHT":"800"
     },
 ~~~
+
+<a name="6"></a>
+### Appendix A - Configuring Firewall proxy settings
+
+* Setup System firewall Proxy settings for VSC _enable install of the VSC C# extension package_
+    1. On desktop, select System Settings > Network > Network Proxy >  HTTP Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
+    2. On desktop, select System Settings > Network > Network Proxy > HTTPS Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
+
+* Configure VSC firewall proxy settings (_for install of library packages such as mono runtime and .NET Core Debugger_) 
+    1. Select File > Preferences > Settings > Edit
+    2. Select HTTP in middle pane
+    3. Select Edit icon > Copy to settings. "http.proxy" should be copied to right hand pane:
+~~~{.sh}
+    {
+       "http.proxy":
+    }
+~~~
+
+    4. Add the proxy setting:
+~~~{.sh}
+    {
+       "http.proxy": "http://xxx.xxx.xxx.xxx:xxxx
+    }
+~~~
+
+The proxy settings are saved to the _settings.json_ file.
+
+* OR Set the OS environment variables http_proxy and https_proxy, in a terminal from which VSC will be run
+~~~{.sh}
+   $ export http_proxy=http://xxx.xxx.xxx.xxx
+   $ export https_proxy=http://xxx.xxx.xxx.xxx
+~~~
+
+These export variables could also be set in your .bashrc file
 
 [Back to top](#0)
 
