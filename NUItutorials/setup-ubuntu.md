@@ -48,12 +48,12 @@ This document covers:
     $ code
 ~~~
 
-   2. Open VSC in current directory
+    2. Open VSC in current directory
 ~~~{.sh}
     $ code .
 ~~~
 
-   3. Open file in VSC
+    3. Open file in VSC
 ~~~{.sh}
     $ code myfile
 ~~~
@@ -161,6 +161,8 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     $ git pull
 ~~~
 
+<!-- -->
+
     * Build from README
 
     * run:
@@ -174,7 +176,7 @@ If ok, DALi demo window will appear.
 * Build NUI csharp bindings
     *In this step we build the C# bindings:
 ~~~{.sh}
-   $ cd dali-csharp-binder/dali-csharp-binder
+    $ cd dali-csharp-binder/dali-csharp-binder
 ~~~
 
 
