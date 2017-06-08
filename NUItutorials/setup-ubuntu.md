@@ -182,22 +182,20 @@ If ok, DALi demo window will appear.
        (_This is a tizen only dependency_). Do not leave a gap in the file.
     * Build bindings by following the README file. (_"Building the Repositry"_)
 
-* Overwrite existing NUI files in ~/DALiNUI/nuirun/src/public
-    * Create a sub folder (_I have used nuirun_), copy nui source code into sub folder:
+* Overwrite two existing NUI files in ~/DALiNUI/nuirun/src/public
+    * Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-Get [NUIApplication.cs](../NUIFilesForOverwriting/NUIApplication.cs)
-    * Copy the NUIApplication.cs file to ~/DALiNUI/nuirun/src/public
-~~~{.sh}
-    cp NUIApplication.cs file to ~/DALiNUI/nuirun/src/public
-~~~
 
-    * Overwrite ![NUIApplication.cs](../NUIFilesForOverwriting/NUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
-    * Overwrite ![CoreUIApplication.cs](../NUIFilesForOverwriting/CoreUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
+    * Open [NUIFilesForOverwriting](../NUIFilesForOverwriting)
+    * Select _CoreUIApplication.cs_, right click, and select the _Save Link As_ menu option
+    * In the file dialog explorer window, select the **Home > DALiNUI > nuirun > src > public** folder
+    * Press the Save button
+    * Repeat these steps for _NUIApplication.cs_
 
 _This step of overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
