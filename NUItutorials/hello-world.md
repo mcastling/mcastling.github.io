@@ -13,7 +13,7 @@ The following steps are required to display text:
 + Create a View - a text label showing text
 + Add the text label to the application main window
 
-This tutorial demonstrates the triggering (_firing_) of the the _Initialized_ and _Touch_ window application events.
+This tutorial demonstrates the triggering (_firing_) of the _Touch_ window application event.
 
 ### Main method
 
@@ -107,13 +107,13 @@ The initialization code contains the following simple steps:
 
 ### The Touch event handler
 
-The user can click anywhere in the application window to exit:
+The user can click anywhere in the application window to change the text in the label:
 
 ~~~{.cs}
-private void WindowTouched(object sender, Window.TouchEventArgs e)
-{
-   example.Application.Quit();
-}
+    private void WindowTouched(object sender, Window.TouchEventArgs e)
+    {
+        _text.Text = "I have been touched!";
+    }
 ~~~
 
 ### Build and Run the application
@@ -125,36 +125,56 @@ Use Visual Studio Code on Linux.
 ## Full example code
 
 ~~~{.cs}
+using System;
+using System.Runtime.InteropServices;
+using Tizen.NUI;
+using Tizen.NUI.UIComponents;
+using Tizen.NUI.BaseComponents;
+using Tizen.NUI.Constants;
+
 namespace HelloTest
 {
     class Example : NUIApplication
     {
-        private void Initialize(object src, EventArgs e)
+        TextLabel _text;
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            Initialize();
+        } 
+
+        protected override void OnTerminate()
+        {
+            base.OnTerminate();
+            _text = null;
+        }
+
+        private void Initialize()
         {
             // Add a simple text label to the main window
-            TextLabel text = new TextLabel("Hello NUI World");
-            text.ParentOrigin = ParentOrigin.CenterLeft;
-            text.HorizontalAlignment = HorizontalAlignment.Center;
-	    text.BackgroundColor = Color.Red;
-            text.PointSize = 32.0f;
+            _text = new TextLabel("Hello NUI World");
+            _text.ParentOrigin = ParentOrigin.CenterLeft;
+            _text.HorizontalAlignment = HorizontalAlignment.Center;
+	    _text.BackgroundColor = Color.Red;
+            _text.PointSize = 32.0f;
 
             // Connect the signal callback for a touched signal
             Window window = Window.Instance;
-            window.Touch += WindowTouched;
-
-            window.Add(text);
+            window.Touched += WindowTouched;
+        
+            window.Add(_text);
         }
 
         // Callback for main window touched signal handling
         private void WindowTouched(object sender, Window.TouchEventArgs e)
         {
-	    example.Application.Quit();
+            _text.Text = "I have been touched!";
         }
 
         static void Main(string[] args)
         {
             Example example = new Example();
-	    example.Initialized += Initialize;
             example.Run(args);
         }
     }

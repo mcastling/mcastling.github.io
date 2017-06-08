@@ -1,12 +1,12 @@
 <a name="0"></a>
 # Setting up the NUI development environment on Ubuntu
 
-This guide explains how to setup, build and run NUI (DALi C#) applications using Visual Studio Core (VSC).
+This guide explains how to setup, build and run NUI (DALi C#) applications using Visual Studio Code (VSC).
 
 It assumes the starting point is a completely 'clean' system, though that is not essential.
 
-The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development,
-describing how to display text in a text label.
+The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to
+display text in a text label.
 
 ## Overview
 This document covers:
@@ -21,9 +21,9 @@ This document covers:
 ## Step-by-step guide
 
 <a name="1"></a>
-### Installation of .NET Core and Visual Studio Core (VSC)
+### Installation of .NET Core and Visual Studio Code (VSC)
 
-* Install dot net core for Ubuntu
+* Install .NET Core for Ubuntu
     1. Follow instructions for [installing dotnet core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
 
 * Install latest VSC for Ubuntu
@@ -33,22 +33,33 @@ This document covers:
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
-* Open VSC via Launch button
+* Open VSC from Launch button
     1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
     2. Select the _Launch_ button to open VSC
 
-* Open VSC via desktop launcher
+* Open VSC from desktop launcher
     1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
     2. Copy VSC icon to Launcher.
     3. Double click on the VSC icon in Launcher.
 
-* Open VSC via terminal
+* Opening VSC from terminal
+    1. Open VSC
 ~~~{.sh}	
     $ code
+~~~
+
+   2. Open VSC in current directory
+~~~{.sh}	
+    $ code .
+~~~
+
+   3. Open file in VSC
+~~~{.sh}	
     $ code myfile
 ~~~
 
 * Firewall proxy settings
+
 VSC requires installation of required packages and libraries. It may be necessary to configure the firewall
 proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#6).
 
@@ -58,11 +69,11 @@ proxy settings to enable download via http. The procedures for firewall setup ar
     3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
 * Alternatively, install C# extension from website
-    1. Install [Install _C# extension_ from visual studio marketplace](https://marketplace.visualstudio.com)
+    1. Install [Install _C# extension_ from VSC marketplace](https://marketplace.visualstudio.com)
 
 #### Recommended - Familiarisation with VSC
 
-+ Build VSC with a console hello world
+* Build VSC with a console hello world
 
 [Getting started with Visual Studio code](https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/with-visual-studio-code)
 will give you a basic understanding of building, debugging and running projects in VSC.
@@ -78,7 +89,10 @@ will give you a basic understanding of building, debugging and running projects 
     $ cd ~/DALiNUI
 ~~~
 
-* Get code from git (via _review.tizen.org_ server)
+* Get code from gerrit (via _review.tizen.org_ server)
+
+Sign in to Tizen.org, then,
+
 ~~~{.sh}
     $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-core
     $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
@@ -87,17 +101,12 @@ will give you a basic understanding of building, debugging and running projects 
     $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/csapi/nui
 ~~~
 
-**Observation:** _only the .git file is pulled into the dali-csharp-binder and nui folders._
-
-* Switch to the 'devel master' branch for each required repo
-
+* Switch to the 'devel/master' branch for each required repo, i.e for dali-core:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-core
     $ git checkout devel/master
     $ git pull
 ~~~
-
-Repeat above steps for the dali-adaptor and dali-toolkit folders.
 
 [Back to top](#0)
 
@@ -140,7 +149,7 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 ~~~
 
 * Optional - Run and test DALi Native (C++)
-    1. Get code - This step requires the _dali_demo_ repo:
+    * Get code - this step requires the _dali_demo_ repo:
 
 ~~~{.sh}
     $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-demo
@@ -152,9 +161,9 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     $ git pull
 ~~~
 
-    2. Build from README
+    * Build from README
 
-    3. run:
+    * run:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-env/opt/bin
     $ dali-demo
@@ -163,29 +172,30 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 If ok, DALi demo window will appear.
 
 * Build NUI csharp bindings
-    1. In this step we build the C# bindings:
+    *In this step we build the C# bindings:
 ~~~{.sh}
    $ cd dali-csharp-binder
 ~~~
 
-    2. Edit _file.list_ and remove the line "src/key-grab.cpp \".
+
+    * Edit _file.list_ and remove the line "src/key-grab.cpp \".
        (_This is a tizen only dependency_). Do not leave a gap in the file.
-    3. Build bindings by following the README file. (_"Building the Repositry"_)
+    * Build bindings by following the README file. (_"Building the Repositry"_)
 
 * Overwrite existing NUI files in ~/DALiNUI/nuirun/src/public
-    1. Create a sub folder (_I have used nuirun_), copy nui source code into sub folder:
+    * Create a sub folder (_I have used nuirun_), copy nui source code into sub folder:
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-    2. Overwrite file by downloading [NUIApplication.cs](../NUIfilesForOverWriting/NUIApplication.cs) ~/DALiNUI/nuirun/src/public
-    3. Overwrite file by downloading [CoreUIApplication.cs](../NUIfilesForOverWriting/CoreUIApplication.cs) ~/DALiNUI/nuirun/src/public
+    * Overwrite [NUIApplication.cs](../NUIFilesForOverWriting/NUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
+    * Overwrite [CoreUIApplication.cs](../NUIFilesForOverWriting/CoreUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
 
 _This step of overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
-* Copy shared library:
+* Copy shared library to required application runtime location:
 ~~~{.sh}
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
@@ -243,9 +253,10 @@ message pane on building.
 
 #### Modify Hello World Application window size
 
-This section provides an insight into the capability of launch.json.
+This section provides an insight into the configuration of the application "Launch" profile.
 
-In VSC, Open _launch.json_ via the Explorer. In the "configurations" section, add the required width and height:
+In VSC, Open _launch.json_ via the Explorer. In the "configurations" section, add the required width and height
+to the environment variable:
 
 ~~~{.sh}
     "name": ".NET Core Launch (console)",
