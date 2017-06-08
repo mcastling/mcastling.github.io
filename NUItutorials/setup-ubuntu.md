@@ -190,8 +190,14 @@ If ok, DALi demo window will appear.
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-    * Overwrite [NUIApplication.cs](../NUIFilesForOverWriting/NUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
-    * Overwrite [CoreUIApplication.cs](../NUIFilesForOverWriting/CoreUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
+    * Get ![NUIApplication.cs](../NUIFilesForOverWriting/NUIApplication.cs) and save to location
+    * Copy the NUIApplication.cs file to ~/DALiNUI/nuirun/src/public
+~~~{.sh}
+    cp NUIApplication.cs file to ~/DALiNUI/nuirun/src/public
+~~~
+
+    * Overwrite ![NUIApplication.cs](../NUIFilesForOverWriting/NUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
+    * Overwrite ![CoreUIApplication.cs](../NUIFilesForOverWriting/CoreUIApplication.cs) by copying the file to ~/DALiNUI/nuirun/src/public
 
 _This step of overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
