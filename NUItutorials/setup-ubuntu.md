@@ -44,17 +44,17 @@ This document covers:
 
 * Opening VSC from terminal
     1. Open VSC
-~~~{.sh}	
+~~~{.sh}
     $ code
 ~~~
 
    2. Open VSC in current directory
-~~~{.sh}	
+~~~{.sh}
     $ code .
 ~~~
 
    3. Open file in VSC
-~~~{.sh}	
+~~~{.sh}
     $ code myfile
 ~~~
 
