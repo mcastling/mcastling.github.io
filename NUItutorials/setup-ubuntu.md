@@ -174,7 +174,7 @@ If ok, DALi demo window will appear.
 * Build NUI csharp bindings
     *In this step we build the C# bindings:
 ~~~{.sh}
-   $ cd dali-csharp-binder
+   $ cd dali-csharp-binder/dali-csharp-binder
 ~~~
 
 
@@ -197,7 +197,7 @@ If ok, DALi demo window will appear.
     * Press the Save button
     * Repeat these steps for _NUIApplication.cs_
 
-_This step of overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
+_Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
 * Copy shared library to required application runtime location:
 ~~~{.sh}
