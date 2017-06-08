@@ -237,9 +237,15 @@ The properties available in the *Button* base class are:
 
 | Property  | Type | Description
 | ------------ | ------------ | ------------ |
-| ForeGroundVisual | Map | A map describing visual, changes dependent on state | 
-| BackgroundVisual | Map | a map describing visual, changes dependent on state |
-| LabelRelativeAlignment | string | Position of text label in relation to foreground/icon when both are present |
+| UnselectedVisual | Map | A map describing visual, changes dependent on state | 
+| SelectedVisual | Map | A map describing visual, changes dependent on state |
+| DisabledUnselectedVisual | Map | A map describing visual, changes dependent on state |
+| DisabledSelectedVisual | Map | A map describing visual, changes dependent on state |
+| UnselectedBackgroundVisual | Map | A map describing visual, changes dependent on state |
+| SelectedBackgroundVisual | Map | A map describing visual, changes dependent on state |
+| DisabledUnselectedBackgroundVisual | Map | A map describing visual, changes dependent on state |
+| DisabledSelectedBackgroundVisual | Map | A map describing visual, changes dependent on state |
+| LabelRelativeAlignment | Align | Position of text label in relation to foreground/icon when both are present |
 | LabelPadding | Vector4 | The padding area around the label (if present) |
 | ForegroundVisualPadding | Vector4 | The padding area around the foreground/icon visual (if present) |
 | AutoRepeating | bool | autorepeating is described in the [button events](#3) section |
@@ -247,7 +253,10 @@ The properties available in the *Button* base class are:
 | NextAutoRepeatingDelay | float | Stores the next autorepeating delay in seconds (current default setting 0.05s) |
 | Togglable | bool | If the togglable property is set to true, then the autorepeating property is set to false. |
 | Selected | bool | Sets the toggable button as either selected or unselected |
-| Label | string | Stores the button text label |
+| UnselectedColor | Color | Gets/Sets the button unselected color |
+| SelectedColor | Color | Gets/Sets the button selected color |
+| Label | Map | Stores the button text label |
+| LabelText | string | Stores the button text label |
 
 Note: If the autorepeating property is set to true then the togglable property is set to false.
 
