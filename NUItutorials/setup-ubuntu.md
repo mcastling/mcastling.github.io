@@ -1,26 +1,29 @@
-<a name="0"></a>
+<a name="top"></a>
 # Setting up the NUI development environment on Ubuntu
 
 This guide explains how to setup, build and run NUI (DALi C#) applications using Visual Studio Code (VSC).
 
 It assumes the starting point is a completely 'clean' system, though that is not essential.
 
-The [Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to
+VSC can be be installed on Ubuntu 14.04 and onwards.
+
+The [NUI Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to
 display text in a text label.
 
 ## Overview
 This document covers:
 
-[Installation of .NET Core and VSC](#1)<br>
-[Getting NUI source code](#2)<br>
-[NUI build environment](#3)<br>
-[Building NUI source code](#4)<br>
-[Build and run the Hello World tutorial](#5)<br>
-[Appendix A - Configuring firewall proxy settings](#6)<br>
+[Installation of .NET Core and VSC](#install)<br>
+[Getting NUI source code](#getsrc)<br>
+[NUI build environment](#buildenv)<br>
+[Building NUI source code](#buildsrc)<br>
+[Build and run the Hello World tutorial](#buildrun)<br>
+[Appendix A - Configuring firewall proxy settings](#firewall)<br>
+[Appendix B - Clean build](#buildclean)<br>
 
 ## Step-by-step guide
 
-<a name="1"></a>
+<a name="install"></a>
 ### Installation of .NET Core and Visual Studio Code (VSC)
 
 * Install .NET Core for Ubuntu
@@ -61,7 +64,7 @@ This document covers:
 * Firewall proxy settings
 
 VSC requires installation of required packages and libraries. It may be necessary to configure the firewall
-proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#6).
+proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#firewall).
 
 * Install C# extension from within VSC, via the Extensions View
     1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or Ctrl+Shift+X (View extensions command).
@@ -78,9 +81,9 @@ proxy settings to enable download via http. The procedures for firewall setup ar
 [Getting started with Visual Studio code](https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/with-visual-studio-code)
 will give you a basic understanding of building, debugging and running projects in VSC.
 
-[Back to top](#0)
+[Back to top](#top)
 
-<a name="2"></a>
+<a name="getsrc"></a>
 ### Get NUI source code from Git
 
 * Create a 'NUI root folder' for the source code, _I am using ~/DALiNUI as an example_
@@ -89,28 +92,25 @@ will give you a basic understanding of building, debugging and running projects 
     $ cd ~/DALiNUI
 ~~~
 
-* Get code from gerrit (via _review.tizen.org_ server)
-
-Sign in to Tizen.org, then,
+* Get code from Github
 
 ~~~{.sh}
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-core
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-adaptor
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-csharp-binder
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-toolkit
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/csapi/nui
+    $ git clone git@github.com:dalihub/dali-core
+    $ git clone git@github.com:dalihub/dali-adaptor
+    $ git clone git@github.com:dalihub/dali-csharp-binder
+    $ git clone git@github.com:dalihub/dali-toolkit
+    $ git clone git@github.com:dalihub/nui
 ~~~
 
 * Switch to the 'devel/master' branch for each required repo, i.e for dali-core:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-core
     $ git checkout devel/master
-    $ git pull
 ~~~
 
-[Back to top](#0)
+[Back to top](#top)
 
-<a name="3"></a>
+<a name="buildenv"></a>
 ### NUI build environment
 
 * Build environment setup, saving to a file:
@@ -131,9 +131,9 @@ You can do this by sourcing the ''setenv'' script you created above:
     $ . setenv
 ~~~
 
-[Back to top](#0)
+[Back to top](#top)
 
-<a name="4"></a>
+<a name="buildsrc"></a>
 ### Building NUI source code
 
 * Build DALi *native* repo's in the following order, follow instructions in the README file in each repo folder.
@@ -143,28 +143,21 @@ You can do this by sourcing the ''setenv'' script you created above:
 
 _The shared library files (.so) will be built and installed into the ~/DALiNUI/dali-env/opt/lib_ folder.
 
-* To subsequently clean the build
-~~~{.sh}
-    $ make maintainer-clean	
-~~~
-
 * Optional - Run and test DALi Native (C++)
     * Get code - this step requires the _dali_demo_ repo:
 
 ~~~{.sh}
-    $ git clone ssh://[Tizen.org username]@review.tizen.org:29418/platform/core/uifw/dali-demo
+    $ git clone git@github.com:dalihub/dali-demo
 ~~~
 
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-demo
     $ git checkout devel/master
-    $ git pull
 ~~~
 
 <!-- -->
 
-    * Build from README
-
+    * Build from README file (_"Building the Repositry"_ section)
     * run:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-env/opt/bin
@@ -182,7 +175,7 @@ If ok, DALi demo window will appear.
 
     * Edit _file.list_ and remove the line "src/key-grab.cpp \".
        (_This is a tizen only dependency_). Do not leave a gap in the file.
-    * Build bindings by following the README file. (_"Building the Repositry"_)
+    * Build bindings by following the README file. (_"Building the Repositry"_ section)
 
 * Overwrite two existing NUI files in ~/DALiNUI/nuirun/src/public
     * Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
@@ -206,37 +199,41 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
 
-[Back to top](#0)
+* To subsequently clean the build (if required), see [Appendix B](#buildclean)
 
-<a name="5"></a>
+[Back to top](#top)
+
+<a name="buildnui"></a>
 ### Build NUI and Run the Hello World (NUI) Tutorial
 
-* Create a 'Hello World' project in VSC
-    1. Open VSC, open the command prompt (Ctrl+`)
-    2. In the Terminal, type the following:
-
+* Create tutorial file 
+    1. Copy code in _"full example"_ section of [NUI Hello World tutorial](../NUItutorials/hello-world.md) to a new file - hello-world.cs
+    2. Copy hello-world.cs to nuirun folder:
 ~~~{.sh}
-    $ cd ~/DALiNUI/nuirun
+    $ cp hello-world.cs ~/DALiNUI/nuirun
+~~~
+
+* Create a 'Hello World' project in VSC
+    1. [Open VSC](#install), and open the command prompt (Ctrl+`)
+    2. In the Integrated Terminal, type the following:
+~~~{.sh}
+    $ cd ~/DALiNUI
     $ . setenv
+    $ cd ~/DALiNUI/nuirun
     $ dotnet new console
 ~~~
 
-The setenv may not be necessary, depending on how the environment has been setup.
+The 'setenv' will not be necessary if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
 
-The _dotnet new console_ creates a Project file *nuirun.csproj* which is essential, and also Program.cs.
+The 'dotnet new console' creates a Project file *nuirun.csproj*, and also _Program.cs_.
 
 + Delete Program.cs in VSC Explorer, as its not needed
 
 + Modify project file
-    1. Edit nuirun.csproj, adding the following line inside the PropertyGroup element:
+    1. Edit nuirun.csproj, adding the following line inside the 'PropertyGroup' element:
 ~~~{.sh}
     <DefineConstants>DOT_NET_CORE<DefineConstants>
 ~~~
-
-+ Create tutorial file (in VSC)
-    1. File > New File
-    2. Copy code in (_"full example" section_) of [Hello World tutorial](../NUItutorials/hello-world.md) to new file
-    3. Rename file, File > Save As "hello-world.cs", or select right click and Rename from menu
 
 + Build assets
     1. Resolve the build assets
@@ -275,7 +272,9 @@ to the environment variable:
     },
 ~~~
 
-<a name="6"></a>
+[Back to top](#top)
+
+<a name="firewall"></a>
 ### Appendix A - Configuring Firewall proxy settings
 
 * Setup System firewall Proxy settings for VSC _enable install of the VSC C# extension package_
@@ -307,7 +306,14 @@ The proxy settings are saved to the _settings.json_ file.
    $ export https_proxy=http://xxx.xxx.xxx.xxx
 ~~~
 
-These export variables could also be set in your .bashrc file
+These export variables could also be set in your .bashrc file.
 
-[Back to top](#0)
+<a name="buildclean"></a>
+### Appendix B - Clean build
+
+~~~{.sh}
+    $ make maintainer-clean	
+~~~
+
+[Back to top](#top)
 
