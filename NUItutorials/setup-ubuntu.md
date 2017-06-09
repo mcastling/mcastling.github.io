@@ -191,11 +191,6 @@ If ok, DALi demo window will appear.
 
 _Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
-* Copy shared library to application runtime location:
-~~~{.sh}
-   cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
-~~~
-
 * To subsequently clean the build (if required), see [Appendix B](#buildclean)
 
 [Back to top](#top)
@@ -249,6 +244,18 @@ message pane on building.
 + Build
 ~~~{.sh}
     $ dotnet build
+~~~
+
+Note: This step builds the 'nui' library.
+
+* Copy shared library to application runtime location:
+~~~{.sh}
+   cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
+~~~
+
++ Run in VSC integrated terminal
+~~~{.sh}
+    $ dotnet run
 ~~~
 
 #### Modify Hello World Application window size
