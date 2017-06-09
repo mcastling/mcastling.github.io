@@ -7,8 +7,8 @@ It assumes the starting point is a completely 'clean' system, though that is not
 
 VSC can be be installed on Ubuntu 14.04 and onwards.
 
-The [NUI Hello World tutorial](../NUItutorials/hello-world.md) provides an introduction into NUI application development, describing how to
-display text in a text label.
+The [NUI Hello World tutorial](../NUItutorials/hello-world.md#fullcode) provides an introduction into NUI application development,
+describing how to display text in a text label.
 
 ## Overview
 This document covers:
@@ -151,7 +151,7 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     $ git checkout devel/master
 ~~~
 
-<!-- -->
+<br>
 
     2. Build from README file (_"Building the Repositry"_ section)
     3. Run:
@@ -181,7 +181,7 @@ If ok, DALi demo window will appear.
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-<br>
+
 
 2. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
 3. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
