@@ -27,33 +27,33 @@ This document covers:
 ### Installation of .NET Core and Visual Studio Code (VSC)
 
 * Install .NET Core for Ubuntu
-    1. Follow instructions for [installing .NET Core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
+ 1. Follow instructions for [installing .NET Core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
 
 * Install latest VSC for Ubuntu
-    1. [Download deb package](https://code.visualstudio.com).
-    2. Install deb package with:
+ 1. [Download deb package](https://code.visualstudio.com).
+ 2. Install deb package with:
 ~~~{.sh}
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
 * Alternatives for opening VSC via the icon
-    1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
-    2. Select the _Launch_ button to open VSC
-    3. Copy VSC icon to Launcher.
-    4. Subsequently can Double click on the VSC icon in Launcher.
+ 1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
+ 2. Select the _Launch_ button to open VSC
+ 3. Copy VSC icon to Launcher.
+ 4. Subsequently can Double click on the VSC icon in Launcher.
 
 * Alternatives for opening VSC from a terminal
-    1. Open VSC
+ 1. Open VSC
 ~~~{.sh}
     $ code
 ~~~
-<br>
-    2. Open VSC in current directory
+
+ 2. Open VSC in current directory
 ~~~{.sh}
     $ code .
 ~~~
-<br>
-    3. Open file in VSC
+
+ 3. Open file in VSC
 ~~~{.sh}
     $ code myfile
 ~~~
