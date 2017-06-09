@@ -3,7 +3,7 @@
 
 The tutorial shows how to create and display "Hello World" using a text label.
 
-[The NUI Overview](NUIoverview.md) describes NUI capabilities in detail.
+[The NUI Overview](NUIoverview.md) is an introduction to NUI.
 
 ## Explanation of tutorial
 
@@ -13,7 +13,7 @@ The following steps are required to display text:
 + Create a View - a text label showing text
 + Add the text label to the application main window
 
-This tutorial demonstrates the triggering (_firing_) of the _Touch_ window application event.
+This tutorial also demonstrates the triggering (_firing_) of the _Touch_ window application event.
 
 ### Namespaces
 
@@ -62,17 +62,7 @@ The Main method consist of 2 steps:
 
 ### The Creation method - OnCreate()
 
-In NUIApplication.cs:
-
-   ~~~{.cs}
-   internal void Initialize(...  )
-   {          
-       OnPreCreate();
-       OnCreate();
-   }
-   ~~~
-
-The `hello world` application `OnCreate` method, overrides the NUIApplication `OnCreate` function: 
+The _hello world_ `OnCreate` method, overrides the NUIApplication `OnCreate` function: 
 
    ~~~{.cs}
    base.OnCreate();
@@ -82,14 +72,6 @@ The `hello world` application `OnCreate` method, overrides the NUIApplication `O
 Hence we can incorporate the required initialization behaviour in our application.
 
 Note: `base.OnCreate` is necessary to invoke the 'created' event.
-
-### Closing the application - OnTerminate()
-
-`OnTerminate` closes the application.
-
-`OnTerminate` is invoked by selection of the window close button.
-
-Note: `base.OnTerminate` is necessary to invoke the 'deleted' event.
 
 ### The Initialization method - Initialize()
 
@@ -135,13 +117,15 @@ The initialization code contains the following simple steps:
    window.Touch += WindowTouched;
    ~~~
 
-   _Adding the Touch event handler with lambda expressions, is demonstrated at the end of the tutorial._
+   [Adding the Touch event handler with lambda expressions](#lambda), is an alternative.
 
-7. Adding text to default layer.
+7. Adding text to the root layer.
 
    ~~~{.cs}
    window.Add(_text);
    ~~~
+
+   The window will add the view to the root layer.
 
 ### The Touch event handler
 
@@ -153,6 +137,14 @@ The user can click anywhere in the application window to change the text in the 
         _text.Text = "I have been touched!";
     }
 ~~~
+
+### Closing the application - OnTerminate()
+
+`OnTerminate` is invoked when the application is about to terminate.
+
+`OnTerminate` is invoked by selection of the window close button.
+
+Note: `base.OnTerminate` is necessary to invoke the 'deleted' event.
 
 ### Build and Run the application
 
@@ -183,12 +175,6 @@ namespace HelloTest
             Initialize();
         } 
 
-        protected override void OnTerminate()
-        {
-            base.OnTerminate();
-            _text = null;
-        }
-
         private void Initialize()
         {
             // Add a simple text label to the main window
@@ -211,6 +197,12 @@ namespace HelloTest
             _text.Text = "I have been touched!";
         }
 
+        protected override void OnTerminate()
+        {
+            base.OnTerminate();
+            _text = null;
+        }
+
         static void Main(string[] args)
         {
             Example example = new Example();
@@ -226,6 +218,7 @@ After running the example, the following output should appear:
 
 <img src="./Images/hello-world.png" style="border: 5px solid black;">
 
+<a name="lambda"></a>
 ### Alternate method of adding the Touched event, using lambda expression syntax
 
 ~~~{.cs}

@@ -34,7 +34,7 @@ The label must be added to the Window, or to a View which is on the Window.
 
 The position of the label on-screen is dependent on the *parentOrigin* property.
 
-This image is ParentOrigin.TopLeft:
+This image shows a text label with ParentOrigin.TopLeft:
 
 ![ ](./Images/TextLabelTopLeft.png)
 

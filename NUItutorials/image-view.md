@@ -40,12 +40,18 @@ ImageView has the following properties:
 
 Note:
 
-+ PreMultipliedAlpha - If true, the RGB components represent the color of the object or pixel adjusted for its opacity
-                       by multiplication. If false, the opacity is disregarded.
++ PreMultipliedAlpha
+If PreMultipliedAlpha is true, the RGB components represent the color of the object or pixel adjusted for its opacity
+by multiplication. If false, the opacity is disregarded.
 
-+ PixelArea          - PixelArea is a relative value, with the whole image area as [0.0, 0.0, 1.0, 1.0], Vector4 area
-                       values are (x, y, width, height).
++ PixelArea
+PixelArea is a relative value, with the whole image area as [0.0, 0.0, 1.0, 1.0].
+Vector4 area values are (x, y, width, height).
 
-                       Ex) on a 200 x 200 pixel image [0.25, 0.5, 0.5, 0.5] would represent a sub area
-                       of the image with the following co-ords. 50,100 150,100 50,200 150,200
+e.g on a 200 x 200 pixel image [0.25, 0.5, 0.5, 0.5] would represent a sub area
+of that image with the following co-ordinates:
+Top left     : 50,100
+Top right    : 150,100
+Bottom left  : 50,200 
+Bottom right : 150,200
 

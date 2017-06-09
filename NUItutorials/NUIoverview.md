@@ -34,15 +34,15 @@ NUI enables developers to quickly create Rich UI applications with realistic eff
 
 Scene graph: Tree data structure, consisting of a collection of nodes.
 
-Window:      Top level node of the scene graph, used for displaying a tree of Views.
+Window:      Top level of the scene graph, used for displaying a tree of Layers and Views.
 
 View:        Primary object for interaction. Views are effectively nodes that receive input (such as touch events),
              and act as a container for drawable elements and other views. Views can display content such as Color shapes, images, text etc.
-             A NUI application uses a hierarchy of view objects to position visible content.
+             An NUI application uses a hierarchy of view objects to position visible content.
 
 Layer:       Layers provide a mechanism for overlaying groups of views on top of each other.
 
-### Last updated - May 2017
+### Last updated - June 2017
 
 
 
