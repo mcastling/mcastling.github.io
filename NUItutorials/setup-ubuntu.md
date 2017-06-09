@@ -64,9 +64,9 @@ VSC requires installation of required packages and libraries. It may be necessar
 proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#firewall).
 
 * Install C# extension from within VSC, via the Extensions View
-    1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
-    2. This will bring up all the extensions in the VS code marketplace.
-    3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
+  1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
+  2. This will bring up all the extensions in the VS code marketplace.
+  3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
 * Alternatively, [Install_C# extension_from VSC marketplace](https://marketplace.visualstudio.com).
 
@@ -204,7 +204,7 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
 ~~~
 
 * Create a 'Hello World' project in VSC
-    1. [Open VSC](#install), then open the command prompt (Ctrl+`)
+    1. [Open VSC](#install), then open the command prompt CTRL+` (backtick)
     2. In the Integrated Terminal, type the following:
 ~~~{.sh}
     $ cd ~/DALiNUI
