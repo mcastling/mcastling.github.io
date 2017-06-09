@@ -204,8 +204,11 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
 ~~~
 
 * Create a 'Hello World' project in VSC
-    1. [Open VSC](#install), then open the command prompt CTRL+` (backtick)
-    2. In the Integrated Terminal, type the following:
+    1. [Open VSC](#install)
+    2. Select FIle > Open File in the main menu.
+    3. Select the `nuirun` folder in the File Dialog
+    4. Open the command prompt CTRL+` (backtick)
+    5. In the Integrated Terminal, type the following:
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ . setenv
@@ -215,14 +218,14 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
 
 The 'setenv' will not be necessary if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
 
-The 'dotnet new console' creates a Project file `nuirun.csproj`, and also a `Program.cs` file.
+The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj`, and also a `Program.cs` file.
 
 + Delete Program.cs in VSC Explorer, as its not needed
 
 + Modify project file
     1. Edit `nuirun.csproj`, adding the following line inside the 'PropertyGroup' element:
 ~~~{.sh}
-    <DefineConstants>DOT_NET_CORE<DefineConstants>
+    <DefineConstants>DOT_NET_CORE</DefineConstants>
 ~~~
 
 + Build assets
@@ -280,8 +283,8 @@ to the environment variable:
 ### Appendix A - Configuring Firewall proxy settings
 
 * Setup System firewall Proxy settings for VSC _enable install of the VSC C# extension package_
-    1. On desktop, select System Settings > Network > Network Proxy >  HTTP Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
-    2. On desktop, select System Settings > Network > Network Proxy > HTTPS Proxy and type IP address e.g **http://xxx.xxx.xxx.xxx port xxxx**
+    1. On desktop, select **System Settings > Network > Network Proxy > HTTP Proxy** and type the IP address, including port number
+    2. On desktop, select **System Settings > Network > Network Proxy > HTTPS Proxy** and type the IP address, including port number
 
 * Configure VSC firewall proxy settings (_for install of library packages such as mono runtime and .NET Core Debugger_) 
     1. Select File > Preferences > Settings > Edit

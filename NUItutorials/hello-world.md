@@ -15,6 +15,8 @@ The following steps are required to display text:
 
 This tutorial also demonstrates the triggering (_firing_) of the _Touch_ window application event.
 
+[Hello World code](#fullcode)
+
 ### Namespaces
 
 The required system and NUI namespaces are imported via the using declarations:
@@ -153,6 +155,7 @@ Use Visual Studio on a Windows platform. Use Visual Studio Code on Linux.
 The [NUI development setup guide](setup-ubuntu.md) describes setting up the NUI development environment
 on Ubuntu, using this tutorial as an example project.
 
+<a name="fullcode"></a>
 ## Full example code
 
 ~~~{.cs}
