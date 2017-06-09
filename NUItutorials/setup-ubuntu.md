@@ -183,11 +183,9 @@ If ok, DALi demo window will appear.
 
 <br>
 
-    2. Open [NUIFilesForOverwriting](../NUIFilesForOverwriting)
-    3. Select _CoreUIApplication.cs_, right click, and select the _Save Link As_ menu option
-    4. In the file dialog explorer window, select the **Home > DALiNUI > nuirun > src > public** folder
-    5. Press the Save button
-    6. Repeat these steps for _NUIApplication.cs_
+2. Download [CoreUIApplication.cs](http://dalihub.github.io/blob/master/NUIsetup/CoreUIApplication.cs)
+3. Download [NUIApplication.cs](http://dalihub.github.io/blob/master/NUIsetup/NUIApplication.cs)
+4. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
 
 _Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
