@@ -119,7 +119,7 @@ The initialization code contains the following simple steps:
 
    ~~~{.cs}
    Window window = Window.Instance;
-   window.Touch += WindowTouched;
+   window.Touched += WindowTouched;
    ~~~
 
    _Adding the Touch event handler with lambda expressions, is demonstrated at the end of the tutorial._
@@ -215,7 +215,7 @@ After running the example, the following output should appear:
 ### Alternate method of adding the Touched event, using lambda expression syntax
 
 ~~~{.cs}
-window.Touched += (object src, EventArgs args) =>
+window.Touched += (object src, Window.TouchEventArgs args) =>
 { // code
     _text.Text = "I have been touched!";
 };
