@@ -5,7 +5,7 @@ This overview provides an introduction to NUI and the DALi engine.
 + NUI  - Natural User Interface
 + DALi - Dynamic Animation Library
 
-NUI is a C# toolkit on top of DALi graphics library which is written in C++.
+NUI is a C# toolkit on top of the DALi graphics library, which is written in C++.
 
 ## NUI 
 
@@ -34,15 +34,13 @@ NUI enables developers to quickly create Rich UI applications with realistic eff
 
 Scene graph: Tree data structure, consisting of a collection of nodes.
 
-Nodes:       Image, text, buttons etc.
-
 Window:      Top level node of the scene graph, used for displaying a tree of Views.
 
 View:        Primary object for interaction. Views are effectively nodes that receive input (such as touch events),
              and act as a container for drawable elements and other views. Views can display content such as Color shapes, images, text etc.
              A NUI application uses a hierarchy of view objects to position visible content.
 
-Layer:       Differant levels within an image. Layers provide a mechanism for overlaying groups of views on top of each other.
+Layer:       Layers provide a mechanism for overlaying groups of views on top of each other.
 
 ### Last updated - May 2017
 

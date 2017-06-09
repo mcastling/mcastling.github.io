@@ -27,7 +27,7 @@ This document covers:
 ### Installation of .NET Core and Visual Studio Code (VSC)
 
 * Install .NET Core for Ubuntu
-    1. Follow instructions for [installing dotnet core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
+    1. Follow instructions for [installing .NET Core for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu)
 
 * Install latest VSC for Ubuntu
     1. [Download deb package](https://code.visualstudio.com).
@@ -68,7 +68,7 @@ proxy settings to enable download via http. The procedures for firewall setup ar
     2. This will bring up all the extensions in the VS code marketplace.
     3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
-* Alternatively, [Install _C# extension_ from VSC marketplace](https://marketplace.visualstudio.com).
+* Alternatively, [Install_C# extension_from VSC marketplace](https://marketplace.visualstudio.com).
 
 #### Recommended - Familiarisation with VSC
 
@@ -191,7 +191,7 @@ If ok, DALi demo window will appear.
 
 _Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
-* Copy shared library to required application runtime location:
+* Copy shared library to application runtime location:
 ~~~{.sh}
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
@@ -238,12 +238,12 @@ The 'dotnet new console' creates a Project file `nuirun.csproj`, and also a `Pro
     $ dotnet restore
 ~~~
 
-Running dotnet restore pulls down the required packages.
+Running `dotnet restore` pulls down the required packages.
 
 + Configure VSC by creating tasks.json
     1. Press `Ctrl+Shift+P` to open the command Pallete, type "ctr", and select Configure Task runner > NET core
 
-A _tasks.json_ file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
+A `tasks.json` file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
 message pane on building.
 
 + Build
@@ -295,9 +295,9 @@ to the environment variable:
     }
 ~~~
 
-The proxy settings are saved to the _settings.json_ file.
+The proxy settings are saved to the `settings.json` file.
 
-* OR Set the OS environment variables http_proxy and https_proxy, in a terminal from which VSC will be run
+* OR Set the OS environment variables `http_proxy` and `https_proxy`, in a terminal from which VSC will be run
 ~~~{.sh}
    $ export http_proxy=http://xxx.xxx.xxx.xxx
    $ export https_proxy=http://xxx.xxx.xxx.xxx

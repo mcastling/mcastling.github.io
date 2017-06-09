@@ -17,7 +17,16 @@ This tutorial demonstrates the triggering (_firing_) of the _Touch_ window appli
 
 ### Namespaces
 
-The required system and NUI namespaces are imported via the using declarations.
+The required system and NUI namespaces are imported via the using declarations:
+
+   ~~~{.cs}
+   using System;
+   using System.Runtime.InteropServices;
+   using Tizen.NUI;
+   using Tizen.NUI.UIComponents;
+   using Tizen.NUI.BaseComponents;
+   using Tizen.NUI.Constants;
+   ~~~
 
 This application is scoped to the 'HelloTest' namespace.
 
@@ -63,7 +72,7 @@ In NUIApplication.cs:
    }
    ~~~
 
-The application OnCreate() method overrides the NUIApplication 'OnCreate()' function: 
+The `hello world` application `OnCreate` method, overrides the NUIApplication `OnCreate` function: 
 
    ~~~{.cs}
    base.OnCreate();
@@ -72,15 +81,15 @@ The application OnCreate() method overrides the NUIApplication 'OnCreate()' func
 
 Hence we can incorporate the required initialization behaviour in our application.
 
-Note: 'base.OnCreate()' is necessary to create the application class hierarchy.
+Note: `base.OnCreate` is necessary to invoke the 'created' event.
 
 ### Closing the application - OnTerminate()
 
-'OnTerminate()' closes the application.
+`OnTerminate` closes the application.
 
-OnTerminate() is invoked by selection of the window close button.
+`OnTerminate` is invoked by selection of the window close button.
 
-Note: 'base.OnTerminate()' is necessary to correctly delete the application class hierarchy.
+Note: `base.OnTerminate` is necessary to invoke the 'deleted' event.
 
 ### The Initialization method - Initialize()
 
@@ -147,9 +156,10 @@ The user can click anywhere in the application window to change the text in the 
 
 ### Build and Run the application
 
-Use Visual Studio on a Windows platform.
+Use Visual Studio on a Windows platform. Use Visual Studio Code on Linux.
 
-Use Visual Studio Code on Linux.
+The [NUI development setup guide](setup-ubuntu.md) describes setting up the NUI development environment
+on Ubuntu, using this tutorial as an example project.
 
 ## Full example code
 
