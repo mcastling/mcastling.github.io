@@ -37,10 +37,10 @@ This document covers:
 ~~~
 
 * Alternatives for opening VSC via the icon
- 1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
- 2. Select the _Launch_ button to open VSC
- 3. Copy VSC icon to Launcher.
- 4. Subsequently can Double click on the VSC icon in Launcher.
+    1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
+    2. Select the _Launch_ button to open VSC
+    3. Copy VSC icon to Launcher.
+    4. Subsequently can Double click on the VSC icon in Launcher.
 
 * Alternatives for opening VSC from a terminal
  1. Open VSC
@@ -64,9 +64,9 @@ VSC requires installation of required packages and libraries. It may be necessar
 proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#firewall).
 
 * Install C# extension from within VSC, via the Extensions View
-  1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
-  2. This will bring up all the extensions in the VS code marketplace.
-  3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
+    1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
+    2. This will bring up all the extensions in the VS code marketplace.
+    3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
 * Alternatively, [Install_C# extension_from VSC marketplace](https://marketplace.visualstudio.com).
 
@@ -141,37 +141,31 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 
 * Optional - Run and test DALi Native (C++)
     1. Get code - this step requires the _dali_demo_ repo:
+    2. Build from README file (_"Building the Repositry"_ section)
+    3. Run dali-demo
 
 ~~~{.sh}
     $ git clone git@github.com:dalihub/dali-demo
-~~~
-
-~~~{.sh}
     $ cd ~/DALiNUI/dali-demo
     $ git checkout devel/master
-~~~
 
-&nbsp;
+    Build from README
 
-    2. Build from README file (_"Building the Repositry"_ section)
-    3. Run:
-~~~{.sh}
     $ cd ~/DALiNUI/dali-env/opt/bin
     $ dali-demo
 ~~~
 
 If ok, DALi demo window will appear.
 
-* Build NUI csharp bindings
-    1. In this step we build the C# bindings:
+* Build NUI csharp bindings, first move to correct folder
+
 ~~~{.sh}
     $ cd dali-csharp-binder/dali-csharp-binder
 ~~~
 
-
-    2. Edit _file.list_ and remove the line "src/key-grab.cpp \".
-       (_This is a tizen only dependency_). Do not leave a gap in the file.
-    3. Build bindings by following the README file. (_"Building the Repositry"_ section)
+* Build NUI csharp bindings - remove dependency
+    1. Edit _file.list_ and remove the line "src/key-grab.cpp \". (_This is a tizen only dependency_). Do not leave a gap in the file.
+    2. Build bindings by following the README file. (_"Building the Repositry"_ section)
 
 * Overwrite two existing NUI files in ~/DALiNUI/nuirun/src/public
     1. Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
@@ -180,8 +174,6 @@ If ok, DALi demo window will appear.
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
-
-
 
 2. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
 3. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
@@ -296,7 +288,7 @@ to the environment variable:
     }
 ~~~
 
-    4. Add the proxy setting:
+* Add the proxy setting:
 ~~~{.sh}
     {
        "http.proxy": "http://xxx.xxx.xxx.xxx:xxxx
