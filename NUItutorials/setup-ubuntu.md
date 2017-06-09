@@ -183,8 +183,8 @@ If ok, DALi demo window will appear.
 
 <br>
 
-2. Download [CoreUIApplication.cs](http://dalihub.github.io/blob/master/NUIsetup/CoreUIApplication.cs)
-3. Download [NUIApplication.cs](http://dalihub.github.io/blob/master/NUIsetup/NUIApplication.cs)
+2. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
+3. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
 4. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
 
 _Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
