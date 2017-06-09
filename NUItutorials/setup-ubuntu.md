@@ -157,7 +157,7 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 
 If ok, DALi demo window will appear.
 
-* Build NUI csharp bindings, first move to correct folder
+* Move to NUI csharp bindings folder
 
 ~~~{.sh}
     $ cd dali-csharp-binder/dali-csharp-binder
@@ -167,19 +167,20 @@ If ok, DALi demo window will appear.
     1. Edit _file.list_ and remove the line "src/key-grab.cpp \". (_This is a tizen only dependency_). Do not leave a gap in the file.
     2. Build bindings by following the README file. (_"Building the Repositry"_ section)
 
-* Overwrite two existing NUI files in ~/DALiNUI/nuirun/src/public
-    1. Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
+* Copy `nui` source folder to a new sub-folder `nuirun` (_for subsequent overwriting of files_)
+
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-2. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
-3. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
-4. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
+* Overwrite two NUI files in ~/DALiNUI/nuirun/src/public
+    1. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
+    2. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
+    3. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
 
-_Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
+_Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported just yet._
 
 * To subsequently clean the build (if required), see [Appendix B](#buildclean)
 
