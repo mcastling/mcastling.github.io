@@ -151,7 +151,7 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
     $ git checkout devel/master
 ~~~
 
-<br>
+&nbsp;
 
     2. Build from README file (_"Building the Repositry"_ section)
     3. Run:
