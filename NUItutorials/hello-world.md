@@ -72,11 +72,15 @@ The application OnCreate() method overrides the NUIApplication 'OnCreate()' func
 
 Hence we can incorporate the required initialization behaviour in our application.
 
-Note: 'base.OnCreate()' is necessary to create application hierarchy.
+Note: 'base.OnCreate()' is necessary to create the application class hierarchy.
 
 ### Closing the application - OnTerminate()
 
-'OnTerminate()' closes the application, OnTerminate() is invoked by selection of the window close button.
+'OnTerminate()' closes the application.
+
+OnTerminate() is invoked by selection of the window close button.
+
+Note: 'base.OnTerminate()' is necessary to correctly delete the application class hierarchy.
 
 ### The Initialization method - Initialize()
 
@@ -85,7 +89,7 @@ The initialization code contains the following simple steps:
 1. Creation of the text label member variable.
 
    ~~~{.cs}
-   _text = new TextLabel("Hello NUI World");
+   _text = new TextLabel("Hello World");
    ~~~
 
 2. Positioning the text in centre of application window. The _ParentOrigin_ defines a point
@@ -178,7 +182,7 @@ namespace HelloTest
         private void Initialize()
         {
             // Add a simple text label to the main window
-            _text = new TextLabel("Hello NUI World");
+            _text = new TextLabel("Hello World");
             _text.ParentOrigin = ParentOrigin.CenterLeft;
             _text.HorizontalAlignment = HorizontalAlignment.Center;
 	    _text.BackgroundColor = Color.Red;

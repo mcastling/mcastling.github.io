@@ -36,26 +36,23 @@ This document covers:
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
 
-* Open VSC from Launch button
+* Alternatives for opening VSC via the icon
     1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
     2. Select the _Launch_ button to open VSC
+    3. Copy VSC icon to Launcher.
+    4. Subsequently can Double click on the VSC icon in Launcher.
 
-* Open VSC from desktop launcher
-    1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
-    2. Copy VSC icon to Launcher.
-    3. Double click on the VSC icon in Launcher.
-
-* Opening VSC from terminal
+* Alternatives for opening VSC from a terminal
     1. Open VSC
 ~~~{.sh}
     $ code
 ~~~
-
+<br>
     2. Open VSC in current directory
 ~~~{.sh}
     $ code .
 ~~~
-
+<br>
     3. Open file in VSC
 ~~~{.sh}
     $ code myfile
@@ -67,19 +64,18 @@ VSC requires installation of required packages and libraries. It may be necessar
 proxy settings to enable download via http. The procedures for firewall setup are described in [Appendix A](#firewall).
 
 * Install C# extension from within VSC, via the Extensions View
-    1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or Ctrl+Shift+X (View extensions command).
+    1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
     2. This will bring up all the extensions in the VS code marketplace.
     3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
-* Alternatively, install C# extension from website
-    1. Install [Install _C# extension_ from VSC marketplace](https://marketplace.visualstudio.com)
+* Alternatively, [Install _C# extension_ from VSC marketplace](https://marketplace.visualstudio.com).
 
 #### Recommended - Familiarisation with VSC
 
 * Build VSC with a console hello world
 
 [Getting started with Visual Studio code](https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/with-visual-studio-code)
-will give you a basic understanding of building, debugging and running projects in VSC.
+will give you a basic understanding of projects in VSC.
 
 [Back to top](#top)
 
@@ -124,7 +120,7 @@ will give you a basic understanding of building, debugging and running projects 
 
 These steps only need to be done once.
 
-You will have to source your environment variables every time you open up a new terminal (or you can add to .bashrc if you prefer).
+You will have to source your environment variables every time you open up a new terminal (or you can add to `.bashrc` if you prefer).
 You can do this by sourcing the ''setenv'' script you created above: 
 
 ~~~{.sh}
@@ -144,7 +140,7 @@ You can do this by sourcing the ''setenv'' script you created above:
 _The shared library files (.so) will be built and installed into the ~/DALiNUI/dali-env/opt/lib_ folder.
 
 * Optional - Run and test DALi Native (C++)
-    * Get code - this step requires the _dali_demo_ repo:
+    1. Get code - this step requires the _dali_demo_ repo:
 
 ~~~{.sh}
     $ git clone git@github.com:dalihub/dali-demo
@@ -157,8 +153,8 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 
 <!-- -->
 
-    * Build from README file (_"Building the Repositry"_ section)
-    * run:
+    2. Build from README file (_"Building the Repositry"_ section)
+    3. Run:
 ~~~{.sh}
     $ cd ~/DALiNUI/dali-env/opt/bin
     $ dali-demo
@@ -167,30 +163,31 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 If ok, DALi demo window will appear.
 
 * Build NUI csharp bindings
-    *In this step we build the C# bindings:
+    1. In this step we build the C# bindings:
 ~~~{.sh}
     $ cd dali-csharp-binder/dali-csharp-binder
 ~~~
 
 
-    * Edit _file.list_ and remove the line "src/key-grab.cpp \".
+    2. Edit _file.list_ and remove the line "src/key-grab.cpp \".
        (_This is a tizen only dependency_). Do not leave a gap in the file.
-    * Build bindings by following the README file. (_"Building the Repositry"_ section)
+    3. Build bindings by following the README file. (_"Building the Repositry"_ section)
 
 * Overwrite two existing NUI files in ~/DALiNUI/nuirun/src/public
-    * Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
+    1. Create a sub folder (_I have used nuirun_), copy nui source code into sub folder
 ~~~{.sh}
     $ cd ~/DALiNUI
     $ mkdir nuirun
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
+<br>
 
-    * Open [NUIFilesForOverwriting](../NUIFilesForOverwriting)
-    * Select _CoreUIApplication.cs_, right click, and select the _Save Link As_ menu option
-    * In the file dialog explorer window, select the **Home > DALiNUI > nuirun > src > public** folder
-    * Press the Save button
-    * Repeat these steps for _NUIApplication.cs_
+    2. Open [NUIFilesForOverwriting](../NUIFilesForOverwriting)
+    3. Select _CoreUIApplication.cs_, right click, and select the _Save Link As_ menu option
+    4. In the file dialog explorer window, select the **Home > DALiNUI > nuirun > src > public** folder
+    5. Press the Save button
+    6. Repeat these steps for _NUIApplication.cs_
 
 _Overwriting these files is necessary as NUI In Ubuntu is not fully supported just yet._
 
@@ -207,14 +204,14 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
 ### Build NUI and Run the Hello World (NUI) Tutorial
 
 * Create tutorial file 
-    1. Copy code in _"full example"_ section of [NUI Hello World tutorial](../NUItutorials/hello-world.md) to a new file - hello-world.cs
-    2. Copy hello-world.cs to nuirun folder:
+    1. Copy code in _"full example"_ section of the [NUI Hello World tutorial](../NUItutorials/hello-world.md) to a new file, `hello-world.cs`
+    2. Copy `hello-world.cs` to the nuirun folder:
 ~~~{.sh}
     $ cp hello-world.cs ~/DALiNUI/nuirun
 ~~~
 
 * Create a 'Hello World' project in VSC
-    1. [Open VSC](#install), and open the command prompt (Ctrl+`)
+    1. [Open VSC](#install), then open the command prompt (Ctrl+`)
     2. In the Integrated Terminal, type the following:
 ~~~{.sh}
     $ cd ~/DALiNUI
@@ -225,12 +222,12 @@ _Overwriting these files is necessary as NUI In Ubuntu is not fully supported ju
 
 The 'setenv' will not be necessary if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
 
-The 'dotnet new console' creates a Project file *nuirun.csproj*, and also _Program.cs_.
+The 'dotnet new console' creates a Project file `nuirun.csproj`, and also a `Program.cs` file.
 
 + Delete Program.cs in VSC Explorer, as its not needed
 
 + Modify project file
-    1. Edit nuirun.csproj, adding the following line inside the 'PropertyGroup' element:
+    1. Edit `nuirun.csproj`, adding the following line inside the 'PropertyGroup' element:
 ~~~{.sh}
     <DefineConstants>DOT_NET_CORE<DefineConstants>
 ~~~
@@ -244,7 +241,7 @@ The 'dotnet new console' creates a Project file *nuirun.csproj*, and also _Progr
 Running dotnet restore pulls down the required packages.
 
 + Configure VSC by creating tasks.json
-    1. Press Ctrl+Shift+P to open the command Pallete, type "ctr", and select Configure Task runner > NET core
+    1. Press `Ctrl+Shift+P` to open the command Pallete, type "ctr", and select Configure Task runner > NET core
 
 A _tasks.json_ file is essential, or else will get "No task runner configured", or "Error Could not find the Pre Launch Task 'build'"
 message pane on building.
@@ -258,7 +255,7 @@ message pane on building.
 
 This section provides an insight into the configuration of the application "Launch" profile.
 
-In VSC, Open _launch.json_ via the Explorer. In the "configurations" section, add the required width and height
+In VSC, Open `launch.json` via the Explorer. In the "configurations" section, add the required width and height
 to the environment variable:
 
 ~~~{.sh}
@@ -306,11 +303,12 @@ The proxy settings are saved to the _settings.json_ file.
    $ export https_proxy=http://xxx.xxx.xxx.xxx
 ~~~
 
-These export variables could also be set in your .bashrc file.
+These export variables could also be set in your `.bashrc` file.
 
 <a name="buildclean"></a>
 ### Appendix B - Clean build
 
+To clean the NUI Build:
 ~~~{.sh}
     $ make maintainer-clean	
 ~~~
