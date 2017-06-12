@@ -219,7 +219,7 @@ namespace HelloTest
 
 After running the example, the following output should appear:
 
-<img src="./Images/hello-world.png" style="border: 5px solid black;">
+<img src="./Images/hello-world.png">
 
 <a name="lambda"></a>
 ### Alternate method of adding the Touched event, using lambda expression syntax
