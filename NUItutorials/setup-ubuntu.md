@@ -213,7 +213,9 @@ The 'setenv' will not be necessary, if the enviromnment has been set up in your 
 
 The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj` and a `Program.cs` file.
 
-<img src="./Images/hello-world.png">
+<img src="./Images/VSC.png">
+
+The screenshot shows the files in Explorer, the editor and the Integrated terminal.
 
 + Delete Program.cs in VSC Explorer, as its not needed.
 
