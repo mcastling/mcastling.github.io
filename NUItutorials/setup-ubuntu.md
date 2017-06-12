@@ -213,10 +213,6 @@ The 'setenv' will not be necessary, if the enviromnment has been set up in your 
 
 The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj` and a `Program.cs` file.
 
-<img src="./Images/VSC.png">
-
-The screenshot shows the files in Explorer, the editor and the Integrated terminal.
-
 + Delete Program.cs in VSC Explorer, as its not needed.
 
 + Modify project file
@@ -245,6 +241,10 @@ message pane on building.
 ~~~
 
 Note: This step builds the 'nui' library.
+
+<img src="./Images/VSC.png">
+
+The screenshot shows the key files associated with the "hello world" project in Explorer, the editor and the Integrated terminal.
 
 * Copy shared library to application runtime location:
 ~~~{.sh}
@@ -290,6 +290,8 @@ These settings will be picked up if the application is run via F5.
     1. On desktop, select **System Settings > Network > Network Proxy > HTTP Proxy** and type the IP address, including port number
     2. On desktop, select **System Settings > Network > Network Proxy > HTTPS Proxy** and type the IP address, including port number
 
+<img src="./Images/SystemProxySettings.png">
+
 * Configure VSC firewall proxy settings (_for install of library packages such as mono runtime and .NET Core Debugger_) 
     1. Select File > Preferences > Settings > Edit
     2. Select HTTP in middle pane
@@ -316,6 +318,10 @@ The proxy settings are saved to the `settings.json` file.
 ~~~
 
 These export variables could also be set in your `.bashrc` file.
+
+<img src="./Images/ExtandSettings.png">
+
+The screenshot shows the installed C# extension package, and also the proxy settings in the `settings.json` file.
 
 <a name="buildclean"></a>
 ### Appendix B - Clean build
