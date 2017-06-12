@@ -209,11 +209,13 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
     $ dotnet new console
 ~~~
 
-The 'setenv' will not be necessary if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
+The 'setenv' will not be necessary, if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
 
-The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj`, and also a `Program.cs` file.
+The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj` and a `Program.cs` file.
 
-+ Delete Program.cs in VSC Explorer, as its not needed
+<img src="./Images/hello-world.png">
+
++ Delete Program.cs in VSC Explorer, as its not needed.
 
 + Modify project file
     1. Edit `nuirun.csproj`, adding the following line inside the 'PropertyGroup' element:
@@ -247,9 +249,14 @@ Note: This step builds the 'nui' library.
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
 
-+ Run in VSC integrated terminal
++ Run full size application in VSC integrated terminal
 ~~~{.sh}
     $ dotnet run
+~~~
+
++ Run adjusted size application in VSC integrated terminal
+~~~{.sh}
+    $ DALI_WINDOW_WIDTH=600 DALI_WINDOW_HEIGHT=800 dotnet run
 ~~~
 
 #### Modify Hello World Application window size
@@ -268,6 +275,8 @@ to the environment variable:
         "DALI_WINDOW_WIDTH":"600",
         "DALI_WINDOW_HEIGHT":"800"
     },
+
+These settings will be picked up if the application is run via F5.
 ~~~
 
 [Back to top](#top)
