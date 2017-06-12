@@ -244,7 +244,7 @@ Note: This step builds the 'nui' library.
 
 <img src="./Images/VSC.png">
 
-The screenshot shows the key files associated with the "hello world" project in Explorer, the editor and the Integrated terminal.
+The screenshot shows the key files associated with the "hello world" project in Explorer.
 
 * Copy shared library to application runtime location:
 ~~~{.sh}
@@ -309,6 +309,11 @@ These settings will be picked up if the application is run via F5.
     }
 ~~~
 
+<img src="./Images/ExtandSettings.png">
+
+The screenshot shows the installed C# extension package, and also the proxy settings for the library packages
+in the `settings.json` file.
+
 The proxy settings are saved to the `settings.json` file.
 
 * OR Set the OS environment variables `http_proxy` and `https_proxy`, in a terminal from which VSC will be run
@@ -318,10 +323,6 @@ The proxy settings are saved to the `settings.json` file.
 ~~~
 
 These export variables could also be set in your `.bashrc` file.
-
-<img src="./Images/ExtandSettings.png">
-
-The screenshot shows the installed C# extension package, and also the proxy settings in the `settings.json` file.
 
 <a name="buildclean"></a>
 ### Appendix B - Clean build
