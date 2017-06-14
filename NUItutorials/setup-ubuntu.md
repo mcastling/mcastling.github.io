@@ -40,7 +40,7 @@ This document covers:
     1. In the desktop launcher, select _Search your Computer_ > _Applications_ for the Visual Studio Code icon.
     2. Select the _Launch_ button to open VSC
     3. Copy VSC icon to Launcher.
-    4. Subsequently can Double click on the VSC icon in Launcher.
+    4. Subsequently, can Double click on the VSC icon in Launcher.
 
 * Alternatives for opening VSC from a terminal
  1. Open VSC
@@ -244,19 +244,19 @@ Note: This step builds the 'nui' library.
 
 <img src="./Images/VSC.png">
 
-The screenshot shows the key files associated with the "hello world" project in Explorer.
+The screenshot shows the key files associated with the "hello world" project in VSC Explorer.
 
 * Copy shared library to application runtime location:
 ~~~{.sh}
    cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
 
-+ Run full size application in VSC integrated terminal
++ To Run full size application in VSC integrated terminal
 ~~~{.sh}
     $ dotnet run
 ~~~
 
-+ Run adjusted size application in VSC integrated terminal
++ To Run adjusted size application in VSC integrated terminal
 ~~~{.sh}
     $ DALI_WINDOW_WIDTH=600 DALI_WINDOW_HEIGHT=800 dotnet run
 ~~~
@@ -309,12 +309,12 @@ These settings will be picked up if the application is run via F5.
     }
 ~~~
 
-<img src="./Images/ExtandSettings.png">
+The proxy settings are saved to the `settings.json` file.
+
+<img src="./Images/VSC_ExtandSettings.png">
 
 The screenshot shows the installed C# extension package, and also the proxy settings for the library packages
 in the `settings.json` file.
-
-The proxy settings are saved to the `settings.json` file.
 
 * OR Set the OS environment variables `http_proxy` and `https_proxy`, in a terminal from which VSC will be run
 ~~~{.sh}
