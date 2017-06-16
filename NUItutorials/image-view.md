@@ -26,7 +26,11 @@ To subsequently change an image use the _SetImage_ method:
 ~~~{.cs}
 imageView.SetImage("./images/gallery-4.jpg");
 ~~~
- 
+
+This figure is displayed via an ImageView:
+
+![ ](./Images/ImageView.png) 
+
 ### Image View Properties
 
 ImageView has the following properties:

@@ -3,7 +3,9 @@
 
 In this tutorial:
 
-[](#1)<br>
+[Properties](#1)<br>
+[Example of Visuals in use](#1)<br>
+
 [Creation and registration](#2)<br>
 [](#3)<br>
 [](#4)<br>
@@ -14,14 +16,14 @@ In this tutorial:
 
 
 DALi provides the following visuals:
- + [Color](@ref color-visual)
- + [Gradient](@ref gradient-visual)
- + [Image](@ref image-visuals)
- + [Border](@ref border-visual)
- + [Mesh](@ref mesh-visual)
- + [Primitive](@ref primitive-visual)
- + [Text](@ref text-visual)
- + [Wireframe](@ref wireframe-visual)
+ + [Color](color-visual)
+ + [Gradient](gradient-visual)
+ + [Image](image-visuals)
+ + [Border](border-visual)
+ + [Mesh](mesh-visual)
+ + [Primitive](primitive-visual)
+ + [Text](text-visual)
+ + [Wireframe](wireframe-visual)
 
 ## Overview
 
@@ -30,20 +32,21 @@ Visuals provide reusable rendering logic.
 Visuals are the main building block of controls. This means that custom controls can reuse existing visuals rather
 than create them from scratch, which increases performance.
  
-Visuals reuse geometry, shaders etc. across controls and manages the renderer and texture to exist only when the control is on-stage.
-Additionally, they respond to actor size and color change, while also providing clipping at the renderer level.
+Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
+Additionally visuals, respond to view size and color change, while also providing clipping at the renderer level.
 
 Visuals are configured via Properties. 
 
-<a name="visualprop"></a>
+<a name="visualproperties"></a>
 ### Visual Properties
 
 Visual properties are set through a property map. The property map has a 'visual type' field,
 which specifies the visual to use or create. The visual type is required to avoid ambiguity as
 multiple visuals can be capable of rendering the same content.
 
-There are 2 methods of implementing and using property maps (a) specific properties or
-(b) via a generic visual map `VisualMap', see [using a VisualMap].
+There are 2 methods of using property maps:
+* Specific property structures, e.g `ColorVisualProperty`
+* Visual maps, e.g `ColorVisual` see [using a VisualMap].
 
 This tutorial concentrates on showing specific property use. 
 
@@ -92,6 +95,8 @@ The following Visual types are available:
 <a name="visualalignment"></a>
 ### Visual Alignment 
 
+The **AlignTYpe** Enum specifies the visual alignment:
+
 | Enumeration | Name         | Description                                                                                          |
 |------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------|
 |             | TopBegin     | Aligns to the top of the vertical axis and the beginning of the horizontal axis (The left or right edge in Left-To-Right or Right-to-Left layouts, respectively) |
@@ -104,8 +109,6 @@ The following Visual types are available:
 |             | BottomCentre | Aligns to the bottom of the vertical axis and the center of the horizontal axis
 |             | BottomEnd    | Aligns to the bottom of the vertical axis and end of the horizontal axis |
  
-Visuals also have a custom **shader** property. Whilst it's possible to change the shader, please note that some visuals rely on the vertex shader to perform certain functions. For example, the NPatch visual uses the vertex shader to perform the stretching. The **shader** property is a Property::Map with the following keys:
-
 [Back to top](#top)
 
 
