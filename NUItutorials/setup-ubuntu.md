@@ -31,7 +31,7 @@ This document covers:
 
 * Install latest VSC for Ubuntu
     1. [Download deb package](https://code.visualstudio.com).
-    2. Install deb package with:
+    2. Install deb package, VSC instructions are to use:
 ~~~{.sh}
     $ sudo dpkg -i code_1.10.2xXXXXXXXXXX_amd64.deb
 ~~~
@@ -88,7 +88,7 @@ will give you a basic understanding of projects in VSC.
     $ cd ~/DALiNUI
 ~~~
 
-* Get code from Github
+* Get code from GitHub
 
 ~~~{.sh}
     $ git clone git@github.com:dalihub/dali-core
@@ -141,7 +141,7 @@ _The shared library files (.so) will be built and installed into the ~/DALiNUI/d
 
 * Optional - Run and test DALi Native (C++)
     1. Get code - this step requires the _dali_demo_ repo:
-    2. Build from README file (_"Building the Repositry"_ section)
+    2. Build from README file (_"Building the Repository"_ section)
     3. Run dali-demo
 
 ~~~{.sh}
@@ -165,7 +165,7 @@ If ok, DALi demo window will appear.
 
 * Build NUI csharp bindings - remove dependency
     1. Edit _file.list_ and remove the line "src/key-grab.cpp \". (_This is a tizen only dependency_). Do not leave a gap in the file.
-    2. Build bindings by following the README file. (_"Building the Repositry"_ section)
+    2. Build bindings by following the README file. (_"Building the Repository"_ section)
 
 * Copy `nui` source folder to a new sub-folder `nuirun` (_for subsequent overwriting of files_)
 
@@ -198,7 +198,7 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
 
 * Create a 'Hello World' project in VSC
     1. [Open VSC](#install)
-    2. Select FIle > Open File in the main menu.
+    2. Select File > Open Folder in the main menu.
     3. Select the `nuirun` folder in the File Dialog
     4. Open the command prompt CTRL+` (backtick)
     5. In the Integrated Terminal, type the following:
@@ -209,7 +209,7 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
     $ dotnet new console
 ~~~
 
-The 'setenv' will not be necessary, if the enviromnment has been set up in your .bashrc as described in [Build environment](#buildenv))
+The 'setenv' will not be necessary, if the environment has been set up in your .bashrc as described in [Build environment](#buildenv))
 
 The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj` and a `Program.cs` file.
 
@@ -222,12 +222,12 @@ The 'dotnet new console' creates a Project, with a Project file `nuirun.csproj` 
 ~~~
 
 + Build assets
-    1. Resolve the build assets
+    1. Restore the dependencies and tools of a project.
 ~~~{.sh}
     $ dotnet restore
 ~~~
 
-Running `dotnet restore` pulls down the required packages.
+Running `dotnet restore` gives you access to the required .NET Core packages that are needed to build your project.
 
 + Configure VSC by creating tasks.json
     1. Press `Ctrl+Shift+P` to open the command Pallete, type "ctr", and select Configure Task runner > NET core
