@@ -3,22 +3,24 @@
 
 In this tutorial:
 
+[Overview](#overview)
 [Example of Visuals in use](#visualexample)<br>
-[Properties](#visualproperties)<br>
-[The Visual type]((#visualtype)<br>)
+[Visual Properties](#visualproperties)<br>
+[Visual Type]((#visualtype)<br>
 [Visual Creation and registration](#visualcreation)<br>
 [The Color Visual](#colorvisual)<br>
-[The Gradient Visual](#)<br>
-[The Image Visual](#IMAGEvisual)<br>
+[The Gradient Visual](#gradientvisual)<br>
+[The Image Visual](#imagevisual)<br>
 [THe Border Visual](#bordervisual)<br>
 [The Mesh visual](#meshvisual)<br>
 [The Primitive Visual](#primitivevisual)<br>
 [The Wireframe Visual](#wireframevisual)<br>
 [The Text Visual](#textvisual)<br>
 [The Visual transform](#visualtransform)<br>
-[The Visual map class](#visualview)<br>
+[The Visual map class](#visualmap)<br>
 [The Visual view class](#visualview)<br>
 
+<a name="overview"></a>
 ## Overview
 
 Visuals provide reusable rendering logic.
@@ -33,6 +35,7 @@ Visuals are configured via Properties.
 
 To create a visual:
 * Create a property map
+* Add visual 'type' to property map (_must be first entry in property map_)
 * Add required property values to the map
 * Create visual using property map
 * Register Visual
@@ -62,19 +65,19 @@ Visual properties are set through a property map.
 
 There are 2 methods of using property maps:
 * Specific property structures, e.g `ColorVisualProperty`
-* Visual maps, e.g `ColorVisual` see [using a VisualMap].
+* Visual maps, e.g `ColorVisual` see [using a VisualMap](#visualmap).
 
-This tutorial concentrates on showing specific property use. 
+This tutorial illustrates both methods.
 
 <a name="visualtype"></a>
 ### Visual Type
 
-The **Type** Enum specifies the Visual to use/create. This is required to avoid ambiguity as multiple visuals
+The **Type** Enum specifies the visual to use/create. This is required to avoid ambiguity as multiple visuals
 may be capable of rendering the same contents.
 
-The following Visual types are available:
+The following visual types are available:
 
-| visualType  |
+| Type  |
 | ------------| 
 | Border    |
 | Color     |
@@ -95,16 +98,28 @@ The following Visual types are available:
 <a name="visualcreation"></a>
 ### Visual Creation and registration
 
-Visuals are created by factory methods.
+Visuals are created by `factory` methods.
 
 Visuals need to be _registered_ with a unique 'property' index. `RegisterVisual` stores the visual 'handle' within the control.
-The index is used for direct access to the visual. The index can be used to link a View to a visual when required.
+The index is used for direct access to the visual. The index can be used to link a view to a visual when required.
 Registration also enables extra functionality, such as connection to the default window. 
 
-The examples in this tutorial demonstrate the recommended procedure for visual creation and registration. However 
-where specific visual assignment is possible, factory creation and registration may occur within the API:
+The examples in this tutorial demonstrate the recommended procedure for visual creation and registration, using 'explicit'
+calls to the factory and register methods:
 
-In this snippet, visual factory creation and registration occur _within_ the `Background` property.
+~~~{.cs}
+...
+...
+
+_colorVisual =  VisualFactory.Get().CreateVisual( colorVisual );
+
+RegisterVisual( ColorVisualPropertyIndex, _colorVisual );
+~~~
+
+However where specific visual assignment is possible, factory creation and registration
+may occur within the API.
+
+In this code snippet, visual factory creation and registration occur _within_ the `Background` property.
 
 ~~~{.cs}
 textView.Background = textVisual;
@@ -117,6 +132,7 @@ Renders a color to the visual's quad geometry.
  
 ![ ](./Images/color-visual.png)
 
+Visual.Type **Color**
 
 #### Usage
 This example shows the creation and registration of a `Color` Visual:
@@ -141,14 +157,11 @@ _colorVisual.DepthIndex = ColorVisualPropertyIndex;
 
 #### Properties Supported
 
-**Visual.Type:** "Color"
-
-VisualMap  **ColorVisual**
-
 | ColorVisualProperty | String   | Type    | Required | Description               |
 |---------------------------------|---------|:--------:|:--------:|----------------|
-|                      | MixColor | VECTOR4 | Yes      | The color required.       |
+|                     | MixColor | VECTOR4 | Yes      | The color required.       |
 
+VisualMap  **ColorVisual**
 
 [Back to top](#top)
 
@@ -169,6 +182,8 @@ Both Linear and Radial gradients are supported.
 |             | Reflect | Reflect the gradient pattern start-to-end, end-to-start, start-to-end etc. until the quad geometry is filled. |
 |             | Repeat  | Repeat the gradient pattern start-to-end, start-to-end, start-to-end etc. until the quad geometry is filled.  |
 
+Visual.Type **Gradient**
+
 #### Usage - radial
 
 ~~~{.cs}
@@ -177,7 +192,6 @@ _visualView = new VisualView();
 
 ...
 ...
-
 
 GradientVisual gradientVisualMap1 = new GradientVisual();
 
@@ -211,13 +225,10 @@ gradientVisualMap1.AnchorPoint = Visual.AlignType.TopBegin;
 _visualView.AddVisual("gradientVisual1", gradientVisualMap1);
 ~~~
 
-Note The `_visualView` [Visual View](#visualview) is a custom view.
+Note : `_visualView` [Visual View](#visualview) is a custom view.
+Note2 : The actual visual is created in the `AddVisual` method.
 
 ### Properties Supported
-
-**VisualType:** "GRADIENT"
-
-VisualMap  **GradientVisual**
 
 | GradientVisualProperty | Name          | Type              | Required |                        Description |
 |------------------------|---------------|:-----------------:|:----------:|--------------------------------------------------------------------------------------|
@@ -229,6 +240,8 @@ VisualMap  **GradientVisual**
 |                        | StopColor     | ARRAY of VECTOR4  | Yes        | The color at those stop offsets. At least 2 required to show a gradient.                |
 |                        | Units         | INTEGER or STRING | No         | Defines the coordinate system. [More info](gradientunits)                                           |
 |                        | SpreadMethod  | INTEGER or STRING | No         | Indicates what happens if gradient starts or ends inside bounds. [More info](gradientspreadmethod) |
+
+VisualMap  **GradientVisual**
 
 <a name="gradientunits"></a>
 #### Units
@@ -255,29 +268,14 @@ The visual provided, depends on the extension of the image.
 * N-Patch
 * SVG
 * Animated Image
- 
+
+Visual.Type **Image**
+
 ### Normal
  
 Renders a raster image ( jpg, png etc.) into the visual's quad geometry.
  
 ![ ](./Images/image-visual.png)
-
-#### Properties Supported
-
-**VisualType:** "IMAGE"
-
-VisualMap **ImageVisual**
-
-| ImageVisualProperty | Name          | Type              | Required | Description 
-|---------------------------------------------------------|---------------|:-----------------:|:--------:|----------------------------------------------------|
-|                     | URL           | STRING            | Yes      | The URL of the image.                                                                  |
-|                     | FittingMode   | INTEGER or STRING | No       | Fitting options, used when resizing images to fit desired dimensions.|
-|                     | samplingMode  | INTEGER or STRING | No       | Filtering options, used when resizing images to sample original pixels.  |
-|                     | DesiredWidth  | INT               | No       | The desired image width. Will use actual image width if not specified.                 |
-|                     | DesiredHeight | INT               | No       | The desired image height. Will use actual image height if not specified.               |
-|                     | PixelArea     | VECTOR4           | No       | The image area to be displayed, default value is [0.0, 0.0, 1.0, 1.0]                  |
-|                     | wrapModeU     | INTEGER or STRING | No       | Wrap mode for u coordinate |
-|                     | wrapModeV     | INTEGER or STRING | No       | Wrap mode for v coordinate |
 
 #### Usage
 
@@ -293,7 +291,22 @@ RegisterVisual( ImageVisualPropertyIndex, _imageVisual );
 _imageVisual.DepthIndex = ImageVisualPropertyIndex;
 ~~~
 
-### N-Patch {#n-patch-visual}
+#### Properties Supported
+
+| ImageVisualProperty | Name          | Type              | Required | Description 
+|---------------------------------------------------------|---------------|:-----------------:|:--------:|----------------------------------------------------|
+|                     | URL           | STRING            | Yes      | The URL of the image.                                                                  |
+|                     | FittingMode   | INTEGER or STRING | No       | Fitting options, used when resizing images to fit desired dimensions.|
+|                     | samplingMode  | INTEGER or STRING | No       | Filtering options, used when resizing images to sample original pixels.  |
+|                     | DesiredWidth  | INT               | No       | The desired image width. Will use actual image width if not specified.                 |
+|                     | DesiredHeight | INT               | No       | The desired image height. Will use actual image height if not specified.               |
+|                     | PixelArea     | VECTOR4           | No       | The image area to be displayed, default value is [0.0, 0.0, 1.0, 1.0]                  |
+|                     | wrapModeU     | INTEGER or STRING | No       | Wrap mode for u coordinate |
+|                     | wrapModeV     | INTEGER or STRING | No       | Wrap mode for v coordinate |
+
+VisualMap **ImageVisual**
+
+### N-Patch
 
 Renders an n-patch or a 9-patch image. Uses non-quad geometry. Both geometry and texture are cached to reduce memory consumption
 if the same n-patch image is used elsewhere.
@@ -302,7 +315,7 @@ if the same n-patch image is used elsewhere.
 
 VisualMap **NPatchVisual**
 
-### SVG {#svg-visual}
+### SVG
 
 Renders a svg image into the visual's quad geometry.
  
@@ -332,7 +345,7 @@ Renders a svg image into the visual's quad geometry.
 
 VisualMap **SVGVisual**
 
-#### Animated Image Visual
+### Animated Image Visual
 
 Renders an animated image into the visual's quad geometry. Currently, only the GIF format is supported.
 
@@ -349,12 +362,20 @@ Renders a color as an internal border to the visual's geometry.
 
 ![ ](./Images/border-visual.png)
 
+Visual.Type **Border**
 
 #### Usage
 
-This exmple shows the use of a BorderVisual VisualMap:
+This example shows the use of a BorderVisual `VisualMap`:
 
 ~~~{.cs}
+
+private BorderVisual borderVisualMap1;
+
+...
+...
+
+
 borderVisualMap1 = new BorderVisual();
 
 borderVisualMap1.Color = Color.Red;
@@ -370,11 +391,10 @@ borderVisualMap1.AnchorPoint = Visual.AlignType.TopBegin;
 _visualView.AddVisual("borderVisual1", borderVisualMap1);
 ~~~
 
+Note : The actual visual is created in the `AddVisual` method.
+
+
 #### Properties Supported
-
-**VisualType:** "BORDER"
-
-VisualMap **BorderVisual**
 
 | BorderVisualProperty | String        | Type    | Required | Description                                      |
 |------------------------------------------------------|---------------|:-------:|:--------:|------------------|
@@ -382,8 +402,9 @@ VisualMap **BorderVisual**
 |                      | BorderSize    | FLOAT   | Yes      | The width of the border (in pixels).             |
 |                      | AntiAliasing  | BOOLEAN | No       | Whether anti-aliasing of the border is required. |
 
-[Back to top](#top)
+VisualMap **BorderVisual**
 
+[Back to top](#top)
 
 <a name="meshvisual"></a>
 ### Mesh Visual
@@ -391,6 +412,8 @@ VisualMap **BorderVisual**
 Renders a mesh using a .obj file, optionally with textures provided by a mtl file. Scaled to fit the control.
  
 ![ ](./Images/mesh-visual.png)
+
+Visual.Type **Mesh**
 
 #### Usage
 
@@ -412,11 +435,9 @@ meshVisualMap1.AnchorPoint = Visual.AlignType.TopBegin;
 _visualView.AddVisual("meshVisual1", meshVisualMap1);
 ~~~
 
-#### Properties Supported
- 
-**VisualType:** "MESH"
+Note : the actual visual is created in the `AddVisual` method.
 
-VisualMap **MeshVisual**
+#### Properties Supported
 
 | MeshVisualProperty | Name         | Type               | Required          | Description                                                                                      |
 |-------------------------------------------------------|----------------|:------------------:|:-----------------:|--------------------------------------------------------------------------------------------------|
@@ -427,6 +448,8 @@ VisualMap **MeshVisual**
 |                    | UseMipmapping  | BOOLEAN            | No                | Flag for whether to use mipmaps for textures or not. Default true.                               |
 |                    | UseSoftNormals | BOOLEAN            | No                | Flag for whether to average normals at each point to smooth textures or not. Default true.       |
 |                    | LightPosition  | VECTOR3            | No                | The position, in stage space, of the point light that applies lighting to the model.             |
+
+VisualMap **MeshVisual**
 
 <a name="meshvisualshadingmode"></a>
 #### Shading Mode
@@ -448,11 +471,41 @@ The shapes are generated with clockwise winding and back-face culling on by defa
 
 ![ ](./Images/cube.png)
  
+Visual.Type **Primitive**
+
+### Usage
+
+Here is an example of using a Primitive Visual, the actual shape is set via the property.
+
+~~~{.cs}
+public int Shape
+{
+    get
+    {
+        return _shape;
+    }
+    set
+    {
+        _shape = value;
+
+        // Create and Register Primitive Visual
+        PropertyMap primitiveVisual = new PropertyMap();
+        primitiveVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Primitive ))
+                       .Add( PrimitiveVisualProperty.Shape, new PropertyValue(_shape))
+                       .Add( PrimitiveVisualProperty.BevelPercentage, new PropertyValue(0.3f))
+                       .Add( PrimitiveVisualProperty.BevelSmoothness, new PropertyValue(0.0f))
+                       .Add( PrimitiveVisualProperty.ScaleDimensions, new PropertyValue(new Vector3(1.0f,1.0f,0.3f)))
+                       .Add( PrimitiveVisualProperty.MixColor, new PropertyValue(new Vector4((245.0f/255.0f), (188.0f/255.0f), (73.0f/255.0f), 1.0f)));
+        _primitiveVisual =  VisualFactory.Get().CreateVisual( primitiveVisual );
+        RegisterVisual( PrimitiveVisualPropertyIndex, _primitiveVisual );
+
+        // Set the depth index for Primitive visual
+        _primitiveVisual.DepthIndex = PrimitiveVisualPropertyIndex;
+    }
+}
+~~~
+
 #### Properties Supported
-
-**VisualType:** "PRIMITIVE"
-
-VisualMap **PrimitiveVisual**
 
 | PrimitiveVisualProperty | Name              | Type               |Description                                                             |
 |---------------------------------------------------------------|-------------------|:------------------:|------------------:|
@@ -468,6 +521,8 @@ VisualMap **PrimitiveVisual**
 |                         | TooevelPercentage | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi |
 |                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                edges)
 |                         | LightPosition     | VECTOR3            | The position, in stage space, of the point light that applies lighting to the model. |
+
+VisualMap **PrimitiveVisual**
 
 #### Shapes
 
@@ -514,38 +569,6 @@ For spheres and conical frustrums, 'slices' determines how many divisions there 
 For spheres, 'stacks' determines how many layers there are as you go down the object.
  
 ![ ](./Images/stacks.png)
- 
-### Usage
-
-Here is an example of using a Primitive Visual, the actual shape is set via the property.
-
-~~~{.cs}
-public int Shape
-{
-    get
-    {
-        return _shape;
-    }
-    set
-    {
-        _shape = value;
-
-        // Create and Register Primitive Visual
-        PropertyMap primitiveVisual = new PropertyMap();
-        primitiveVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Primitive ))
-                       .Add( PrimitiveVisualProperty.Shape, new PropertyValue(_shape))
-                       .Add( PrimitiveVisualProperty.BevelPercentage, new PropertyValue(0.3f))
-                       .Add( PrimitiveVisualProperty.BevelSmoothness, new PropertyValue(0.0f))
-                       .Add( PrimitiveVisualProperty.ScaleDimensions, new PropertyValue(new Vector3(1.0f,1.0f,0.3f)))
-                       .Add( PrimitiveVisualProperty.MixColor, new PropertyValue(new Vector4((245.0f/255.0f), (188.0f/255.0f), (73.0f/255.0f), 1.0f)));
-        _primitiveVisual =  VisualFactory.Get().CreateVisual( primitiveVisual );
-        RegisterVisual( PrimitiveVisualPropertyIndex, _primitiveVisual );
-
-        // Set the depth index for Primitive visual
-        _primitiveVisual.DepthIndex = PrimitiveVisualPropertyIndex;
-    }
-}
-~~~
 
 [Back to top](#top)
 
@@ -561,12 +584,13 @@ The wireframe visual is mainly used for debugging, and replaces all other visual
 [Back to top](#top)
 
 <a name="textvisual"></a>
-
 ### Text Visual 
 
 Renders text within a control.
 
 ![ ](./Images/HelloWorld.png)
+
+**Visual.Type** "Text"
 
 #### Usage
 
@@ -576,8 +600,8 @@ textVisual.Add(Visual.Property.Type, new PropertyValue((int)Visual.Type.Text))
           .Add(TextVisualProperty.Text, new PropertyValue(_name))
           .Add(TextVisualProperty.TextColor, new PropertyValue(Color.White))
           .Add(TextVisualProperty.PointSize, new PropertyValue(7))
-          .Add( TextVisualProperty.HorizontalAlignment, new PropertyValue("CENTER"))
-          .Add( TextVisualProperty.VerticalAlignment, new PropertyValue("CENTER"));
+          .Add(TextVisualProperty.HorizontalAlignment, new PropertyValue("CENTER"))
+          .Add(TextVisualProperty.VerticalAlignment, new PropertyValue("CENTER"));
 _textVisual =  VisualFactory.Get().CreateVisual( textVisual );
 RegisterVisual( TextVisualPropertyIndex, _textVisual );
 
@@ -586,10 +610,6 @@ _textVisual.DepthIndex = TextVisualPropertyIndex;
 ~~~
 
 #### Properties
-
-**VisualType:** "TEXT"
-
-VisualMap **TextVisual**
 
 | TextVisualProperty  | Name                | Type          | Required | Description                                                                   | 
 |---------------------|---------------------|:-------------:|:--------:|---------------------------------------|
@@ -603,11 +623,11 @@ VisualMap **TextVisual**
 |                     | TextColor           | VECTOR4       | No       | The color of the text                                                         |
 |                     | EnableMarkup        | BOOL          | No       | If mark up should be enabled |                                                |
 
+VisualMap **TextVisual**
 
 [Back to top](#top)
 
 <a name="visualtransform"></a>
-
 ### Visual Transform
 
 Visuals have 'attributes' that enable layouting within a control.
@@ -673,9 +693,11 @@ colorVisualTransform.Add( (int)VisualTransformPropertyType.Offset, new PropertyV
 _colorVisual.SetTransformAndSize(colorVisualTransform, size);
 ~~~
 
+[Back to top](#top)
+
 ### The Visual Map class
 
-The `VisualMap` class encapsulates the property map of a visual.
+The `VisualMap` class encapsulates the (transform) property map of a visual.
 
 Here is the `ColorVisual` VisualMap
 
@@ -700,20 +722,32 @@ Here is the `ColorVisual` VisualMap
    }
 ~~~
 
-Here is an example of using a Visual Map:
+Here is an example of using a Visual Map to create a visual:
 
 ~~~{.cs}
 
 var colorMap = new ColorVisual{Color=Color.White;};
 var _colorVisual = VisualFactory.Instance.CreateVisual(colorMap.OutputVisualMap);
 RegisterVisual(ColorVisualPropertyIndex, _colorVisual);
+~~~
+
+In this example the visual is created from the Visual Map in the `Background' property.
+
+~~~{.cs}
+ColorVisual colorVisualMap1 = new ColorVisual();
+colorVisualMap1.Color = Color.Green;
+_visualView.Background = colorVisualMap1.OutputVisualMap;
+
+window.GetDefaultLayer().Add(_visualView);
+~~~
 
 VisualMaps have a custom **shader** property.
-~~~
+
+[Back to top](#top)
 
 ### The Visual View class
 
-The `VisualView` is a custom View class, enabling the addition of any visual.
+The `VisualView` is a custom view class, enabling the addition of any visual.
 
 ~~~{.cs}
 public class VisualView : CustomView
@@ -730,5 +764,5 @@ _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 
 [Gradient Visuals](#gradientvisual) is an example of adding a gradient visual to a Visual View.
 
-
+[Back to top](#top)
 
