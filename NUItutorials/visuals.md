@@ -3,11 +3,11 @@
 
 In this tutorial:
 
-[Overview](#overview)
-[Example of Visuals in use](#visualexample)<br>
+[Overview](#overview)<br>
 [Visual Properties](#visualproperties)<br>
-[Visual Type]((#visualtype)<br>
+[Visual Type](#visualtype)<br>
 [Visual Creation and registration](#visualcreation)<br>
+[Example of Visuals in use](#visualexample)<br>
 [The Color Visual](#colorvisual)<br>
 [The Gradient Visual](#gradientvisual)<br>
 [The Image Visual](#imagevisual)<br>
@@ -38,17 +38,17 @@ To create a visual:
 * Add visual 'type' to property map (_must be first entry in property map_)
 * Add required property values to the map
 * Create visual using property map
-* Register Visual
+* Register visual
 
 <a name="visualexample"></a>
 ### Example of Visuals in use - button styling
 
 Images and icons are added to buttons using visuals.
 
-The button's appearance can be modified by setting properties for the various 'state' Visuals.
-
 A control has 3 states - NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
 Each state and sub-state should have the required visuals. A visual can be common between states.
+
+The button's appearance can be modified by setting properties for the various 'state' Visuals.
 
 When pressed the unselected visuals are replaced by the selected visual.
  
@@ -72,7 +72,7 @@ This tutorial illustrates both methods.
 <a name="visualtype"></a>
 ### Visual Type
 
-The **Type** Enum specifies the visual to use/create. This is required to avoid ambiguity as multiple visuals
+The **Type** Enum specifies the visual to use/create. This is required to avoid ambiguity, as multiple visuals
 may be capable of rendering the same contents.
 
 The following visual types are available:
@@ -100,9 +100,9 @@ The following visual types are available:
 
 Visuals are created by `factory` methods.
 
-Visuals need to be _registered_ with a unique 'property' index. `RegisterVisual` stores the visual 'handle' within the control.
-The index is used for direct access to the visual. The index can be used to link a view to a visual when required.
-Registration also enables extra functionality, such as connection to the default window. 
+Visuals need to be _registered_ with a unique 'property' index. The index is used for direct access to the visual.
+The index can be used to link a view to a visual when required. Registration also enables extra functionality,
+such as connection to the default window. `RegisterVisual` stores the visual 'handle' within the control.
 
 The examples in this tutorial demonstrate the recommended procedure for visual creation and registration, using 'explicit'
 calls to the factory and register methods:
@@ -116,14 +116,14 @@ _colorVisual =  VisualFactory.Get().CreateVisual( colorVisual );
 RegisterVisual( ColorVisualPropertyIndex, _colorVisual );
 ~~~
 
-However where specific visual assignment is possible, factory creation and registration
-may occur within the API.
-
+However where specific visual assignment is possible, factory creation and registration may occur within the API.
 In this code snippet, visual factory creation and registration occur _within_ the `Background` property.
 
 ~~~{.cs}
 textView.Background = textVisual;
 ~~~
+
+The View `AddVisual` method is another example of API visual creation.
 
 <a name="colorvisual"></a>
 ### Color visual
@@ -225,23 +225,24 @@ gradientVisualMap1.AnchorPoint = Visual.AlignType.TopBegin;
 _visualView.AddVisual("gradientVisual1", gradientVisualMap1);
 ~~~
 
-Note : `_visualView` [Visual View](#visualview) is a custom view.
-Note2 : The actual visual is created in the `AddVisual` method.
+The actual visual is created in the View `AddVisual` method.
+
+Note : `_visualView` is a Custom View. See [Visual View](#visualview)
 
 ### Properties Supported
 
 | GradientVisualProperty | Name          | Type              | Required |                        Description |
 |------------------------|---------------|:-----------------:|:----------:|--------------------------------------------------------------------------------------|
-|                        | StartPosition | VECTOR2           | For Linear | The start position of the linear gradient.                               
+|                        | StartPosition | VECTOR2           | For Linear | The start position of the linear gradient.                               |
 |                        | EndPosition   | VECTOR2           | For Linear | The end position of the lineargradient.                                               |
 |                        | Center        | VECTOR2           | For Radial | The center point of thegradient.                                                       |
 |                        | Radius        | FLOAT             | For Radial | The size of theradius.                                                                 |
-|                        | StopOffset    | ARRAY of FLOAT    | No         | All the stop offsets. If not supplied default is 0.0 and1.0.                           |
+|                        | StopOffset    | ARRAY of FLOAT    | No         | All the stop offsets. If not supplied default is 0.0 and 1.0.                           |
 |                        | StopColor     | ARRAY of VECTOR4  | Yes        | The color at those stop offsets. At least 2 required to show a gradient.                |
-|                        | Units         | INTEGER or STRING | No         | Defines the coordinate system. [More info](gradientunits)                                           |
-|                        | SpreadMethod  | INTEGER or STRING | No         | Indicates what happens if gradient starts or ends inside bounds. [More info](gradientspreadmethod) |
+|                        | Units         | INTEGER or STRING | No         | Defines the coordinate system. [More info](#gradientunits)                                          |
+|                        | SpreadMethod  | INTEGER or STRING | No         | Indicates what happens if gradient starts or ends inside bounds. [More info](#gradientspreadmethod) |
 
-VisualMap  **GradientVisual**
+VisualMap : **GradientVisual**
 
 <a name="gradientunits"></a>
 #### Units
@@ -269,7 +270,7 @@ The visual provided, depends on the extension of the image.
 * SVG
 * Animated Image
 
-Visual.Type **Image**
+Visual.Type : **Image**
 
 ### Normal
  
@@ -304,7 +305,7 @@ _imageVisual.DepthIndex = ImageVisualPropertyIndex;
 |                     | wrapModeU     | INTEGER or STRING | No       | Wrap mode for u coordinate |
 |                     | wrapModeV     | INTEGER or STRING | No       | Wrap mode for v coordinate |
 
-VisualMap **ImageVisual**
+VisualMap : **ImageVisual**
 
 ### N-Patch
 
@@ -313,7 +314,7 @@ if the same n-patch image is used elsewhere.
  
 ![ ](./Images/n-patch-visual.png)
 
-VisualMap **NPatchVisual**
+VisualMap : **NPatchVisual**
 
 ### SVG
 
@@ -343,7 +344,7 @@ Renders a svg image into the visual's quad geometry.
  
 </div>
 
-VisualMap **SVGVisual**
+VisualMap : **SVGVisual**
 
 ### Animated Image Visual
 
@@ -351,7 +352,7 @@ Renders an animated image into the visual's quad geometry. Currently, only the G
 
 ![ ](./Images/animated-image-visual.gif)
 
-VisualMap **AnimatedImageVisual**
+VisualMap : **AnimatedImageVisual**
 
 [Back to top](#top)
 
@@ -362,7 +363,7 @@ Renders a color as an internal border to the visual's geometry.
 
 ![ ](./Images/border-visual.png)
 
-Visual.Type **Border**
+Visual.Type : **Border**
 
 #### Usage
 
@@ -393,7 +394,6 @@ _visualView.AddVisual("borderVisual1", borderVisualMap1);
 
 Note : The actual visual is created in the `AddVisual` method.
 
-
 #### Properties Supported
 
 | BorderVisualProperty | String        | Type    | Required | Description                                      |
@@ -402,7 +402,7 @@ Note : The actual visual is created in the `AddVisual` method.
 |                      | BorderSize    | FLOAT   | Yes      | The width of the border (in pixels).             |
 |                      | AntiAliasing  | BOOLEAN | No       | Whether anti-aliasing of the border is required. |
 
-VisualMap **BorderVisual**
+VisualMap : **BorderVisual**
 
 [Back to top](#top)
 
@@ -413,7 +413,7 @@ Renders a mesh using a .obj file, optionally with textures provided by a mtl fil
  
 ![ ](./Images/mesh-visual.png)
 
-Visual.Type **Mesh**
+Visual.Type : **Mesh**
 
 #### Usage
 
@@ -444,7 +444,7 @@ Note : the actual visual is created in the `AddVisual` method.
 |                    | ObjectURL      | STRING             | Yes               | The location of the ".obj" file.                                                                 |
 |                    | MaterialURL    | STRING             | No                | The location of the ".mtl" file. Leave blank for a textureless object.                           |
 |                    | TexturesPath   | STRING             | If using material | Path to the directory the textures (including gloss and normal) are stored in.                   |
-|                    | ShadingMode    | INTEGER or STRING  | No                | Sets the type of shading mode that the mesh will use. [More info](@meshvisualshadingmode) |
+|                    | ShadingMode    | INTEGER or STRING  | No                | Sets the type of shading mode that the mesh will use. [More info](#meshvisualshadingmode) |
 |                    | UseMipmapping  | BOOLEAN            | No                | Flag for whether to use mipmaps for textures or not. Default true.                               |
 |                    | UseSoftNormals | BOOLEAN            | No                | Flag for whether to average normals at each point to smooth textures or not. Default true.       |
 |                    | LightPosition  | VECTOR3            | No                | The position, in stage space, of the point light that applies lighting to the model.             |
@@ -475,7 +475,7 @@ Visual.Type **Primitive**
 
 ### Usage
 
-Here is an example of using a Primitive Visual, the actual shape is set via the property.
+Here is an example of using a Primitive Visual, the actual shape is set via the `Shape` property.
 
 ~~~{.cs}
 public int Shape
@@ -518,11 +518,11 @@ public int Shape
 |                         | ScaleHeight       | FLOAT              | The scale of the height of a conic. |
 |                         | ScaleRadius       | FLOAT              | The scale of the radius of a cylinder. |
 |                         | ScaleDimensions   | VECTOR3            | The dimensions of a cuboid. Scales in the same fashion as a 9-patch image. |
-|                         | TooevelPercentage | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi |
+|                         | BevelPercentage   | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi |
 |                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                edges)
 |                         | LightPosition     | VECTOR3            | The position, in stage space, of the point light that applies lighting to the model. |
 
-VisualMap **PrimitiveVisual**
+VisualMap : **PrimitiveVisual**
 
 #### Shapes
 
@@ -590,7 +590,7 @@ Renders text within a control.
 
 ![ ](./Images/HelloWorld.png)
 
-**Visual.Type** "Text"
+**Visual.Type** : "Text"
 
 #### Usage
 
@@ -623,66 +623,74 @@ _textVisual.DepthIndex = TextVisualPropertyIndex;
 |                     | TextColor           | VECTOR4       | No       | The color of the text                                                         |
 |                     | EnableMarkup        | BOOL          | No       | If mark up should be enabled |                                                |
 
-VisualMap **TextVisual**
+VisualMap : **TextVisual**
 
 [Back to top](#top)
 
 <a name="visualtransform"></a>
 ### Visual Transform
 
-Visuals have 'attributes' that enable layouting within a control.
+Visuals have 'type' and 'policy' properties that enable layouting within a control.
 
 #### Transform Type
 
-The **VisualTransformPropertyType** enum specifies all the transform property types:
+The `VisualTransformPropertyType` enum specifies all the transform property types:
 
-| Enumeration  | Name         | Type              | Required | Description                                                                                 |
+| Property     | Name         | Type              | Required | Description                                                                                 |
 |----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
 |              | Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
 |              | Size         | VECTOR2           | No       | The size of the visual.                                                                     |
-|              | OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](@ref visualtransformpolicy) |
+|              | OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy) |
 |              | SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute  |
-|              | Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](@ref align-type)            |
-|              | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](@ref align-type)                                |
+|              | Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)            |
+|              | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                                |
 
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
 
-THe **VisualTransformPolicyType** enum specifies policy types that could be used by the transform for the offset or size.
+THe `VisualTransformPolicyType` enum specifies policy types that could be used by the transform for the offset or size.
 The offset and size policies can be either Relative or Absolute.
 
-| Enumeration | Name     | Description                                                                   |
-|--------------------- ------------------------------------|----------|----------------------------------|
-|             | Relative | *Default*. The size or offset value represents a ratio of the control's size  |
-|             | Absolute | The size or offset value represents world units (pixels)                      |
+| Enumeration  | Name    Description                                                                                 |
+|----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
+|              | Relative | *Default*. The size or offset value represents a ratio of the control's size |
+|              | Absolute | The size or offset value represents world units (pixels)  |
 
-For example, an offsetPolicy of [ RELATIVE, RELATIVE ], a sizePolicy of [ ABSOLUTE, ABSOLUTE ], an offset of ( 0, 0.25 ) and a size of ( 20, 20 ) means the visual will be 20 pixels by 20 pixels in size, positioned 25% above the center of the control.
+For example, an offsetPolicy of [ RELATIVE, RELATIVE ], a sizePolicy of [ ABSOLUTE, ABSOLUTE ], an offset of ( 0, 0.25 ) and a size of ( 20, 20 ),
+means the visual will be 20 pixels by 20 pixels in size, positioned 25% above the center of the control.
 
 <a name="visualalignment"></a>
 #### Visual Alignment 
 
-The **AlignType** Enum specifies the visual alignment:
+The `AlignType` Enum specifies the visual alignment:
 
 | Enumeration | Name         | Description                                                                                          |
 |------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------|
 |             | TopBegin     | Aligns to the top of the vertical axis and the beginning of the horizontal axis (The left or right edge in Left-To-Right or Right-to-Left layouts, respectively) |
 |             | TopCenter    | Aligns to the top of the vertical axis and the center of the horizontal axis |
 |             | TopEnd       | Aligns to the top of the vertical axis and end of the horizontal axis (The right or left edge in Left-To-Right or Right-to-Left layouts, respectively) |
-|             | CenterBegin  | R_Aligns to the center of the vertical axis and the beginning of the horizontal axis|
+|             | CenterBegin  | Aligns to the center of the vertical axis and the beginning of the horizontal axis |
 |             | Center       | Aligns to the center of the control |
 |             | CentreEnd    | Aligns to the center of the vertical axis and end of the horizontal axis |
-|             | BottomEnd    | Aligns to the bottom of the vertical axis and the beginning of the horizontal axis|
+|             | BottomEnd    | Aligns to the bottom of the vertical axis and the beginning of the horizontal axis |
 |             | BottomCentre | Aligns to the bottom of the vertical axis and the center of the horizontal axis
 |             | BottomEnd    | Aligns to the bottom of the vertical axis and end of the horizontal axis |
  
 [Back to top](#top)
 
-### Example of a Visual Transform
+<a name="visualtransformexample"></a>
+#### Example of a Visual Transform
 
-This example shows the configuration and size of a color visual.
+This example shows the configuration and size of a color visual, during a change of size/position/scale of a control.
 
 ~~~{.cs}
+
+OnRelayout(Vector2 size, ....)
+
+...
+...
+
 PropertyMap colorVisualTransform = new PropertyMap();
 colorVisualTransform.Add( (int)VisualTransformPropertyType.Offset, new PropertyValue(new Vector2(0.0f,0.0f)))
                     .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(new Vector2((int)VisualTransformPolicyType.Relative, (int)VisualTransformPolicyType.Relative)))
@@ -695,6 +703,7 @@ _colorVisual.SetTransformAndSize(colorVisualTransform, size);
 
 [Back to top](#top)
 
+<a name="visualmap"></a>
 ### The Visual Map class
 
 The `VisualMap` class encapsulates the (transform) property map of a visual.
@@ -702,8 +711,9 @@ The `VisualMap` class encapsulates the (transform) property map of a visual.
 Here is the `ColorVisual` VisualMap
 
 ~~~{.cs}
-    public class ColorVisual : VisualMap
+   public class ColorVisual : VisualMap
 
+...
 ...
 
    private Color _mixColorForColorVisual = null;
@@ -745,9 +755,10 @@ VisualMaps have a custom **shader** property.
 
 [Back to top](#top)
 
+<a name="visualview"></a>
 ### The Visual View class
 
-The `VisualView` is a custom view class, enabling the addition of any visual.
+The `VisualView` is a Custom View class, enabling the addition of any visual.
 
 ~~~{.cs}
 public class VisualView : CustomView
