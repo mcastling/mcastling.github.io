@@ -132,7 +132,7 @@ Renders a color to the visual's quad geometry.
  
 ![ ](./Images/color-visual.png)
 
-Visual.Type **Color**
+Visual.Type : **Color**
 
 #### Usage
 This example shows the creation and registration of a `Color` Visual:
@@ -161,7 +161,7 @@ _colorVisual.DepthIndex = ColorVisualPropertyIndex;
 |---------------------------------|---------|:--------:|:--------:|----------------|
 |                     | MixColor | VECTOR4 | Yes      | The color required.       |
 
-VisualMap  **ColorVisual**
+VisualMap  : **ColorVisual**
 
 [Back to top](#top)
 
@@ -176,13 +176,7 @@ Both Linear and Radial gradients are supported.
 |--------|--------|
 | ![ ](./Images/linear-gradient-visual.png) | ![ ](./Images/radial-gradient-visual.png) |
 
-| Enumeration | Name    | Description                                                                                          |
-|------------------------------------------------------|---------|----------------------------------------------------------------------|
-|             | Pad     | *Default*. Uses the terminal colors of the gradient to fill the remainder of the quad geometry.               |
-|             | Reflect | Reflect the gradient pattern start-to-end, end-to-start, start-to-end etc. until the quad geometry is filled. |
-|             | Repeat  | Repeat the gradient pattern start-to-end, start-to-end, start-to-end etc. until the quad geometry is filled.  |
-
-Visual.Type **Gradient**
+Visual.Type : **Gradient**
 
 #### Usage - radial
 
@@ -255,6 +249,12 @@ Defines the coordinate system for the attributes:
 #### Spread Method
 
 Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
+
+| Enumeration | Name    | Description                                                                                          |
+|------------------------------------------------------|---------|----------------------------------------------------------------------|
+|             | Pad     | *Default*. Uses the terminal colors of the gradient to fill the remainder of the quad geometry.               |
+|             | Reflect | Reflect the gradient pattern start-to-end, end-to-start, start-to-end etc. until the quad geometry is filled. |
+|             | Repeat  | Repeat the gradient pattern start-to-end, start-to-end, start-to-end etc. until the quad geometry is filled.  |
 
 [Back to top](#top)
 
@@ -449,7 +449,7 @@ Note : the actual visual is created in the `AddVisual` method.
 |                    | UseSoftNormals | BOOLEAN            | No                | Flag for whether to average normals at each point to smooth textures or not. Default true.       |
 |                    | LightPosition  | VECTOR3            | No                | The position, in stage space, of the point light that applies lighting to the model.             |
 
-VisualMap **MeshVisual**
+VisualMap : **MeshVisual**
 
 <a name="meshvisualshadingmode"></a>
 #### Shading Mode
@@ -471,7 +471,7 @@ The shapes are generated with clockwise winding and back-face culling on by defa
 
 ![ ](./Images/cube.png)
  
-Visual.Type **Primitive**
+Visual.Type : **Primitive**
 
 ### Usage
 
@@ -509,17 +509,17 @@ public int Shape
 
 | PrimitiveVisualProperty | Name              | Type               |Description                                                             |
 |---------------------------------------------------------------|-------------------|:------------------:|------------------:|
-|                         | Shape             | INTEGER or STRING  | The specific shape to render. |
-|                         | mixColor          | VECTOR4            | The color of the shape.       | |
-|                         | Slices            | INTEGER            | The number of slices as you go around the shape. |
-|                         | Stacks            | INTEGER            | The number of stacks as you go down the shape.                        | 
-|                         | ScaleTopRadius    | FLOAT              | The scale of the radius of the top circle of a conical frustrum.  |
-|                         | ScaleBottomRadius | FLOAT              | The scale of the radius of the bottom circle of a conical frustrum.|
-|                         | ScaleHeight       | FLOAT              | The scale of the height of a conic. |
-|                         | ScaleRadius       | FLOAT              | The scale of the radius of a cylinder. |
-|                         | ScaleDimensions   | VECTOR3            | The dimensions of a cuboid. Scales in the same fashion as a 9-patch image. |
-|                         | BevelPercentage   | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi |
-|                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                edges)
+|                         | Shape             | INTEGER or STRING  | The specific shape to render.                                          |
+|                         | mixColor          | VECTOR4            | The color of the shape.                                                |
+|                         | Slices            | INTEGER            | The number of slices as you go around the shape.                                     |
+|                         | Stacks            | INTEGER            | The number of stacks as you go down the shape.                                       | 
+|                         | ScaleTopRadius    | FLOAT              | The scale of the radius of the top circle of a conical frustrum.                     |
+|                         | ScaleBottomRadius | FLOAT              | The scale of the radius of the bottom circle of a conical frustrum.                  |
+|                         | ScaleHeight       | FLOAT              | The scale of the height of a conic.                                                  |
+|                         | ScaleRadius       | FLOAT              | The scale of the radius of a cylinder.                                               |
+|                         | ScaleDimensions   | VECTOR3            | The dimensions of a cuboid. Scales in the same fashion as a 9-patch image.           |
+|                         | BevelPercentage   | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi         |
+|                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                edges)               |
 |                         | LightPosition     | VECTOR3            | The position, in stage space, of the point light that applies lighting to the model. |
 
 VisualMap : **PrimitiveVisual**
@@ -579,7 +579,7 @@ Renders a wireframe around a quad geometry.
 
 The wireframe visual is mainly used for debugging, and replaces all other visuals when 'Visual Debug Rendering' is turned on.
 
-![ ](./Images//wireframe-visual.png)
+![ ](./Images/wireframe-visual.png)
 
 [Back to top](#top)
 
@@ -630,13 +630,15 @@ VisualMap : **TextVisual**
 <a name="visualtransform"></a>
 ### Visual Transform
 
-Visuals have 'type' and 'policy' properties that enable layouting within a control.
+The visual 'transform' map enables layouting within a control.
+
+The [VisualMaps](#visualmap), has 'type' fields and 'policy' properties to control the transformation.
 
 #### Transform Type
 
 The `VisualTransformPropertyType` enum specifies all the transform property types:
 
-| Property     | Name         | Type              | Required | Description                                                                                 |
+| Field        | Name         | Type              | Required | Description                                                                                 |
 |----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
 |              | Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
 |              | Size         | VECTOR2           | No       | The size of the visual.                                                                     |
@@ -652,7 +654,7 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 THe `VisualTransformPolicyType` enum specifies policy types that could be used by the transform for the offset or size.
 The offset and size policies can be either Relative or Absolute.
 
-| Enumeration  | Name    Description                                                                                 |
+| Enumeration  | Name     | Description                                                                                 |
 |----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
 |              | Relative | *Default*. The size or offset value represents a ratio of the control's size |
 |              | Absolute | The size or offset value represents world units (pixels)  |
@@ -706,7 +708,7 @@ _colorVisual.SetTransformAndSize(colorVisualTransform, size);
 <a name="visualmap"></a>
 ### The Visual Map class
 
-The `VisualMap` class encapsulates the (transform) property map of a visual.
+The `VisualMap` class encapsulates the [Transform map](#visualtransform) of visual.
 
 Here is the `ColorVisual` VisualMap
 
@@ -731,6 +733,8 @@ Here is the `ColorVisual` VisualMap
        }
    }
 ~~~
+
+The Visual map class also contains a output visual map, used in visual creation.
 
 Here is an example of using a Visual Map to create a visual:
 
@@ -773,7 +777,7 @@ _visualView.PivotPoint = PivotPoint.TopLeft;
 _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 ~~~
 
-[Gradient Visuals](#gradientvisual) is an example of adding a gradient visual to a Visual View.
+[Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a Visual View.
 
 [Back to top](#top)
 
