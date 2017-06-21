@@ -55,7 +55,7 @@ When pressed the unselected visuals are replaced by the selected visual.
 When the button is disabled, background, button and selected visuals are replaced by
 their disabled visuals.
 
-The [styling tutorial](../NUItutorials/styling.md) explains how to build up visuals for the
+The [styling tutorial](styling.md) explains how to build up visuals for the
 button states using JSON stylesheets, and transitioning between the various button states.
 
 <a name="visualproperties"></a>
