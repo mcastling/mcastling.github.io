@@ -7,7 +7,7 @@ It assumes the starting point is a completely 'clean' system, though that is not
 
 VSC can be be installed on Ubuntu 14.04 and onwards.
 
-The [NUI Hello World tutorial](../NUItutorials/hello-world.md#fullcode) provides an introduction into NUI application development,
+The [NUI Hello World tutorial](hello-world.md#fullcode) provides an introduction into NUI application development,
 describing how to display text in a text label.
 
 ## Overview
@@ -190,7 +190,7 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
 ### Build NUI and Run the Hello World (NUI) Tutorial
 
 * Create tutorial file 
-    1. Copy code in _"full example"_ section of the [NUI Hello World tutorial](../NUItutorials/hello-world.md) to a new file, `hello-world.cs`
+    1. Copy code in _"full example"_ section of the [NUI Hello World tutorial](hello-world.md) to a new file, `hello-world.cs`
     2. Copy `hello-world.cs` to the nuirun folder:
 ~~~{.sh}
     $ cp hello-world.cs ~/DALiNUI/nuirun
