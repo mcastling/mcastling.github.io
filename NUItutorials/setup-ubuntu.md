@@ -163,9 +163,15 @@ If ok, DALi demo window will appear.
     $ cd dali-csharp-binder/dali-csharp-binder
 ~~~
 
-* Build NUI csharp bindings - remove dependency
+* NUI csharp bindings - remove dependency
     1. Edit _file.list_ and remove the line "src/key-grab.cpp \". (_This is a tizen only dependency_). Do not leave a gap in the file.
-    2. Build bindings by following the README file. (_"Building the Repository"_ section)
+    2.. Change directory to 'parent' binder folder
+~~~{.sh}
+    $ cd ~/DALiNUI/dali-csharp-binder
+~~~
+
+* Build NUI csharp bindings
+    1. Build bindings by following the README file. (_"Building the Repository"_ section)
 
 * Copy the `nui` source folder to a new sub-folder `nuirun` (_for subsequent overwriting of files_)
 
