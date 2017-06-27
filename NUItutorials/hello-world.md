@@ -195,7 +195,7 @@ namespace HelloTest
         }
 
         // Callback for main window touched signal handling
-        private void WindowTouched(object sender, Window.TouchEventArgs e)
+        private void WindowTouched(object sender, Window.TouchedEventArgs e)
         {
             _text.Text = "I have been touched!";
         }
