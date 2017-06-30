@@ -8,14 +8,16 @@ This tutorial covers the following subjects:
 [Animation Overview](#overview)<br>
 [Animation creation](#creation)<br>
 [Animating properties](#animatingproperties)<br>
-[Animation class methods](#animationmethods)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
+
+
+[Animation Types](#)<br>
+[Alpha Functions](#)<br>
+[Events](#)<br>
+
 
 [Animation nultithreading](#)<br>
-[Working example](#)<br>
+[Animation Working example](#)<br>
+[Animation class methods](#animationclassmethods)<br>
 [Animation class properties](#animationproperties)<br>
 
 The tutorial includes a working example.
@@ -87,7 +89,7 @@ See [Animation methods](#animationmethods) for explanation of parameters.
 
 [Back to top](#top)
 
-
+<a name="control"></a>
 ### Playback Control
 
 When an animation is created, it can be played:
@@ -114,6 +116,9 @@ However, the property changes can be **discarded** when the animation ends (or i
 animation.EndAction = Animations.EndActions.Discard
 ~~~
 
+[Back to top](#top)
+
+<a name="events"></a>
 ### Events
 
 Applications can be notified when the animation finishes:
@@ -146,6 +151,9 @@ _animation.ProgressNotification = 0.5; // trigger 'progress reached' Event at 50
 _animation.ProgressReached += progressReached;
 ~~~
 
+[Back to top](#top)
+
+<a name="alphafunctions"></a>
 ### Alpha Functions
 
 Alpha functions are used in animations to specify the rate of change of the animation parameter over time. This allows
@@ -192,6 +200,7 @@ animation.SetDefaultAlphaFunction(af);
 
 [Back to top](#top)
 
+<a name="animationtypes"></a>
 ### Animation Types
 
 NUI supports both 'key frame' and path animation.
@@ -400,7 +409,7 @@ cp animation-hello-world.cs ~/DALiNUI/nuirun/src/public
 
 [Back to top](#top)
 
-<a name="animationmethods"></a>
+<a name="animationclassmethods"></a>
 ### Animation class methods
 
 The `Animation` class provides a series of overloaded methods for animation of properties, including:
@@ -431,7 +440,7 @@ public void AnimateTo(View target, string property, object destinationValue, int
 _startTime_		Start time of animation
 _endTime_		End time of animation
 
-* **AnimateBetween** animates a property between [keyframes](#zzz).
+* **AnimateBetween** animates a property between [key frames](#animationtypes).
 
 ~~~{.cs}
 public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = 
@@ -453,27 +462,27 @@ _forward_ 		The vector (in local space coordinate system) that will be oriented 
 
 [Back to top](#top)
 
-<a name="animationproperties"></a>
+<a name="animationclassproperties"></a>
 ### Animation class Properties
 
 `Animation` class properties include:
 
-| Property     | Type         | Description
-| ------------ | ------------ | ------------                       |
-|              |              |                                    |
-|      Duration        |    int          |   Gets/Sets the duration in milli seconds of the animation.                                 |
-|   DefaultAlphaFunction           |   AlphaFunction           |     Gets/Sets the default alpha function for the animation.  |
-|      State         |     States         |   Queries the state of the animation.      (States - Enumeration for what state the animation is in  (_Stopped_, _Playing_ or _Paused_)|
-|      LoopCount        |           int   |      Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever                              |
-|                       |                 |      Get : Gets the loop count. A zero is the same as Looping = true; i.e repeat forever.                            |
-|      Looping        |     bool         |  Gets/Sets the status of whether the animation will loop.   (resets the loop count). The loop count is initially 1 for play once.  |
-|   EndAction           |   EndActions           |    Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped |
+| Property               | Type         | Description
+| ------------ ----------| ------------ | ------------                       |
+|                        |              |                                                                                              |
+|   Duration             |    int        |   Gets/Sets the duration in milli seconds of the animation.                                 |
+| DefaultAlphaFunction   | AlphaFunction           |     Gets/Sets the default alpha function for the animation.                                                                 |
+|      State             |     States   |   Queries the state of the animation. (States - Enum for what state the animation is in (_Stopped_, _Playing_ or _Paused_)               |
+|      LoopCount         |      int     |      Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever                              |
+|                       |                 |      Get : Gets the loop count. A zero is the same as Looping = true; i.e repeat forever.                                              |
+|      Looping          |     bool         |  Gets/Sets the status of whether the animation will loop.   (resets the loop count). The loop count is initially 1 for play once.       |
+|   EndAction           |   EndActions      |    Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped              |
 |     CurrentLoop       |   int           |       Gets the current loop count                             |
 |  DisconnectAction     |   EndAction           |   Gets/Sets the disconnect action.                                 |
-| CurrentProgreaa       |         float     |   Gets/Sets the progress of the animation. |
+| CurrentProgreaa       |     float         |   Gets/Sets the progress of the animation. |
 | SpeedFactor           |     float         | Gets/Sets specifies a speed factor for the animation.                                   |
-| PLayRange             |   RelativeVector2 |   Animation will play between the values specified. Both values(range.x and range.y ) should be between 0-1 |
-| ProgressNotification  |    float          | Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
+| PLayRange             | RelativeVector2 |   Animation will play between the values specified. Both values(range.x and range.y ) should be between 0-1 |
+| ProgressNotification  |    float        | Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
 
-
+[Back to top](#top)
 
