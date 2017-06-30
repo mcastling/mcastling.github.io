@@ -8,14 +8,15 @@ This tutorial covers the following subjects:
 [Animation Overview](#overview)<br>
 [Animation creation](#creation)<br>
 [Animating properties](#animatingproperties)<br>
-[Animation methods](#animationmethods)<br>
+[Animation class methods](#animationmethods)<br>
 [](#)<br>
 [](#)<br>
 [](#)<br>
 [](#)<br>
 
 [Animation nultithreading](#)<br>
-[working example](#)<br>
+[Working example](#)<br>
+[Animation class properties](#animationproperties)<br>
 
 The tutorial includes a working example.
 
@@ -26,8 +27,8 @@ Enables you to create animated effects.
 
 NUI provides a rich and easy to use animation framework which allows the creation of visually rich applications.
 
-NUI animations occur in a dedicated thread. This allows animations to run smoothly, regardless of the time
-taken to process the input, events, and other factors in the application code. See [Animation multithreading](#multithreading).
+NUI animations occur in a [dedicated thread](#multithreading). This allows animations to run smoothly, regardless of the time
+taken to process the input, events, and other factors in the application code.
 
 ![](NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` clss contains 'property' 
 methods such as `GetProperty` and `IsPropertyAnimatable`. The `Animation` class contains the animation methods such as `AnimateBy`.
@@ -86,54 +87,6 @@ See [Animation methods](#animationmethods) for explanation of parameters.
 
 [Back to top](#top)
 
-<a name="animationmethods"></a>
-### Animation methods
-
-The `Animation` class provides a series of overloaded methods for animation of properties.
-
-* **AnimateBy** animates a property value by a relative amount.
-
-~~~{.cs}
-public void AnimateBy(View target, string property, object relativeValue, AlphaFunction alphaFunction = null)
-~~~
-
-_target_        	The target object to animate<
-_property_      	The target property to animate, can be enum or string
-_relativeValue_ 	The property value will change by this amount
-_alphaFunction_ 	The alpha function to apply
-
-* **AnimateTo** animates a property to a destination value.
-
-~~~{.cs}
-public void AnimateTo(View target, string property, object destinationValue, AlphaFunction alphaFunction = null)
-~~~
-
-_destinationValue_      The destination value
-
-~~~{.cs}
-public void AnimateTo(View target, string property, object destinationValue, int startTime, int endTime, AlphaFunction alphaFunction = null)
-~~~
-
-_startTime_		Start time of animation
-_endTime_		End time of animation
-
-* **AnimateBetween** animates a property between [keyframes](#zzz).
-
-~~~{.cs}
-public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = 
-~~~
-
-_keyFrames_		The set of time/value pairs between which to animate
-_interpolation_		The method used to interpolate between values
-
-* **AnimatePath** animates a view's position and orientation through a predefined path.
-
-~~~{.cs}
-public void AnimatePath(View view, Path path, Vector3 forward, AlphaFunction alphaFunction = null)
-~~~
-
-_path_			Defines position and orientation
-_forward_ 		The vector (in local space coordinate system) that will be oriented with the path's tangent direction</param>
 
 ### Playback Control
 
@@ -179,21 +132,18 @@ public void AnimationFinished(object sender, EventArgs e)
 
 }
 
-
-Applications can be notified when the animation has reached a given progress percentage
+Applications can be notified when the animation has reached a given progress percentage:
 
 ~~~{.cs}
-_animation.ProgressReached += progressReached;
-~~~
+_animation.ProgressNotification = 0.5; // trigger 'progress reached' Event at 50% of animation time
 
-        /// <summary>
-        /// Gets/Sets the Progress notification marker which triggers the ProgressReachedSignal.<br>
-        /// percentage of animation progress should be greater than 0 and less than 1, e.g 0.3 for 30% <br>
-        /// One notification can be set on each animation
-        /// </summary>
-        public float ProgressNotification
- ~~~{.cs}
-_animation.ProgressNotification = 0.5; // trigger progress reached signal at 50% of animation time
+
+...
+...
+...
+...
+
+_animation.ProgressReached += progressReached;
 ~~~
 
 ### Alpha Functions
@@ -202,6 +152,16 @@ Alpha functions are used in animations to specify the rate of change of the anim
 the animation to be accelerated, decelerated, repeated or bounced. The built in supported functions can be viewed
 in the `AlphaFunction` class.
 
+It is possible to specify a different alpha function for each animator in an Animation object:
+
+~~~{.cs}
+animation.AnimateTo(view1, View.Property.Position, Vector3(10.0f, 50.0f, 0.0f), new AlphaFunction.BuiltinFunctions.Linear);
+~~~
+
+The `AnimateTo` parameters are described in [Animation methods](#animationmethods)
+
+The 'built in' alpha functions are :
+~~~{.cs}
   public enum BuiltinFunction {
     Default,
     Linear,
@@ -219,40 +179,24 @@ in the `AlphaFunction` class.
     EaseOutBack,
     Count
   }
-
-It is possible to specify a different alpha function for each animator in an Animation object:
-
-~~~{.cs}
-animation.AnimateTo(view1, View.Property.Position, Vector3(10.0f, 50.0f, 0.0f), new AlphaFunction.BuiltinFunctions.Linear);
 ~~~
 
+The [animation working example](#workingexample) includes the use of a built in alpha function.
 
-
-
-
-You can create your own alpha function:
+You can also create your own alpha function:
 
 ~~~{.cs}
-
 AlphaFunction af(alphafunc);
 animation.SetDefaultAlphaFunction(af);
-
 ~~~
 
 [Back to top](#top)
 
 ### Animation Types
 
-NUI supports key frame and path animation.
+NUI supports both 'key frame' and path animation.
 
 #### Key-Frame Animation
-
-When you play the animation, DALi will animate the position of actor1 between the key-frames specified.
-'actor1' will animate from (10.0f, 10.0f, 10.0f) to (200.0f, 200.0f, 200.0f) by 70% of the animation time,
-and then spend the remaining time animating back to (100.0f, 100.0f, 100.0f).
-
-The advantage of specifying a key-frame at 0% is that regardless of where 'actor1' is, it will start from position (10.0f, 10.0f, 10.0f).
-If `AnimateTo` was used, then the start position would have been actor1's current position.
 
 DALi provides support for animating between several different values, i.e. key-frames.
 A key frame takes a progress value between 0.0f and 1.0f (0 and 100% respectively) and portrays the value of the
@@ -273,11 +217,16 @@ And then add them to your animation:
 animation.AnimateBetween( view1, View.Property.Position), keyFrames );
 ~~~
 
-Here is a more comprehensive sample of 'Key frame' use:
+When you play the animation, DALi will animate the position of view1 between the key-frames specified.
+'view1' will animate from (10.0f, 10.0f, 10.0f) to (200.0f, 200.0f, 200.0f) by 70% of the animation time,
+and then spend the remaining time animating back to (100.0f, 100.0f, 100.0f).
+
+The advantage of specifying a key-frame at 0% is that regardless of where 'view1' is, it will start from position (10.0f, 10.0f, 10.0f).
+If `AnimateTo` was used, then the start position would have been view1's current position.
+
+Here is a more comprehensive example of 'Key frame' use, taken from `FocusEffect.cs`:
 
 ~~~{.cs}
-
-// from FocusEffect.cs
 focusData.ImageItem.Size = new Size(100.0f, 100.0f, 0.0f);
 parentItem.Add(focusData.ImageItem);
 
@@ -301,71 +250,86 @@ if (focusData.Name == "halo")
 }
 
 _animation.AnimateBetween(focusData.ImageItem, "Size", keyFrames, Animation.Interpolation.Linear, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSine));
-
 ~~~
 
-
-## Path Animations
+### Path Animations
 
 A `Path` can be used to animate the position and orientation of actors.
 
 ![ ](animation/animated-path.png)
 
-The black points in the diagram are points where the logo will travel to. The red points are the control points which
+The logo will travel to the black points on the diagram. The red points are the control points which
 express the curvature of the path on the black points.
 
 This, in code will be represented as follows:
-~~~{.cpp}
-Path path = Path::New();
-path.AddPoint( Vector3( 50.0f, 10.0f, 0.0f ));
-path.AddPoint( Vector3( 90.0f, 50.0f, 0.0f ));
-path.AddPoint( Vector3( 10.0f, 90.0f, 0.0f ));
+
+~~~{.cs}
+Animation animation = new Animation();
+
+...
+...
+
+Path path = new Path();
+path.AddPoint( new Position( 50.0f, 10.0f, 0.0f ));
+path.AddPoint( new Position( 90.0f, 50.0f, 0.0f ));
+path.AddPoint( new Position( 10.0f, 90.0f, 0.0f ));
 ~~~
-The control points can be added manually using Dali::Path::AddControlPoint, or Path can auto-generate them for you:
+
+The control points can be added manually using `AddControlPoint`, or Path can auto-generate them for you:
+
 ~~~{.cs}
 path.GenerateControlPoints(0.25f);
 ~~~
-Here 0.25f represents the curvature of the path you require. Please see Dali::Path::GenerateControlPoints for more information.
 
-To animate actor1 along this path:
-~~~{.cpp}
-animation.Animate( actor1, path, Vector3::ZERO );
+Here 0.25f represents the curvature of the path you require. The generated control points result in a smooth join
+between the splines of each segment.
+
+To animate view1 along this path:
+~~~{.cs}
+animation.Animate( view1, path, new Position(0.0f, 0.0f, 0.0f) );
 ~~~
-The third parameter is the forward vector (in local space coordinate system) that will be oriented with the path's tangent direction.
 
+The third parameter is the forward vector (in local space coordinate system) that will be oriented with the path's
+tangent direction.
 
-// from test1.cs
-            Position position0 = new Position(200.0f, 200.0f, 0.0f);
-            Position position1 = new Position(300.0f, 300.0f, 0.0f);
-            Position position2 = new Position(400.0f, 400.0f, 0.0f);
+Another example:
 
-            Path path = new Path();
-            path.AddPoint(position0);
-            path.AddPoint(position1);
-            path.AddPoint(position2);
+~~~{.cs}
+// black points	 
+Position position0 = new Position(200.0f, 200.0f, 0.0f);
+Position position1 = new Position(300.0f, 300.0f, 0.0f);
+Position position2 = new Position(400.0f, 400.0f, 0.0f);
 
-            //Control points for first segment
-            path.AddControlPoint(new Vector3(39.0f, 90.0f, 0.0f));
-            path.AddControlPoint(new Vector3(56.0f, 119.0f, 0.0f));
+Path path = new Path();
+path.AddPoint(position0);
+path.AddPoint(position1);
+path.AddPoint(position2);
 
-            //Control points for second segment
-            path.AddControlPoint(new Vector3(78.0f, 120.0f, 0.0f));
-            path.AddControlPoint(new Vector3(93.0f, 104.0f, 0.0f));
+// Control points for first segment
+path.AddControlPoint(new Vector3(39.0f, 90.0f, 0.0f));
+path.AddControlPoint(new Vector3(56.0f, 119.0f, 0.0f));
 
-            Animation animation = new Animation();
-            animation.AnimatePath(view, path, Vector3.XAxis, 0, 5000, new AlphaFunction(AlphaFunction.BuiltinFunctions.Linear));
-            animation.Play();
+// Control points for second segment
+path.AddControlPoint(new Vector3(78.0f, 120.0f, 0.0f));
+path.AddControlPoint(new Vector3(93.0f, 104.0f, 0.0f));
+
+Animation animation = new Animation();
+animation.AnimatePath(view, path, Vector3.XAxis, 0, 5000, new AlphaFunction(AlphaFunction.BuiltinFunctions.Linear)); // X Axis
+animation.Play();
+~~~
+
+Note : `AnimatePath` invokes `Animate`
 
 [Back to top](#top)
 
-<a name="multithrerading"></a>
+<a name="multithreading"></a>
 ### Multi-threaded Architecture
 
 NUI animations and rendering occur in a dedicated rendering thread. This allows animations to run smoothly, regardless of the time
 taken to process inputs events etc. in application code.
 
-Internally NUI contains a scene-graph, which mirrors the Views hierarchy. The scene-graph objects perform the actual animation & rendering,
-whilst Views provide thread-safe access.
+Internally NUI contains a scene-graph, which mirrors the Views hierarchy. The scene-graph objects perform the actual animation and
+rendering, whilst Views provide thread-safe access.
 
 An example view hierarchy is shown below, in which one of the views is being animated. The objects in green are created by the
 application code, whilst the private objects in blue are used in the dedicated rendering thread.
@@ -374,10 +338,10 @@ application code, whilst the private objects in blue are used in the dedicated r
 
 #### Reading an animated value
 
-When a property is animatable, it can only be modified in the rendering thread. The value returned from a getter method, is the value used when the
-previous frame was rendered.
+When a property is animatable, it can only be modified in the rendering thread. The value returned from a getter method, is the value
+used when the previous frame was rendered.
 
-For example `pos = view.Position` returns the position at which the View was last rendered. Since setting position `view.Position = pos`
+For example `pos = view.Position` returns the position at which the View was last rendered. Since setting a position i.e. `view.Position = pos`
 is asynchronous, `pos = view.Position` won't immediately return the same value.
 
 ~~~{.cs}
@@ -385,9 +349,9 @@ is asynchronous, `pos = view.Position` won't immediately return the same value.
 
 View view = new View();
 Window.Instance.Add(view); // initial position is 0,0,0
-view.Position = new Vector3(10,10,10);
+view.Position = new Position(10,10,10);
 
-Vector3 current = view.Position;
+Position current = view.Position;
 Console.WriteLine("Current position: " + current.X + ", " + current.Y + ", " + current.Z);
 Console.WriteLine("...");
 
@@ -395,14 +359,15 @@ Console.WriteLine("...");
 
 current = view.Position;
 Console.WriteLine("Current position: " + current.X + ", " + current.Y + ", " + current.Z);
-
 ~~~
 
 The example code above would likely output:
 
-"Current position: 0,0,0"
-"..."
-"Current position: 10,10,10"
+~~~{.cs}
+Current position: 0,0,0
+...
+Current position: 10,10,10
+~~~
 
 #### Setting a property during an animation
 
@@ -423,13 +388,72 @@ The order of execution in the render thread is:
 
 A simple animation 'hello world' example has been created to help in illustration some of the principles outlined in this guide: 
 
-    1. Download [Animation example source code](http://dalihub.github.io/NUIsetup/animation-hello-world.cs)
-    2. Copy this file to your nuirun/src/public folder
+Read the instructions in [Building NUI source code](setup-ubuntu.md#buildnui) of the ubuntu setup guide, which includes an explanation
+of where to place tutorial files. ('nuirun' folder).
 
-To build this example, follow the Build and Run section of [Ubuntu setup guide](setup-ubuntu.md#buildnui)
+    1. Download [Animation example source code](http://dalihub.github.io/NUIsetup/animation-hello-world-tutorial.cs)
+    2. Copy this file to your 'nuirun' folder, (or ../nuirun/tutorials).
+
+~~~{.sh}
+cp animation-hello-world.cs ~/DALiNUI/nuirun/src/public
+~~~
 
 [Back to top](#top)
 
+<a name="animationmethods"></a>
+### Animation class methods
+
+The `Animation` class provides a series of overloaded methods for animation of properties, including:
+
+* **AnimateBy** animates a property value by a relative amount.
+
+~~~{.cs}
+public void AnimateBy(View target, string property, object relativeValue, AlphaFunction alphaFunction = null)
+~~~
+
+_target_        	The target object to animate<
+_property_      	The target property to animate, can be enum or string
+_relativeValue_ 	The property value will change by this amount
+_alphaFunction_ 	The alpha function to apply
+
+* **AnimateTo** animates a property to a destination value.
+
+~~~{.cs}
+public void AnimateTo(View target, string property, object destinationValue, AlphaFunction alphaFunction = null)
+~~~
+
+_destinationValue_      The destination value
+
+~~~{.cs}
+public void AnimateTo(View target, string property, object destinationValue, int startTime, int endTime, AlphaFunction alphaFunction = null)
+~~~
+
+_startTime_		Start time of animation
+_endTime_		End time of animation
+
+* **AnimateBetween** animates a property between [keyframes](#zzz).
+
+~~~{.cs}
+public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = 
+~~~
+
+_keyFrames_		The set of time/value pairs between which to animate
+_interpolation_		The method used to interpolate between values
+
+* **AnimatePath** animates a view's position and orientation through a predefined path.
+
+~~~{.cs}
+public void AnimatePath(View view, Path path, Vector3 forward, AlphaFunction alphaFunction = null)
+~~~
+
+_path_			Defines position and orientation
+_forward_ 		The vector (in local space coordinate system) that will be oriented with the path's tangent direction</param>
+
+~~~
+
+[Back to top](#top)
+
+<a name="animationproperties"></a>
 ### Animation class Properties
 
 `Animation` class properties include:
@@ -437,15 +461,19 @@ To build this example, follow the Build and Run section of [Ubuntu setup guide](
 | Property     | Type         | Description
 | ------------ | ------------ | ------------                       |
 |              |              |                                    |
-|              |              |                                    |
-|              |              |                                    |
-|              |              |                                    |
-|                             |              |                                    |
-|                             |              |                                    |
-|                              |              |                                    |
-|                               |              |                                    |
-| SpeedFactor                      |     float         | Gets/Sets Specifies a speed factor for the animation.                                   |
-| ProgressNotification         |    float          |    Gets/Sets the Progress notification marker which triggers the ProgressReachedSigna                                |
+|      Duration        |    int          |   Gets/Sets the duration in milli seconds of the animation.                                 |
+|   DefaultAlphaFunction           |   AlphaFunction           |     Gets/Sets the default alpha function for the animation.  |
+|      State         |     States         |   Queries the state of the animation.      (States - Enumeration for what state the animation is in  (_Stopped_, _Playing_ or _Paused_)|
+|      LoopCount        |           int   |      Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever                              |
+|                       |                 |      Get : Gets the loop count. A zero is the same as Looping = true; i.e repeat forever.                            |
+|      Looping        |     bool         |  Gets/Sets the status of whether the animation will loop.   (resets the loop count). The loop count is initially 1 for play once.  |
+|   EndAction           |   EndActions           |    Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped |
+|     CurrentLoop       |   int           |       Gets the current loop count                             |
+|  DisconnectAction     |   EndAction           |   Gets/Sets the disconnect action.                                 |
+| CurrentProgreaa       |         float     |   Gets/Sets the progress of the animation. |
+| SpeedFactor           |     float         | Gets/Sets specifies a speed factor for the animation.                                   |
+| PLayRange             |   RelativeVector2 |   Animation will play between the values specified. Both values(range.x and range.y ) should be between 0-1 |
+| ProgressNotification  |    float          | Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
 
 
 
