@@ -1,13 +1,14 @@
 <a name="top"></a>
-# How to style a control with JSON
+# Tutorial on styling a control with JSON
+
+NOTE  27 JUNE - THIS TUTORIAL WILL BE COMPLETED AT A LATER DATE (code still been developed)
 
 This tutorial shows how to style a toolkit control with JSON.
 
-THe tutorial uses a PushButton as an example control.
+The tutorial uses a PushButton as an example control.
 
 In this tutorial:
 
-[Overview](#overview)<br>
 [Visuals](#visuals)<br>
 [](#)<br>
 [](#)<br>
