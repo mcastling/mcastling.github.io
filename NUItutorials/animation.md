@@ -28,7 +28,7 @@ The `Animation` class can be used to animate the [animatable properties](#animat
 NUI animations occur in a [dedicated thread](#multithreading). This allows animations to run smoothly, regardless of the time
 taken to process the input, events, and other factors in the application code.
 
-![](./Images/NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
+This image ![](./Images/NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
 methods such as `GetProperty` and `IsPropertyAnimatable`. The `Animation` class contains [animation methods](#animationclassmethods)
 such as `AnimateBy` and `AnimateTo`.
 
@@ -100,7 +100,7 @@ Note: Properties can be passed to a animation method via `property` class instan
 _animation.AnimateTo(new Property(_text, View.Property.ORIENTATION), new Property.Value(new Rotation(new Radian(new Degree(180.0f)), ...
 ~~~
 
-See [Animation class member functions](#animationclassmethods) for explanation of parameters.
+See [Animate methods](#animationclassmethods) for explanation of parameters.
 
 [Back to top](#top)
 
@@ -459,7 +459,7 @@ cp animation-hello-world.cs ~/DALiNUI/nuirun/src/public
 [Back to top](#top)
 
 <a name="animationclassmethods"></a>
-### Animation class methods
+### Animate methods
 
 The `Animation` class provides a series of overloaded methods for animation of properties, including:
 
@@ -469,17 +469,17 @@ The `Animation` class provides a series of overloaded methods for animation of p
 public void AnimateBy(View target, string property, object relativeValue, AlphaFunction alphaFunction = null)
 ~~~
 
-_target_        	The target object to animate
-_property_      	The target property to animate, can be enum or string
-_relativeValue_ 	The property value will change by this amount
-_alphaFunction_ 	The alpha function to apply
+_target_        The target object to animate
+_property_      The target property to animate, can be enum or string
+_relativeValue_ The property value will change by this amount
+_alphaFunction_ The alpha function to apply
 
 ~~~{.cs}
 public void AnimateBy(View target, string property, object relativeValue, int startTime, int endTime, AlphaFunction alphaFunction = null)
 ~~~
 
-_startTime_		Start time of animation
-_endTime_		End time of animation
+_startTime_     Start time of animation
+_endTime_       End time of animation
 
 * **AnimateTo** animates a property to a destination value.
 
@@ -487,14 +487,14 @@ _endTime_		End time of animation
 public void AnimateTo(View target, string property, object destinationValue, AlphaFunction alphaFunction = null)
 ~~~
 
-_destinationValue_      The destination value
+_destinationValue_    The destination value
 
 ~~~{.cs}
 public void AnimateTo(View target, string property, object destinationValue, int startTime, int endTime, AlphaFunction alphaFunction = null)
 ~~~
 
-_startTime_		Start time of animation
-_endTime_		End time of animation
+_startTime_    Start time of animation
+_endTime_      End time of animation
 
 * **AnimateBetween** animates a property between [key frames](#animationtypes).
 
@@ -502,8 +502,8 @@ _endTime_		End time of animation
 public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = 
 ~~~
 
-_keyFrames_		The set of time/value pairs between which to animate
-_interpolation_		The method used to interpolate between values
+_keyFrames_     The set of time/value pairs between which to animate
+_interpolation_ The method used to interpolate between values
 
 * **AnimatePath** animates a view's position and orientation through a predefined path.
 
@@ -511,8 +511,8 @@ _interpolation_		The method used to interpolate between values
 public void AnimatePath(View view, Path path, Vector3 forward, AlphaFunction alphaFunction = null)
 ~~~
 
-_path_			Defines position and orientation
-_forward_ 		The vector (in local space coordinate system) that will be oriented with the path's tangent direction
+_path_    Defines position and orientation
+_forward_ The vector (in local space coordinate system) that will be oriented with the path's tangent direction
 
 [Back to top](#top)
 
@@ -522,18 +522,18 @@ _forward_ 		The vector (in local space coordinate system) that will be oriented 
 `Animation` class properties include:
 
 | Property               | Type            | Description |
-| ------------ ----------| ------------    | ------------                       |
-|   Duration             |    int          |   Gets/Sets the duration in milli seconds of the animation.                                 |
-| DefaultAlphaFunction   | AlphaFunction   |   Gets/Sets the default alpha function for the animation.                                                              |
-|      State             |     States      |   Queries the 'state' of the animation. (_Stopped_, _Playing_ or _Paused_)          |
-|      LoopCount         |      int        |   Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever                           |
-|                        |                 |   Get : Gets the loop count. A zero is the same as Looping = true; i.e. repeat forever.                                        |
+| ------------ ----------| ------------    | ------------|
+|   Duration             |    int          |   Gets/Sets the duration in milli seconds of the animation. |
+| DefaultAlphaFunction   | AlphaFunction   |   Gets/Sets the default alpha function for the animation. |
+|      State             |     States      |   Queries the 'state' of the animation. (_Stopped_, _Playing_ or _Paused_) |
+|      LoopCount         |      int        |   Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever |
+|                        |                 |   Get : Gets the loop count. A zero is the same as Looping = true; i.e. repeat forever. |
 |      Looping           |     bool         |  Gets/Sets the status of whether the animation will loop. (resets the loop count). The loop count is initially 1 for play once. |
-|   EndAction           |   EndActions      |  Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped              |
-|     CurrentLoop       |   int            |   Gets the current loop count                             |
-|  DisconnectAction     |   EndAction      |   Gets/Sets the disconnect action.                                 |
+|   EndAction           |   EndActions      |  Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped |
+|     CurrentLoop       |   int            |   Gets the current loop count |
+|  DisconnectAction     |   EndAction      |   Gets/Sets the disconnect action. |
 | CurrentProgreaa       |     float         |   Gets/Sets the progress of the animation. |
-| SpeedFactor           |     float         | Gets/Sets specifies a speed factor for the animation.                                   |
+| SpeedFactor           |     float         | Gets/Sets specifies a speed factor for the animation. |
 | PLayRange             | RelativeVector2 |   Animation will play between the values specified. Both values(range.x and range.y ) should be between 0 and 1 |
 | ProgressNotification  |    float        |   Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
 
