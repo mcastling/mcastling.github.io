@@ -161,6 +161,7 @@ If ok, DALi demo window will appear.
 
 ~~~{.sh}
     $ cd dali-csharp-binder
+~~~
 
 * Build NUI csharp bindings
     1. Build bindings by following the README file. (_"Building the Repository"_ section)
@@ -189,9 +190,11 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
 
 * Create tutorial file 
     1. Copy code in _"full example"_ section of the [NUI Hello World tutorial](hello-world.md) to a new file, `hello-world.cs`
+    2. Create _tutorials_ folder
     2. Copy `hello-world.cs` to the nuirun folder:
 ~~~{.sh}
-    $ cp hello-world.cs ~/DALiNUI/nuirun
+    $ mkdir tutorials
+    $ cp hello-world.cs ~/DALiNUI/nuirun/tutorials
 ~~~
 
 * Create a 'Hello World' project in VSC
