@@ -9,10 +9,10 @@ This tutorial describes the NUI animation framework, covering the following subj
 [Animating properties](#animatingproperties)<br>
 [Controlling animation](#control)<br>
 [Animation Types](#animationtypes)<br>
-[Alpha Functions](#)<br>
+[Alpha Functions](#alphafunctions)<br>
 [Events](#events)<br>
-[Animation multithreading](#)<br>
-[Working example](#)<br>
+[Animation multithreading](#multithreading)<br>
+[Working example](#workingexample)<br>
 [Animation class methods](#animationclassmethods)<br>
 [Animation class properties](#animationclassproperties)<br>
 
@@ -309,7 +309,7 @@ if (focusData.Name == "halo")
 _animation.AnimateBetween(focusData.ImageItem, "Size", keyFrames, Animation.Interpolation.Linear, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSine));
 ~~~
 
-### Path Animations
+#### Path Animations
 
 A `Path` can be used to animate the position and orientation of views.
 
@@ -398,7 +398,7 @@ application code, whilst the private objects in blue are used in the dedicated r
 When a property is animatable, it can only be modified in the rendering thread. The value returned from a getter method, is the value
 used when the previous frame was rendered.
 
-For example `pos = view.Position` returns the position at which the View was last rendered. Since setting a position i.e. `view.Position = pos`
+For example `pos = view.Position` returns the position at which the view was last rendered. Since setting a position i.e. `view.Position = pos`
 is asynchronous, `pos = view.Position` won't immediately return the same value.
 
 ~~~{.cs}
@@ -434,14 +434,14 @@ When a property is being animated, the Animation will override any values set e.
 
 The order of execution in the render thread is:
 
-~~~{.cs}
+~~~{.sh}
 1. Process message => SetPosition
 2. Apply animation => SetPosition
 3. Render frame
 ~~~
 
 <a name="workingexample"></a>
-### Simple Animation example
+### Animation example
 
 A simple text animation example has been created to illustrate some of the principles outlined in this guide, including the use of
 `AnimateBy`, `AnimateTo` methods and an alphafunction.
@@ -449,8 +449,8 @@ A simple text animation example has been created to illustrate some of the princ
 Read the instructions in [Building NUI source code](setup-ubuntu.md#buildnui) of the ubuntu setup guide, which includes an explanation
 of where to place tutorial files. (_'nuirun' folder_).
 
-    1. Download [Animation example source code](http://dalihub.github.io/NUIsetup/animation-hello-world-tutorial.cs)
-    2. Copy this file to your 'nuirun' folder, (or ../nuirun/tutorials).
+1. Download [Animation example source code](http://dalihub.github.io/NUIsetup/animation-hello-world-tutorial.cs)
+2. Copy this file to your 'nuirun' folder, (or ../nuirun/tutorials).
 
 ~~~{.sh}
 cp animation-hello-world.cs ~/DALiNUI/nuirun/src/public
@@ -499,7 +499,7 @@ _endTime_      End time of animation
 * **AnimateBetween** animates a property between [key frames](#animationtypes).
 
 ~~~{.cs}
-public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = 
+public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = null)
 ~~~
 
 _keyFrames_     The set of time/value pairs between which to animate
@@ -521,14 +521,9 @@ _forward_ The vector (in local space coordinate system) that will be oriented wi
 
 `Animation` class properties include:
 
-| Property               | Type            | Description                                               |
-| ------------ ----------| ----------------| ----------------------------------------------------------|
-| Duration               | int             | Gets/Sets the duration in milli seconds of the animation. |
-
-
 | Property               | Type            | Description |
 | -----------------------| --------------- | ------------ |
-| ResourceUrl | string  | path to image file. |
+| Duration | int  | Gets/Sets the duration in milli seconds of the animation. |
 | ImageMap | Map | map of properties associated with a given image. |
 | PreMultipliedAlpha | bool | opacity adjusted image. |
 | PixelArea | Vector4 | sub area of image. |
