@@ -16,8 +16,6 @@ This tutorial describes the NUI animation framework, covering the following subj
 [Animation class methods](#animationclassmethods)<br>
 [Animation class properties](#animationclassproperties)<br>
 
-The tutorial includes a simple working example.
-
 <a name="overview"></a>
 ## Animation Overview
 
@@ -30,9 +28,9 @@ The `Animation` class can be used to animate the [animatable properties](#animat
 NUI animations occur in a [dedicated thread](#multithreading). This allows animations to run smoothly, regardless of the time
 taken to process the input, events, and other factors in the application code.
 
-![](NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
-methods such as `GetProperty` and `IsPropertyAnimatable`. The `Animation` class contains the [animation methods](#animationclassmethods)
-such as `AnimateBy`.
+![](./Images/NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
+methods such as `GetProperty` and `IsPropertyAnimatable`. The `Animation` class contains [animation methods](#animationclassmethods)
+such as `AnimateBy` and `AnimateTo`.
 
 [Back to top](#top)
 
@@ -60,12 +58,9 @@ _animation = new Animation
 ### Animatable Properties
 
 Properties can be 'animatable'. Examples af animatable `View` properties are:
-Position
-Orientation
-Scale
-Color etc.
+Position, Orientation, Scale, Color etc.
 
-The application developer can query the animatable state of a property via `IsPropertyAnimatable`.
+The animatable state of a property can be queried via `IsPropertyAnimatable`, but not changed.
 
 The animatable state can be set in the derived classes of custom view controls.
 
@@ -91,21 +86,21 @@ animation.AnimateBy( view2, "Position", Vector3(10.0f, 50.0f, 0.0f) ); 	// End P
 
 Another example taken from the working example in this tutorial:
 ~~~{.cs}
-_animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(180.0f)), PositionAxis.X), 0, 500,
-		     new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
+_animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(180.0f)), PositionAxis.X), 0, 500, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
 
-_animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(0.0f)), PositionAxis.X), 500, 1000,
-                     new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
+_animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(0.0f)), PositionAxis.X), 500, 1000, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
 
 _animation.AnimateBy(_text, "ScaleX", 3, 1000, 1500);
 _animation.AnimateBy(_text, "ScaleY", 4.0f, 1500, 2000);
 ~~~
 
-Note: Properties can be passed to method via propery class instantiation-
+Note: Properties can be passed to a animation method via `property` class instantiation:
 
+~~~{.cs}
 _animation.AnimateTo(new Property(_text, View.Property.ORIENTATION), new Property.Value(new Rotation(new Radian(new Degree(180.0f)), ...
+~~~
 
-See [Animation class members](#animationclassmethods) for explanation of parameters.
+See [Animation class member functions](#animationclassmethods) for explanation of parameters.
 
 [Back to top](#top)
 
@@ -316,9 +311,9 @@ _animation.AnimateBetween(focusData.ImageItem, "Size", keyFrames, Animation.Inte
 
 ### Path Animations
 
-A `Path` can be used to animate the position and orientation of actors.
+A `Path` can be used to animate the position and orientation of views.
 
-![ ](animation/animated-path.png)
+![ ](./Images/animated-path.png)
 
 The logo will travel to the black points on the diagram. The red points are the control points which
 express the curvature of the path on the black points.
@@ -396,7 +391,7 @@ rendering, whilst views provide thread-safe access.
 An example view hierarchy is shown below, in which one of the views is being animated. The objects in green are created by the
 application code, whilst the private objects in blue are used in the dedicated rendering thread.
 
-![](multi-threaded-animation.png)
+![](./Images/multi-threaded-animation.png)
 
 #### Reading an animated value
 
@@ -435,7 +430,7 @@ Current position: 10,10,10
 
 When a property is being animated, the Animation will override any values set e.g. `current = view.Position;`
 
-![](multi-threaded-animation-2.png)
+![](./Images/multi-threaded-animation-2.png)
 
 The order of execution in the render thread is:
 
@@ -518,8 +513,6 @@ public void AnimatePath(View view, Path path, Vector3 forward, AlphaFunction alp
 
 _path_			Defines position and orientation
 _forward_ 		The vector (in local space coordinate system) that will be oriented with the path's tangent direction
-
-~~~
 
 [Back to top](#top)
 
