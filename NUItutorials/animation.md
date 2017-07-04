@@ -521,13 +521,13 @@ _forward_ The vector (in local space coordinate system) that will be oriented wi
 
 `Animation` class properties include:
 
+| Property               | Type            | Description                                               |
+| ------------ ----------| ----------------| ----------------------------------------------------------|
+| Duration               | int             | Gets/Sets the duration in milli seconds of the animation. |
+
+
 | Property               | Type            | Description |
-| ------------ ----------| ------------    | ------------|
-|   Duration             |    int          |   Gets/Sets the duration in milli seconds of the animation. |
-
-
-| Property  | Type | Description |
-| ------------ | ------------ | ------------ |
+| -----------------------| --------------- | ------------ |
 | ResourceUrl | string  | path to image file. |
 | ImageMap | Map | map of properties associated with a given image. |
 | PreMultipliedAlpha | bool | opacity adjusted image. |
