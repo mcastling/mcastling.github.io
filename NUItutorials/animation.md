@@ -524,18 +524,17 @@ _forward_ The vector (in local space coordinate system) that will be oriented wi
 | Property               | Type            | Description |
 | ------------ ----------| ------------    | ------------|
 |   Duration             |    int          |   Gets/Sets the duration in milli seconds of the animation. |
-| DefaultAlphaFunction   | AlphaFunction   |   Gets/Sets the default alpha function for the animation. |
-|      State             |     States      |   Queries the 'state' of the animation. (_Stopped_, _Playing_ or _Paused_) |
-|      LoopCount         |      int        |   Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever |
-|                        |                 |   Get : Gets the loop count. A zero is the same as Looping = true; i.e. repeat forever. |
-|      Looping           |     bool         |  Gets/Sets the status of whether the animation will loop. (resets the loop count). The loop count is initially 1 for play once. |
-|   EndAction           |   EndActions      |  Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped |
-|     CurrentLoop       |   int            |   Gets the current loop count |
-|  DisconnectAction     |   EndAction      |   Gets/Sets the disconnect action. |
-| CurrentProgreaa       |     float         |   Gets/Sets the progress of the animation. |
-| SpeedFactor           |     float         | Gets/Sets specifies a speed factor for the animation. |
-| PLayRange             | RelativeVector2 |   Animation will play between the values specified. Both values(range.x and range.y ) should be between 0 and 1 |
-| ProgressNotification  |    float        |   Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
+
+
+| Property  | Type | Description |
+| ------------ | ------------ | ------------ |
+| ResourceUrl | string  | path to image file. |
+| ImageMap | Map | map of properties associated with a given image. |
+| PreMultipliedAlpha | bool | opacity adjusted image. |
+| PixelArea | Vector4 | sub area of image. |
+| Border | Rectangle | The border of the image in the order:left, right, bottom, top. For N-Patch images only. |
+| BorderOnly | bool | Gets/sets whether to draws the borders only(If true). For N-Patch images only. |
+| SynchronousLoading | bool | Gets/Sets wheher the image is synchronos. For N-Patch images only. |
 
 [Back to top](#top)
 
