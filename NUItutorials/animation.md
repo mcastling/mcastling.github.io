@@ -28,7 +28,7 @@ The `Animation` class can be used to animate the [animatable properties](#animat
 NUI animations occur in a [dedicated thread](#multithreading). This allows animations to run smoothly, regardless of the time
 taken to process the input, events, and other factors in the application code.
 
-This image ![](./Images/NUI_Class_Hierarchy.png) shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
+![](./Images/NUI_Class_Hierarchy.png) This image shows the Animation classes in the NUI class hierarchy. The `Animatable` class contains 'property' 
 methods such as `GetProperty` and `IsPropertyAnimatable`. The `Animation` class contains [animation methods](#animationclassmethods)
 such as `AnimateBy` and `AnimateTo`.
 
@@ -57,10 +57,9 @@ _animation = new Animation
 <a name="animatableproperties"></a>
 ### Animatable Properties
 
-Properties can be 'animatable'. Examples af animatable `View` properties are:
-Position, Orientation, Scale, Color etc.
+Properties can be 'animatable'. Examples af animatable `View` properties are - Position, Orientation, Scale, Color etc.
 
-The animatable state of a property can be queried via `IsPropertyAnimatable`, but not changed.
+For 'standard' controls, the animatable state of a property can be queried (via `IsPropertyAnimatable`), but not changed.
 
 The animatable state can be set in the derived classes of custom view controls.
 
@@ -124,7 +123,7 @@ To loop the animation to play multiple times:
 animation.SetLooping(true);
 ~~~
 
-By default, when an animation ends, the properties that it was animating are BAKED.
+By default, when an animation ends, the properties that it was animating are 'baked'.
 However, the property changes can be **discarded** when the animation ends (or is stopped):
 
 ~~~{.cs}
@@ -151,6 +150,7 @@ public void AnimationFinished(object sender, EventArgs e)
     ...
 
 }
+~~~
 
 Applications can be notified when the animation has reached a given progress percentage:
 
@@ -178,7 +178,7 @@ It is possible to specify a different alpha function for each animator in an Ani
 animation.AnimateTo(view1, "Position", Vector3(10.0f, 50.0f, 0.0f), new AlphaFunction.BuiltinFunctions.Linear);
 ~~~
 
-The `AnimateTo` parameters are described in [Animation class members](#animationclassmethods)
+The `AnimateTo` parameters are described in [Animate methods](#animationclassmethods)
 
 The 'built in' alpha functions are :
 ~~~{.cs}
@@ -206,7 +206,7 @@ The [animation working example](#workingexample) includes the use of a built in 
 You can also create your own alpha function, by setting the default alphafunction:
 
 ~~~{.cs}
-float alphfunc(float progress)
+float alphafunc(float progress)
 {
     if ( (progress > 0.2f) && (progress < 0.7f) )
     {
@@ -216,12 +216,8 @@ float alphfunc(float progress)
     return progress;
 }
 
-...
-...
-...
-
 AlphaFunction af(alphafunc);
-animation.SetDefaultAlphaFunction(alphfunc);
+animation.SetDefaultAlphaFunction(af);
 ~~~
 
 or by using delegates:
@@ -252,7 +248,7 @@ _animation.AnimateTo(_view2, "Position", new Vector3(150.0f, 150.0f, 0.0f), 5000
 <a name="animationtypes"></a>
 ### Animation Types
 
-NUI supports both 'key frame' and path animation.
+NUI supports both key-frame and path animation.
 
 #### Key-Frame Animation
 
@@ -279,7 +275,7 @@ When the animation runs, NUI animates the position of `view1` between the specif
 `view1` will animate from (10.0f, 10.0f, 10.0f) to (200.0f, 200.0f, 200.0f) by 70% of the animation time,
 and then spend the remaining time animating back to (100.0f, 100.0f, 100.0f).
 
-The advantage of specifying a key-frame at 0% is that regardless of where 'view1' is, it will start from position (10.0f, 10.0f, 10.0f).
+The advantage of specifying a key frame at 0% is that regardless of where `view1` is, it will start from position (10.0f, 10.0f, 10.0f).
 If `AnimateTo` was used, then the start position would have been view1's current position.
 
 Here is a more comprehensive example of 'Key frame' use, taken from `FocusEffect.cs`:
@@ -318,7 +314,7 @@ A `Path` can be used to animate the position and orientation of views.
 The logo will travel to the black points on the diagram. The red points are the control points which
 express the curvature of the path on the black points.
 
-This, in code will be represented as follows:
+Here is the code sample:
 
 ~~~{.cs}
 Animation animation = new Animation();
@@ -341,7 +337,8 @@ path.GenerateControlPoints(0.25f);
 Here 0.25f represents the curvature of the path you require. The generated control points result in a smooth join
 between the splines of each segment.
 
-To animate view1 along this path:
+To animate `view1` along this path:
+
 ~~~{.cs}
 animation.Animate( view1, path, new Position(0.0f, 0.0f, 0.0f) );
 ~~~
@@ -395,7 +392,7 @@ application code, whilst the private objects in blue are used in the dedicated r
 
 #### Reading an animated value
 
-When a property is animatable, it can only be modified in the rendering thread. The value returned from a getter method, is the value
+When a property is animatable, it can only be modified in the rendering thread. The value returned from a 'get' property, is the value
 used when the previous frame was rendered.
 
 For example `pos = view.Position` returns the position at which the view was last rendered. Since setting a position i.e. `view.Position = pos`
@@ -469,11 +466,6 @@ The `Animation` class provides a series of overloaded methods for animation of p
 public void AnimateBy(View target, string property, object relativeValue, AlphaFunction alphaFunction = null)
 ~~~
 
-_target_        The target object to animate
-_property_      The target property to animate, can be enum or string
-_relativeValue_ The property value will change by this amount
-_alphaFunction_ The alpha function to apply
-
 ~~~{.cs}
 public void AnimateBy(View target, string property, object relativeValue, int startTime, int endTime, AlphaFunction alphaFunction = null)
 ~~~
@@ -504,6 +496,10 @@ public void AnimateTo(View target, string property, object destinationValue, int
 public void AnimateBetween(View target, string property, KeyFrames keyFrames, Interpolation interpolation = Interpolation.Linear, AlphaFunction alphaFunction = null)
 ~~~
 
+~~~{.cs}
+public void AnimateBetween(View target, string property, KeyFrames keyFrames)
+~~~
+
 | Parameter       | Description |
 | --------------- |------------ |
 | _keyFrames_     | The set of time/value pairs between which to animate       |
@@ -515,13 +511,15 @@ public void AnimateBetween(View target, string property, KeyFrames keyFrames, In
 public void AnimatePath(View view, Path path, Vector3 forward, AlphaFunction alphaFunction = null)
 ~~~
 
-_path_    Defines position and orientation
-_forward_ The vector (in local space coordinate system) that will be oriented with the path's tangent direction
+| Parameter       | Description |
+| --------------- |------------ |
+| _path_          | Defines position and orientation     |
+| _forward_       | The vector (in local space coordinate system) that will be oriented with the path's tangent direction |
 
 [Back to top](#top)
 
 <a name="animationclassproperties"></a>
-### Animation class Properties
+### Animation class properties
 
 `Animation` class properties include:
 
@@ -533,12 +531,12 @@ _forward_ The vector (in local space coordinate system) that will be oriented wi
 | LoopCount              |      int        | Set : Enables looping for 'count' repeats. A zero is the same as Looping = true; i.e. repeat forever |
 |                        |                 | Get : Gets the loop count. |
 | Looping                |     bool        | Gets/Sets the status of whether the animation will loop. (resets the loop count). The loop count is initially 1 for play once. |
-| EndAction              |   EndActions    | Gets/Sets the end action of the animation. This action is performed when the animation ends or if it is stopped |
+| EndAction              |   EndActions    | Gets/Sets the end action of the animation. This action is performed when the animation ends, or if it is stopped |
 | CurrentLoop            |   int           | Gets the current loop count |
 | DisconnectAction       |   EndAction     | Gets/Sets the disconnect action. |
 | CurrentProgress        |     float       | Gets/Sets the progress of the animation. |
 | SpeedFactor            |     float       | Gets/Sets specifies a speed factor for the animation. |
-| PLayRange              | RelativeVector2 | Animation will play between the values specified. Both values(range.x and range.y ) should be between 0 and 1 |
+| PlayRange              | RelativeVector2 | Animation will play between the values specified. Both values(range.x and range.y ) should be between 0 and 1 |
 | ProgressNotification   |    float        | Gets/Sets the Progress notification marker which triggers the ProgressReached Event, should be between 0 and 1 |
 
 [Back to top](#top)
