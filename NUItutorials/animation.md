@@ -19,7 +19,7 @@ This tutorial describes the NUI animation framework, covering the following subj
 <a name="overview"></a>
 ## Animation Overview
 
-Animation enables you to create animated effects, such as moving objects by changing their **properties** for a specified duration.
+Animation enables you to create animated effects, by changing object **properties** such as position, for a specified duration.
 
 NUI provides a rich and easy to use animation framework which allows the creation of visually rich applications.
 
@@ -74,7 +74,7 @@ There are two distinct ways in which properties can be animated within DALi:
 
 Here is an example:
 
-(Assume view1 and view2 are at position 10.0f, 10.0f, 0.0f at the start of the animation).
+(Assume `view1` and `view2` are at position 10.0f, 10.0f, 0.0f at the start of the animation).
 ~~~{.cs}
 // Animate the position of view1 TO 10.0f, 50.0f, 0.0f
 animation.AnimateTo( view1, "Position", Vector3(10.0f, 50.0f, 0.0f) ); 	// End Position: 10.0f, 50.0f, 0.0f
@@ -86,14 +86,13 @@ animation.AnimateBy( view2, "Position", Vector3(10.0f, 50.0f, 0.0f) ); 	// End P
 Another example taken from the working example in this tutorial:
 ~~~{.cs}
 _animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(180.0f)), PositionAxis.X), 0, 500, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
-
 _animation.AnimateTo(_text, "Orientation", new Rotation(new Radian(new Degree(0.0f)), PositionAxis.X), 500, 1000, new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseInOutSine));
 
 _animation.AnimateBy(_text, "ScaleX", 3, 1000, 1500);
 _animation.AnimateBy(_text, "ScaleY", 4.0f, 1500, 2000);
 ~~~
 
-Note: Properties can be passed to a animation method via `property` class instantiation:
+Properties can also be passed to an animation method via `property` class instantiation:
 
 ~~~{.cs}
 _animation.AnimateTo(new Property(_text, View.Property.ORIENTATION), new Property.Value(new Rotation(new Radian(new Degree(180.0f)), ...
@@ -127,7 +126,7 @@ By default, when an animation ends, the properties that it was animating are 'ba
 However, the property changes can be **discarded** when the animation ends (or is stopped):
 
 ~~~{.cs}
-animation.EndAction = Animations.EndActions.Discard
+animation.EndAction = Animations.EndActions.Discard;
 ~~~
 
 [Back to top](#top)
@@ -145,17 +144,15 @@ _animation.Finished += AnimationFinished;
 public void AnimationFinished(object sender, EventArgs e)
 {
     Tizen.Log.Debug("NUI", "AnimationFinished()");
-
     ...
     ...
-
 }
 ~~~
 
 Applications can be notified when the animation has reached a given progress percentage:
 
 ~~~{.cs}
-_animation.ProgressNotification = 0.5; // trigger 'progress reached' Event at 50% of animation time
+_animation.ProgressNotification = 0.5; // trigger 'progress reached' event at 50% of animation time
 
 ...
 ...
@@ -235,7 +232,7 @@ delegate float UserAlphaFunctionDelegate(float progress);
 ...
 ...
 
-_user_alpha_func = new UserAlphaFunctionDelegate(alphfunc);
+_user_alpha_func = new UserAlphaFunctionDelegate(alphafunc);
 
 ...
 ...
@@ -260,9 +257,9 @@ You can create several key frames:
 
 ~~~{.cs}
 KeyFrames keyFrames = new KeyFrames();
-keyFrames.Add( 0.0f, Vector3( 10.0f, 10.0f, 10.0f ) );
-keyFrames.Add( 0.7f, Vector3( 200.0f, 200.0f, 200.0f ) );
-keyFrames.Add( 1.0f, Vector3( 100.0f, 100.0f, 100.0f ) );
+keyFrames.Add( 0.0f, new Vector3( 10.0f, 10.0f, 10.0f ) );
+keyFrames.Add( 0.7f, new Vector3( 200.0f, 200.0f, 200.0f ) );
+keyFrames.Add( 1.0f, new Vector3( 100.0f, 100.0f, 100.0f ) );
 ~~~
 
 And then add them to your animation:
@@ -276,7 +273,7 @@ When the animation runs, NUI animates the position of `view1` between the specif
 and then spend the remaining time animating back to (100.0f, 100.0f, 100.0f).
 
 The advantage of specifying a key frame at 0% is that regardless of where `view1` is, it will start from position (10.0f, 10.0f, 10.0f).
-If `AnimateTo` was used, then the start position would have been view1's current position.
+If `AnimateTo` was used, then the start position would have been `view1's` current position.
 
 Here is a more comprehensive example of 'Key frame' use, taken from `FocusEffect.cs`:
 
@@ -425,7 +422,7 @@ Current position: 10,10,10
 
 #### Setting a property during an animation
 
-When a property is being animated, the Animation will override any values set e.g. `current = view.Position;`
+When a property is being animated, the Animation will override any values set.
 
 ![](./Images/multi-threaded-animation-2.png)
 
@@ -440,7 +437,7 @@ The order of execution in the render thread is:
 <a name="workingexample"></a>
 ### Animation example
 
-A simple text animation example has been created to illustrate some of the principles outlined in this guide, including the use of
+A simple text animation example has been created to illustrate some of the principles outlined in this guide, including the use of the
 `AnimateBy`, `AnimateTo` methods and an alphafunction.
 
 Read the instructions in [Building NUI source code](setup-ubuntu.md#buildnui) of the ubuntu setup guide, which includes an explanation
@@ -450,7 +447,7 @@ of where to place tutorial files. (_'nuirun' folder_).
 2. Copy this file to your 'nuirun' folder, (or ../nuirun/tutorials).
 
 ~~~{.sh}
-cp animation-hello-world.cs ~/DALiNUI/nuirun/src/public
+cp animation-hello-world.cs ~/DALiNUI/nuirun/tutorials
 ~~~
 
 [Back to top](#top)
