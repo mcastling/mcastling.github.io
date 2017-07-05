@@ -9,6 +9,7 @@ In this tutorial:
 [Visual Properties](#visualproperties)<br>
 [Visual Type](#visualtype)<br>
 [Visual Creation and registration](#visualcreation)<br>
+[Visual depth index](#visualdepthindex)
 [Example of Visuals in use](#visualexample)<br>
 [The Color Visual](#colorvisual)<br>
 [The Gradient Visual](#gradientvisual)<br>
@@ -21,17 +22,17 @@ In this tutorial:
 [The Visual transform](#visualtransform)<br>
 [The Visual map class](#visualmap)<br>
 [The Visual view class](#visualview)<br>
+[Appendix A - Automatic property registration of visuals](#automaticpropertyreg)<br>
 
 <a name="overview"></a>
 ## Overview
 
 Visuals provide reusable rendering logic.
 
-Visuals are the main building block of controls. This means that custom controls can reuse existing visuals rather
-than create them from scratch, which increases performance.
+Visuals are the main building block of controls.
  
 Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
-Additionally visuals, respond to view size and color change, while also providing clipping at the renderer level.
+Additionally visuals, respond to View size and color change, while also providing clipping at the renderer level.
 
 Visuals are configured via Properties. 
 
@@ -39,20 +40,20 @@ To create a visual:
 * Create a property map
 * Add visual 'type' to property map (_must be first entry in property map_)
 * Add required property values to the map
-* Create visual using property map
+* Create visual in a 'factory' using a property map
 * Register visual
 
 <a name="visualexample"></a>
 ### Example of Visuals in use - button styling
 
-Images and icons are added to buttons using visuals.
+Images, icons and text are added to buttons using visuals.
 
 A control has 3 states - NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
+The button's appearance can be modified by setting properties for the various 'state' Visuals.
 Each state and sub-state should have the required visuals. A visual can be common between states.
 
-The button's appearance can be modified by setting properties for the various 'state' Visuals.
-
-When pressed the unselected visuals are replaced by the selected visual.
+When pressed the button moves from the unselected state to the selected state. The unselected visuals
+are replaced by the selected visuals.
  
 When the button is disabled, background, button and selected visuals are replaced by
 their disabled visuals.
@@ -66,8 +67,9 @@ button states using JSON stylesheets, and transitioning between the various butt
 Visual properties are set through a property map. 
 
 There are 2 methods of using property maps:
-* Specific property structures, e.g `ColorVisualProperty`
-* Visual maps, e.g `ColorVisual` see [using a VisualMap](#visualmap).
+* Specific visual 'property' structures, e.g. `ColorVisualProperty`. These structures specify the properties of each Visual type.
+  The properties are listed in the respective Visual section.
+* Visual maps, e.g. `ColorVisual` see [using a VisualMap](#visualmap).
 
 This tutorial illustrates both methods.
 
@@ -116,16 +118,35 @@ calls to the factory and register methods:
 _colorVisual =  VisualFactory.Get().CreateVisual( colorVisual );
 
 RegisterVisual( ColorVisualPropertyIndex, _colorVisual );
+
+_colorVisual.DepthIndex = ColorVisualPropertyIndex;
 ~~~
 
 However where specific visual assignment is possible, factory creation and registration may occur within the API.
-In this code snippet, visual factory creation and registration occur _within_ the `Background` property.
+In the following code snippet, visual factory creation and registration occur _within_ the `Background` property.
 
 ~~~{.cs}
 textView.Background = textVisual;
 ~~~
 
 The View `AddVisual` method is another example of API visual creation.
+
+The examples throughout this tutorial use the current method of property registration based on a property index range. The
+NUI code base is currently been modified to utilise automatic generation of indexes for property registration.
+See [Automatic property registration](#automaticpropertyreg).
+
+[Back to top](#top)
+
+<a name="visualdepthindex"></a>
+### Visual Depth Index
+
+The 'depth index' is the draw order for visuals within a View.
+
+Depth index increases automatically for each added visual
+
+Last Visual registered always on top.
+
+[Back to top](#top)
 
 <a name="colorvisual"></a>
 ### Color visual
@@ -137,9 +158,15 @@ Renders a color to the visual's quad geometry.
 Visual.Type : **Color**
 
 #### Usage
-This example shows the creation and registration of a `Color` Visual:
+This example shows the creation and registration of a `Color` Visual - using 'old' style property registration:
 
 ~~~{.cs}
+private const int PROPERTY_REGISTRATION_START_INDEX = 10001000;
+private const int ColorVisualPropertyIndex = PROPERTY_REGISTRATION_START_INDEX+1 ;
+private const int PrimitiveVisualPropertyIndex = PROPERTY_REGISTRATION_START_INDEX+2;
+
+...
+...
 
 private VisualBase _colorVisual;
 
@@ -780,6 +807,57 @@ _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 ~~~
 
 [Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a Visual View.
+
+[Back to top](#top)
+
+<a name="automaticpropertyreg"></a>
+### Appendix A - Automatic property registration of visuals
+
+The `ScriptableProperty` class enables a property to be registered with the `type registry`. Add `ScriptableProperty` to any
+property belonging to a View (control) you want to be scriptable from JSON.
+
+Property indices are generated automatically in the `ScriptableProperty` class. A Unique index for each property
+can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
+
+Here is an example:
+
+~~~{.cs}
+
+private VisualBase _imageVisual;
+
+...
+...
+
+[ScriptableProperty()]
+public string ImageURL
+{
+    get
+    {
+        return _imageURL;
+    }
+    set
+    {
+        _imageURL = value;
+
+        // Create and Register Image Visual
+        PropertyMap imageVisual = new PropertyMap();
+        imageVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Image ))
+                   .Add( ImageVisualProperty.URL, new PropertyValue( _imageURL ) )
+                   .Add( ImageVisualProperty.AlphaMaskURL, new PropertyValue( _maskURL ));
+
+        _imageVisual =  VisualFactory.Get().CreateVisual( imageVisual );
+
+        RegisterVisual( GetPropertyIndex("ImageURL"), _imageVisual );
+
+        // Set the depth index for Image visual
+        _imageVisual.DepthIndex = ImageVisualPropertyIndex;
+        }
+    }
+~~~
+
+A range of property indecies are provided for the index assigned to _DepthIndex_ `ImageVisualPropertyIndex`, 0 by default 
+~~~{.cs}
+~~~
 
 [Back to top](#top)
 
