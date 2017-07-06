@@ -678,8 +678,7 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 
 
 | Enumeration  | Type              | Required | Description                                                                  |
-|--------------|------------------------------------------------------------------------------|
-| Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
+|--------------|-------------------|----------|------------------------------------------------|
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
