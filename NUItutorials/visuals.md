@@ -661,7 +661,7 @@ VisualMap : **TextVisual**
 
 The visual 'transform' map enables layouting within a control.
 
-The [VisualMaps](#visualmap), has 'type' fields and 'policy' properties to control the transformation.
+The [VisualMap](#visualmap) class, has 'type' fields and 'policy' properties to control the transformation.
 
 #### Transform Type
 
@@ -676,6 +676,9 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 | Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)           |
 | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                               |
 
+
+| Enumeration  | Description                                                                  |
+|--------------|------------------------------------------------------------------------------|
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
