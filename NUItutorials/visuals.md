@@ -679,8 +679,13 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 
 | Enumeration  | Type              | Required | Description                                                                  |
 |--------------|-------------------|----------|------------------------------------------------|
-| Relative     | *Default*. The size or offset value represents a ratio of the control's size |
-| Absolute     | The size or offset value represents world units (pixels)  |
+| Offset       | VECTOR2           | No       | The offset of the visual                      |
+| Size         | VECTOR2           | No       | The size of the visual.                       |
+| OffsetPolicy | VECTOR4                                                          |
+| SizePolicy   | VECTOR4                                                         |
+| Origin       |                                                           |
+| AnchorPoint  |                                                           |
+|              |                                                           |
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
