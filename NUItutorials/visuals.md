@@ -672,20 +672,19 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 | Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
 | Size         | VECTOR2           | No       | The size of the visual.                                                                     |
 | OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy)  |
-| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute                                        |
+| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute.                                        |
 | Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)           |
 | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                               |
 
 
 | Enumeration  | Type              | Required | Description                                                                  |
 |--------------|-------------------|----------|------------------------------------------------|
-| Offset       | VECTOR2           | No       | The offset of the visual                      |
+| Offset       | VECTOR2           | No       | The offset of the visual.                      |
 | Size         | VECTOR2           | No       | The size of the visual.                       |
-| OffsetPolicy | VECTOR4                                                          |
-| SizePolicy   | VECTOR4                                                         |
-| Origin       |                                                           |
-| AnchorPoint  |                                                           |
-|              |                                                           |
+| OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy)  |
+| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute.                                        |
+| Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)           |
+| AnchorPoint  | INTEGER or STRING | Mo       | The anchor point of the visual. [More info](#visualalignment)                               |
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
@@ -695,8 +694,8 @@ The offset and size policies can be either Relative or Absolute.
 
 | Enumeration  | Description                                                                  |
 |--------------|------------------------------------------------------------------------------|
-| Relative     | *Default*. The size or offset value represents a ratio of the control's size |
-| Absolute     | The size or offset value represents world units (pixels)  |
+| Relative     | *Default*. The size or offset value represents a ratio of the control's size.|
+| Absolute     | The size or offset value represents world units (pixels).  |
 
 For example, an offsetPolicy of [ RELATIVE, RELATIVE ], a sizePolicy of [ ABSOLUTE, ABSOLUTE ], an offset of ( 0, 0.25 ) and a size of ( 20, 20 ),
 means the visual will be 20 pixels by 20 pixels in size, positioned 25% above the center of the control.
