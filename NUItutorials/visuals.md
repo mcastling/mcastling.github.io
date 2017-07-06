@@ -9,7 +9,7 @@ In this tutorial:
 [Visual Properties](#visualproperties)<br>
 [Visual Type](#visualtype)<br>
 [Visual Creation and registration](#visualcreation)<br>
-[Visual depth index](#visualdepthindex)
+[Visual depth index](#visualdepthindex)<br>
 [Example of Visuals in use](#visualexample)<br>
 [The Color Visual](#colorvisual)<br>
 [The Gradient Visual](#gradientvisual)<br>
@@ -140,11 +140,11 @@ See Appendix A [Automatic property registration for Visuals](#automaticpropertyr
 <a name="visualdepthindex"></a>
 ### Visual Depth Index
 
-The 'depth index' is the draw order for visuals within a View.
+The 'depth index' is the draw order for visuals within a view.
 
 Depth index increases automatically for each added visual.
 
-Last Visual registered is always on top.
+Last visual registered is always on top.
 
 [Back to top](#top)
 
@@ -641,7 +641,7 @@ _textVisual.DepthIndex = TextVisualPropertyIndex;
 #### Properties
 
 | TextVisualProperty  | Name                | Type          | Required | Description                                                                   | 
-|---------------------|---------------------|:-------------:|:--------:|---------------------------------------|
+|---------------------|---------------------|---------------|----------|-------------------------------------------------------------------------------|
 |                     | Text                | STRING        | Yes      | The text to display in UTF-8 format                                           |
 |                     | FontFamily          | STRING        | No       | The requested font family to use                                              |
 |                     | FontStyle           | MAP           | No       | The requested font style to use                                               |
@@ -650,7 +650,7 @@ _textVisual.DepthIndex = TextVisualPropertyIndex;
 |                     | HorizontalAlignment | STRING        | No       | The line horizontal alignment: "BEGIN", "CENTER", "END"                       |
 |                     | VerticalAlignment   | STRING        | No       | The line vertical alignment: "TOP",   "CENTER", "BOTTOM"                      |
 |                     | TextColor           | VECTOR4       | No       | The color of the text                                                         |
-|                     | EnableMarkup        | BOOL          | No       | If mark up should be enabled |                                                |
+|                     | EnableMarkup        | BOOL          | No       | If mark up should be enabled                                                  |
 
 VisualMap : **TextVisual**
 
@@ -668,19 +668,19 @@ The [VisualMaps](#visualmap), has 'type' fields and 'policy' properties to contr
 The `VisualTransformPropertyType` enum specifies all the transform property types:
 
 | Enumeration  | Type              | Required | Description                                                                                 |
-|----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
+|----------------------------------|----------|---------------------------------------------------------------------------------------------|
 | Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
 | Size         | VECTOR2           | No       | The size of the visual.                                                                     |
-| OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy) |
-| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute  |
-| Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)            |
-| AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                                |
+| OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy)  |
+| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute                                        |
+| Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)           |
+| AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                               |
 
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
 
-THe `VisualTransformPolicyType` enum specifies policy types that could be used by the transform for the offset or size.
+The `VisualTransformPolicyType` enum specifies policy types that could be used by the transform for the offset or size.
 The offset and size policies can be either Relative or Absolute.
 
 | Enumeration  | Description                                                                  |
