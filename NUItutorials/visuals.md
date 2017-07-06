@@ -129,11 +129,11 @@ In the following code snippet, visual factory creation and registration occur _w
 textView.Background = textVisual;
 ~~~
 
-The View `AddVisual` method is another example of API visual creation.
+The `VisualView` class `AddVisual` method is another example of API 'inherent' Visual creation.
 
-The examples throughout this tutorial use the current method of property registration based on a property index range. The
-NUI code base is currently been modified to utilise automatic generation of indexes for property registration.
-See [Automatic property registration](#automaticpropertyreg).
+The snippet above, and the examples for each Visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
+The NUI code base is currently been modified (_July 2017_) to utilise property registration based on automatic generation of indices.
+See Appendix A [Automatic property registration for Visuals](#automaticpropertyreg) for an example.
 
 [Back to top](#top)
 
@@ -142,9 +142,9 @@ See [Automatic property registration](#automaticpropertyreg).
 
 The 'depth index' is the draw order for visuals within a View.
 
-Depth index increases automatically for each added visual
+Depth index increases automatically for each added visual.
 
-Last Visual registered always on top.
+Last Visual registered is always on top.
 
 [Back to top](#top)
 
@@ -158,7 +158,6 @@ Renders a color to the visual's quad geometry.
 Visual.Type : **Color**
 
 #### Usage
-This example shows the creation and registration of a `Color` Visual - using 'old' style property registration:
 
 ~~~{.cs}
 private const int PROPERTY_REGISTRATION_START_INDEX = 10001000;
@@ -305,7 +304,7 @@ Visual.Type : **Image**
  
 Renders a raster image ( jpg, png etc.) into the visual's quad geometry.
  
-![ ](./Images/image-visual.png)
+![ ](./Images/ImageView.png)
 
 #### Usage
 
@@ -378,6 +377,7 @@ VisualMap : **SVGVisual**
 ### Animated Image Visual
 
 Renders an animated image into the visual's quad geometry. Currently, only the GIF format is supported.
+A new API is under development (_July 2017_) to enable multiple images to be displayed in turn.
 
 ![ ](./Images/animated-image-visual.gif)
 
@@ -667,14 +667,14 @@ The [VisualMaps](#visualmap), has 'type' fields and 'policy' properties to contr
 
 The `VisualTransformPropertyType` enum specifies all the transform property types:
 
-| Field        | Name         | Type              | Required | Description                                                                                 |
+| Enumeration  | Type              | Required | Description                                                                                 |
 |----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
-|              | Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
-|              | Size         | VECTOR2           | No       | The size of the visual.                                                                     |
-|              | OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy) |
-|              | SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute  |
-|              | Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)            |
-|              | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                                |
+| Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
+| Size         | VECTOR2           | No       | The size of the visual.                                                                     |
+| OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy) |
+| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute  |
+| Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)            |
+| AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                                |
 
 
 <a name="visualtransformpolicy"></a>
@@ -683,10 +683,10 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 THe `VisualTransformPolicyType` enum specifies policy types that could be used by the transform for the offset or size.
 The offset and size policies can be either Relative or Absolute.
 
-| Enumeration  | Name     | Description                                                                                 |
-|----------------------------------------------------------------|--------------|:-----------------:|:--------:|-------------------------------------------|
-|              | Relative | *Default*. The size or offset value represents a ratio of the control's size |
-|              | Absolute | The size or offset value represents world units (pixels)  |
+| Enumeration  | Description                                                                  |
+|--------------|------------------------------------------------------------------------------|
+| Relative     | *Default*. The size or offset value represents a ratio of the control's size |
+| Absolute     | The size or offset value represents world units (pixels)  |
 
 For example, an offsetPolicy of [ RELATIVE, RELATIVE ], a sizePolicy of [ ABSOLUTE, ABSOLUTE ], an offset of ( 0, 0.25 ) and a size of ( 20, 20 ),
 means the visual will be 20 pixels by 20 pixels in size, positioned 25% above the center of the control.
@@ -694,19 +694,19 @@ means the visual will be 20 pixels by 20 pixels in size, positioned 25% above th
 <a name="visualalignment"></a>
 #### Visual Alignment 
 
-The `AlignType` Enum specifies the visual alignment:
+The `AlignType` enum specifies the visual alignment:
 
-| Enumeration | Name         | Description                                                                                          |
-|------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------|
-|             | TopBegin     | Aligns to the top of the vertical axis and the beginning of the horizontal axis (The left or right edge in Left-To-Right or Right-to-Left layouts, respectively) |
-|             | TopCenter    | Aligns to the top of the vertical axis and the center of the horizontal axis |
-|             | TopEnd       | Aligns to the top of the vertical axis and end of the horizontal axis (The right or left edge in Left-To-Right or Right-to-Left layouts, respectively) |
-|             | CenterBegin  | Aligns to the center of the vertical axis and the beginning of the horizontal axis |
-|             | Center       | Aligns to the center of the control |
-|             | CentreEnd    | Aligns to the center of the vertical axis and end of the horizontal axis |
-|             | BottomEnd    | Aligns to the bottom of the vertical axis and the beginning of the horizontal axis |
-|             | BottomCentre | Aligns to the bottom of the vertical axis and the center of the horizontal axis
-|             | BottomEnd    | Aligns to the bottom of the vertical axis and end of the horizontal axis |
+| Enumeration  | Description                                                                                          |
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| TopBegin     | Aligns to the top of the vertical axis and the beginning of the horizontal axis (The left or right edge in Left-To-Right or Right-to-Left layouts, respectively) |
+| TopCenter    | Aligns to the top of the vertical axis and the center of the horizontal axis |
+| TopEnd       | Aligns to the top of the vertical axis and end of the horizontal axis (The right or left edge in Left-To-Right or Right-to-Left layouts, respectively) |
+| CenterBegin  | Aligns to the center of the vertical axis and the beginning of the horizontal axis |
+| Center       | Aligns to the center of the control |
+| CentreEnd    | Aligns to the center of the vertical axis and end of the horizontal axis |
+| BottomEnd    | Aligns to the bottom of the vertical axis and the beginning of the horizontal axis |
+| BottomCentre | Aligns to the bottom of the vertical axis and the center of the horizontal axis
+| BottomEnd    | Aligns to the bottom of the vertical axis and end of the horizontal axis |
  
 [Back to top](#top)
 
@@ -851,13 +851,11 @@ public string ImageURL
 
         // Set the depth index for Image visual
         _imageVisual.DepthIndex = ImageVisualPropertyIndex;
-        }
     }
+}
 ~~~
 
-A range of property indecies are provided for the index assigned to _DepthIndex_ `ImageVisualPropertyIndex`, 0 by default 
-~~~{.cs}
-~~~
+A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
 
 [Back to top](#top)
 
