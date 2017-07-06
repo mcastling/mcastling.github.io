@@ -677,8 +677,9 @@ The `VisualTransformPropertyType` enum specifies all the transform property type
 | AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                               |
 
 
-| Enumeration  | Description                                                                  |
+| Enumeration  | Type              | Required | Description                                                                  |
 |--------------|------------------------------------------------------------------------------|
+| Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
 
 <a name="visualtransformpolicy"></a>
 #### Transform Offset & Size Policy
