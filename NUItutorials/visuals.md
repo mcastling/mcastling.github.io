@@ -32,7 +32,7 @@ Visuals provide reusable rendering logic.
 Visuals are the main building block of controls.
  
 Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
-Additionally visuals, respond to View size and color change, while also providing clipping at the renderer level.
+Additionally visuals, respond to view size and color change, while also providing clipping at the renderer level.
 
 Visuals are configured via Properties. 
 
@@ -661,21 +661,11 @@ VisualMap : **TextVisual**
 
 The visual 'transform' map enables layouting within a control.
 
-The [VisualMap](#visualmap) class, has 'type' fields and 'policy' properties to control the transformation.
+The [VisualMap](#visualmap) class, has 'policy' properties to control the transformation.
 
 #### Transform Type
 
 The `VisualTransformPropertyType` enum specifies all the transform property types:
-
-| Enumeration  | Type              | Required | Description                                                                                 |
-|----------------------------------|----------|---------------------------------------------------------------------------------------------|
-| Offset       | VECTOR2           | No       | The offset of the visual.                                                                   |
-| Size         | VECTOR2           | No       | The size of the visual.                                                                     |
-| OffsetPolicy | VECTOR4           | No       | Whether the offset components are Relative or Absolute [More info](#visualtransformpolicy)  |
-| SizePolicy   | VECTOR4           | No       | Whether the size components are Relative or Absolute.                                        |
-| Origin       | INTEGER or STRING | No       | The origin of the visual within the control's area. [More info](#visualalignment)           |
-| AnchorPoint  | INTEGER or STRING | No       | The anchor point of the visual. [More info](#visualalignment)                               |
-
 
 | Enumeration  | Type              | Required | Description                                                                  |
 |--------------|-------------------|----------|------------------------------------------------|
@@ -726,7 +716,7 @@ This example shows the configuration and size of a color visual, during a change
 
 ~~~{.cs}
 
-OnRelayout(Vector2 size, ....)
+OnRelayout(Vector2 viewSize, ....)
 
 ...
 ...
@@ -738,7 +728,7 @@ colorVisualTransform.Add( (int)VisualTransformPropertyType.Offset, new PropertyV
                     .Add( (int)VisualTransformPropertyType.Size, new PropertyValue(new Vector2(1.0f, 1.0f)) )
                     .Add( (int)VisualTransformPropertyType.Origin, new PropertyValue((int)Visual.AlignType.TopBegin) )
                     .Add( (int)VisualTransformPropertyType.AnchorPoint, new PropertyValue((int)Visual.AlignType.TopBegin) );
-_colorVisual.SetTransformAndSize(colorVisualTransform, size);
+_colorVisual.SetTransformAndSize(colorVisualTransform, viewSize);
 ~~~
 
 [Back to top](#top)
@@ -746,9 +736,12 @@ _colorVisual.SetTransformAndSize(colorVisualTransform, size);
 <a name="visualmap"></a>
 ### The Visual Map class
 
-The `VisualMap` class encapsulates the [Transform map](#visualtransform) of visual.
+The `VisualMap` class is the 'base class' for each visual.
 
-Here is the `ColorVisual` VisualMap
+The `VisualMap` class encapsulates properties for visual size and offset, depth index, shader, 'mix color', opacity etc. as well as
+the [Transform map](#visualtransform) of a visual.
+
+Here is part of the `ColorVisual` VisualMap
 
 ~~~{.cs}
    public class ColorVisual : VisualMap
@@ -772,9 +765,9 @@ Here is the `ColorVisual` VisualMap
    }
 ~~~
 
-The Visual map class also contains a output visual map, used in visual creation.
+The Visual Map class also contains an _output visual map_, used in visual creation.
 
-Here is an example of using a Visual Map to create a visual:
+Here is an example of using the output map to create a visual:
 
 ~~~{.cs}
 
@@ -815,7 +808,7 @@ _visualView.PivotPoint = PivotPoint.TopLeft;
 _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 ~~~
 
-[Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a Visual View.
+[Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a `VisualView`.
 
 [Back to top](#top)
 

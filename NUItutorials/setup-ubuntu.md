@@ -140,7 +140,7 @@ You can do this by sourcing the ''setenv'' script you created above:
 _The shared library files (.so) will be built and installed into the ~/DALiNUI/dali-env/opt/lib_ folder.
 
 * Optional - Run and test DALi Native (C++)
-    1. Get code - this step requires the _dali_demo_ repo:
+    1. Get code - this step requires the _dali_demo_ repo
     2. Build from README file (_"Building the Repository"_ section)
     3. Run dali-demo
 
@@ -164,7 +164,13 @@ If ok, DALi demo window will appear.
 ~~~
 
 * Build NUI csharp bindings
-    1. Build bindings by following the README file. (_"Building the Repository"_ section)
+    1. Build bindings by running these commands from the 'dali-csharp-binder' folder
+
+~~~{.sh}
+    $ autoreconf --install
+    $ ./configure --prefix=$DESKTOP_PREFIX
+    $ make install -j8
+~~~
 
 * Copy the `nui` source folder to a new sub-folder `nuirun` (_for subsequent overwriting of files_)
 
@@ -174,12 +180,12 @@ If ok, DALi demo window will appear.
     $ cp -r nui/Tizen.NUI/src nuirun
 ~~~
 
-* Overwrite two NUI files in ~/DALiNUI/nuirun/src/public
+* Copy/overwrite two NUI files in ~/DALiNUI/nuirun/src/public
     1. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
     2. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
     3. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
 
-_Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported just yet._
+_These 2 files are necessary, as NUI in Ubuntu is not fully supported just yet. (July 2017)_
 
 * To subsequently clean the build (if required), see [Appendix B](#buildclean)
 
@@ -190,8 +196,9 @@ _Overwriting these 2 files is necessary, as NUI in Ubuntu is not fully supported
 
 * Create tutorial file 
     1. Copy code in _"full example"_ section of the [NUI Hello World tutorial](hello-world.md) to a new file, `hello-world.cs`
-    2. Create _tutorials_ folder
+    2. Create a _tutorials_ folder
     2. Copy `hello-world.cs` to the nuirun folder:
+
 ~~~{.sh}
     $ mkdir tutorials
     $ cp hello-world.cs ~/DALiNUI/nuirun/tutorials
@@ -247,9 +254,9 @@ Note: This step builds the 'nui' library.
 
 The screenshot shows the key files associated with the "hello world" project in VSC Explorer.
 
-* Copy shared library to application runtime location:
+* Copy shared library to application runtime location (_needs to be done after build step so `bin` folder exists_)
 ~~~{.sh}
-   cp  dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
+   cp dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
 
 + To Run full size application in VSC integrated terminal
