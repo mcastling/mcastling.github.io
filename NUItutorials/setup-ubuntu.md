@@ -156,8 +156,7 @@ If ok, DALi demo window will appear.
     $ cd dali-csharp-binder
 ~~~
 
-* Build NUI csharp bindings
-    1. Build bindings by running these commands from the 'dali-csharp-binder' folder.
+* Build NUI csharp bindings, by running these commands from the 'dali-csharp-binder' folder.
 
 ~~~{.sh}
     $ autoreconf --install
