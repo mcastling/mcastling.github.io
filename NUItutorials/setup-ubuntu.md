@@ -43,19 +43,11 @@ This document covers:
     4. Subsequently, can Double click on the VSC icon in Launcher.
 
 * Alternatives for opening VSC from a terminal
- 1. Open VSC
-~~~{.sh}
-    $ code
-~~~
 
- 2. Open VSC in current directory
 ~~~{.sh}
-    $ code .
-~~~
-
- 3. Open file in VSC
-~~~{.sh}
-    $ code myfile
+    $ code            // Open VSC
+    $ code .          // Open VSC in current directory
+    $ code myfile     // Open file in VSC
 ~~~
 
 * Firewall proxy settings
@@ -66,7 +58,8 @@ proxy settings to enable download via http. The procedures for firewall setup ar
 * Install C# extension from within VSC, via the Extensions View
     1. Bring up the Extensions view by clicking on the extensions icon in the Activity Bar, or `Ctrl+Shift+X` (View extensions command).
     2. This will bring up all the extensions in the VS code marketplace.
-    3. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
+    3. Type "C#" to filter selections.
+    4. Click the Install button next to C#. After a successful install, you will see the Reload button, click to restart VSC.
 
 * Alternatively, [Install_C# extension_from VSC marketplace](https://marketplace.visualstudio.com).
 
@@ -164,7 +157,7 @@ If ok, DALi demo window will appear.
 ~~~
 
 * Build NUI csharp bindings
-    1. Build bindings by running these commands from the 'dali-csharp-binder' folder
+    1. Build bindings by running these commands from the 'dali-csharp-binder' folder.
 
 ~~~{.sh}
     $ autoreconf --install
@@ -183,7 +176,7 @@ If ok, DALi demo window will appear.
 * Copy/overwrite two NUI files in ~/DALiNUI/nuirun/src/public
     1. Download [CoreUIApplication.cs](http://dalihub.github.io/NUIsetup/CoreUIApplication.cs)
     2. Download [NUIApplication.cs](http://dalihub.github.io/NUIsetup/NUIApplication.cs)
-    3. Place these files in your nuirun/src/public folder (You will have to overwrite NUIApplication.cs).
+    3. Place these files in your nuirun/src/public folder (You will have to overwrite `NUIApplication.cs`).
 
 _These 2 files are necessary, as NUI in Ubuntu is not fully supported just yet. (July 2017)_
 
@@ -254,7 +247,7 @@ Note: This step builds the 'nui' library.
 
 The screenshot shows the key files associated with the "hello world" project in VSC Explorer.
 
-* Copy shared library to application runtime location (_needs to be done after build step so `bin` folder exists_)
+* Copy shared library to application runtime location (_This step needs to be done after build step, so `bin` folder exists_)
 ~~~{.sh}
    cp dali-env/opt/lib/libdali-csharp-binder.so ~/DALiNUI/nuirun/bin/Debug/netcoreapp1.1/
 ~~~
@@ -303,14 +296,7 @@ These settings will be picked up if the application is run via F5.
 * Configure VSC firewall proxy settings (_for install of library packages such as mono runtime and .NET Core Debugger_) 
     1. Select File > Preferences > Settings > Edit
     2. Select HTTP in middle pane
-    3. Select Edit icon > Copy to settings. "http.proxy" should be copied to right hand pane:
-~~~{.sh}
-    {
-       "http.proxy":
-    }
-~~~
-
-* Add the proxy setting:
+    3. (a) Select Edit icon > Copy to settings. "http.proxy" should be copied to right hand pane, then (b) add the proxy setting:
 ~~~{.sh}
     {
        "http.proxy": "http://xxx.xxx.xxx.xxx:xxxx
