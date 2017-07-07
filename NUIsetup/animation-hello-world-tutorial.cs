@@ -52,7 +52,7 @@ namespace HelloWorldAnimationTest
         {
             Window window = Window.Instance;
             window.BackgroundColor = Color.White;
-            window.Touched += OnWindowTouched;
+            window.TouchEvent += OnWindowTouched;
 
             _text = new TextLabel("Hello NUI World");
             _text.ParentOrigin = ParentOrigin.CenterLeft;
@@ -84,7 +84,7 @@ namespace HelloWorldAnimationTest
             }
         }
 
-        public void OnWindowTouched(object sender, Window.TouchedEventArgs e)
+        public void OnWindowTouched(object sender, Window.TouchEventArgs e)
         {
             if (e.Touch.GetState(0) == PointStateType.Down)
             {
