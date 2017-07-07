@@ -29,19 +29,6 @@ namespace HelloWorldAnimationTest
         private Animation _animation;
         private TextLabel _text;
 
-/* 
-        public Example() : base()
-        {
-        }
-
-        public Example(string stylesheet) : base(stylesheet)
-        {
-        }
-
-        public Example(string stylesheet, WindowMode windowMode) : base(stylesheet, windowMode)
-        {
-        }
-*/
         protected override void OnCreate()
         {
             base.OnCreate();
