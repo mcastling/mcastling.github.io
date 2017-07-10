@@ -79,6 +79,12 @@ Key `CustomView` methods include:
 | RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
 | OnStageConnection      | Called after the view has been connected to the stage 'default window' |
 
+
+| Parameter       | Description |
+| --------------- |------------ |
+| _path_          | Defines position and orientation     |
+| _forward_       | The vector (in local space coordinate system) that will be oriented with the path's tangent direction |
+
 [Back to top](#top)
  
 <a name="creation"></a>
