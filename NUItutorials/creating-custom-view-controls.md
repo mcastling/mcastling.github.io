@@ -69,7 +69,7 @@ There are several controls derived from `CustomView` objects already existing in
  
 Key `CustomView` methods include:
 
-| Name                   | Description                                                                                          |
+| Name                   | Description |
 |----------------------------------------------------------------------------------------------------------------------------|
 | OnInitialize           | called after the view has been initialized.               |
 | SetBackground          | Set the background with a property map.         |
