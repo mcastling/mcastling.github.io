@@ -1,5 +1,5 @@
 <a name="top"></a>
-# Creating Custom View Controls 
+# Creating Custom View controls 
 
 In this tutorial:
 
@@ -11,7 +11,7 @@ In this tutorial:
 [Styling](#stylable)<br>
 [Type and property registration](#typeregistration)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
-[Setting control behaviour](#controlbehaviour)<br>
+[Setting view behaviour](#viewbehaviour)<br>
 [Events](#events)<br>
 [Gestures](#gestures)<br>
 [Accessibility](#accessibility)<br>
@@ -20,19 +20,19 @@ In this tutorial:
 
 <a name="overview"></a>
 ### Overview
-NUI provides the ability to create custom view controls.
+NUI provides the ability to create custom views.
 
 <a name="guidelines"></a>
-### General guidelines for creating a custom control
-+ Derive your control from the `CustomView` class.
-+ Use **properties** as much as possible, as controls should be data driven.
-  + These controls will be used through JavaScript and JSON files so need to be compatible.
-+ The control can be updated when the properties change (e.g. style change)
-  + Ensure control deals with these property changes gracefully, on both first and subsequent times they are set
+### General guidelines for creating a custom view
++ Derive your view from the `CustomView` class.
++ Use **properties** as much as possible, as views should be data driven.
+  + These views will be used through JavaScript and JSON files.
++ The view can be updated when the properties change (e.g. style change)
+  + Ensure the view deals with these property changes gracefully, on both first and subsequent times they are set
 + Use visuals rather than creating several child views.
   + DALi rendering pipeline more efficient
-+ Accessibility actions should be considered when designing the control.
-+ Use `Events` if the application needs to be react to changes in the control state.
++ Accessibility actions should be considered when designing the view.
++ Use `Events` if the application needs to react to changes in the view state.
 + Use of `Gestures` should be preferred over analysing raw touch events.
 
 [Back to top](#top)
@@ -70,12 +70,12 @@ There are several controls derived from `CustomView` objects already existing in
 Key `CustomView` methods include:
 
 | Name                   | Description                                                                                          |
-|------------------------------------------------------|---------|----------------------------------------------------------------------|
-| OnInitialize           | called after the Control has been initialized.               |
+|----------------------------------------------------------------------------------------------------------------------------|
+| OnInitialize           | called after the view has been initialized.               |
 | SetBackground          | Set the background with a property map.         |
-| EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |           |
+| EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
 | RegisterVisual         | Register a visual by Property Index, linking an View to visual when required. |
-| CreateTransition       | Create a transition effect on the control - for animations. |
+| CreateTransition       | Create a transition effect on the view - for animations. |
 | RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
 | OnStageConnection      | Called after the view has been connected to the stage 'default window' |
 
@@ -84,15 +84,15 @@ Key `CustomView` methods include:
 <a name="creation"></a>
 ### Custom View Creation
 
-A control is created with the `new` operator:
+A view is created with the `new` operator:
 
 ~~~{.cs}
 contactView = new ContactView()
 ~~~
 
 Each custom C# view should have it's static constructor called before any JSON file is loaded.
-Static constructors for a class will only run once ( they are run per control type, not per instance).
-Inside the static constructor the control should register it's type. e.g.
+Static constructors for a class will only run once ( they are run per view, not per instance).
+The view should register it's type inside the static constructor e.g.
 
 ~~~{.cs}
 static ContactView()
@@ -101,10 +101,10 @@ static ContactView()
 }
 ~~~
 
-The `ViewRegistry` method registers the controls and any scriptable properties they have with the `Type Registery'.
+The `ViewRegistry` method registers the views and any scriptable properties they have with the `Type Registery'.
 
-The control should also provide a `CreateInstance` function, which gets passed to the `ViewRegistry` method.
-`CreateInstance` will be called if the control is in a JSON file:
+The view should also provide a `CreateInstance` function, which gets passed to the `ViewRegistry` method.
+`CreateInstance` will be called if the view is in a JSON file:
 
 ~~~{.cs}
 static CustomView CreateInstance()
@@ -183,7 +183,7 @@ The [Visuals tutorial](visuals.md) describes the property maps that can be used 
 <a name="stylable"></a>
 ### Ensuring Control is Stylable
 
-The NUI property system allows custom controls to be easily styled. The JSON Syntax is used in the stylesheets:
+The NUI property system allows custom views to be easily styled. The JSON Syntax is used in the stylesheets:
  
 **JSON Styling Syntax Example:**
 ~~~
@@ -205,7 +205,7 @@ The NUI property system allows custom controls to be easily styled. The JSON Syn
 }
 ~~~
  
-Styling gives the UI designer the ability to change the look and feel of the control without any code changes.
+Styling gives the UI designer the ability to change the look and feel of the view without any code changes.
  
 | Normal Style | Customized Style |
 |:------------:|:----------------:|
@@ -219,24 +219,24 @@ and transitioning between the various button states.
 <a name="typeregistration"></a>
 ### Type Registration 
 
-The 'Type Registry' is used to register your custom control.
+The 'Type Registry' is used to register your custom view.
 
-Type registration allows the creation of the control via a JSON file, as well as registering properties, signals, actions,
+Type registration allows the creation of the view via a JSON file, as well as registering properties, signals, actions,
 transitions and animation effects.
  
 Type Registration is via the `ViewRegistry` method, see [Custom View creation](#creation)
 
 #### Properties
  
-Control properties can be one of three types:
+View properties can be one of three types:
  + **Event-side only:** A function is called to set or retrieve THE value of this property.
  + **Animatable Properties:** These are double-buffered properties that can be animated.
- + **Custom Properties:** These are dynamic properties that are created for every single instance of the control.
+ + **Custom Properties:** These are dynamic properties that are created for every single instance of the view.
                           Custom properties tend to take a lot of memory, and are usually used by applications or
                           other controls to dynamically set certain attributes on their children.
                           The index for these properties can also be different for every instance.
  
-Careful consideration must be taken when choosing which property type to use for the properties of the custom control.
+Careful consideration must be taken when choosing which property type to use for the properties of the custom view.
 For example, an Animatable property type can be animated, but requires a lot more resources (both in its execution and memory footprint)
 compared to an event-side only property.
 
@@ -251,7 +251,7 @@ The `ScriptableProperty` class enables a property to be registered with the `typ
     internal class ScriptableProperty : System.Attribute
 ~~~
 
-Add `ScriptableProperty`to any property belonging to a View (control) you want to be scriptable from JSON.
+Add `ScriptableProperty`to any property you want to be scriptable from JSON.
 The following code snippet is taken from the `ContactView` class:
 
 ~~~{.cs}
@@ -276,17 +276,17 @@ Property registration for transistions and animations is via `GetPropertyIndex`,
 
 [Back to top](#top)
  
-<a name="controlbehaviour"></a>
-### Setting Control Behaviour
+<a name="viewbehaviour"></a>
+### Setting View behaviour
 
 The `CustomViewBehaviour` enum specifies the following behaviour:-
  
 | Behaviour                            | Description                                                                                                    |
 |--------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | ViewBehaviourDefault                 | Default behavior (size negotiation is on, style change is monitored, event callbacks are not called.)           |
-| DisableSizeNegotiation               | If our control does not need size negotiation, i.e. control will be skipped by the size negotiation algorithm. |
-| DisableStyleChangeSignals            | True if control should not monitor style change signals such as Theme/Font change.                             |
-| RequiresKeyboardNavigationSupport    | True if need to support keyboard navigation.    
+| DisableSizeNegotiation               | If our view does not need size negotiation, i.e. view will be skipped by the size negotiation algorithm. |
+| DisableStyleChangeSignals            | True if view should not monitor style change signals such as Theme/Font change.                             |
+| RequiresKeyboardNavigationSupport    | True if need to support keyboard navigation.
 | LastViewBehaviour                    |                                                               |
 
 `CustomViewBehaviour` is used during object construction. Two examples follow:
@@ -313,8 +313,8 @@ public ContactView() : base(typeof(ContactView).Name, CustomViewBehaviour.Requir
 + A **hover event** is when a pointer moves within the bounds of a custom view (e.g. mouse pointer or hover pointer).
 + A **wheel event** is when the mouse wheel (or similar) is moved while hovering over a view (via a mouse pointer or hover pointer).
  
-If the control needs to utilize hover and wheel events, then the correct [behaviour flag](#controlbehaviour) should be used when
-constructing the control, and the appropriate method should be overridden.
+If the view needs to utilize hover and wheel events, then the correct [behaviour flag](#viewbehaviour) should be used when
+constructing the view, and the appropriate method should be overridden.
 
 [Back to top](#top)
 
@@ -325,14 +325,13 @@ DALi has a gesture system which analyses a stream of touch events and attempts t
 The following gesture detectors are provided:
  
  + **Pan:** When the user starts panning (or dragging) one or more fingers.
-            The panning should start from within the bounds of the control.
+            The panning should start from within the bounds of the view.
  + **Pinch:** Detects when two touch points move towards or away from each other.
-              The center point of the pinch should be within the bounds of the control.
- + **Tap:** When the user taps within the bounds of the control.
- + **LongPress:** When the user presses and holds on a certain point within the bounds of a control.
+              The center point of the pinch should be within the bounds of the view.
+ + **Tap:** When the user taps within the bounds of the view.
+ + **LongPress:** When the user presses and holds on a certain point within the bounds of a view.
  
-The control base class provides basic set up to detect these gestures. If any of these detectors are required then
-this can be specified in the `OnInitialize` method.
+Gesture detectors can be specified in the `OnInitialize` method.
  
 This code snippet is taken from the `ContactView` custom view control:
 
@@ -393,8 +392,8 @@ public override void OnTap(TapGesture tap)
 
 Accessibility is functionality that has been designed to aid usage by the visually impaired.
  
-Accessibility behaviour can be customized in the control by overriding certain virtual methods.
-An example is `OnAccessibilityTouch`. Touch events are delivered differently in 'Accessibility' mode.
+Accessibility behaviour can be customized in the view by overriding certain virtual methods.
+An example is `OnAccessibilityTouch`. Touch events are delivered differantly in 'Accessibility' mode.
 `OnAccessibilityTouch` should be overridden if some special behaviour is required when these touch events
 are received. 
 
@@ -403,7 +402,7 @@ are received.
 <a name="defaultwindowconnection"></a>
 ### Stage Connection
 
-Methods are provided in the `CustomView' class that can be overridden if notification is required when our control
+Methods are provided in the `CustomView' class that can be overridden if notification is required when our view
 is connected to, or disconnected from the stage (default window).
 
 ~~~{.cs}
@@ -448,7 +447,7 @@ Size negotiation is implemented via a range of `ResizePolicies`, declared in the
 - ResizePolicy::DIMENSION_DEPENDENCY: This covers rules such as width-for-height and height-for-width. You specify that one dimension depends on another.
 
 Relayout requests are put in automatically when a property is changed on a view, or a change to the stage hierarchy is
-made and manual requests are usually not necessary. The`RelayoutRequest` method is available for deriving controls to call when
+made and manual requests are usually not necessary. The`RelayoutRequest` method is available for deriving views to call when
 they would like themselves to be relaid out.
 
 The following overridable methods provide customization points for the size negotiation algorithm:
@@ -462,10 +461,10 @@ The following overridable methods provide customization points for the size nego
   immediately after the new size has been set on the view. i.e after size negotiation is complete. 
 
 * `OnSetResizePolicy` is called when the resize policy is set on a view. Allows deriving views to respond to changes in resize policy.
-  `OnSetResizePolicy` can be overridden to receive notice that the resize policy has changed on the control and action can be taken. 
+  `OnSetResizePolicy` can be overridden to receive notice that the resize policy has changed on the view and action can be taken. 
 
-Size negotiation is enabled on controls by default. To disable size negotiation, simply pass in the
-`DisableSizeNegotiation` behaviour flag into the control constructor. See [behaviour flags](#controlbehaviour)
+Size negotiation is enabled on views by default. To disable size negotiation, simply pass in the
+`DisableSizeNegotiation` behaviour flag into the view constructor. See [behaviour flags](#viewbehaviour)
 
 [Back to top](#top)
 
