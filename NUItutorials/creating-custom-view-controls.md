@@ -81,9 +81,15 @@ Key `CustomView` methods include:
 
 
 | Name       | Description |
-| --------------- |------------ |
-|  OnInitialize       | Called after the view has been initialized.  |
-|         |  |
+| -----------------------|------------ |
+| OnInitialize          | Called after the view has been initialized.  |
+| SetBackground          | Set the background with a property map.         |
+| EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
+| RegisterVisual         | Register a visual by Property Index, linking a view to visual when required. |
+| CreateTransition       | Create a transition effect on the view - for animations. |
+| RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
+| OnStageConnection      | Called after the view has been connected to the stage 'default window' |
+
 
 [Back to top](#top)
  
@@ -285,14 +291,14 @@ Property registration for transistions and animations is via `GetPropertyIndex`,
 <a name="viewbehaviour"></a>
 ### Setting View behaviour
 
-The `CustomViewBehaviour` enum specifies the following behaviour:-
+The `CustomViewBehaviour` enum specifies the following behaviour:
  
 | Behaviour                            | Description                                                                                                    |
 |--------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | ViewBehaviourDefault                 | Default behavior (size negotiation is on, style change is monitored, event callbacks are not called.)           |
 | DisableSizeNegotiation               | If our view does not need size negotiation, i.e. view will be skipped by the size negotiation algorithm. |
 | DisableStyleChangeSignals            | True if view should not monitor style change signals such as Theme/Font change.                             |
-| RequiresKeyboardNavigationSupport    | True if need to support keyboard navigation.
+| RequiresKeyboardNavigationSupport    | True if need to support keyboard navigation. |
 | LastViewBehaviour                    |                                                               |
 
 `CustomViewBehaviour` is used during object construction. Two examples follow:
