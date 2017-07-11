@@ -74,16 +74,16 @@ Key `CustomView` methods include:
 | OnInitialize           | called after the view has been initialized.               |
 | SetBackground          | Set the background with a property map.         |
 | EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
-| RegisterVisual         | Register a visual by Property Index, linking an View to visual when required. |
+| RegisterVisual         | Register a visual by Property Index, linking a view to visual when required. |
 | CreateTransition       | Create a transition effect on the view - for animations. |
 | RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
 | OnStageConnection      | Called after the view has been connected to the stage 'default window' |
 
 
-| Parameter       | Description |
+| Name       | Description |
 | --------------- |------------ |
-| _path_          | Defines position and orientation     |
-| _forward_       | The vector (in local space coordinate system) that will be oriented with the path's tangent direction |
+|  OnInitialize       | Called after the view has been initialized.  |
+|         |  |
 
 [Back to top](#top)
  
