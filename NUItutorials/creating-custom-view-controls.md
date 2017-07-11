@@ -11,6 +11,7 @@ In this tutorial:
 [Styling](#stylable)<br>
 [Type registration](#typeregistration)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
+[Creating Transitions](#creatingtransitions)<br>
 [Setting view behaviour](#viewbehaviour)<br>
 [Events](#events)<br>
 [Gestures](#gestures)<br>
@@ -147,6 +148,11 @@ The following code snippet shows the creation and registration of an image visua
 
 ~~~{.cs}
 
+private VisualBase _imageVisual;
+
+...
+...
+
 [ScriptableProperty()]
 public string ImageURL
 {
@@ -170,12 +176,14 @@ public string ImageURL
             // Set the depth index for Image visual
            _imageVisual.DepthIndex = ImageVisualPropertyIndex;
         }
-    }
+}
 ~~~
 
-Note: this property is a [ScriptableProperty](#enableproperties)
+Note: this property is a [ScriptableProperty](#enableproperties), which automatically generates indices.
 
 `RegisterVisual` registers a visual by a 'property index', linking a view to a visual when required.
+
+`GetPropertyIndex` gets the generated index corresponding to the name
 
 The [Visuals tutorial](visuals.md) describes the property maps that can be used for each visual type.
 
@@ -305,24 +313,72 @@ transitions and animation effects.
  
 Type Registration is via the `ViewRegistry` method, see [Custom View creation](#creation).
 
-#### Properties
- 
-View properties can be one of 3 types:
- + **Event-side only:** A function is called to set or retrieve the value of this property.
- + **Animatable Properties:** These are double-buffered properties that can be animated.
- + **Custom Properties:** These are dynamic properties that are created for every single instance of the view.
-                          Custom properties tend to take a lot of memory, and are usually used by applications or
-                          other controls to dynamically set certain attributes on their children.
-                          The index for these properties can also be different for every instance.
- 
-Careful consideration must be taken when choosing which property type to use for the properties of the custom view.
-For example, an Animatable property type can be animated, but requires a lot more resources (both in its execution and memory footprint)
-compared to an event-side only property.
+[Back to top](#top)
+
+<a name="properties"></a>
+### Properties
+
+Properties can be animatable. Examples af animatable `View` properties are - Position, Orientation, Scale, Color etc.
+
+The [Animation tutorial](animation.md) describes the NUI animation framework.
+
+<a name="enableproperties"></a>
+#### Enabling properties for JSON access - property registration
+
+The `ScriptableProperty` class enables a property to be registered with the `type registry'.
+
+~~~{.cs}
+    internal class ScriptableProperty : System.Attribute
+~~~
+
+Add `ScriptableProperty` to any property belonging to a view (control) that you want to be scriptable from JSON.
+
+Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
+can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
+
+The [Rendering](#rendering) section has an example.
+
+~~~{.cs}
+
+private VisualBase _imageVisual;
+
+...
+...
+
+[ScriptableProperty()]
+public string ImageURL
+{
+    get
+    {
+        return _imageURL;
+    }
+    set
+    {
+        _imageURL = value;
+
+        // Create and Register Image Visual
+        PropertyMap imageVisual = new PropertyMap();
+        imageVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Image ))
+                   .Add( ImageVisualProperty.URL, new PropertyValue( _imageURL ) )
+                   .Add( ImageVisualProperty.AlphaMaskURL, new PropertyValue( _maskURL ));
+
+        _imageVisual =  VisualFactory.Get().CreateVisual( imageVisual );
+
+        RegisterVisual( GetPropertyIndex("ImageURL"), _imageVisual );
+
+        // Set the depth index for Image visual
+        _imageVisual.DepthIndex = ImageVisualPropertyIndex;
+    }
+}
+~~~
+
+A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
+
+See [Automatic property registration of visuals](visuals.md#automaticpropertyreg) for further details, and an example.
 
 [Back to top](#top)
- 
 
-<a name="createtransitions"></a>
+<a name="creatingtransitions"></a>
 ### Creating Transitions
 
                    PropertyMap _transition = new PropertyMap();
@@ -351,16 +407,6 @@ compared to an event-side only property.
 
 [Back to top](#top)
 
-
-<a name="enableproperties"></a>
-### Enabling properties for JSON access - property registration
-
-Add `ScriptableProperty`attribute to any property you want to be scriptable from JSON. 
-
-See [Automatic property registration of visuals](visuals.md#automaticpropertyreg) for further details, and an example.
-
-[Back to top](#top)
- 
 <a name="viewbehaviour"></a>
 ### Setting View behaviour
 

@@ -133,7 +133,7 @@ The `VisualView` class `AddVisual` method is another example of API 'inherent' V
 
 The snippet above, and the examples for each Visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
 The NUI code base is currently been modified (_July 2017_) to utilise property registration based on automatic generation of indices.
-See Appendix A [Automatic property registration for Visuals](#automaticpropertyreg) for an example.
+See [Properties and registration](#properties).
 
 [Back to top](#top)
 
@@ -809,60 +809,6 @@ _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 ~~~
 
 [Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a `VisualView`.
-
-[Back to top](#top)
-
-<a name="automaticpropertyreg"></a>
-### Appendix A - Automatic property registration of visuals
-
-The `ScriptableProperty` class enables a property to be registered with the `type registry'.
-
-~~~{.cs}
-    internal class ScriptableProperty : System.Attribute
-~~~
-
-Add `ScriptableProperty` to any property belonging to a view (control) you want to be scriptable from JSON.
-
-Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
-can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
-
-Here is an example:
-
-~~~{.cs}
-
-private VisualBase _imageVisual;
-
-...
-...
-
-[ScriptableProperty()]
-public string ImageURL
-{
-    get
-    {
-        return _imageURL;
-    }
-    set
-    {
-        _imageURL = value;
-
-        // Create and Register Image Visual
-        PropertyMap imageVisual = new PropertyMap();
-        imageVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Image ))
-                   .Add( ImageVisualProperty.URL, new PropertyValue( _imageURL ) )
-                   .Add( ImageVisualProperty.AlphaMaskURL, new PropertyValue( _maskURL ));
-
-        _imageVisual =  VisualFactory.Get().CreateVisual( imageVisual );
-
-        RegisterVisual( GetPropertyIndex("ImageURL"), _imageVisual );
-
-        // Set the depth index for Image visual
-        _imageVisual.DepthIndex = ImageVisualPropertyIndex;
-    }
-}
-~~~
-
-A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
 
 [Back to top](#top)
 
