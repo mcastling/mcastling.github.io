@@ -9,7 +9,7 @@ In this tutorial:
 [Creation of a custom view](#creation)<br>
 [Rendering](#rendering)<br>
 [Styling](#stylable)<br>
-[Type and property registration](#typeregistration)<br>
+[Type registration](#typeregistration)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
 [Setting view behaviour](#viewbehaviour)<br>
 [Events](#events)<br>
@@ -69,20 +69,9 @@ There are several controls derived from `CustomView` objects already existing in
  
 Key `CustomView` methods include:
 
-| Name                   | Description |
-|----------------------------------------------------------------------------------------------------------------------------|
-| OnInitialize           | called after the view has been initialized.               |
-| SetBackground          | Set the background with a property map.         |
-| EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
-| RegisterVisual         | Register a visual by Property Index, linking a view to visual when required. |
-| CreateTransition       | Create a transition effect on the view - for animations. |
-| RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
-| OnStageConnection      | Called after the view has been connected to the stage 'default window' |
-
-
 | Name       | Description |
 | -----------------------|------------ |
-| OnInitialize          | Called after the view has been initialized.  |
+| OnInitialize           | Called after the view has been initialized.  |
 | SetBackground          | Set the background with a property map.         |
 | EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
 | RegisterVisual         | Register a visual by Property Index, linking a view to visual when required. |
@@ -193,30 +182,108 @@ The [Visuals tutorial](visuals.md) describes the property maps that can be used 
 [Back to top](#top)
  
 <a name="stylable"></a>
-### Ensuring Control is Stylable
+### Ensuring View is Stylable
 
 The NUI property system allows custom views to be easily styled. The JSON Syntax is used in the stylesheets:
  
-**JSON Styling Syntax Example:**
-~~~
-{
+**JSON Styling Syntax Example - current format:**
+
+This is an example of the current stylesheet 'format', (_as at July 2017_). This example includes a visual.
+
+~~~{.json}
+
   "styles":
   {
-    "textfield":
+
+...
+...
+
+    "TextField":
     {
       "pointSize":18,
       "primaryCursorColor":[0.0,0.72,0.9,1.0],
       "secondaryCursorColor":[0.0,0.72,0.9,1.0],
-      "cursorWidth":1,
+      "cursorWidth":3,
       "selectionHighlightColor":[0.75,0.96,1.0,1.0],
       "grabHandleImage" : "{DALI_STYLE_IMAGE_DIR}cursor_handler_drop_center.png",
       "selectionHandleImageLeft" : {"filename":"{DALI_STYLE_IMAGE_DIR}selection_handle_drop_left.png" },
-      "selectionHandleImageRight": {"filename":"{DALI_STYLE_IMAGE_DIR}selection_handle_drop_right.png" }
-    }
-  }
-}
+      "selectionHandleImageRight": {"filename":"{DALI_STYLE_IMAGE_DIR}selection_handle_drop_right.png" },
+      "enableSelection":true
+    },
+
+...
+...
+
+    "TextFieldFontSize0":
+    {
+      "pointSize":10
+    },
+
+...
+...
+
+    "TextSelectionPopup":
+    {
+      "popupMaxSize":[656,72],
+      "optionDividerSize":[2,0],
+      "popupDividerColor":[0.23,0.72,0.8,0.11],
+      "popupIconColor":[1.0,1.0,1.0,1.0],
+      "popupPressedColor":[0.24,0.72,0.8,0.11],
+      "background": {
+        "visualType": "IMAGE",
+        "url": "{DALI_IMAGE_DIR}selection-popup-background.9.png"
+        },
+      "backgroundBorder": {
+        "visualType": "IMAGE",
+        "url": "{DALI_IMAGE_DIR}selection-popup-border.9.png",
+        "mixColor":[0.24,0.72,0.8,1.0]
+        },
+      "popupFadeInDuration":0.25,
+      "popupFadeOutDuration":0.25
+    },
+
 ~~~
- 
+
+**JSON Styling Syntax Example - 'new' format:**
+
+This is an example of the new stylesheet 'format', currently under development (_July 2017_):
+
+This example also includes a visual.
+
+~~~{.json}
+
+  "states":
+  {
+    "NORMAL":
+    {
+      "states":
+      {
+        "UNSELECTED":
+        {
+          "visuals":
+          {
+            "backgroundVisual":
+             {
+              "visualType":"IMAGE",
+              "url":"backgroundUnSelected.png"
+             }
+          }
+        },
+        "SELECTED":
+        {
+          "visuals":
+          {
+            "backgroundVisual":
+             {
+              "visualType":"IMAGE",
+              "url":"backgroundSelected.png"
+             }
+          }
+        }
+      }
+    },
+~~~
+
 Styling gives the UI designer the ability to change the look and feel of the view without any code changes.
  
 | Normal Style | Customized Style |
@@ -236,12 +303,12 @@ The 'Type Registry' is used to register your custom view.
 Type registration allows the creation of the view via a JSON file, as well as registering properties, signals, actions,
 transitions and animation effects.
  
-Type Registration is via the `ViewRegistry` method, see [Custom View creation](#creation)
+Type Registration is via the `ViewRegistry` method, see [Custom View creation](#creation).
 
 #### Properties
  
-View properties can be one of three types:
- + **Event-side only:** A function is called to set or retrieve THE value of this property.
+View properties can be one of 3 types:
+ + **Event-side only:** A function is called to set or retrieve the value of this property.
  + **Animatable Properties:** These are double-buffered properties that can be animated.
  + **Custom Properties:** These are dynamic properties that are created for every single instance of the view.
                           Custom properties tend to take a lot of memory, and are usually used by applications or
@@ -254,37 +321,43 @@ compared to an event-side only property.
 
 [Back to top](#top)
  
+
+<a name="createtransitions"></a>
+### Creating Transitions
+
+                   PropertyMap _transition = new PropertyMap();
+                    _transition.Add("target", new PropertyValue(target.Name));
+                    _transition.Add("property", new PropertyValue(_str));
+                    if (initialValue != null)
+                    {
+                        PropertyValue initVal = PropertyValue.CreateFromObject(initialValue);
+                        _transition.Add("initialValue", new PropertyValue(initVal));
+                    }
+                    _transition.Add("targetValue", destVal);
+                    _transition.Add("animator", new PropertyValue(_animator));
+
+                    TransitionData _transitionData = new TransitionData(_transition);
+                    return this.CreateTransition(_transitionData);
+
+       /// Create a transition effect on the control.
+        /// </summary>
+        /// <param name="transitionData">transitionData The transition data describing the effect to create</param>
+        /// <returns>A handle to an animation defined with the given effect, or an empty handle if no properties match
+
+        protected Animation CreateTransition(TransitionData transitionData)
+        {
+            return viewWrapperImpl.CreateTransition(transitionData);
+        }
+
+[Back to top](#top)
+
+
 <a name="enableproperties"></a>
 ### Enabling properties for JSON access - property registration
 
-The `ScriptableProperty` class enables a property to be registered with the `type registry'.
+Add `ScriptableProperty`attribute to any property you want to be scriptable from JSON. 
 
-~~~{.cs}
-    internal class ScriptableProperty : System.Attribute
-~~~
-
-Add `ScriptableProperty`to any property you want to be scriptable from JSON.
-The following code snippet is taken from the `ContactView` class:
-
-~~~{.cs}
-[ScriptableProperty()]
-public int Shape
-{
-    get
-    {
-        return _shape;
-    }
-    set
-    {
-        _shape = value;
-
-        ...
-        ...
-    }
-
-Property registration for transistions and animations is via `GetPropertyIndex`, an example is shown in [rendering](#rendering).
-
-~~~
+See [Automatic property registration of visuals](visuals.md#automaticpropertyreg) for further details, and an example.
 
 [Back to top](#top)
  
@@ -313,20 +386,18 @@ public VisualView() : base(typeof(VisualView).Name, CustomViewBehaviour.ViewBeha
 public ContactView() : base(typeof(ContactView).Name, CustomViewBehaviour.RequiresKeyboardNavigationSupport)
 {
 }
-
 ~~~
 
 [Back to top](#top)
 
 <a name="events"></a>
-### Touch, Hover & Wheel Events
+### Touch, Hover and Wheel Events
 
-+ A **touch** is when any touch occurs within the bounds of the custom view. Connect to the View class `TouchSignal` method.
++ A **touch event** is when any touch occurs within the bounds of the custom view. Connect to the View class `TouchSignal` method, (via `TouchEvent`).
 + A **hover event** is when a pointer moves within the bounds of a custom view (e.g. mouse pointer or hover pointer).
 + A **wheel event** is when the mouse wheel (or similar) is moved while hovering over a view (via a mouse pointer or hover pointer).
- 
-If the view needs to utilize hover and wheel events, then the correct [behaviour flag](#viewbehaviour) should be used when
-constructing the view, and the appropriate method should be overridden.
+
+The `View` class contains `TouchEvent`, `WheelEvent` and `HoverEvent` events.
 
 [Back to top](#top)
 
@@ -412,10 +483,10 @@ are received.
 [Back to top](#top)
 
 <a name="defaultwindowconnection"></a>
-### Stage Connection
+### Window Connection
 
 Methods are provided in the `CustomView' class that can be overridden if notification is required when our view
-is connected to, or disconnected from the stage (default window).
+is connected to, or disconnected from the window.
 
 ~~~{.cs}
 OnStageConnection( int depth )
@@ -457,6 +528,14 @@ Size negotiation is implemented via a range of `ResizePolicies`, declared in the
 - ResizePolicy::SIZE_FIXED_OFFSET_FROM_PARENT: Fill up the parent and add a fixed offset using SetSizeModeFactor.
 - ResizePolicy::FIT_TO_CHILDREN: Size will scale around the size of the actor's children. E.g. A popup's height may resize itself around it's contents.
 - ResizePolicy::DIMENSION_DEPENDENCY: This covers rules such as width-for-height and height-for-width. You specify that one dimension depends on another.
+
+Here is an example of setting resize policy for a custom view:
+
+~~~{.cs}
+contactView = new ContactView();
+contactView.WidthResizePolicy  = ResizePolicyType.FillToParent;
+contactView.HeightResizePolicy = ResizePolicyType.FillToParent;
+~~~
 
 Relayout requests are put in automatically when a property is changed on a view, or a change to the stage hierarchy is
 made and manual requests are usually not necessary. The`RelayoutRequest` method is available for deriving views to call when

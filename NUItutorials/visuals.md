@@ -815,10 +815,15 @@ _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 <a name="automaticpropertyreg"></a>
 ### Appendix A - Automatic property registration of visuals
 
-The `ScriptableProperty` class enables a property to be registered with the `type registry`. Add `ScriptableProperty` to any
-property belonging to a View (control) you want to be scriptable from JSON.
+The `ScriptableProperty` class enables a property to be registered with the `type registry'.
 
-Property indices are generated automatically in the `ScriptableProperty` class. A Unique index for each property
+~~~{.cs}
+    internal class ScriptableProperty : System.Attribute
+~~~
+
+Add `ScriptableProperty` to any property belonging to a view (control) you want to be scriptable from JSON.
+
+Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
 can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
 
 Here is an example:
