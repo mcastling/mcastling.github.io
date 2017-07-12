@@ -10,6 +10,7 @@ In this tutorial:
 [Rendering](#rendering)<br>
 [Styling](#stylable)<br>
 [Type registration](#typeregistration)<br>
+[Properties](#properties)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
 [Creating Transitions](#creatingtransitions)<br>
 [Setting view behaviour](#viewbehaviour)<br>
@@ -57,10 +58,14 @@ There are several controls derived from `CustomView` objects already existing in
 
 * **Spin** control, which is used for continuously changing values when users can easily predict a set of values.
 
-* **ContactView** which consists of four visuals (Image, Primitive, Text and Color).
+* **ContactView** which consists of four visuals (Image, Primitive, Text and Color), to display contact information.
   All of these visuals can be configured via properties - ImageURL (Image), Shape (Primitive), Name (Text) and Color.
   Tap gesture is also enabled on the `ContactView` which changes the color visual to some random color when the
   ContactView is tapped.
+
+![ ](ContactView.png)
+
+The contact view screenshot shows 5 contacts, each with the 4 visuals.
 
 * A **VisualView** control enabling the addition of any visual. See [Visual View class](visuals.md#visualview)
 
@@ -70,7 +75,7 @@ There are several controls derived from `CustomView` objects already existing in
  
 Key `CustomView` methods include:
 
-| Name       | Description |
+| Name                   | Description |
 | -----------------------|------------ |
 | OnInitialize           | Called after the view has been initialized.  |
 | SetBackground          | Set the background with a property map.         |
@@ -135,14 +140,10 @@ public override void OnInitialize()
 <a name="rendering"></a>
 ### Rendering Content
 
-![ ](creating-custom-controls/rendering.png)
-
 To render content, the required views can be created and added to the control itself as its children.
 However, this solution is not fully optimised and means extra views will be added, which is extra processing.
  
 It is recommended to use/reuse visuals to create the required content. See [Visuals tutorial](visuals.md).
-
-Visuals are usually defined in a stylesheet.
  
 The following code snippet shows the creation and registration of an image visual in `ContactView.cs`.
 
@@ -179,11 +180,13 @@ public string ImageURL
 }
 ~~~
 
-Note: this property is a [ScriptableProperty](#enableproperties), which automatically generates indices.
+Note: The 'ImageURL' property is a [ScriptableProperty](#enableproperties), which automatically generates indices.
 
 `RegisterVisual` registers a visual by a 'property index', linking a view to a visual when required.
 
-`GetPropertyIndex` gets the generated index corresponding to the name
+`GetPropertyIndex` gets the generated index corresponding to the name.
+
+A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
 
 The [Visuals tutorial](visuals.md) describes the property maps that can be used for each visual type.
 
@@ -322,6 +325,11 @@ Properties can be animatable. Examples af animatable `View` properties are - Pos
 
 The [Animation tutorial](animation.md) describes the NUI animation framework.
 
+Properties can be accessed via a unique index. The index can be set manually in code ('hard-coded'), or calculated
+automatically. `ContactView.cs` contains examples of both methods; fixed for 'depth index', and automatic for
+registering visuals. The NUI code base is currently been modified (_July 2017_) to utilise property registration based
+solely on automatic generation of indices.
+
 <a name="enableproperties"></a>
 #### Enabling properties for JSON access - property registration
 
@@ -336,74 +344,105 @@ Add `ScriptableProperty` to any property belonging to a view (control) that you 
 Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
 can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
 
-The [Rendering](#rendering) section has an example.
-
-~~~{.cs}
-
-private VisualBase _imageVisual;
-
-...
-...
-
-[ScriptableProperty()]
-public string ImageURL
-{
-    get
-    {
-        return _imageURL;
-    }
-    set
-    {
-        _imageURL = value;
-
-        // Create and Register Image Visual
-        PropertyMap imageVisual = new PropertyMap();
-        imageVisual.Add( Visual.Property.Type, new PropertyValue( (int)Visual.Type.Image ))
-                   .Add( ImageVisualProperty.URL, new PropertyValue( _imageURL ) )
-                   .Add( ImageVisualProperty.AlphaMaskURL, new PropertyValue( _maskURL ));
-
-        _imageVisual =  VisualFactory.Get().CreateVisual( imageVisual );
-
-        RegisterVisual( GetPropertyIndex("ImageURL"), _imageVisual );
-
-        // Set the depth index for Image visual
-        _imageVisual.DepthIndex = ImageVisualPropertyIndex;
-    }
-}
-~~~
-
-A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
-
-See [Automatic property registration of visuals](visuals.md#automaticpropertyreg) for further details, and an example.
+[Rendering](#rendering) has an example of the use of a 'scriptable property', using `GetPropertyIndex`.
 
 [Back to top](#top)
 
 <a name="creatingtransitions"></a>
 ### Creating Transitions
 
-                   PropertyMap _transition = new PropertyMap();
-                    _transition.Add("target", new PropertyValue(target.Name));
-                    _transition.Add("property", new PropertyValue(_str));
-                    if (initialValue != null)
-                    {
-                        PropertyValue initVal = PropertyValue.CreateFromObject(initialValue);
-                        _transition.Add("initialValue", new PropertyValue(initVal));
-                    }
-                    _transition.Add("targetValue", destVal);
-                    _transition.Add("animator", new PropertyValue(_animator));
+#### Transitions
 
-                    TransitionData _transitionData = new TransitionData(_transition);
-                    return this.CreateTransition(_transitionData);
+Controls such as buttons change between states from user interaction.
+All controls can move between the states NORMAL, FOCUSED and DISABLED.
+Whilst in those states Button has sub-states SELECTED and UNSELECTED.
 
-       /// Create a transition effect on the control.
-        /// </summary>
-        /// <param name="transitionData">transitionData The transition data describing the effect to create</param>
-        /// <returns>A handle to an animation defined with the given effect, or an empty handle if no properties match
+To move between states and sub-states transition animations can be defined.
+Each state and sub-state can have an "entry" and "exit" transition.
 
-        protected Animation CreateTransition(TransitionData transitionData)
-        {
-            return viewWrapperImpl.CreateTransition(transitionData);
-        }
+To make defining common transitions easier an effect can be used with a "from" and "to" state.
+
+One such effect is CROSSFADE which animates the opacity of visuals fading in and out to give a nice transition.
+
+Transition effects can be read from stylesheets, or 'directly' via the `CreateTransition` API. 
+
+#### CreateTransition API
+
+Its possible to animate 'Scriptable Properties' by using the `CreateTransition` API from custom view derived classes.
+
+`CreateTransition` creates a transition effect on the view.
+
+~~~{.cs}
+protected Animation CreateTransition(TransitionData transitionData)
+~~~
+
+where,
+
+The transition data parameter describes the effect to create.
+The return value is a handle to an animation defined with the given effect, or an empty handle if no properties match.
+
+#### Example of the use of CreateTransition API
+
+This example code is taken from the `AnimateVisual` method in the `VisualView` class. `VisualView` is a custom view derived class.
+
+~~~{.cs}
+_alphaFunction = "EASE_IN_OUT_SINE";
+
+...
+...
+
+PropertyMap _animator = new PropertyMap();
+if ( _alphaFunction != null) {_animator.Add("alphaFunction", new PropertyValue(_alphaFunction));}
+
+PropertyMap _timePeriod = new PropertyMap();
+_timePeriod.Add("duration", new PropertyValue((endTime - startTime) / 1000.0f));
+_timePeriod.Add("delay", new PropertyValue(startTime / 1000.0f));
+_animator.Add("timePeriod", new PropertyValue(_timePeriod));
+
+string _str1 = property.Substring(0, 1);
+string _str2 = property.Substring(1);
+string _str = _str1.ToLower() + _str2;
+if (_str == "position") {_str = "offset";}
+
+PropertyValue destVal = PropertyValue.CreateFromObject(destinationValue);
+
+PropertyMap _transition = new PropertyMap();
+_transition.Add("target", new PropertyValue(target.Name));
+_transition.Add("property", new PropertyValue(_str));
+if (initialValue != null)
+{
+    PropertyValue initVal = PropertyValue.CreateFromObject(initialValue);
+    _transition.Add("initialValue", new PropertyValue(initVal));
+}
+
+_transition.Add("targetValue", destVal);
+_transition.Add("animator", new PropertyValue(_animator));
+
+TransitionData _transitionData = new TransitionData(_transition);
+return this.CreateTransition(_transitionData);
+~~~
+
+#### Example of Transition values in a stylesheet
+
+Example using CROSSFADE effect:
+ 
+~~~{json}
+"transitions":
+[
+  {
+     "from":"UNSELECTED",
+     "to":"SELECTED",
+     "visualName":"*",
+     "effect":"CROSSFADE",
+     "animator":
+     {
+       "alphaFunction":"EASE_OUT",
+       "duration":"0.2,
+       "delay":0
+     }
+  }
+]
+~~~
 
 [Back to top](#top)
 
@@ -450,7 +489,7 @@ The `View` class contains `TouchEvent`, `WheelEvent` and `HoverEvent` events.
 <a name="gestures"></a>
 ### Gestures
 
-DALi has a gesture system which analyses a stream of touch events and attempts to determine the intention of the user.
+NUI has a gesture system which analyses a stream of touch events and attempts to determine the intention of the user.
 The following gesture detectors are provided:
  
  + **Pan:** When the user starts panning (or dragging) one or more fingers.

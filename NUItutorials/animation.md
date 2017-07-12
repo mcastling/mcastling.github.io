@@ -63,6 +63,9 @@ For 'standard' controls, the animatable state of a property can be queried (via 
 
 The animatable state can be set in the derived classes of custom view controls.
 
+See also [Properties](creating-custom-view-controls.md#properties) which describes 'ScriptableProperties' which are properties
+which can also be animated.
+
 [Back to top](#top)
 
 <a name="animatingproperties"></a>

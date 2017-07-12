@@ -22,7 +22,6 @@ In this tutorial:
 [The Visual transform](#visualtransform)<br>
 [The Visual map class](#visualmap)<br>
 [The Visual view class](#visualview)<br>
-[Appendix A - Automatic property registration of visuals](#automaticpropertyreg)<br>
 
 <a name="overview"></a>
 ## Overview
@@ -55,11 +54,9 @@ Each state and sub-state should have the required visuals. A visual can be commo
 When pressed the button moves from the unselected state to the selected state. The unselected visuals
 are replaced by the selected visuals.
  
-When the button is disabled, background, button and selected visuals are replaced by
-their disabled visuals.
+When the button is disabled, background, button and selected visuals are replaced by their disabled visuals.
 
-The [styling tutorial](styling.md) explains how to build up visuals for the
-button states using JSON stylesheets, and transitioning between the various button states.
+The [styling tutorial](styling.md) explains how to build up and transition visuals for the button states using JSON stylesheets.
 
 <a name="visualproperties"></a>
 ### Visual Properties
@@ -129,11 +126,11 @@ In the following code snippet, visual factory creation and registration occur _w
 textView.Background = textVisual;
 ~~~
 
-The `VisualView` class `AddVisual` method is another example of API 'inherent' Visual creation.
+The `VisualView` class `AddVisual` method is another example of API 'inherent' visual creation.
 
 The snippet above, and the examples for each Visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
 The NUI code base is currently been modified (_July 2017_) to utilise property registration based on automatic generation of indices.
-See [Properties and registration](#properties).
+See [Properties](creating-custom-view-visual.md#properties).
 
 [Back to top](#top)
 
@@ -712,7 +709,15 @@ The `AlignType` enum specifies the visual alignment:
 <a name="visualtransformexample"></a>
 #### Example of a Visual Transform
 
-This example shows the configuration and size of a color visual, during a change of size/position/scale of a control.
+A ContactView is a Custom View which consists of four visuals (Image, Primitive, Text and Color), to display 'contact' information.
+All of these visuals can be configured via properties - ImageURL (Image), Shape (Primitive), Name (Text) and Color.
+Tap gesture is also enabled on the ContactView which changes the color visual to some random color when ContactView is tapped.
+
+This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (`OnRelayout` method).
+ 
+![ ](ContactView.png)
+
+Here is the corresponding code sample, for the image visual (:
 
 ~~~{.cs}
 
@@ -721,15 +726,18 @@ OnRelayout(Vector2 viewSize, ....)
 ...
 ...
 
-PropertyMap colorVisualTransform = new PropertyMap();
-colorVisualTransform.Add( (int)VisualTransformPropertyType.Offset, new PropertyValue(new Vector2(0.0f,0.0f)))
-                    .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(new Vector2((int)VisualTransformPolicyType.Relative, (int)VisualTransformPolicyType.Relative)))
-                    .Add((int)VisualTransformPropertyType.SizePolicy, new PropertyValue(new Vector2((int)VisualTransformPolicyType.Relative, (int)VisualTransformPolicyType.Relative)))
-                    .Add( (int)VisualTransformPropertyType.Size, new PropertyValue(new Vector2(1.0f, 1.0f)) )
-                    .Add( (int)VisualTransformPropertyType.Origin, new PropertyValue((int)Visual.AlignType.TopBegin) )
-                    .Add( (int)VisualTransformPropertyType.AnchorPoint, new PropertyValue((int)Visual.AlignType.TopBegin) );
-_colorVisual.SetTransformAndSize(colorVisualTransform, viewSize);
+// Configure the transform and size of Image visual.
+PropertyMap imageVisualTransform = new PropertyMap();
+imageVisualTransform.Add((int)VisualTransformPropertyType.Offset, new PropertyValue(new Vector2(10.0f, 0.0f)))
+                    .Add((int)VisualTransformPropertyType.OffsetPolicy, new PropertyValue(new Vector2((int)VisualTransformPolicyType.Absolute, (int)VisualTransformPolicyType.Absolute)))
+                    .Add((int)VisualTransformPropertyType.SizePolicy, new PropertyValue(new Vector2((int)VisualTransformPolicyType.Absolute, (int)VisualTransformPolicyType.Absolute)))
+                    .Add((int)VisualTransformPropertyType.Size, new PropertyValue(new Vector2(40.0f, 40.0f)))
+                    .Add((int)VisualTransformPropertyType.Origin, new PropertyValue((int)Visual.AlignType.CenterBegin))
+                    .Add((int)VisualTransformPropertyType.AnchorPoint, new PropertyValue((int)Visual.AlignType.CenterBegin));
+_imageVisual.SetTransformAndSize(imageVisualTransform, size);
 ~~~
+
+The code for other visuals in `OnRelayout` is similar. Although note that the `OffsetPolicy` for the text visual is `VisualTransformPolicyType.Relative`, in both axis.
 
 [Back to top](#top)
 
@@ -799,7 +807,7 @@ The `VisualView` is a Custom View class, enabling the addition of any visual.
 public class VisualView : CustomView
 ~~~
 
-Here is an example of setting up a `VisualView`.
+Here is an example of setting up a `VisualView`:
 
 ~~~{.cs}
 _visualView = new VisualView();
@@ -808,7 +816,7 @@ _visualView.PivotPoint = PivotPoint.TopLeft;
 _visualView.Size = new Size(window.Size.Width, window.Size.Height, 0.0f);
 ~~~
 
-[Gradient Visuals](#gradientvisual) are an example of adding a gradient visual to a `VisualView`.
+[Gradient Visuals](#gradientvisual) shows an example of adding a gradient visual to a `VisualView`.
 
 [Back to top](#top)
 
