@@ -3,19 +3,17 @@
 
 This tutorial describes how to create, register and use visuals.
 
-In this tutorial:
-
 [Overview](#overview)<br>
 [Visual Properties](#visualproperties)<br>
 [Visual Type](#visualtype)<br>
-[Visual Creation and registration](#visualcreation)<br>
-[Visual depth index](#visualdepthindex)<br>
+[Visual Creation and Registration](#visualcreation)<br>
+[Visual Depth Index](#visualdepthindex)<br>
 [Example of Visuals in use](#visualexample)<br>
 [The Color Visual](#colorvisual)<br>
 [The Gradient Visual](#gradientvisual)<br>
 [The Image Visual](#imagevisual)<br>
-[THe Border Visual](#bordervisual)<br>
-[The Mesh visual](#meshvisual)<br>
+[The Border Visual](#bordervisual)<br>
+[The Mesh Visual](#meshvisual)<br>
 [The Primitive Visual](#primitivevisual)<br>
 [The Wireframe Visual](#wireframevisual)<br>
 [The Text Visual](#textvisual)<br>
@@ -30,8 +28,8 @@ Visuals provide reusable rendering logic.
 
 Visuals are the main building block of controls.
  
-Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
-Additionally visuals, respond to View size and color change, while also providing clipping at the renderer level.
+Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is been displayed.
+Additionally visuals, respond to `View` size and color change, while also providing clipping at the renderer level.
 
 Visuals are configured via *properties*. 
 
@@ -51,10 +49,10 @@ A control has 3 states - NORMAL, FOCUSED and DISABLED. Buttons have sub states: 
 The button's appearance can be modified by setting properties for the various 'state' visuals.
 Each state and sub-state should have the required visuals. A visual can be common between states.
 
-When pressed the button moves from the unselected state to the selected state. The unselected visuals
-are replaced by the selected visuals.
+When a button is pressed it moves from the Unselected state to the Selected state. The Unselected visuals
+are replaced by the Selected visuals.
  
-When the button is disabled, background, button and selected visuals are replaced by their disabled visuals.
+When the button is disabled, Background, Button and Selected visuals are replaced by their 'disabled' visuals.
 
 The [styling tutorial](styling.md) explains how to build up and transition visuals, for the button states using JSON stylesheets.
 
@@ -97,13 +95,13 @@ The following visual types are available:
 [Back to top](#top)
 
 <a name="visualcreation"></a>
-### Visual Creation and registration
+### Visual Creation and Registration
 
 Visuals are created by `factory` methods.
 
 Visuals need to be _registered_ with a unique 'property' index. The index is used for direct access to the visual.
 The index can be used to link a view to a visual when required. Registration also enables extra functionality,
-such as connection to the default window. `RegisterVisual` stores the visual 'handle' within the control.
+such as connection to the _Window_. `RegisterVisual` stores the visual 'handle' within the control.
 
 The examples in this tutorial demonstrate the recommended procedure for visual creation and registration, using 'explicit'
 calls to the factory and register methods:
@@ -128,9 +126,9 @@ textView.Background = textVisual;
 
 The `VisualView` class `AddVisual` method, is another example of API 'inherent' visual creation.
 
-The snippet above, and the examples for each Visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
+The snippet above, and the examples for each visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
 The NUI code base is currently been modified (_July 2017_) to utilise property registration based on automatic generation of indices.
-See [Properties in custom views](creating-custom-view-visual.md#properties).
+See [Properties in custom views](creating-custom-view-controls.md#properties).
 
 [Back to top](#top)
 
@@ -246,7 +244,7 @@ _visualView.AddVisual("gradientVisual1", gradientVisualMap1);
 
 The actual visual is created in the View `AddVisual` method.
 
-Note : `_visualView` is a Custom View. See [Visual View](#visualview)
+Note : `_visualView` is a custom view. See [Visual View](#visualview)
 
 ### Properties
 
@@ -373,8 +371,8 @@ VisualMap : **SVGVisual**
 
 ### Animated Image Visual
 
-Renders an animated image into the visual's quad geometry. Currently, only the GIF format is supported.
-However a new API is under development (_July 2017_) to enable multiple images to be displayed in turn.
+Renders an animated image into the visual's quad geometry. Currently, only the GIF format is supported,
+however a new API is under development (_July 2017_) to enable multiple images to be displayed in turn.
 
 ![ ](./Images/animated-image-visual.gif)
 
@@ -435,7 +433,7 @@ VisualMap : **BorderVisual**
 <a name="meshvisual"></a>
 ### Mesh Visual
 
-Renders a mesh using a .obj file, optionally with textures provided by a mtl file. Scaled to fit the control.
+Renders a mesh using an .obj file, optionally with textures provided by an `mtl` file. Scaled to fit the control.
  
 ![ ](./Images/mesh-visual.png)
 
@@ -482,7 +480,7 @@ VisualMap : **MeshVisual**
  
 | Enumeration  | Name                                   | Description                                                                                                             |
 |---------------------------------------------------------------------------------|------------------------------------------|----------------------------------------------------|
-|              | TexturedWithDefuseLighting             | *Simplest*. One color that is lit by ambient and diffuse lighting.                                                      |
+|              | TexturelessWithDefuseLighting          | *Simplest*. One color that is lit by ambient and diffuse lighting.                                                      |
 |              | TexturedWithSpecularLighting           | Uses only the visual image textures provided with specular lighting in addition to ambient and diffuse lighting.        |
 |              | TexturedWIthDetailedSpecularLIghting   | Uses all textures provided including a gloss, normal and texture map along with specular, ambient and diffuse lighting. |
 
@@ -501,7 +499,7 @@ Visual.Type : **Primitive**
 
 ### Usage
 
-Here is an example of using a Primitive Visual, the actual shape is set via the `Shape` property.
+Here is an example of using a Primitive visual, the actual shape is set via the `Shape` property.
 
 ~~~{.cs}
 public int Shape
@@ -606,7 +604,7 @@ For spheres, 'stacks' determines how many layers there are as you go down the ob
 
 Renders a wireframe around a quad geometry.
 
-The wireframe visual is mainly used for debugging, and replaces all other visuals when 'Visual Debug Rendering' is turned on.
+The wireframe visual is mainly used for debugging, replacing all other visuals when 'Visual Debug Rendering' is turned on.
 
 ![ ](./Images/wireframe-visual.png)
 
@@ -712,11 +710,11 @@ The `AlignType` enum specifies the visual alignment:
 <a name="visualtransformexample"></a>
 #### Example of a Visual Transform
 
-A `ContactView` is a Custom View which consists of four visuals (Image, Primitive, Text and Color), to display 'contact' information.
+A `ContactView` is a custom view which consists of four visuals (Image, Primitive, Text and Color), to display 'contact' information.
 All of these visuals can be configured via properties - ImageURL (Image), Shape (Primitive), Name (Text) and Color.
-Tap gesture is also enabled on the ContactView which changes the color visual to some random color when the ContactView is tapped.
+Tap gesture is also enabled on the `ContactView`, which changes the color visual to some random color when the `ContactView` is tapped.
 
-This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (the `OnRelayout` method).
+This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (in the `OnRelayout` method).
  
 ![ ](./Images/ContactView.png)
 
@@ -740,7 +738,7 @@ imageVisualTransform.Add((int)VisualTransformPropertyType.Offset, new PropertyVa
 _imageVisual.SetTransformAndSize(imageVisualTransform, size);
 ~~~
 
-The code for other visuals in `OnRelayout` is similar. Although note that the `OffsetPolicy` for the text visual is `VisualTransformPolicyType.Relative`, in both axis.
+The code for the other visuals in `OnRelayout` is similar. Although note that the `OffsetPolicy` for the text visual is `VisualTransformPolicyType.Relative`, in both axis.
 
 [Back to top](#top)
 
@@ -752,7 +750,7 @@ The `VisualMap` class is the 'base class' for each visual.
 The `VisualMap` class encapsulates properties for visual size and offset, depth index, shader, 'mix color', opacity etc. as well as
 the [Transform map](#visualtransform) of a visual.
 
-Here is part of the `ColorVisual` VisualMap
+Here is part of the `ColorVisual` derived class
 
 ~~~{.cs}
    public class ColorVisual : VisualMap
@@ -776,9 +774,9 @@ Here is part of the `ColorVisual` VisualMap
    }
 ~~~
 
-The Visual Map class also contains an _output visual map_, used in visual creation.
+The `VisualMap` class also contains an _output visual map_, used in visual creation.
 
-Here is an example of using the output map to create a visual:
+Here is an example of using this output map to create a visual:
 
 ~~~{.cs}
 
@@ -787,7 +785,7 @@ var _colorVisual = VisualFactory.Instance.CreateVisual(colorMap.OutputVisualMap)
 RegisterVisual(ColorVisualPropertyIndex, _colorVisual);
 ~~~
 
-In this example the visual is created from the Visual Map in the `Background' property.
+In this next example the visual is created from the visual map in the `Background` property.
 
 ~~~{.cs}
 ColorVisual colorVisualMap1 = new ColorVisual();
@@ -797,14 +795,14 @@ _visualView.Background = colorVisualMap1.OutputVisualMap;
 window.GetDefaultLayer().Add(_visualView);
 ~~~
 
-VisualMaps have a custom **shader** property.
+Visual maps have a custom **shader** property.
 
 [Back to top](#top)
 
 <a name="visualview"></a>
 ### The Visual View class
 
-The `VisualView` is a Custom View class, enabling the addition of any visual.
+The `VisualView` is derived from the `CustomView` class, and enables the addition of any visual.
 
 ~~~{.cs}
 public class VisualView : CustomView

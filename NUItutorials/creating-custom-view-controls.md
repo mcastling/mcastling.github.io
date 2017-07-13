@@ -4,13 +4,13 @@
 In this tutorial:
 
 [Overview](#overview)<br>
-[Guidelines for custom view creation](#guidelines)<br>
+[Guidelines for creating a custom view](#guidelines)<br>
 [The existing CustomView class](#existingcustomview)<br>
-[Creation of a custom view](#creation)<br>
+[Creation of a Custom View](#creation)<br>
 [Rendering](#rendering)<br>
 [Styling](#stylable)<br>
 [Type registration](#typeregistration)<br>
-[Properties in custom views](#properties)<br>
+[Properties in Custom Views](#properties)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
 [Creating Transitions](#creatingtransitions)<br>
 [Setting view behaviour](#viewbehaviour)<br>
@@ -63,7 +63,7 @@ There are several controls derived from `CustomView` objects already existing in
   Tap gesture is also enabled on the `ContactView` which changes the color visual to some random color when the
   ContactView is tapped.
 
-![ ](ContactView.png)
+![ ](./Images/ContactView.png)
 
 The contact view screenshot shows 5 contacts, each with the 4 visuals.
 
@@ -97,9 +97,9 @@ A view is created with the `new` operator:
 contactView = new ContactView()
 ~~~
 
-Each custom C# view should have it's static constructor called before any JSON file is loaded.
+Each custom C# View should have it's static constructor called before any JSON file is loaded.
 Static constructors for a class will only run once ( they are run per view, not per instance).
-The view should register it's type inside the static constructor e.g.
+The View should register it's type inside the static constructor e.g.
 
 ~~~{.cs}
 static ContactView()
@@ -108,9 +108,9 @@ static ContactView()
 }
 ~~~
 
-The `ViewRegistry` method registers the views and any scriptable properties they have with the `Type Registery'.
+The `ViewRegistry` method registers the views and any scriptable properties they have with the `Type Registry'.
 
-The view should also provide a `CreateInstance` function, which gets passed to the `ViewRegistry` method.
+The View should also provide a `CreateInstance` function, which gets passed to the `ViewRegistry` method.
 `CreateInstance` will be called if the view is in a JSON file:
 
 ~~~{.cs}
@@ -180,11 +180,11 @@ public string ImageURL
 }
 ~~~
 
-Note: The 'ImageURL' property is a [ScriptableProperty](#enableproperties), which automatically generates indices.
+Note: The `ImageURL` property is a [ScriptableProperty](#enableproperties), which automatically generates indices.
 
 `RegisterVisual` registers a visual by a 'property index', linking a view to a visual when required.
 
-`GetPropertyIndex` gets the generated index corresponding to the name.
+`GetPropertyIndex` gets the generated index corresponding to the property name.
 
 A range of property indices are provided for `ImageVisualPropertyIndex`, 0 by default.
 
@@ -295,7 +295,7 @@ This example also includes a visual.
     },
 ~~~
 
-Styling gives the UI designer the ability to change the look and feel of the view without any code changes.
+Styling gives the UI designer the ability to change the look and feel of the View without any code changes.
  
 | Normal Style | Customized Style |
 |:------------:|:----------------:|
@@ -321,12 +321,12 @@ Type Registration is via the `ViewRegistry` method, see [Custom View creation](#
 <a name="properties"></a>
 ### Properties in custom views
 
-Properties can be animatable. Examples af animatable `View` properties are - Position, Orientation, Scale, Color etc.
+Properties can be animatable or non-animatable. Examples af animatable `View` properties are - Position, Orientation, Scale, Color etc.
 
 The [Animation tutorial](animation.md) describes the NUI animation framework.
 
 Properties can be accessed via a unique index. The index can be set manually in code ('hard-coded'), or calculated
-automatically. `ContactView.cs` contains examples of both methods; fixed for 'depth index', and automatic for
+automatically. `ContactView.cs` contains examples of both indexing methods; fixed for 'depth index', and automatic for
 registering visuals. The NUI code base is currently been modified (_July 2017_) to utilise property registration based
 solely on automatic generation of indices.
 
@@ -367,7 +367,7 @@ Transition effects can be read from stylesheets, or 'directly' via the `CreateTr
 
 #### CreateTransition API
 
-Its possible to *animate 'scriptable properties'*, by using the `CreateTransition` API from custom view derived classes.
+Its possible to animate 'scriptable properties', by using the `CreateTransition` API from custom view derived classes.
 
 `CreateTransition` creates a transition effect on the view.
 
@@ -377,8 +377,8 @@ protected Animation CreateTransition(TransitionData transitionData)
 
 where:
 
-The transition data parameter describes the effect to create.
-The return value is a handle to an animation defined with the given effect, or an empty handle if no properties match.
+* The transition data parameter describes the effect to create.
+* The return value is a handle to an animation defined with the given effect, or an empty handle if no properties match.
 
 #### Example of the use of CreateTransition API
 
@@ -569,7 +569,7 @@ are received.
 <a name="defaultwindowconnection"></a>
 ### Window Connection
 
-Methods are provided in the `CustomView' class that can be overridden if notification is required when our view
+Methods are provided in the `CustomView` class that can be overridden if notification is required when our view
 is connected to, or disconnected from the window.
 
 ~~~{.cs}
