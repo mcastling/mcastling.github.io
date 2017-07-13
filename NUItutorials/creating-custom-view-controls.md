@@ -10,7 +10,7 @@ In this tutorial:
 [Rendering](#rendering)<br>
 [Styling](#stylable)<br>
 [Type registration](#typeregistration)<br>
-[Properties](#properties)<br>
+[Properties in custom views](#properties)<br>
 [Enabling properties for JSON access](#enableproperties)<br>
 [Creating Transitions](#creatingtransitions)<br>
 [Setting view behaviour](#viewbehaviour)<br>
@@ -319,7 +319,7 @@ Type Registration is via the `ViewRegistry` method, see [Custom View creation](#
 [Back to top](#top)
 
 <a name="properties"></a>
-### Properties
+### Properties in custom views
 
 Properties can be animatable. Examples af animatable `View` properties are - Position, Orientation, Scale, Color etc.
 
@@ -331,7 +331,7 @@ registering visuals. The NUI code base is currently been modified (_July 2017_) 
 solely on automatic generation of indices.
 
 <a name="enableproperties"></a>
-#### Enabling properties for JSON access - property registration
+### Enabling properties for JSON access - property registration
 
 The `ScriptableProperty` class enables a property to be registered with the `type registry'.
 
@@ -339,7 +339,7 @@ The `ScriptableProperty` class enables a property to be registered with the `typ
     internal class ScriptableProperty : System.Attribute
 ~~~
 
-Add `ScriptableProperty` to any property belonging to a view (control) that you want to be scriptable from JSON.
+Add `ScriptableProperty` to any property belonging to a view, that you want to be scriptable from JSON.
 
 Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
 can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
@@ -355,20 +355,19 @@ can be obtained by `GetPropertyIndex`, with the name of the property as a parame
 
 Controls such as buttons change between states from user interaction.
 All controls can move between the states NORMAL, FOCUSED and DISABLED.
-Whilst in those states Button has sub-states SELECTED and UNSELECTED.
+Whilst in those states, a button has sub-states SELECTED and UNSELECTED.
 
 To move between states and sub-states transition animations can be defined.
 Each state and sub-state can have an "entry" and "exit" transition.
 
-To make defining common transitions easier an effect can be used with a "from" and "to" state.
-
-One such effect is CROSSFADE which animates the opacity of visuals fading in and out to give a nice transition.
+To make defining common transitions easier an effect can be used with a "from" and "to" state. One such effect is
+CROSSFADE which animates the opacity of visuals fading in and out to give a nice transition.
 
 Transition effects can be read from stylesheets, or 'directly' via the `CreateTransition` API. 
 
 #### CreateTransition API
 
-Its possible to animate 'Scriptable Properties' by using the `CreateTransition` API from custom view derived classes.
+Its possible to animate 'scriptable properties' by using the `CreateTransition` API from custom view derived classes.
 
 `CreateTransition` creates a transition effect on the view.
 
@@ -376,7 +375,7 @@ Its possible to animate 'Scriptable Properties' by using the `CreateTransition` 
 protected Animation CreateTransition(TransitionData transitionData)
 ~~~
 
-where,
+where:
 
 The transition data parameter describes the effect to create.
 The return value is a handle to an animation defined with the given effect, or an empty handle if no properties match.
@@ -478,7 +477,7 @@ public ContactView() : base(typeof(ContactView).Name, CustomViewBehaviour.Requir
 <a name="events"></a>
 ### Touch, Hover and Wheel Events
 
-+ A **touch event** is when any touch occurs within the bounds of the custom view. Connect to the View class `TouchSignal` method, (via `TouchEvent`).
++ A **touch event** is when any touch occurs within the bounds of the custom view.
 + A **hover event** is when a pointer moves within the bounds of a custom view (e.g. mouse pointer or hover pointer).
 + A **wheel event** is when the mouse wheel (or similar) is moved while hovering over a view (via a mouse pointer or hover pointer).
 
@@ -501,7 +500,7 @@ The following gesture detectors are provided:
  
 Gesture detectors can be specified in the `OnInitialize` method.
  
-This code snippet is taken from the `ContactView` custom view control:
+This code snippet is taken from the `ContactView` custom view:
 
 ~~~{.cs}
 public override void OnInitialize()

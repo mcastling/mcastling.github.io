@@ -31,7 +31,7 @@ Visuals provide reusable rendering logic.
 Visuals are the main building block of controls.
  
 Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
-Additionally visuals, respond to view size and color change, while also providing clipping at the renderer level.
+Additionally visuals, respond to View size and color change, while also providing clipping at the renderer level.
 
 Visuals are configured via Properties. 
 
@@ -48,7 +48,7 @@ To create a visual:
 Images, icons and text are added to buttons using visuals.
 
 A control has 3 states - NORMAL, FOCUSED and DISABLED. Buttons have sub states: SELECTED and UNSELECTED.
-The button's appearance can be modified by setting properties for the various 'state' Visuals.
+The button's appearance can be modified by setting properties for the various 'state' visuals.
 Each state and sub-state should have the required visuals. A visual can be common between states.
 
 When pressed the button moves from the unselected state to the selected state. The unselected visuals
@@ -64,8 +64,8 @@ The [styling tutorial](styling.md) explains how to build up and transition visua
 Visual properties are set through a property map. 
 
 There are 2 methods of using property maps:
-* Specific visual 'property' structures, e.g. `ColorVisualProperty`. These structures specify the properties of each Visual type.
-  The properties are listed in the respective Visual section.
+* Specific 'property' structures for each visual, e.g. `ColorVisualProperty`. These structures specify the properties of each visual type.
+  _In this tutorial, the properties for each visual are listed in the respective 'Properties' sub-section_.
 * Visual maps, e.g. `ColorVisual` see [using a VisualMap](#visualmap).
 
 This tutorial illustrates both methods.
@@ -126,11 +126,11 @@ In the following code snippet, visual factory creation and registration occur _w
 textView.Background = textVisual;
 ~~~
 
-The `VisualView` class `AddVisual` method is another example of API 'inherent' visual creation.
+The `VisualView` class `AddVisual` method, is another example of API 'inherent' visual creation.
 
 The snippet above, and the examples for each Visual throughout this tutorial use **property registration based on a 'fixed' property index range**.
 The NUI code base is currently been modified (_July 2017_) to utilise property registration based on automatic generation of indices.
-See [Properties](creating-custom-view-visual.md#properties).
+See [Properties in custom views](creating-custom-view-visual.md#properties).
 
 [Back to top](#top)
 
@@ -141,7 +141,7 @@ The 'depth index' is the draw order for visuals within a view.
 
 Depth index increases automatically for each added visual.
 
-Last visual registered is always on top.
+The last registered visual is always on top.
 
 [Back to top](#top)
 
@@ -180,7 +180,7 @@ RegisterVisual( ColorVisualPropertyIndex, _colorVisual );
 _colorVisual.DepthIndex = ColorVisualPropertyIndex;
 ~~~
 
-#### Properties Supported
+#### Properties
 
 | ColorVisualProperty | String   | Type    | Required | Description               |
 |---------------------------------|---------|:--------:|:--------:|----------------|
@@ -248,7 +248,7 @@ The actual visual is created in the View `AddVisual` method.
 
 Note : `_visualView` is a Custom View. See [Visual View](#visualview)
 
-### Properties Supported
+### Properties
 
 | GradientVisualProperty | Name          | Type              | Required |                        Description |
 |------------------------|---------------|:-----------------:|:----------:|--------------------------------------------------------------------------------------|
@@ -317,7 +317,7 @@ RegisterVisual( ImageVisualPropertyIndex, _imageVisual );
 _imageVisual.DepthIndex = ImageVisualPropertyIndex;
 ~~~
 
-#### Properties Supported
+#### Properties
 
 | ImageVisualProperty | Name          | Type              | Required | Description 
 |---------------------------------------------------------|---------------|:-----------------:|:--------:|----------------------------------------------------|
@@ -374,7 +374,7 @@ VisualMap : **SVGVisual**
 ### Animated Image Visual
 
 Renders an animated image into the visual's quad geometry. Currently, only the GIF format is supported.
-A new API is under development (_July 2017_) to enable multiple images to be displayed in turn.
+However a new API is under development (_July 2017_) to enable multiple images to be displayed in turn.
 
 ![ ](./Images/animated-image-visual.gif)
 
@@ -420,7 +420,7 @@ _visualView.AddVisual("borderVisual1", borderVisualMap1);
 
 Note : The actual visual is created in the `AddVisual` method.
 
-#### Properties Supported
+#### Properties
 
 | BorderVisualProperty | String        | Type    | Required | Description                                      |
 |------------------------------------------------------|---------------|:-------:|:--------:|------------------|
@@ -463,7 +463,7 @@ _visualView.AddVisual("meshVisual1", meshVisualMap1);
 
 Note : the actual visual is created in the `AddVisual` method.
 
-#### Properties Supported
+#### Properties
 
 | MeshVisualProperty | Name         | Type               | Required          | Description                                                                                      |
 |-------------------------------------------------------|----------------|:------------------:|:-----------------:|--------------------------------------------------------------------------------------------------|
@@ -531,7 +531,7 @@ public int Shape
 }
 ~~~
 
-#### Properties Supported
+#### Properties
 
 | PrimitiveVisualProperty | Name              | Type               |Description                                                             |
 |---------------------------------------------------------------|-------------------|:------------------:|------------------:|
@@ -709,15 +709,15 @@ The `AlignType` enum specifies the visual alignment:
 <a name="visualtransformexample"></a>
 #### Example of a Visual Transform
 
-A ContactView is a Custom View which consists of four visuals (Image, Primitive, Text and Color), to display 'contact' information.
+A `ContactView` is a Custom View which consists of four visuals (Image, Primitive, Text and Color), to display 'contact' information.
 All of these visuals can be configured via properties - ImageURL (Image), Shape (Primitive), Name (Text) and Color.
-Tap gesture is also enabled on the ContactView which changes the color visual to some random color when ContactView is tapped.
+Tap gesture is also enabled on the ContactView which changes the color visual to some random color when the ContactView is tapped.
 
-This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (`OnRelayout` method).
+This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (the `OnRelayout` method).
  
 ![ ](ContactView.png)
 
-Here is the corresponding code sample, for the image visual (:
+Here is the corresponding code sample, for the image visual:
 
 ~~~{.cs}
 
