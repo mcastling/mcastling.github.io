@@ -32,7 +32,7 @@ NUI provides the ability to create custom views.
 + The view can be updated when the properties change (e.g. style change)
   + Ensure the view deals with these property changes gracefully, on both first and subsequent times they are set
 + Use visuals rather than creating several child views.
-  + DALi rendering pipeline more efficient
+  + Ensures that the rendering pipeline is more efficient
 + Accessibility actions should be considered when designing the view.
 + Use `Events` if the application needs to react to changes in the view state.
 + Use of `Gestures` should be preferred over analysing raw touch events.
@@ -299,7 +299,7 @@ Styling gives the UI designer the ability to change the look and feel of the vie
  
 | Normal Style | Customized Style |
 |:------------:|:----------------:|
-|![ ](./Images/creating-custom-controls/popup-normal.png) | ![ ](./Images/creating-custom-controls/popup-styled.png)|
+|![ ](./Images/popup-normal.png) | ![ ](./Images/popup-styled.png)|
  
 The [styling tutorial](styling.md) explains how to build up visuals for the button states using JSON stylesheets,
 and transitioning between the various button states.
@@ -344,7 +344,7 @@ Add `ScriptableProperty` to any property belonging to a view, that you want to b
 Property indices are generated automatically in the `ScriptableProperty` class. A unique index for each property
 can be obtained by `GetPropertyIndex`, with the name of the property as a parameter.
 
-[Rendering](#rendering) has an example of the use of a 'scriptable property', using `GetPropertyIndex`.
+[Rendering](#rendering) has an example of the use of a 'scriptable property', with `GetPropertyIndex`.
 
 [Back to top](#top)
 
@@ -367,7 +367,7 @@ Transition effects can be read from stylesheets, or 'directly' via the `CreateTr
 
 #### CreateTransition API
 
-Its possible to animate 'scriptable properties' by using the `CreateTransition` API from custom view derived classes.
+Its possible to *animate 'scriptable properties'*, by using the `CreateTransition` API from custom view derived classes.
 
 `CreateTransition` creates a transition effect on the view.
 

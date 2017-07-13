@@ -33,7 +33,7 @@ Visuals are the main building block of controls.
 Visuals reuse geometry, shaders etc. across controls, and manage the renderer and texture existance when the control is on-stage.
 Additionally visuals, respond to View size and color change, while also providing clipping at the renderer level.
 
-Visuals are configured via Properties. 
+Visuals are configured via *properties*. 
 
 To create a visual:
 * Create a property map
@@ -56,7 +56,7 @@ are replaced by the selected visuals.
  
 When the button is disabled, background, button and selected visuals are replaced by their disabled visuals.
 
-The [styling tutorial](styling.md) explains how to build up and transition visuals for the button states using JSON stylesheets.
+The [styling tutorial](styling.md) explains how to build up and transition visuals, for the button states using JSON stylesheets.
 
 <a name="visualproperties"></a>
 ### Visual Properties
@@ -65,7 +65,7 @@ Visual properties are set through a property map.
 
 There are 2 methods of using property maps:
 * Specific 'property' structures for each visual, e.g. `ColorVisualProperty`. These structures specify the properties of each visual type.
-  _In this tutorial, the properties for each visual are listed in the respective 'Properties' sub-section_.
+  _The properties for each visual are listed in the respective 'Properties' sub-section_.
 * Visual maps, e.g. `ColorVisual` see [using a VisualMap](#visualmap).
 
 This tutorial illustrates both methods.
@@ -466,7 +466,7 @@ Note : the actual visual is created in the `AddVisual` method.
 #### Properties
 
 | MeshVisualProperty | Name         | Type               | Required          | Description                                                                                      |
-|-------------------------------------------------------|----------------|:------------------:|:-----------------:|--------------------------------------------------------------------------------------------------|
+|--------------------|----------------|------------------|-----------------|-------------------------------------------------------------------|
 |                    | ObjectURL      | STRING             | Yes               | The location of the ".obj" file.                                                                 |
 |                    | MaterialURL    | STRING             | No                | The location of the ".mtl" file. Leave blank for a textureless object.                           |
 |                    | TexturesPath   | STRING             | If using material | Path to the directory the textures (including gloss and normal) are stored in.                   |
@@ -533,19 +533,19 @@ public int Shape
 
 #### Properties
 
-| PrimitiveVisualProperty | Name              | Type               |Description                                                             |
-|---------------------------------------------------------------|-------------------|:------------------:|------------------:|
+| PrimitiveVisualProperty | Name              | Type               | Description                                                             |
+|-------------------------|-------------------|------------------- |-------------------|
 |                         | Shape             | INTEGER or STRING  | The specific shape to render.                                          |
 |                         | mixColor          | VECTOR4            | The color of the shape.                                                |
-|                         | Slices            | INTEGER            | The number of slices as you go around the shape.                                     |
-|                         | Stacks            | INTEGER            | The number of stacks as you go down the shape.                                       | 
+|                         | Slices            | INTEGER            | The number of slices as you go around the shape. [More info](#slices)             |
+|                         | Stacks            | INTEGER            | The number of stacks as you go down the shape. [More info](#stacks)   |
 |                         | ScaleTopRadius    | FLOAT              | The scale of the radius of the top circle of a conical frustrum.                     |
 |                         | ScaleBottomRadius | FLOAT              | The scale of the radius of the bottom circle of a conical frustrum.                  |
 |                         | ScaleHeight       | FLOAT              | The scale of the height of a conic.                                                  |
 |                         | ScaleRadius       | FLOAT              | The scale of the radius of a cylinder.                                               |
 |                         | ScaleDimensions   | VECTOR3            | The dimensions of a cuboid. Scales in the same fashion as a 9-patch image.           |
-|                         | BevelPercentage   | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimensi         |
-|                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                edges)               |
+|                         | BevelPercentage   | FLOAT              | Determines how bevelled the cuboid should be, based off the smallest dimenson [More info](#bevel)       |
+|                         | BevelSmoothness   | FLOAT              | Defines how smooth the bevelled edges should be.                                      |
 |                         | LightPosition     | VECTOR3            | The position, in stage space, of the point light that applies lighting to the model. |
 
 VisualMap : **PrimitiveVisual**
@@ -576,6 +576,7 @@ There are six shapes that can be chosen, some of which are simplified specialisa
 |----------|------|----------|
 | ![ ](./Images/conical-frustrum.png) | ![ ](./Images/cone.png) | ![ ](./Images/cylinder.png) |
  
+<a name="bevel"></a>
 #### Bevel
  
 Bevel percentage ranges from 0.0 to 1.0. It affects the ratio of the outer face widths to the width of the overall cube, as shown:
@@ -583,13 +584,15 @@ Bevel percentage ranges from 0.0 to 1.0. It affects the ratio of the outer face 
 | 0.0 ( cube) | 0.3 | 0.7 | 1.0 (octahedron) |
 |-------------|-----|-----|------------------|
 | ![ ](./Images/cube.png) | ![ ](./Images/bevelled-cube-low.png) | ![ ](./Images/bevelled-cube-high.png) | ![ ](./Images/octahedron.png) |
- 
+
+<a name="slices"></a>
 #### Slices
  
 For spheres and conical frustrums, 'slices' determines how many divisions there are as you move around the object.
  
 ![ ](./Images/slices.png)
- 
+
+<a name="stacks"></a> 
 #### Stacks
  
 For spheres, 'stacks' determines how many layers there are as you go down the object.
@@ -715,7 +718,7 @@ Tap gesture is also enabled on the ContactView which changes the color visual to
 
 This screenshot taken from a `ContactView`, shows the configuration and size of the visuals, set via 'transformation' during initial display (the `OnRelayout` method).
  
-![ ](ContactView.png)
+![ ](./Images/ContactView.png)
 
 Here is the corresponding code sample, for the image visual:
 
