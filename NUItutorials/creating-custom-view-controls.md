@@ -629,8 +629,8 @@ The following overridable methods provide customization points for the size nego
 
 * `GetNaturalSize` returns the natural size of the view
  
-* `GetHeightForWidth` invoked by the size negotiation algorithm if we have a fixed width.
-* `GetWidthForHeight` invoked by the size negotiation algorithm if we have a fixed height.
+* `GetHeightForWidth` Returns the height for a given width. Invoked by the size negotiation algorithm if we have a fixed width.
+* `GetWidthForHeight` Returns the width for a given height. Invoked by the size negotiation algorithm if we have a fixed height.
 
 * Override the `OnRelayout` method to position and resize. `OnRelayout` is called during the relayout process at the end of the frame
   immediately after the new size has been set on the view. i.e after size negotiation is complete. 
