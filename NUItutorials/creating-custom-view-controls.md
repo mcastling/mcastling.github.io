@@ -1,8 +1,6 @@
 <a name="top"></a>
 # Creating Custom View controls 
 
-In this tutorial:
-
 [Overview](#overview)<br>
 [Guidelines for creating a custom view](#guidelines)<br>
 [The existing CustomView class](#existingcustomview)<br>
@@ -80,7 +78,7 @@ Key `CustomView` methods include:
 | OnInitialize           | Called after the view has been initialized.  |
 | SetBackground          | Set the background with a property map.         |
 | EnableGestureDetection | Allows deriving classes to enable any of the gesture detectors that are available              |
-| RegisterVisual         | Register a visual by Property Index, linking a view to visual when required. |
+| RegisterVisual         | Register a visual by 'property index', linking a view to visual when required. |
 | CreateTransition       | Create a transition effect on the view - for animations. |
 | RelayoutRequest        | Request a relayout, which means performing a size negotiation on this view, its parent and children (and potentially whole scene) |
 | OnStageConnection      | Called after the view has been connected to the stage 'default window' |
