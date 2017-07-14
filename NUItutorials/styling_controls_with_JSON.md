@@ -1,7 +1,7 @@
 <a name="top"></a>
 # Tutorial on styling a control with JSON
 
-NOTE  27 JUNE - THIS TUTORIAL WILL BE COMPLETED AT A LATER DATE (code still been developed)
+NOTE  27 JUNE - THIS TUTORIAL WILL BE COMPLETED AT A LATER DATE (code still been developed for 'new' format for Visuals as described in this tutorial see AV)
 
 This tutorial shows how to style a toolkit control with JSON.
 
@@ -10,14 +10,11 @@ The tutorial uses a PushButton as an example control.
 In this tutorial:
 
 [Visuals](#visuals)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
-[](#)<br>
+[Styling a new View](#newview)<br>
+[Styling for state](#state)<br>
+[Building up a style sheet, state by state](#build)<br>
+[Transitions](#transitions)<br>
+[Example style sheet](#example)<br>
 
 <a name="overview"></a>
 ### Visuals
@@ -39,10 +36,11 @@ The following Visual types are available:
 The [Visuals tutorial](visuals.md) describes how to create, register and use visuals, and also lists all properties associated
 with each visual type.
 
+<a name="newview"></a>
 ### Styling a new View
 
-Styling is inherited, so styling a parent will automatically effect its child unless overridden.<br />
-View, and PushButton offer the following Style properties<br />
+Styling is inherited, so styling a parent will automatically effect its child unless overridden.<
+View, and PushButton offer the following Style properties
 
 Useful View properties for styling :
 
@@ -57,6 +55,9 @@ Useful View properties for styling :
 Note : `sizeModeFactor` is only used when `ResizePolicyType` is set to either: ResizePolicyType.SizeRelativeToParent or ResizePolicyType.SizeFixedOffsetFromParent.<br>
 This view's size is set to the view's size multiplied by or added to this factor, depending on ResizePolicyType.
 
+[Back to top](#top)
+
+<a name="state"></a>
 ### Styling for State
 
 Control has 3 states: NORMAL, FOCUSED and DISABLED. Each state should have the required visuals.
@@ -91,6 +92,10 @@ _"states"_ Visuals for specific states can be put here ( see next example ) <br 
   }
 }
 ```
+
+[Back to top](#top)
+
+<a name="buildforstate"></a>
 ### Building up a style sheet, state by state
 
 1) All controls have have below states:
@@ -181,7 +186,9 @@ The states have been defined but no visuals provided.
       }
     },
 ```
+[Back to top](#top)
 
+<a name="transitions"></a>
 ### Transitions
 
 The control (Button) will change between states from user interaction. <br />
@@ -268,8 +275,9 @@ Example using entry and exit transition for UNSELECTED
 ]
 ```
 
+[Back to top](#top)
 
-
+<a name="example"></a>
 ### Example Style sheet
 Example button stylesheet  ( Link to most update version )
 ```json
@@ -422,3 +430,4 @@ Example button stylesheet  ( Link to most update version )
 }
 ```
 
+[Back to top](#top)

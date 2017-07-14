@@ -301,7 +301,7 @@ Styling gives the UI designer the ability to change the look and feel of the Vie
 |:------------:|:----------------:|
 |![ ](./Images/popup-normal.png) | ![ ](./Images/popup-styled.png)|
  
-The [styling tutorial](styling.md) explains how to build up visuals for the button states using JSON stylesheets,
+The [styling tutorial](styling_controls_with_JSON.md) explains how to build up visuals for the button states using JSON stylesheets,
 and transitioning between the various button states.
 
 [Back to top](#top)

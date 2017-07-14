@@ -54,7 +54,7 @@ are replaced by the Selected visuals.
  
 When the button is disabled, Background, Button and Selected visuals are replaced by their 'disabled' visuals.
 
-The [styling tutorial](styling.md) explains how to build up and transition visuals, for the button states using JSON stylesheets.
+The [styling tutorial](styling_controls_with_JSON.md) explains how to build up and transition visuals, for the button states using JSON stylesheets.
 
 <a name="visualproperties"></a>
 ### Visual Properties
