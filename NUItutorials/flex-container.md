@@ -320,11 +320,11 @@ flexContainer.Add(item);
 <a name="layoutexample"></a>
 ### Example of creating Flexbox layout using FlexContainer
 
-Now let's see how to create a Gallery like layout (as shown below) using FlexContainer.
+This example creates a Gallery like layout (as shown below) using FlexContainer.
 
 ![ ](./Images/flex-container/flexbox-demo.jpg)
  
-Firstly, we create a flex container as the whole view and set its resize policy to fill its parent (i.e. the _window_).
+1. Firstly, we create a flex container as the whole view, and set its resize policy to fill its parent (the _window_).
 
 ~~~{.cs}
 // Create the main flex container
@@ -339,15 +339,15 @@ flexContainer.BackgroundColor = Color.White; // set the background color to be w
 Window.Instance.Add(flexContainer);
 ~~~
  
-We want to set the flex direction of this main container to column, as we want the toolbar and the actual content to be displayed vertically.
+2. Set the flex direction of this main container to column, as we want the toolbar and the actual content to be displayed vertically.
  
 ~~~{.cs}
 // Display toolbar and content vertically
 flexContainer.FlexDirection = FlexContainer.FlexDirectionType.Column;
 ~~~
  
-Now we create a flex container as the toolbar and add it to the main container. Because the flex direction in the main container is column,
-the toolbar will be arranged on the top of the main container.
+3. Now we create a flex container as the toolbar and add it to the main container. Because the flex direction in the main container is column,
+   the toolbar will be arranged on the top of the main container.
  
 ~~~{.cs}
 // Create the toolbar
@@ -360,10 +360,9 @@ toolBar.BackgroundColor = Color.Cyan; // Set the background color for the toolba
 flexContainer.Add(toolBar);
 ~~~
 
-We want the buttons and title to be displayed horizontally and vertically aligned to the center of the toolbar, so we set its flex direction
-to row and set its alignItems property to center. We also want the toolbar and the actual content to share the height of the main container, 
-so that the toolbar will occupy 10 percent of the whole vertical space and the content will occupy the rest of the vertical space.
-This can be achieved by setting the flex property.
+4. We want the buttons and title to display horizontally, and be vertically aligned to the center of the toolbar. Therefore set the toolbar flex direction
+   to 'row', and set its `alignItems` property to 'center'. We also want the toolbar to occupy 10 percent of the whole vertical space,
+   and the content to occupy the rest of the vertical space. This can be achieved by setting the `Flex` property.
  
 ~~~{.cs}
 toolBar.FlexDirection = FlexContainer.FlexDirectionType.Row; // display toolbar items horizontally
@@ -371,8 +370,8 @@ toolBar.AlignItems = FlexContainer.Alignment.AlignCenter;    // align toolbar it
 toolBar.Flex = 0.1f;                                         // 10 percent of available space in the cross axis
 ~~~
  
-Then we create another flex container as the content area to display the image, and it will be displayed in the bottom of the main container.
-We want the item inside it to be horizontally and vertically centered, so that the image will always be in the center of the content area.
+5. Then we create a third flex container as the content area to display the image. This container will be in the bottom of the main container.
+   We want the item inside it to be horizontally and vertically centered, so that the image will always be in the center of the content area.
 
 ~~~{.cs}
 // Create the content area
@@ -388,10 +387,10 @@ content.Flex = 0.9f;                                                // 90 percen
 flexContainer.Add(content);
 ~~~
  
-Now we start to add items to the toolbar. The toolbar will have one button on the left, one button on the right, and a
-title always in the center (regardless of the screen size). To achieve that, we can simply make the title flexible so
-that it will automatically take all the available horizontal space left. We will also add some space around the items
-so that the layout looks nicer.
+6. Now add items to the toolbar. The toolbar will have one button on the left, one button on the right, and a
+   title always in the center (regardless of the screen size). To achieve that, we make the title 'flexible' so
+   that it will automatically take all the available horizontal space left. We will also add some space around the items
+   so that the layout looks nicer.
  
 ~~~{.cs}
 // Add a button to the left of the toolbar
@@ -435,11 +434,11 @@ labelMap2.Add("textColor", new PropertyValue(Color.Black));
 nextButton.Label = labelMap2;
 ~~~
 
-This is really neat when running on devices with different size or changing from different orientation.
+The above settings enable the application to run on differant sized devices, or when changing the screen orientation.
 The toolbar will expand or shrink based on the available space and the title will always be in the center,
-therefore the layout of the toolbar will keep the same.
+therefore the layout of the toolbar will remain the same.
  
-Finally, we will add the image to the content area.
+7. Finally, add the image to the content area.
  
 ~~~{.cs}
 
@@ -450,7 +449,5 @@ imageView.PivotPoint = PivotPoint.TopLeft;
 content.Add(imageView);
 ~~~
  
-As you can see, it is easy to make flexible containers in NUI. We can use these concepts to create responsive layouts.
-
 [Back to top](#top)
  
