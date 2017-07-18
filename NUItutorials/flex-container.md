@@ -1,19 +1,24 @@
 <a name="top"></a>
 # Flex Container Tutorial
 
-This tutorial describes how to create and use the flex-container and associated flex-items.
+This tutorial describes how to create and use the 'flex container' - `FlexContainer`.
 
-A flex item is simply the name given to items such as buttons and text labels added to the the flex container.
+The flex container contains items such as buttons, text labels and images.
+
+[Overview](#overview)<br>
+[Custom properties supported by flex items](#custom-properties)<br>
+[Example of creating Flexbox layout using FlexContainer](#layoutexample)<br>
 
 <a name="overview"></a>
 ## Overview
 
-Flexbox is a CSS3 web layout model which allows responsive elements within a container, automatically arranged to different size screens or devices.
+Flexbox is a CSS3 web layout model which allows responsive elements within a container, automatically arranged to different
+size screens or devices.
  
-FlexContainer implements a subset of the `Flexbox` spec. (defined by W3C) at: https://www.w3.org/TR/css-flexbox-1/
+The `FlexContainer` class implements a subset of the `Flexbox` spec. (defined by W3C) at: https://www.w3.org/TR/css-flexbox-1/
  
-The flex container has the ability to alter the width and/or height of its children (i.e. flex items) to best fill the available space on any display device.
-The container expands items to fill available free space, or shrinks them to prevent overflow.
+The flex container has the ability to alter the width and/or height of its children (i.e. flex items) to best fill the available space on
+any display device. The container expands items to fill available free space, or shrinks them to prevent overflow.
  
 Below is an illustration of the various directions and terms as applied to a flex container with the "flex direction" defined as "row".
  
@@ -27,12 +32,6 @@ NUI supports the following subset of `Flexbox` properties.
  + [JustifyContent](#justify-content)
  + [AlignItems](#align-items)
  + [AlignContent](#align-content)
-
-In addition:
-
- + [Custom properties supported by flex item](#custom-properties)
-
- + [Example of creating Flexbox layout using FlexContainer](#layoutexample)
 
 ### ContentDirection
  
@@ -162,7 +161,8 @@ flexContainer.AlignItems = FlexContainer.Alignment.AlignFlexStart;
 <a name="align-content"></a>
 ### AlignContent
  
-_AlignContent_ specifies the alignment of flex lines when they do not use all available space on the cross axis, so only works when there are multiple lines.
+_AlignContent_ specifies the alignment of flex lines when they do not use all available space on the cross axis, so only works when
+there are multiple lines.
  
 ![ ](./Images/flex-container/align-content.jpg)
  
@@ -192,7 +192,8 @@ flexContainer.AlignContent = FlexContainer.Alignment.AlignFlexEnd;
  + [AlignSelf](#align-self)
  + [FlexMargin](#flex-margin)
  
-These non-animatable properties are registered dynamically to each child which would be added to the flex container, and once added their values can not be changed.
+These non-animatable properties are registered dynamically to each child which would be added to the flex container, and once added
+their values can not be changed.
  
 When a view is added to the flex container, these properties are checked to decide how to lay out the view inside the flex container.
 
@@ -201,9 +202,10 @@ When a view is added to the flex container, these properties are checked to deci
 <a name="flex"></a>
 ### Flex
  
-By default, the items in the flex container are not flexible. If set, this property makes the item flexible, which means the item can alter its width/height
-in order to receive the specified proportion of the free space in the flex container. If all items in the flex container use this pattern, their sizes will
-be proportional to the specified flex factor. Flex items will not shrink below their minimum size (if set using `View.MinimumSize`).
+By default, the items in the flex container are not flexible. Setting the `Flex` property makes the item flexible, which means the
+item can alter its width/height in order to receive the specified proportion of the free space in the flex container. If all items
+in the flex container use this pattern, their sizes will be proportional to the specified flex factor. Flex items will not shrink
+below their minimum size (if set using the `View` `MinimumSize` method).
  
 ![ ](./Images/flex-container/flex.jpg)
  
@@ -246,7 +248,7 @@ flexContainer.Add( item5 );
 ### AlignSelf
  
 _AlignSelf_ specifies how the item will align along the cross axis, if set, this overrides the default alignment for all items defined
-by the container’s [alignItems](#align-items) property.
+by the container’s [AlignItems](#align-items) property.
  
 ![ ](./Images/flex-container/align-self.jpg)
 
@@ -320,11 +322,11 @@ flexContainer.Add(item);
 <a name="layoutexample"></a>
 ### Example of creating Flexbox layout using FlexContainer
 
-This example creates a Gallery like layout (as shown below) using FlexContainer.
+This example creates a Gallery like layout (as shown below) using `FlexContainer`.
 
 ![ ](./Images/flex-container/flexbox-demo.jpg)
  
-1. Firstly, we create a flex container as the whole view, and set its resize policy to fill its parent (the _window_).
+1. Firstly, we create a flex container as the whole view, and set its resize policy to _fill its parent_ (the parent is _window_).
 
 ~~~{.cs}
 // Create the main flex container
@@ -339,15 +341,15 @@ flexContainer.BackgroundColor = Color.White; // set the background color to be w
 Window.Instance.Add(flexContainer);
 ~~~
  
-2. Set the flex direction of this main container to column, as we want the toolbar and the actual content to be displayed vertically.
+2. Set the flex direction of this main container to _column_, as we want the toolbar and the actual content to be displayed vertically.
  
 ~~~{.cs}
 // Display toolbar and content vertically
 flexContainer.FlexDirection = FlexContainer.FlexDirectionType.Column;
 ~~~
  
-3. Now we create a flex container as the toolbar and add it to the main container. Because the flex direction in the main container is column,
-   the toolbar will be arranged on the top of the main container.
+3. Now we create a flex container as the toolbar and add it to the main container. Because the flex direction in the main container
+   is _column_, the toolbar will be arranged on the top of the main container.
  
 ~~~{.cs}
 // Create the toolbar
@@ -360,14 +362,14 @@ toolBar.BackgroundColor = Color.Cyan; // Set the background color for the toolba
 flexContainer.Add(toolBar);
 ~~~
 
-4. We want the buttons and title to display horizontally, and be vertically aligned to the center of the toolbar. Therefore set the toolbar flex direction
-   to 'row', and set its `alignItems` property to 'center'. We also want the toolbar to occupy 10 percent of the whole vertical space,
-   and the content to occupy the rest of the vertical space. This can be achieved by setting the `Flex` property.
+4. We want the buttons and title to display horizontally, and be vertically aligned to the center of the toolbar. Therefore set the
+   toolbar flex direction to _row_, and set its `alignItems` property to _center_. We also want the toolbar to occupy 10 percent of
+   the whole vertical space, and the content to occupy the rest of the vertical space. This can be achieved by setting the `Flex` property.
  
 ~~~{.cs}
 toolBar.FlexDirection = FlexContainer.FlexDirectionType.Row; // display toolbar items horizontally
 toolBar.AlignItems = FlexContainer.Alignment.AlignCenter;    // align toolbar items vertically center
-toolBar.Flex = 0.1f;                                         // 10 percent of available space in the cross axis
+toolBar.Flex = 0.1f; // 10 percent of available space in the cross axis
 ~~~
  
 5. Then we create a third flex container as the content area to display the image. This container will be in the bottom of the main container.
@@ -381,7 +383,7 @@ content.PivotPoint = PivotPoint.TopLeft;
 content.FlexDirection = FlexContainer.FlexDirectionType.Row;        // display items horizontally
 content.JustifyContent = FlexContainer.Justification.JustifyCenter; // align items horizontally center
 content.AlignItems = FlexContainer.Alignment.AlignCenter;           // align items vertically center
-content.Flex = 0.9f;                                                // 90 percent of available space in the cross axis
+content.Flex = 0.9f; // 90 percent of available space in the cross axis
 
 // Add it to the main container
 flexContainer.Add(content);
@@ -397,7 +399,7 @@ flexContainer.Add(content);
 PushButton prevButton = new PushButton();
 prevButton.ParentOrigin = ParentOrigin.TopLeft;
 prevButton.PivotPoint = PivotPoint.TopLeft;
-prevButton.MinimumSize = new Vector2( 100.0f, 60.0f );           // this is the minimum size the button should keep
+prevButton.MinimumSize = new Vector2( 100.0f, 60.0f ); // this is the minimum size the button should keep
 prevButton.FlexMargin = new Vector4(10.0f, 10.0f, 10.0f, 10.0f); // set 10 pixel margin around the button
 toolBar.Add(prevButton);
 
@@ -415,7 +417,7 @@ title.WidthResizePolicy = ResizePolicyType.UseNaturalSize;
 title.HeightResizePolicy = ResizePolicyType.UseNaturalSize;
 title.HorizontalAlignment = HorizontalAlignment.Center;
 title.VerticalAlignment = VerticalAlignment.Center;
-title.Flex = 1.0f;                                          // take all the available space left apart from the two buttons
+title.Flex = 1.0f; // take all the available space left apart from the two buttons
 title.FlexMargin = new Vector4(10.0f, 10.0f, 10.0f, 10.0f); // set 10 pixel margin around the title
 toolBar.Add(title);
 
@@ -423,7 +425,7 @@ toolBar.Add(title);
 PushButton nextButton = new PushButton();
 nextButton.ParentOrigin = ParentOrigin.TopLeft;
 nextButton.PivotPoint = PivotPoint.TopLeft;
-nextButton.MinimumSize = new Vector2( 100.0f, 60.0f );           // this is the minimum size the button should keep
+nextButton.MinimumSize = new Vector2( 100.0f, 60.0f ); // this is the minimum size the button should keep
 nextButton.FlexMargin = new Vector4(10.0f, 10.0f, 10.0f, 10.0f); // set 10 pixel margin around the button
 toolBar.Add(nextButton);
 
@@ -434,14 +436,13 @@ labelMap2.Add("textColor", new PropertyValue(Color.Black));
 nextButton.Label = labelMap2;
 ~~~
 
-The above settings enable the application to run on differant sized devices, or when changing the screen orientation.
-The toolbar will expand or shrink based on the available space and the title will always be in the center,
-therefore the layout of the toolbar will remain the same.
+   The above settings enable the application to run on differant sized devices, or when changing the screen
+   orientation. The toolbar will expand or shrink based on the available space and the title will always be
+   in the center, therefore the layout of the toolbar will remain the same.
  
 7. Finally, add the image to the content area.
  
 ~~~{.cs}
-
 // Add an image to the center of the content area
 ImageView imageView = new ImageView( "image.jpg" );
 imageView.ParentOrigin = ParentOrigin.TopLeft;
