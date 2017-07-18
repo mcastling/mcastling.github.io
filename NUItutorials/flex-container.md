@@ -1,7 +1,7 @@
 <a name="top"></a>
 # Flex Container Tutorial
 
-This tutorial describes how to create and use the 'flex container' - the `FlexContainer` class.
+This tutorial describes how to create and use the 'flex container'.
 
 The flex container contains items such as buttons, text labels and images.
 
@@ -18,10 +18,10 @@ size screens or devices.
 The `FlexContainer` class implements a subset of the `Flexbox` spec. (defined by W3C) at:
 https://www.w3.org/TR/css-flexbox-1/
  
-The flex container has the ability to alter the width and/or height of its children (i.e. flex items) to optimally fill the available
+The flex container has the ability to alter the width and/or height of its children (i.e. flex items), to optimally fill the available
 space on any display device. The container expands items to fill available free space, or shrinks them to prevent overflow.
  
-Below is an illustration of the various directions and terms as applied to a flex container with the "flex direction" defined as "row".
+Below is an illustration of the various directions and terms as applied to a flex container with the "flex direction" defined as `row`.
  
 ![ ](./Images/flex-container/flex-container.jpg)
  
@@ -326,7 +326,7 @@ This example creates a Gallery like layout (as shown below) using `FlexContainer
 
 ![ ](./Images/flex-container/flexbox-demo.jpg)
  
-1. Firstly, we create a flex container as the whole view, and set its resize policy to _fill its parent_ (the parent is _window_).
+1. Firstly, we create a flex container as the whole view, and set its resize policy to 'fill its parent' (the parent is the _window_).
 
 ~~~{.cs}
 // Create the main flex container
