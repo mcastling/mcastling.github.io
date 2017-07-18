@@ -1,7 +1,7 @@
 <a name="top"></a>
 # Flex Container Tutorial
 
-This tutorial describes how to create and use the 'flex container' - `FlexContainer`.
+This tutorial describes how to create and use the 'flex container' - the `FlexContainer` class.
 
 The flex container contains items such as buttons, text labels and images.
 
@@ -15,10 +15,11 @@ The flex container contains items such as buttons, text labels and images.
 Flexbox is a CSS3 web layout model which allows responsive elements within a container, automatically arranged to different
 size screens or devices.
  
-The `FlexContainer` class implements a subset of the `Flexbox` spec. (defined by W3C) at: https://www.w3.org/TR/css-flexbox-1/
+The `FlexContainer` class implements a subset of the `Flexbox` spec. (defined by W3C) at:
+https://www.w3.org/TR/css-flexbox-1/
  
-The flex container has the ability to alter the width and/or height of its children (i.e. flex items) to best fill the available space on
-any display device. The container expands items to fill available free space, or shrinks them to prevent overflow.
+The flex container has the ability to alter the width and/or height of its children (i.e. flex items) to optimally fill the available
+space on any display device. The container expands items to fill available free space, or shrinks them to prevent overflow.
  
 Below is an illustration of the various directions and terms as applied to a flex container with the "flex direction" defined as "row".
  
@@ -247,8 +248,8 @@ flexContainer.Add( item5 );
 <a name="align-self"></a>
 ### AlignSelf
  
-_AlignSelf_ specifies how the item will align along the cross axis, if set, this overrides the default alignment for all items defined
-by the container’s [AlignItems](#align-items) property.
+_AlignSelf_ specifies how the item will align along the cross axis, if set, this property overrides the default alignment for all
+items defined by the container’s [AlignItems](#align-items) property.
  
 ![ ](./Images/flex-container/align-self.jpg)
 
@@ -257,7 +258,6 @@ by the container’s [AlignItems](#align-items) property.
 Below is the example code for the items to achieve the alignment on the cross axis as illustrated above.
  
 ~~~{.cs}
-
 // Create the flex container
 FlexContainer flexContainer = new FlexContainer();
 
