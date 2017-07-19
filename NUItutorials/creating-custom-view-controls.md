@@ -598,7 +598,9 @@ Size negotiation is implemented via a range of `ResizePolicies`, declared in the
 | SizeFixedOffsetFromParent | Fill up the parent, and add a fixed offset using SetSizeModeFactor.|
 | FitToChildren             | Size will adjust to wrap around all children e.g. A popup's height may resize itself around it's contents. |
 | DimensionDependency       | One dimension is dependent on the other |
-| UseAssignedSize           | The size will be assigned to the view |
+
+
+Note: `UseAssignedSize`-The size will be assigned to the view, is not a resize policy more an implementation detail.
 
 
 * UseNaturalSize: Use this option for objects such as images or text to get their natural size e.g. The dimensions of the image,
